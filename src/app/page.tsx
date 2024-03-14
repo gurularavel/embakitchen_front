@@ -1,7 +1,9 @@
+import { Slider } from '@embakitchen/components/slider'
+
 export default function Home() {
   return (
     <main>
-      <h1>Home Page</h1>
+      <Slider type='main' />
     </main>
   )
 }
