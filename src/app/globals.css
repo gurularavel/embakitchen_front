@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .max-w-unset {
+    max-width: unset;
+  }
+}
