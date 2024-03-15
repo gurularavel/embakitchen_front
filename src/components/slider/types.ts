@@ -1,5 +1,5 @@
 type Slider = 'main' | 'gallery'
 
-export interface ISliderProps {
+export interface SliderProps {
   type: Slider
 }
