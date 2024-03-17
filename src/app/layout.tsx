@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { Header } from '@embakitchen/components/header'
 import { Montserrat } from 'next/font/google'
+import { Header } from '@embakitchen/components/header'
 import './globals.css'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
