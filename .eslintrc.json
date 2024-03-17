@@ -5,6 +5,11 @@
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
     "comma-dangle": ["error", "always-multiline"],
-    "jsx-quotes": ["error", "prefer-single"]
+    "jsx-quotes": ["error", "prefer-single"],
+    "no-console": [
+      "error", {
+        "allow": ["warn", "error"]
+      }
+    ]
   }
 }

@@ -9,5 +9,6 @@
   "arrowParens": "avoid",
   "bracketSameLine": false,
   "bracketSpacing": true,
-  "quoteProps": "as-needed"
+  "quoteProps": "as-needed",
+  "printWidth": 100
 }
