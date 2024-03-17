@@ -1,11 +1,12 @@
 import React from 'react'
-import { styles } from '@embakitchen/components/header/styles'
-import { IHeaderProps } from '@embakitchen/components/header/types'
 import Image from 'next/image'
-import { Navbar } from '../navbar'
+import { IHeaderProps } from '@embakitchen/components/header/types'
+import { Navbar } from '@embakitchen/components/navbar'
+import { styles } from '@embakitchen/components/header/styles'
 
 export const Header: React.FC<IHeaderProps> = () => {
   const headerStyles: Record<string, string> = styles as Record<string, string>
+
   return (
     <header className={headerStyles.header}>
       <div className={headerStyles.mobileMenu}>
