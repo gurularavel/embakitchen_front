@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import { IHeaderProps } from '@embakitchen/components/header/types'
+import { HeaderProps } from '@embakitchen/components/header/types'
 import { Navbar } from '@embakitchen/components/navbar'
 import { styles } from '@embakitchen/components/header/styles'
 
-export const Header: React.FC<IHeaderProps> = () => {
+export const Header: React.FC<HeaderProps> = () => {
   const headerStyles: Record<string, string> = styles as Record<string, string>
 
   return (
@@ -32,7 +32,10 @@ export const Header: React.FC<IHeaderProps> = () => {
         <Navbar />
       </div>
       <div className={headerStyles.right}>
-        <div className={headerStyles.tel}>
+        <a
+          className={headerStyles.tel}
+          href='tel:126'
+        >
           <Image
             width={30}
             height={30}
@@ -40,7 +43,7 @@ export const Header: React.FC<IHeaderProps> = () => {
             src='/assets/images/call-calling.svg'
           />
           126
-        </div>
+        </a>
         <div className={headerStyles.search}>
           <Image
             width={24}

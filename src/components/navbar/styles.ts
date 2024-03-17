@@ -1,7 +1,7 @@
 import { ITailwindStyles } from '@embakitchen/types'
 
 export const styles: ITailwindStyles = {
-  navbar: 'min-mobile:hidden laptop:flex gap-x-[16px] items-center',
+  navbar: 'mobile-s:hidden laptop:flex gap-x-[16px] items-center',
   navbarItem: 'flex gap-x-[2px]',
   paragraph: 'text-white font-medium text-sm leading-5',
   active: '!text-[#FFC35C]',

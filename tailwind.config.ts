@@ -14,7 +14,7 @@ const config: Config = {
       },
     },
     screens: {
-      'min-mobile': '320px',
+      'mobile-s': '320px',
       mobile: '576px',
       tablet: '768px',
       laptop: '1024px',

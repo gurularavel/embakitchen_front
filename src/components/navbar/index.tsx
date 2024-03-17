@@ -1,14 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import { INavbarProps, INavbarItemProps } from '@embakitchen/components/navbar/types'
-import { styles } from '@embakitchen/components/navbar/styles'
+import { NavbarProps, NavbarItemProps, NavItem } from '@embakitchen/components/navbar/types'
+import { styles as navbarStyles } from '@embakitchen/components/navbar/styles'
 
-type NavItem = {
-  id: number
-  name: string
-  dropdown?: boolean
-  active?: boolean
-}
+const styles: Record<string, string> = navbarStyles as Record<string, string>
 
 export const navItems: NavItem[] = [
   {
@@ -35,11 +30,9 @@ export const navItems: NavItem[] = [
   },
 ]
 
-export const Navbar: React.FC<INavbarProps> = () => {
-  const navbarStyles: Record<string, string> = styles as Record<string, string>
-
+export const Navbar: React.FC<NavbarProps> = () => {
   return (
-    <div className={navbarStyles.navbar}>
+    <div className={styles.navbar}>
       {navItems.map(item => (
         <NavbarItem
           key={item.id}
@@ -48,17 +41,15 @@ export const Navbar: React.FC<INavbarProps> = () => {
           active={item.active}
         />
       ))}
-      <button className={navbarStyles.specialOrder}>Özəl sifariş</button>
+      <button className={styles.specialOrder}>Özəl sifariş</button>
     </div>
   )
 }
 
-export const NavbarItem: React.FC<INavbarItemProps> = ({ item, active, dropdown }) => {
-  const navbarItemStyles: Record<string, string> = styles as Record<string, string>
-
+export const NavbarItem: React.FC<NavbarItemProps> = ({ item, active, dropdown }) => {
   return (
-    <div className={`${navbarItemStyles.navbarItem} ${active ? navbarItemStyles.active : ''}`}>
-      <p className={navbarItemStyles.paragraph}>{item}</p>
+    <div className={`${styles.navbarItem} ${active ? styles.active : ''}`}>
+      <p className={styles.paragraph}>{item}</p>
       {dropdown ? (
         <Image
           width={20}
