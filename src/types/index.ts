@@ -1,3 +1,3 @@
-export interface ITailwindStyles {
-  [key: string]: string | ITailwindStyles
+export interface TailwindStyles {
+  [key: string]: string | TailwindStyles
 }
