@@ -1,7 +1,7 @@
 export interface StatisticsProps {}
 
-export interface StatisticItem {
+export interface StatisticsItem {
   id: number
-  number: string
+  number: number
   name: string
 }
