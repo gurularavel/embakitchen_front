@@ -27,7 +27,11 @@ const icons: SocialIcon[] = [
     url: '/',
     description: 'embakitchen instagram account',
   },
-  { img: '/assets/images/icons/youtube.svg', url: '/', description: 'embakitchen youtube account' },
+  {
+    img: '/assets/images/icons/youtube.svg',
+    url: '/',
+    description: 'embakitchen youtube account',
+  },
 ]
 
 const sliders: Record<string, React.ReactNode> = {
