@@ -1,6 +1,6 @@
-import { ITailwindStyles } from '@embakitchen/types'
+import { TailwindStyles } from '@embakitchen/types'
 
-export const styles: ITailwindStyles = {
+export const styles: TailwindStyles = {
   header:
     'bg-[#31373D] desktop:px-[100px] min-[1200px]:px-[30px] mobile-s:px-[20px] h-[76px] flex justify-between',
   left: 'flex items-center h-full desktop:gap-x-[70px] min-[1200px]:gap-x-[50px] laptop:gap-x-[5px]',
