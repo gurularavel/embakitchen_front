@@ -17,6 +17,9 @@ const config: Config = {
         'dark-gray': '#333333',
         'half-white': 'rgba(255, 255, 255, 0.5)',
       },
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)'],
+      },
     },
     screens: {
       'mobile-s': '320px',
