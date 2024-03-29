@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { NavbarProps, NavbarItemProps, NavItem } from '@embakitchen/components/navbar/types'
 import { styles as navbarStyles } from '@embakitchen/components/navbar/styles'
@@ -18,6 +20,20 @@ export const navItems: NavItem[] = [
     id: 3,
     name: 'Haqqımızda',
     dropdown: true,
+    items: [
+      {
+        id: 1,
+        name: 'Şirkət haqqında',
+      },
+      {
+        id: 2,
+        name: 'Layihələrimiz',
+      },
+      {
+        id: 3,
+        name: 'Partnyorlar',
+      },
+    ],
   },
   {
     id: 4,
@@ -36,9 +52,10 @@ export const Navbar: React.FC<NavbarProps> = () => {
       {navItems.map(item => (
         <NavbarItem
           key={item.id}
-          item={item.name}
+          name={item.name}
           dropdown={item.dropdown}
           active={item.active}
+          items={item.items}
         />
       ))}
       <button className={styles.specialOrder}>Özəl sifariş</button>
@@ -46,17 +63,39 @@ export const Navbar: React.FC<NavbarProps> = () => {
   )
 }
 
-export const NavbarItem: React.FC<NavbarItemProps> = ({ item, active, dropdown }) => {
+export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, items }) => {
+  const [rotate, setRotate] = useState(false)
+
   return (
-    <div className={`${styles.navbarItem} ${active ? styles.active : ''}`}>
-      <p className={styles.paragraph}>{item}</p>
+    <div
+      className={`${styles.navbarItem} ${active ? styles.active : ''}`}
+      onClick={() => setRotate(!rotate)}
+    >
+      <p className={styles.paragraph}>{name}</p>
       {dropdown ? (
         <Image
           width={20}
           height={20}
           alt='arrowdown'
           src='/assets/images/arrow-down.svg'
+          className={rotate ? 'rotate-180' : ''}
         />
+      ) : null}
+      {dropdown ? (
+        rotate ? (
+          <div className={styles.dropdownItems}>
+            {items?.map(item => {
+              return (
+                <div
+                  className={styles.dropdownItem}
+                  key={item.id}
+                >
+                  <p className={styles.dropdownParagraph}>{item.name}</p>
+                </div>
+              )
+            })}
+          </div>
+        ) : null
       ) : null}
     </div>
   )
