@@ -21,6 +21,13 @@ const config: Config = {
         montserrat: ['var(--font-montserrat)'],
       },
     },
+    screens: {
+      'mobile-s': '320px',
+      mobile: '576px',
+      tablet: '768px',
+      laptop: '1024px',
+      desktop: '1440px',
+    },
   },
   plugins: [],
 }

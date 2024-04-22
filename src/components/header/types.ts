@@ -1,3 +1,1 @@
-export interface IHeaderPropsType {
-  test: 'test'
-}
+export interface HeaderProps {}
