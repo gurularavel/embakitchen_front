@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Navbar } from '@embakitchen/components/navbar'
+import { Navbar, NavbarMobile } from '@embakitchen/components/navbar'
 import { HeaderProps } from '@embakitchen/components/header/types'
 import { styles as headerStyles } from '@embakitchen/components/header/styles'
 
@@ -12,12 +12,13 @@ export const Header: React.FC<HeaderProps> = () => {
       <div className={styles.mobileMenu}>
         <button className={styles.mobileMenuBtn}>
           <Image
-            width={6}
-            height={12}
+            width={24}
+            height={24}
             src='/assets/images/kebab-menu.svg'
             alt='menu'
           />
         </button>
+        <NavbarMobile />
       </div>
       <div className={styles.left}>
         <div className={styles.logo}>
@@ -51,6 +52,17 @@ export const Header: React.FC<HeaderProps> = () => {
               height={24}
               alt='search'
               src='/assets/images/search.svg'
+            />
+          </button>
+        </div>
+        <div>
+          <button className={styles.lang}>
+            Az
+            <Image
+              width={24}
+              height={24}
+              alt='search'
+              src='/assets/images/arrow-down.svg'
             />
           </button>
         </div>

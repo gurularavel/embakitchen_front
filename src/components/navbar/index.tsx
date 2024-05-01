@@ -2,8 +2,14 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { NavbarProps, NavbarItemProps, NavItem } from '@embakitchen/components/navbar/types'
+import {
+  NavbarProps,
+  NavbarItemProps,
+  NavItem,
+  NavbarMobileProps,
+} from '@embakitchen/components/navbar/types'
 import { styles as navbarStyles } from '@embakitchen/components/navbar/styles'
+import { transform } from 'next/dist/build/swc'
 
 const styles: Record<string, string> = navbarStyles as Record<string, string>
 
@@ -96,6 +102,110 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, 
             })}
           </div>
         ) : null
+      ) : null}
+    </div>
+  )
+}
+
+export const NavbarMobile: React.FC<NavbarMobileProps> = () => {
+  return (
+    <div className={styles.navbarMobile}>
+      <div className={styles.closeMenu}>
+        <Image
+          width={20}
+          height={20}
+          alt='arrowdown'
+          src='/assets/images/cross.svg'
+        />
+      </div>
+      <div className={styles.navbarMobileItem}>
+        {navItems.map(item => (
+          <NavbarMobileItem
+            key={item.id}
+            name={item.name}
+            dropdown={item.dropdown}
+            active={item.active}
+            items={item.items}
+          />
+        ))}
+        <button className={styles.specialOrder}>Özəl sifariş</button>
+      </div>
+
+      <div className={styles.mobileBottom}>
+        <div>
+          <a
+            className={styles.mobileTel}
+            href='tel:126'
+          >
+            <Image
+              width={30}
+              height={30}
+              alt='search'
+              src='/assets/images/call-calling.svg'
+            />
+            126
+          </a>
+        </div>
+        <div className={styles.mobileButtons}>
+          <button className={styles.mobilePrivateCabinet}>
+            <Image
+              width={24}
+              height={24}
+              alt='search'
+              src='/assets/images/profile-circle.svg'
+            />
+            Şəxsi kabinet
+          </button>
+          <button className={styles.mobileLang}>
+            Az
+            <Image
+              width={24}
+              height={24}
+              alt='search'
+              src='/assets/images/arrow-down.svg'
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const NavbarMobileItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, items }) => {
+  const [rotate, setRotate] = useState(false)
+
+  return (
+    <div
+      className={`${styles.navbarItem} ${active ? styles.active : ''}`}
+      onClick={() => setRotate(!rotate)}
+    >
+      <p className={active ? `${styles.active}` : `${styles.mobileParagraph}`}>
+        {name}
+        {dropdown ? (
+          rotate ? (
+            <div className={styles.mobileDropdownItems}>
+              {items?.map(item => {
+                return (
+                  <div
+                    className={styles.mobileDropdownItem}
+                    key={item.id}
+                  >
+                    <p className={styles.mobileParagraph}>{item.name}</p>
+                  </div>
+                )
+              })}
+            </div>
+          ) : null
+        ) : null}
+      </p>
+      {dropdown ? (
+        <Image
+          width={20}
+          height={20}
+          alt='arrowdown'
+          src='/assets/images/arrow-down.svg'
+          className={rotate ? 'rotate-180 mt-[-110px]' : ''}
+        />
       ) : null}
     </div>
   )

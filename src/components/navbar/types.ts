@@ -1,4 +1,5 @@
 export interface NavbarProps {}
+export interface NavbarMobileProps {}
 
 export interface NavbarItemProps {
   name: string
@@ -10,6 +11,7 @@ export interface NavbarItemProps {
 interface DropDownItem {
   id: number
   name: string
+  active?: boolean
 }
 
 export interface NavItem {
