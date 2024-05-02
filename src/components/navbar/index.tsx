@@ -9,7 +9,6 @@ import {
   NavbarMobileProps,
 } from '@embakitchen/components/navbar/types'
 import { styles as navbarStyles } from '@embakitchen/components/navbar/styles'
-import { transform } from 'next/dist/build/swc'
 
 const styles: Record<string, string> = navbarStyles as Record<string, string>
 
