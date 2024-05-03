@@ -2,5 +2,5 @@
   "editor.quickSuggestions": {
     "strings": true
   },
-  "tailwindCSS.classAttributes": ["class", "className", "ngClass", ".*styles"]
+  "tailwindCSS.classAttributes": ["class", "className", ".*styles"]
 }
