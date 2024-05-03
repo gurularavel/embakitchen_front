@@ -7,14 +7,14 @@ interface DropdownItem {
 export interface NavbarItemProps {
   name: string
   active?: boolean
-  dropdown?: boolean
+  isDropdown?: boolean
   items?: DropdownItem[]
 }
 
 export interface NavItem {
   id: number
   name: string
-  dropdown?: boolean
+  isDropdown?: boolean
   items?: DropdownItem[]
   active?: boolean
 }

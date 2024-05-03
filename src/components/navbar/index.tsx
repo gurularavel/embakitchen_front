@@ -19,7 +19,7 @@ export const navItems: NavItem[] = [
   {
     id: 3,
     name: 'Haqqımızda',
-    dropdown: true,
+    isDropdown: true,
     items: [
       {
         id: 1,
@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => (
       <NavbarItem
         key={item.id}
         name={item.name}
-        dropdown={item.dropdown}
+        isDropdown={item.isDropdown}
         active={item.active}
         items={item.items}
       />
@@ -61,7 +61,7 @@ export const Navbar: React.FC = () => (
   </div>
 )
 
-export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, items }) => {
+export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, isDropdown, items }) => {
   const [rotated, setRotated] = useState(false)
 
   return (
@@ -70,7 +70,7 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, 
       onClick={() => setRotated(!rotated)}
     >
       <p className={styles.paragraph}>{name}</p>
-      {dropdown ? (
+      {isDropdown ? (
         <Image
           width={20}
           height={20}
@@ -79,7 +79,7 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, 
           className={rotated ? 'rotated-180' : ''}
         />
       ) : null}
-      {dropdown && rotated ? (
+      {isDropdown && rotated ? (
         <div className={styles.dropdownItems}>
           {items?.map(item => (
             <div
@@ -110,7 +110,7 @@ export const NavbarMobile: React.FC = () => (
         <NavbarMobileItem
           key={item.id}
           name={item.name}
-          dropdown={item.dropdown}
+          isDropdown={item.isDropdown}
           active={item.active}
           items={item.items}
         />
@@ -157,7 +157,12 @@ export const NavbarMobile: React.FC = () => (
   </div>
 )
 
-export const NavbarMobileItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, items }) => {
+export const NavbarMobileItem: React.FC<NavbarItemProps> = ({
+  name,
+  active,
+  isDropdown,
+  items,
+}) => {
   const [isRotated, setIsRotated] = useState(false)
 
   return (
@@ -167,7 +172,7 @@ export const NavbarMobileItem: React.FC<NavbarItemProps> = ({ name, active, drop
     >
       <p className={active ? `${styles.active}` : `${styles.mobileParagraph}`}>
         {name}
-        {dropdown && isRotated ? (
+        {isDropdown && isRotated ? (
           <div className={styles.mobileDropdownItems}>
             {items?.map(item => {
               return (
@@ -182,7 +187,7 @@ export const NavbarMobileItem: React.FC<NavbarItemProps> = ({ name, active, drop
           </div>
         ) : null}
       </p>
-      {dropdown ? (
+      {isDropdown ? (
         <Image
           width={20}
           height={20}
