@@ -62,12 +62,12 @@ export const Navbar: React.FC = () => (
 )
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, isDropdown, items }) => {
-  const [rotated, setRotated] = useState(false)
+  const [isRotated, setIsRotated] = useState(false)
 
   return (
     <div
       className={`${styles.navbarItem} ${active ? styles.active : ''}`}
-      onClick={() => setRotated(!rotated)}
+      onClick={() => setIsRotated(!isRotated)}
     >
       <p className={styles.paragraph}>{name}</p>
       {isDropdown ? (
@@ -76,10 +76,10 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, isDropdown
           height={20}
           alt='arrowdown'
           src='/assets/images/arrow-down.svg'
-          className={rotated ? 'rotated-180' : ''}
+          className={isRotated ? 'rotated-180' : ''}
         />
       ) : null}
-      {isDropdown && rotated ? (
+      {isDropdown && isRotated ? (
         <div className={styles.dropdownItems}>
           {items?.map(item => (
             <div
