@@ -1,23 +1,20 @@
-export interface NavbarProps {}
-export interface NavbarMobileProps {}
+interface DropdownItem {
+  id: number
+  name: string
+  active?: boolean
+}
 
 export interface NavbarItemProps {
   name: string
   active?: boolean
   dropdown?: boolean
-  items?: DropDownItem[]
-}
-
-interface DropDownItem {
-  id: number
-  name: string
-  active?: boolean
+  items?: DropdownItem[]
 }
 
 export interface NavItem {
   id: number
   name: string
   dropdown?: boolean
-  items?: DropDownItem[]
+  items?: DropdownItem[]
   active?: boolean
 }

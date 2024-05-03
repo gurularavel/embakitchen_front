@@ -1,10 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import { Navbar, NavbarMobile } from '@embakitchen/components/navbar'
-import { HeaderProps } from '@embakitchen/components/header/types'
 import { styles as headerStyles } from '@embakitchen/components/header/styles'
 
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC = () => {
   const styles: Record<string, string> = headerStyles as Record<string, string>
 
   return (
