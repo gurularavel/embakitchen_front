@@ -46,22 +46,20 @@ export const navItems: NavItem[] = [
   },
 ]
 
-export const Navbar: React.FC = () => {
-  return (
-    <div className={styles.navbar}>
-      {navItems.map(item => (
-        <NavbarItem
-          key={item.id}
-          name={item.name}
-          dropdown={item.dropdown}
-          active={item.active}
-          items={item.items}
-        />
-      ))}
-      <button className={styles.specialOrder}>Özəl sifariş</button>
-    </div>
-  )
-}
+export const Navbar: React.FC = () => (
+  <div className={styles.navbar}>
+    {navItems.map(item => (
+      <NavbarItem
+        key={item.id}
+        name={item.name}
+        dropdown={item.dropdown}
+        active={item.active}
+        items={item.items}
+      />
+    ))}
+    <button className={styles.specialOrder}>Özəl sifariş</button>
+  </div>
+)
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, dropdown, items }) => {
   const [rotated, setRotated] = useState(false)
