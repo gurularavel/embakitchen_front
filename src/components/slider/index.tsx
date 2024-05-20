@@ -66,6 +66,7 @@ function MainSlider() {
                 src={item.img}
                 alt={item.description}
                 fill={true}
+                className={styles.img}
               />
               <div className={styles.textSection}>
                 <h2 className={styles.title}>
