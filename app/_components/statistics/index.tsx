@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { StatisticsItem, StatisticsProps } from '@embakitchen/components/statistics/types'
-import { styles as statisticsStyles } from '@embakitchen/components/statistics/styles'
+import { StatisticsItem, StatisticsProps } from '@embakitchen/_components/statistics/types'
+import { styles as statisticsStyles } from '@embakitchen/_components/statistics/styles'
 
 export const statisticsItems: StatisticsItem[] = [
   {

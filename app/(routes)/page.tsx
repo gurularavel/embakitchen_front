@@ -1,5 +1,5 @@
-import { Slider } from '@embakitchen/components/slider'
-import { Statistics } from '@embakitchen/components/statistics'
+import { Slider } from '@embakitchen/_components/slider'
+import { Statistics } from '@embakitchen/_components/statistics'
 
 export default function Home() {
   return (

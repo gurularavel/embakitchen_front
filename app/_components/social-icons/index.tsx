@@ -3,8 +3,8 @@ import Image from 'next/image'
 import type {
   SocialIconsProps,
   SocialIconsLayout,
-} from '@embakitchen/components/social-icons/types'
-import { styles as socialIconsStyles } from '@embakitchen/components/social-icons/styles'
+} from '@embakitchen/_components/social-icons/types'
+import { styles as socialIconsStyles } from '@embakitchen/_components/social-icons/styles'
 
 export const SocialIcons: React.FC<SocialIconsProps> = ({ layout, icons }) => {
   const styles: Record<string, string> = socialIconsStyles as Record<string, string>

@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { NavbarItemProps, NavItem } from '@embakitchen/components/navbar/types'
-import { styles as navbarStyles } from '@embakitchen/components/navbar/styles'
+import { NavbarItemProps, NavItem } from '@embakitchen/_components/navbar/types'
+import { styles as navbarStyles } from '@embakitchen/_components/navbar/styles'
 
 const styles: Record<string, string> = navbarStyles as Record<string, string>
 
