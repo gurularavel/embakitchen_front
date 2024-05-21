@@ -4,12 +4,17 @@ import React from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-import type { SliderProps } from '@embakitchen/_components/slider/types'
 import type { SocialIcon } from '@embakitchen/_components/SocialContacts'
-import { styles as sliderStyles } from '@embakitchen/_components/slider/styles'
+import { SocialContacts } from '@embakitchen/_components'
+import { sliderStyles } from '@embakitchen/_styles'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { SocialContacts } from '@embakitchen/_components'
+
+type Slider = 'main' | 'gallery'
+
+interface SliderProps {
+  type: Slider
+}
 
 const icons: SocialIcon[] = [
   {
