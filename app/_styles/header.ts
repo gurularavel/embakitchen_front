@@ -1,5 +1,3 @@
-import { TailwindStyles } from '@embakitchen/_types'
-
 export const headerStyles: TailwindStyles = {
   header:
     'relative bg-[#31373D] desktop:px-[100px] min-[1200px]:px-[30px] mobile-s:px-[20px] mobile-s:h-screen laptop:h-[76px] flex justify-between tablet:text-sm laptop:text-base',

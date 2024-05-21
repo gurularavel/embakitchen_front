@@ -1,5 +1,3 @@
-import type { TailwindStyles } from '@embakitchen/_types'
-
 export const sliderStyles: TailwindStyles = {
   main: {
     container: 'relative',

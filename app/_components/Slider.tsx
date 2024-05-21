@@ -4,19 +4,17 @@ import React from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-import type { SocialIcon } from '@embakitchen/_components/SocialContacts'
+import type { SocialContact } from '@embakitchen/_types'
 import { SocialContacts } from '@embakitchen/_components'
 import { sliderStyles } from '@embakitchen/_styles'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-type Slider = 'main' | 'gallery'
-
 interface SliderProps {
   type: Slider
 }
 
-const icons: SocialIcon[] = [
+const icons: SocialContact[] = [
   {
     img: '/assets/images/icons/whatsapp.svg',
     url: '/',
