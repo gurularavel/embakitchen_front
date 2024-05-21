@@ -4,12 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-import { SocialIcons } from '@embakitchen/_components/social-icons'
 import type { SliderProps } from '@embakitchen/_components/slider/types'
-import type { SocialIcon } from '@embakitchen/_components/social-icons/types'
+import type { SocialIcon } from '@embakitchen/_components/SocialContacts'
 import { styles as sliderStyles } from '@embakitchen/_components/slider/styles'
 import 'swiper/css'
 import 'swiper/css/pagination'
+import { SocialContacts } from '@embakitchen/_components'
 
 const icons: SocialIcon[] = [
   {
@@ -80,7 +80,7 @@ function MainSlider() {
             </SwiperSlide>
           ))}
       </Swiper>
-      <SocialIcons
+      <SocialContacts
         layout='vertical'
         icons={icons}
       />

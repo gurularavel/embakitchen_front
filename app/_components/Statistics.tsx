@@ -1,8 +1,13 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { StatisticsItem, StatisticsProps } from '@embakitchen/_components/statistics/types'
-import { styles as statisticsStyles } from '@embakitchen/_components/statistics/styles'
+import { statisticsStyles } from '@embakitchen/_styles'
+
+interface StatisticsItem {
+  id: number
+  number: number
+  name: string
+}
 
 export const statisticsItems: StatisticsItem[] = [
   {
@@ -27,7 +32,7 @@ export const statisticsItems: StatisticsItem[] = [
   },
 ]
 
-export const Statistics: React.FC<StatisticsProps> = () => {
+export const Statistics: React.FC = () => {
   const styles: Record<string, string> = statisticsStyles as Record<string, string>
 
   useEffect(() => {
