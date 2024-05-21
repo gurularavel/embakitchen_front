@@ -1,6 +1,6 @@
-import { TailwindStyles } from '@embakitchen/types'
+import { TailwindStyles } from '@embakitchen/_types'
 
-export const styles: TailwindStyles = {
+export const navbarStyles: TailwindStyles = {
   navbar: 'mobile-s:hidden laptop:flex gap-x-[16px] items-center',
   navbarItem:
     'flex mobile-s:justify-between laptop:justify-start gap-x-[2px] relative hover:cursor-pointer',
