@@ -3,3 +3,9 @@ export interface SocialContact {
   url: string
   description: string
 }
+
+export interface StatisticsData {
+  id: number
+  number: number
+  name: string
+}
