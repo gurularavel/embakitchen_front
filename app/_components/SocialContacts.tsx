@@ -1,15 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
-import type {
-  SocialIconsProps,
-  SocialIconsLayout,
-} from '@embakitchen/components/social-icons/types'
-import { styles as socialIconsStyles } from '@embakitchen/components/social-icons/styles'
+import type { SocialContact } from '@embakitchen/_types'
+import { socialContactsStyles } from '@embakitchen/_styles'
 
-export const SocialIcons: React.FC<SocialIconsProps> = ({ layout, icons }) => {
-  const styles: Record<string, string> = socialIconsStyles as Record<string, string>
-  const getLayoutStyles: (layout: SocialIconsLayout) => string = socialIconsStyles.layout as (
-    layout: SocialIconsLayout,
+interface SocialIconsProps {
+  layout: LayoutOptions
+  icons: SocialContact[]
+}
+
+export const SocialContacts: React.FC<SocialIconsProps> = ({ layout, icons }) => {
+  const styles: Record<string, string> = socialContactsStyles as Record<string, string>
+  const getLayoutStyles: (layout: LayoutOptions) => string = socialContactsStyles.layout as (
+    layout: LayoutOptions,
   ) => string
 
   return (
