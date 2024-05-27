@@ -11,7 +11,8 @@ const config: Config = {
       backgroundImage: {
         // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'slogan-section': 'url("../public/images/slogan_section_bg.png")',
+        'slogan-section':
+          'url("../public/assets/images/slogan_section_bg.png")',
       },
       colors: {
         // primary: '#E55E25',

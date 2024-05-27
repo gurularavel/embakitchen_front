@@ -1,6 +1,6 @@
 // export * from '@embakitchen/_components/Header/Header'
 // export * from '@embakitchen/_components/Navbar/Navbar'
-// export * from '@embakitchen/_components/Slider/Slider'
-// export * from '@embakitchen/_components/SocialContacts/SocialContacts'
+export * from '@embakitchen/_components/Slider/Slider'
+export * from '@embakitchen/_components/SocialContacts/SocialContacts'
 // export * from '@embakitchen/_components/Statistics/Statistics'
 export * from '@embakitchen/_components/SloganSection/SloganSection'

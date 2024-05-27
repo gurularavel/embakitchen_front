@@ -7,7 +7,5 @@ declare global {
 
   type LayoutOptions = 'horizontal' | 'vertical'
 
-  type Slider = 'main' | 'gallery'
-
   type StringPairs = Record<string, string>
 }
