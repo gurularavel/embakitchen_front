@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
 import type { SocialContact } from '@embakitchen/_types'
 import { SocialContacts } from '@embakitchen/_components'
-import { sliderStyles } from '@embakitchen/_styles'
+import { sliderStyles } from '@embakitchen/_components/Slider/Slider.style'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
