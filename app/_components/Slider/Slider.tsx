@@ -4,14 +4,17 @@ import React from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-import { SocialIcons } from '@embakitchen/components/social-icons'
-import type { SliderProps } from '@embakitchen/components/slider/types'
-import type { SocialIcon } from '@embakitchen/components/social-icons/types'
-import { styles as sliderStyles } from '@embakitchen/components/slider/styles'
+import type { SocialContact } from '@embakitchen/_types'
+import { SocialContacts } from '@embakitchen/_components'
+import { sliderStyles } from '@embakitchen/_components/Slider/Slider.style'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-const icons: SocialIcon[] = [
+interface SliderProps {
+  type: Slider
+}
+
+const icons: SocialContact[] = [
   {
     img: '/assets/images/icons/whatsapp.svg',
     url: '/',
@@ -41,7 +44,10 @@ const sliders: Record<string, React.ReactNode> = {
 export const Slider: React.FC<SliderProps> = ({ type }) => sliders[type]
 
 function MainSlider() {
-  const styles: Record<string, string> = sliderStyles.main as Record<string, string>
+  const styles: Record<string, string> = sliderStyles.main as Record<
+    string,
+    string
+  >
 
   return (
     <div className={styles.container}>
@@ -74,14 +80,18 @@ function MainSlider() {
                   <span className={styles.titleBold}>{item.titleBottom}</span>
                 </h2>
                 <div className={styles.buttons}>
-                  <button className={styles.specialOrder}>Özəl sifariş yarat</button>
-                  <button className={styles.showProducts}>Məhsullara bax</button>
+                  <button className={styles.specialOrder}>
+                    Özəl sifariş yarat
+                  </button>
+                  <button className={styles.showProducts}>
+                    Məhsullara bax
+                  </button>
                 </div>
               </div>
             </SwiperSlide>
           ))}
       </Swiper>
-      <SocialIcons
+      <SocialContacts
         layout='vertical'
         icons={icons}
       />

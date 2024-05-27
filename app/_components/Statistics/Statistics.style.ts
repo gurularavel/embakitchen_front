@@ -1,6 +1,4 @@
-import { TailwindStyles } from '@embakitchen/types'
-
-export const styles: TailwindStyles = {
+export const statisticsStyles: TailwindStyles = {
   statistics:
     'laptop:mt-[100px] mobile-s:mt-[24px] desktop:px-[125px] laptop:px-[129px] tablet:px-[12px] mobile-s:px-[40px] flex mobile-s:flex-wrap justify-between mobile-s:gap-y-[24px] tablet:gap-y-0',
   statisticsItem:

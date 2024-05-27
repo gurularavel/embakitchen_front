@@ -1,8 +1,13 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { StatisticsItem, StatisticsProps } from '@embakitchen/components/statistics/types'
-import { styles as statisticsStyles } from '@embakitchen/components/statistics/styles'
+import { statisticsStyles } from '@embakitchen/_components/Statistics/Statistics.style'
+
+interface StatisticsItem {
+  id: number
+  number: number
+  name: string
+}
 
 export const statisticsItems: StatisticsItem[] = [
   {
@@ -27,11 +32,16 @@ export const statisticsItems: StatisticsItem[] = [
   },
 ]
 
-export const Statistics: React.FC<StatisticsProps> = () => {
-  const styles: Record<string, string> = statisticsStyles as Record<string, string>
+export const Statistics: React.FC = () => {
+  const styles: Record<string, string> = statisticsStyles as Record<
+    string,
+    string
+  >
 
   useEffect(() => {
-    const counters = Array.from(document.querySelectorAll('.counter_number')) as HTMLElement[]
+    const counters = Array.from(
+      document.querySelectorAll('.counter_number'),
+    ) as HTMLElement[]
 
     const observerCallback = (
       entries: IntersectionObserverEntry[],
@@ -42,7 +52,9 @@ export const Statistics: React.FC<StatisticsProps> = () => {
           counters.forEach((counter, i) => {
             let interval = setInterval(() => {
               if (parseInt(counter.textContent!) < statisticsItems[i].number) {
-                counter.textContent = (parseInt(counter.textContent!) + 1).toString()
+                counter.textContent = (
+                  parseInt(counter.textContent!) + 1
+                ).toString()
               } else {
                 clearInterval(interval)
               }

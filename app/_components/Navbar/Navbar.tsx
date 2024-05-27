@@ -2,8 +2,28 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { NavbarItemProps, NavItem } from '@embakitchen/components/navbar/types'
-import { styles as navbarStyles } from '@embakitchen/components/navbar/styles'
+import { navbarStyles } from '@embakitchen/_components/Navbar/Navbar.style'
+
+interface DropdownItem {
+  id: number
+  name: string
+  active?: boolean
+}
+
+interface NavbarItemProps {
+  name: string
+  active?: boolean
+  isDropdown?: boolean
+  items?: DropdownItem[]
+}
+
+interface NavItem {
+  id: number
+  name: string
+  isDropdown?: boolean
+  items?: DropdownItem[]
+  active?: boolean
+}
 
 const styles: Record<string, string> = navbarStyles as Record<string, string>
 
@@ -61,7 +81,12 @@ export const Navbar: React.FC = () => (
   </div>
 )
 
-export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, isDropdown, items }) => {
+export const NavbarItem: React.FC<NavbarItemProps> = ({
+  name,
+  active,
+  isDropdown,
+  items,
+}) => {
   const [isRotated, setIsRotated] = useState(false)
 
   return (
