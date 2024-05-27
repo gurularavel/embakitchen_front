@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { statisticsStyles } from '@embakitchen/_styles'
+import { statisticsStyles } from '@embakitchen/_components/Statistics/Statistics.style'
 
 interface StatisticsItem {
   id: number
