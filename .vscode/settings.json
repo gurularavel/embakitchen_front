@@ -2,5 +2,10 @@
   "editor.quickSuggestions": {
     "strings": true
   },
-  "tailwindCSS.classAttributes": ["class", "className", ".*styles"]
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    ".*styles"
+  ],
+  "editor.wordWrap": "on"
 }
