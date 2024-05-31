@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { navbarStyles } from '@embakitchen/_styles'
+import { navbarStyles } from '@embakitchen/_components/Navbar/Navbar.style'
 
 interface DropdownItem {
   id: number
@@ -81,7 +81,12 @@ export const Navbar: React.FC = () => (
   </div>
 )
 
-export const NavbarItem: React.FC<NavbarItemProps> = ({ name, active, isDropdown, items }) => {
+export const NavbarItem: React.FC<NavbarItemProps> = ({
+  name,
+  active,
+  isDropdown,
+  items,
+}) => {
   const [isRotated, setIsRotated] = useState(false)
 
   return (

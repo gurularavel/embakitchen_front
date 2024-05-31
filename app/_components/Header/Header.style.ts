@@ -10,5 +10,6 @@ export const headerStyles: TailwindStyles = {
   privateCabinet:
     'laptop:w-[150px] desktop:w-[187px] h-[44px] mobile-s:hidden min-[1150px]:flex justify-center items-center text-white gap-x-[8px] bg-[#49525B] rounded-lg',
   mobileMenuBtn: 'mobile-s:hidden laptop:inline-block',
-  mobileMenu: 'laptop:hidden h-full mobile-s:w-[50px] mobile:w-[90px] flex items-center',
+  mobileMenu:
+    'laptop:hidden h-full mobile-s:w-[50px] mobile:w-[90px] flex items-center',
 }
