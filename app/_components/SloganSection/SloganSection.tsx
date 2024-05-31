@@ -10,7 +10,7 @@ export const SloganSection: React.FC<SloganSectionProps> = ({
   title,
   description,
 }) => {
-  const styles: StringPairs = sloganSectionStyles as StringPairs
+  const styles: StringPair = sloganSectionStyles as StringPair
 
   return (
     <section className={styles.container}>

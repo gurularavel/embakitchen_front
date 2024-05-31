@@ -21,7 +21,8 @@ export const navbarStyles: TailwindStyles = {
   closeMenu: 'w-full h-[76px] flex justify-end items-center px-[44px]',
   mobileBottom: 'px-[40px] absolute bottom-[40px] w-full',
   mobileTel: 'flex gap-[8px]  items-center text-[#FFC35C] text-xl',
-  mobileButtons: 'flex mobile-s:flex-wrap tablet:flex-nowrap gap-[24px] mt-[24px]',
+  mobileButtons:
+    'flex mobile-s:flex-wrap tablet:flex-nowrap gap-[24px] mt-[24px]',
   mobilePrivateCabinet:
     'w-full h-[44px] bg-[#49525B] flex justify-center items-center rounded-lg text-white text-base gap-[8px]',
   mobileLang:

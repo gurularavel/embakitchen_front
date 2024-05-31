@@ -1,6 +1,6 @@
-export const socialContactsStyles: TailwindStyles = {
-  wrapper: 'absolute right-[100px] top-1/2 -translate-y-1/2 z-10',
-  layout: layout => `flex ${layout === 'horizontal' ? '' : 'flex-col gap-y-3'}`,
-  link: 'flex items-center justify-center w-10 h-10 rounded bg-half-white',
-  icon: 'w-6 h-6',
+export const socialContactsStyles: TailwindStyle = {
+  wrapper:
+    'absolute right-25 top-1/2 -translate-y-1/2 z-10 hidden laptop:block',
+  layout: (layout: unknown) =>
+    `flex ${(layout as LayoutOption) === 'vertical' ? 'flex-col gap-y-3' : ''}`,
 }
