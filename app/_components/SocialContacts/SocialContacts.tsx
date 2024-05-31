@@ -1,42 +1,30 @@
 import React from 'react'
-import Image from 'next/image'
+import { SocialContactsItem } from '@embakitchen/_components'
 import type { SocialContact } from '@embakitchen/_types'
 import { socialContactsStyles } from '@embakitchen/_components/SocialContacts/SocialContacts.style'
 
-interface SocialIconsProps {
-  layout: LayoutOptions
-  icons: SocialContact[]
+interface SocialContactsProps {
+  layout: LayoutOption
+  contacts: SocialContact[]
 }
 
-export const SocialContacts: React.FC<SocialIconsProps> = ({
+export const SocialContacts: React.FC<SocialContactsProps> = ({
   layout,
-  icons,
+  contacts,
 }) => {
-  const styles: Record<string, string> = socialContactsStyles as Record<
-    string,
-    string
-  >
-  const getLayoutStyles: (layout: LayoutOptions) => string =
-    socialContactsStyles.layout as (layout: LayoutOptions) => string
+  const styles: StringPair = socialContactsStyles as StringPair
+
+  const getLayoutStyles: (layout: LayoutOption) => string =
+    socialContactsStyles.layout as (layout: LayoutOption) => string
 
   return (
     <div className={styles.wrapper}>
       <ul className={getLayoutStyles(layout)}>
-        {icons.map(icon => (
-          <li key={icon.img}>
-            <a
-              href={icon.url}
-              className={styles.link}
-            >
-              <Image
-                src={icon.img}
-                alt={icon.description}
-                width={30}
-                height={30}
-                className={styles.icon}
-              />
-            </a>
-          </li>
+        {contacts.map((contact: SocialContact, i) => (
+          <SocialContactsItem
+            key={i}
+            contact={contact}
+          />
         ))}
       </ul>
     </div>

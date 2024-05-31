@@ -1,15 +1,17 @@
 'use client'
 
 import React from 'react'
-import { SliderVariants } from '@embakitchen/_components/Slider/SliderVariants'
-import type { SliderVariant } from '@embakitchen/_types'
-
-interface SliderProps {
-  variant: SliderVariant
-}
+import { SliderVariant } from '@embakitchen/_components'
+import type { SliderOption } from '@embakitchen/_types'
 
 const sliders: Record<string, React.ReactNode> = {
-  main: <SliderVariants.MainSlider />,
+  main: <SliderVariant.MainSlider />,
 }
 
-export const Slider: React.FC<SliderProps> = ({ variant }) => sliders[variant]
+interface SliderProps {
+  variant: SliderOption
+}
+
+export const Slider: React.FC<SliderProps> = ({ variant }) => {
+  return <div className='mb-25'>{sliders[variant]}</div>
+}
