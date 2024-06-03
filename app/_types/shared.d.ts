@@ -6,8 +6,7 @@ export interface SocialContact {
   alt: string
 }
 
-export interface StatisticsData {
-  id: number
-  number: number
-  name: string
+export interface StatisticsEntry {
+  quantity: number
+  title: string
 }
