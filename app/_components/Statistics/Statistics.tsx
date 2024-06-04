@@ -83,10 +83,7 @@ export const Statistics: React.FC = () => {
   // )
 
   return (
-    <div
-      className={styles.wrapper}
-      style={{ border: '3px solid blue' }}
-    >
+    <div className={styles.wrapper}>
       {statisticsItems?.map((item, i) => (
         <StatisticsItem
           key={i}

@@ -9,10 +9,7 @@ export const StatisticsItem: React.FC<StatisticsEntry> = ({
   const styles: StringPair = statisticsItemStyles as StringPair
 
   return (
-    <div
-      className={styles.container}
-      style={{ border: '3px solid red' }}
-    >
+    <div className={styles.container}>
       <div className={styles.wrapper}>
         <span className={styles.quantity}>{quantity}+</span>
         <span className={styles.title}>{title}</span>

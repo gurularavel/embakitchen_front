@@ -65,6 +65,7 @@ const config: Config = {
       tablet: '768px',
       laptop: '1024px',
       desktop: '1440px',
+      wide: '1920px',
     },
   },
   plugins: [],
