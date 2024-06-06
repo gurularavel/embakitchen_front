@@ -87,8 +87,8 @@ export const Statistics: React.FC = () => {
       {statisticsItems?.map((item, i) => (
         <StatisticsItem
           key={i}
-          quantity={item.quantity}
-          title={item.title}
+          entry={item}
+          isLast={i === statisticsItems.length - 1}
         />
       ))}
     </div>
