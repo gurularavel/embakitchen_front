@@ -18,7 +18,7 @@
       }
     ],
     "paths": {
-      "@embakitchen/*": ["./app/*"]
+      "@embakitchen/*": ["./src/*"]
     },
     "typeRoots": ["./types", "./node_modules/@types"]
   },

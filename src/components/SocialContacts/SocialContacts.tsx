@@ -1,7 +1,7 @@
 import React from 'react'
-import { SocialContactsItem } from '@embakitchen/_components'
-import type { SocialContact } from '@embakitchen/_types'
-import { socialContactsStyles } from '@embakitchen/_components/SocialContacts/SocialContacts.style'
+import { SocialContactsItem } from '@embakitchen/components'
+import type { SocialContact } from '@embakitchen/types'
+import { socialContactsStyles } from '@embakitchen/components/SocialContacts/SocialContacts.style'
 
 interface SocialContactsProps {
   layout: LayoutOption

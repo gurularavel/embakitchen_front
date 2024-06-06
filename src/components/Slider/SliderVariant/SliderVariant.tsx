@@ -4,10 +4,10 @@ import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-import { SliderSurface } from '@embakitchen/_components'
+import { SliderSurface } from '@embakitchen/components'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { sliderVariantStyles } from '@embakitchen/_components/Slider/SliderVariant/SliderVariant.style'
+import { sliderVariantStyles } from '@embakitchen/components/Slider/SliderVariant/SliderVariant.style'
 import mainSliderMockImg from '/public/assets/images/main_slider_mock_img.jpg'
 
 interface MainSliderItem {

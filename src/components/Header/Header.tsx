@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import { Navbar, NavbarMobile } from '@embakitchen/_components'
-import { headerStyles } from '@embakitchen/_components/Header/Header.style'
+import { Navbar, NavbarMobile } from '@embakitchen/components'
+import { headerStyles } from '@embakitchen/components/Header/Header.style'
 
 export const Header: React.FC = () => {
   const styles: Record<string, string> = headerStyles as Record<string, string>

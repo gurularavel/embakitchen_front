@@ -1,5 +1,5 @@
 import React from 'react'
-import { sloganSectionStyles } from '@embakitchen/_components/SloganSection/SloganSection.style'
+import { sloganSectionStyles } from '@embakitchen/components/SloganSection/SloganSection.style'
 
 interface SloganSectionProps {
   title: string

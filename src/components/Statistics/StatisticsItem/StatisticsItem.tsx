@@ -1,6 +1,6 @@
 import React from 'react'
-import type { StatisticsEntry } from '@embakitchen/_types'
-import { statisticsItemStyles } from '@embakitchen/_components/Statistics/StatisticsItem/StatisticsItem.style'
+import type { StatisticsEntry } from '@embakitchen/types'
+import { statisticsItemStyles } from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem.style'
 
 interface StatisticsItemProps {
   entry: StatisticsEntry

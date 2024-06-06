@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import type { SocialContact } from '@embakitchen/_types'
-import { socialContactsItemStyles } from '@embakitchen/_components/SocialContacts/SocialContactsItem/SocialContactsItem.style'
+import type { SocialContact } from '@embakitchen/types'
+import { socialContactsItemStyles } from '@embakitchen/components/SocialContacts/SocialContactsItem/SocialContactsItem.style'
 
 interface SocialContactsItemProps {
   contact: SocialContact

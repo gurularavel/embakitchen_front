@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { StatisticsItem } from '@embakitchen/_components'
-import type { StatisticsEntry } from '@embakitchen/_types'
-import { statisticsStyles } from '@embakitchen/_components/Statistics/Statistics.style'
+import { StatisticsItem } from '@embakitchen/components'
+import type { StatisticsEntry } from '@embakitchen/types'
+import { statisticsStyles } from '@embakitchen/components/Statistics/Statistics.style'
 
 const statisticsItems: StatisticsEntry[] = [
   {

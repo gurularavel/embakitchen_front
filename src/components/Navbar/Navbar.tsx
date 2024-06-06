@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { navbarStyles } from '@embakitchen/_components/Navbar/Navbar.style'
+import { navbarStyles } from '@embakitchen/components/Navbar/Navbar.style'
 
 interface DropdownItem {
   id: number
