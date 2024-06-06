@@ -10,12 +10,12 @@ import 'swiper/css/pagination'
 import { sliderVariantStyles } from '@embakitchen/components/Slider/SliderVariant/SliderVariant.style'
 import mainSliderMockImg from '/public/assets/images/main_slider_mock_img.jpg'
 
-interface MainSliderItem {
+interface MainSliderEntry {
   img: StaticImageData
   alt: string
 }
 
-const MainSlider = () => {
+const MainSlider: React.FC = () => {
   const styles: StringPair = sliderVariantStyles.main as StringPair
 
   return (
@@ -26,7 +26,7 @@ const MainSlider = () => {
         loop={true}
         className={`main_slider ${styles.slider}`}
       >
-        {Array<MainSliderItem>(3)
+        {Array<MainSliderEntry>(3)
           .fill({
             img: mainSliderMockImg,
             alt: 'embakitchen homepage slider mock image',

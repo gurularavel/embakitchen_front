@@ -1,3 +1,4 @@
+import React from 'react'
 import { SocialContacts } from '@embakitchen/components'
 import type { SocialContact } from '@embakitchen/types'
 import { sliderSurfaceStyles } from '@embakitchen/components/Slider/SliderSurface/SliderSurface.style'
@@ -29,7 +30,7 @@ const contacts: SocialContact[] = [
   },
 ]
 
-const MainSliderSurface = () => {
+const MainSliderSurface: React.FC = () => {
   const styles: StringPair = sliderSurfaceStyles.main as StringPair
 
   return (
