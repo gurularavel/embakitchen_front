@@ -88,7 +88,10 @@ export const Statistics: React.FC = () => {
         <StatisticsItem
           key={i}
           entry={item}
-          isLast={i === statisticsItems.length - 1}
+          line={{
+            row: i,
+            isLast: i === statisticsItems.length - 1,
+          }}
         />
       ))}
     </div>

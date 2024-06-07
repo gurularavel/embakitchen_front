@@ -2,26 +2,34 @@ import React from 'react'
 import type { StatisticsEntry } from '@embakitchen/types'
 import { statisticsItemStyles } from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem.style'
 
+interface Line {
+  row: number
+  isLast: boolean
+}
+
 interface StatisticsItemProps {
   entry: StatisticsEntry
-  isLast: boolean
+  line: Line
 }
 
 export const StatisticsItem: React.FC<StatisticsItemProps> = ({
   entry,
-  isLast,
+  line,
 }) => {
   const styles: StringPair = statisticsItemStyles as StringPair
 
+  const getContainerStyles: (row: number) => string =
+    statisticsItemStyles.container as (row: number) => string
+
   return (
     <>
-      <div className={styles.container}>
+      <div className={getContainerStyles(line.row)}>
         <div className={styles.wrapper}>
           <span className={styles.quantity}>{entry?.quantity}+</span>
           <span className={styles.title}>{entry?.title}</span>
         </div>
       </div>
-      {!isLast && <div className={styles.line}></div>}
+      {!line.isLast && <div className={styles.line}></div>}
     </>
   )
 }
