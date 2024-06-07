@@ -5,7 +5,7 @@
   "tailwindCSS.classAttributes": [
     "class",
     "className",
-    ".*styles"
+    ".*Styles.*"
   ],
   "editor.wordWrap": "on"
 }
