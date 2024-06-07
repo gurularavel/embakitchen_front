@@ -1,1 +1,1 @@
-export const MOBILE_MAX_SCREEN_WIDTH: number = 576
+export const STATISTICS_INTERVAL_LIMIT: number = 1500

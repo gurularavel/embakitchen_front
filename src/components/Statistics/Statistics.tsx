@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react'
 import { StatisticsItem } from '@embakitchen/components'
+import { updateStatisticsContainer } from '@embakitchen/utils'
 import type { StatisticsEntry } from '@embakitchen/types'
 import { statisticsStyles } from '@embakitchen/components/Statistics/Statistics.style'
 
@@ -27,73 +28,57 @@ const statisticsItems: StatisticsEntry[] = [
 export const Statistics: React.FC = () => {
   const styles: StringPair = statisticsStyles as StringPair
 
-  // useEffect(() => {
-  //   const counters = Array.from(
-  //     document.querySelectorAll('.counter_number'),
-  //   ) as HTMLElement[]
+  useEffect(() => {
+    const containers: HTMLElement[] = Array.from(
+      document.querySelectorAll('.statistics-container'),
+    )
 
-  //   const observerCallback = (
-  //     entries: IntersectionObserverEntry[],
-  //     observer: IntersectionObserver,
-  //   ) => {
-  //     entries.forEach(entry => {
-  //       if (entry.isIntersecting) {
-  //         counters.forEach((counter, i) => {
-  //           let interval = setInterval(() => {
-  //             if (parseInt(counter.textContent!) < statisticsItems[i].number) {
-  //               counter.textContent = (
-  //                 parseInt(counter.textContent!) + 1
-  //               ).toString()
-  //             } else {
-  //               clearInterval(interval)
-  //             }
-  //           }, 1250 / statisticsItems[i].number)
-  //           setTimeout(() => {
-  //             counter.textContent += '+'
-  //           }, 1250)
-  //         })
-  //         observer.unobserve(entry.target!)
-  //       }
-  //     })
-  //   }
+    const statisticsObserverCallback = (
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver,
+    ) => {
+      const [entry] = entries
 
-  //   let observer = new IntersectionObserver(observerCallback, {
-  //     root: null,
-  //     rootMargin: '0px',
-  //     threshold: 1.0,
-  //   })
+      if (entry.isIntersecting) {
+        containers.forEach((container: HTMLElement) => {
+          updateStatisticsContainer(container)
+        })
+        observer.unobserve(entry.target)
+      }
+    }
 
-  //   let target = document.querySelector('.counter-observer')
-  //   if (target) {
-  //     observer.observe(target)
-  //   }
-  // }, [])
+    const statisticsObserver = new IntersectionObserver(
+      statisticsObserverCallback,
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0,
+      },
+    )
 
-  // return (
-  //     {statisticsItems.map(item => (
-  //       <div
-  //         className={styles.statisticsItem}
-  //         key={item.id}
-  //       >
-  //         <span className={`${styles.number} counter_number`}>0</span>
-  //         <span className={styles.name}>{item.name}</span>
-  //       </div>
-  //     ))}
-  //     <div className='counter-observer'></div>
-  // )
+    const target = document.querySelector('.statistics-observer')
+    if (target) {
+      statisticsObserver.observe(target)
+    }
+
+    return () => statisticsObserver.disconnect()
+  }, [])
 
   return (
-    <div className={styles.wrapper}>
-      {statisticsItems?.map((item, i) => (
-        <StatisticsItem
-          key={i}
-          entry={item}
-          line={{
-            row: i,
-            isLast: i === statisticsItems.length - 1,
-          }}
-        />
-      ))}
-    </div>
+    <>
+      <div className={styles.wrapper}>
+        {statisticsItems?.map((item, i) => (
+          <StatisticsItem
+            key={i}
+            entry={item}
+            line={{
+              row: i,
+              isLast: i === statisticsItems.length - 1,
+            }}
+          />
+        ))}
+      </div>
+      <div className='statistics-observer'></div>
+    </>
   )
 }

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.main_slider .swiper-pagination.swiper-pagination-bullets {
+.main-slider .swiper-pagination.swiper-pagination-bullets {
   bottom: 212px;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@
   }
 }
 
-.main_slider .swiper-pagination-bullet {
+.main-slider .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
   background-color: #fff;
@@ -21,14 +21,14 @@
   opacity: 1;
 }
 
-.main_slider .swiper-pagination-bullet-active {
+.main-slider .swiper-pagination-bullet-active {
   width: 24px;
   height: 24px;
   background-color: transparent;
   border: 1px solid #fff;
 }
 
-.main_slider .swiper-pagination-bullet-active::after {
+.main-slider .swiper-pagination-bullet-active::after {
   content: '';
   display: inline-block;
   width: 12px;

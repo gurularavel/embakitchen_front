@@ -24,7 +24,7 @@ const MainSlider: React.FC = () => {
         pagination={{ clickable: true }}
         modules={[Pagination]}
         loop={true}
-        className={`main_slider ${styles.slider}`}
+        className={`main-slider ${styles.slider}`}
       >
         {Array<MainSliderEntry>(3)
           .fill({

@@ -23,10 +23,13 @@ export const StatisticsItem: React.FC<StatisticsItemProps> = ({
 
   return (
     <>
-      <div className={getContainerStyles(line.row)}>
+      <div
+        className={`statistics-container ${getContainerStyles(line.row)}`}
+        data-quantity={entry.quantity}
+      >
         <div className={styles.wrapper}>
-          <span className={styles.quantity}>{entry?.quantity}+</span>
-          <span className={styles.title}>{entry?.title}</span>
+          <span className={`statistics-quantity ${styles.quantity}`}>0</span>
+          <span className={styles.title}>{entry.title}</span>
         </div>
       </div>
       {!line.isLast && <div className={styles.line}></div>}
