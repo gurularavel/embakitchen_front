@@ -6,7 +6,7 @@ export const updateStatisticsContainer = (container: HTMLElement) => {
     '.statistics-quantity',
   ) as HTMLElement
 
-  const interval = setInterval(() => {
+  const interval: ReturnType<typeof setInterval> = setInterval(() => {
     if (+quantityWrapper.textContent! < quantity) {
       quantityWrapper.textContent = (
         +quantityWrapper.textContent! + 1

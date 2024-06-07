@@ -59,6 +59,9 @@ const config: Config = {
         '18': '4.5rem', // 72px
         '25': '6.25rem', // 100px
       },
+      height: {
+        '19': '4.75rem', // 76px
+      },
     },
     screens: {
       compact: '375px',

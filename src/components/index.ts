@@ -1,5 +1,5 @@
-// export * from '@embakitchen/_components/Header/Header'
-// export * from '@embakitchen/_components/Navbar/Navbar'
+export * from '@embakitchen/components/Header/Header'
+export * from '@embakitchen/components/Header/Navbar/Navbar'
 export * from '@embakitchen/components/Slider/Slider'
 export * from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
 export * from '@embakitchen/components/Slider/SliderSurface/SliderSurface'

@@ -1,6 +1,4 @@
-import { Slider } from '@embakitchen/components'
-import { Statistics } from '@embakitchen/components'
-import { SloganSection } from '@embakitchen/components'
+import { Slider, Statistics, SloganSection } from '@embakitchen/components'
 
 export default function Home() {
   return (
