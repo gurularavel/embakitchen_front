@@ -12,6 +12,6 @@ export const sliderSurfaceStyles: TailwindStyle = {
     specialOrder:
       'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-primary-1 rounded-md text-white px-0 laptop:px-6 relative z-10',
     showProducts:
-      'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-white rounded-md text-dark-gray px-0 laptop:px-6 relative z-10',
+      'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-white rounded-md text-dark-gray-1 px-0 laptop:px-6 relative z-10',
   },
 }

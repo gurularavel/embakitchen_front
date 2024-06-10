@@ -11,6 +11,7 @@ export default function Home() {
         title='Siz arzulayın, biz reallaşdıraq'
         description='Xəyallarınızdakı mətbəxi bizə həvalə edin'
       />
+      <Slider variant='partners' />
     </main>
   )
 }
