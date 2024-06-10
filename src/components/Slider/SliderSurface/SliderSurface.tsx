@@ -2,10 +2,10 @@ import React from 'react'
 import { SocialContacts } from '@embakitchen/components'
 import type { SocialContact } from '@embakitchen/types'
 import { sliderSurfaceStyles } from '@embakitchen/components/Slider/SliderSurface/SliderSurface.style'
-import iconWhatsapp from '/public/assets/icons/whatsapp.svg'
-import iconFacebook from '/public/assets/icons/facebook.svg'
-import iconInstagram from '/public/assets/icons/instagram.svg'
-import iconYoutube from '/public/assets/icons/youtube.svg'
+import iconWhatsapp from '/public/assets/icons/social/whatsapp.svg'
+import iconFacebook from '/public/assets/icons/social/facebook.svg'
+import iconInstagram from '/public/assets/icons/social/instagram.svg'
+import iconYoutube from '/public/assets/icons/social/youtube.svg'
 
 const contacts: SocialContact[] = [
   {

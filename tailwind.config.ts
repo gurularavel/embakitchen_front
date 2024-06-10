@@ -22,7 +22,10 @@ const config: Config = {
           '5': '#F0A17F',
         },
         dark: {
-          gray: '#333333',
+          gray: {
+            '1': '#333333',
+            '2': '#18181B',
+          },
           blue: '#31373D',
         },
         semi: {

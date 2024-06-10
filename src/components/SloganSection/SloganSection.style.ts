@@ -1,6 +1,6 @@
 export const sloganSectionStyles: TailwindStyle = {
   container:
-    'bg-dark-blue bg-slogan-section h-[440px] flex items-center justify-center',
+    'bg-dark-blue bg-slogan-section h-[440px] flex items-center justify-center mb-6 laptop:mb-25',
   wrapper: 'max-w-72 laptop:max-w-4xl',
   title:
     'text-base laptop:text-xl leading-6 laptop:leading-7 font-medium text-primary-5 text-center',

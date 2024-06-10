@@ -6,6 +6,7 @@ import type { SliderOption } from '@embakitchen/types'
 
 const sliders: Record<string, React.ReactNode> = {
   main: <SliderVariant.MainSlider />,
+  partners: <SliderVariant.PartnersSlider />,
 }
 
 interface SliderProps {
@@ -13,5 +14,5 @@ interface SliderProps {
 }
 
 export const Slider: React.FC<SliderProps> = ({ variant }) => {
-  return <div className='mb-25'>{sliders[variant]}</div>
+  return sliders[variant]
 }
