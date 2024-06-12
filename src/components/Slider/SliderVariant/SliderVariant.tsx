@@ -27,8 +27,9 @@ interface MainSliderEntry {
   alt: string
 }
 
-const MainSlider: React.FC = () => {
-  const styles: StringPair = sliderVariantStyles.main as StringPair
+const Main: React.FC = () => {
+  const styles: Dictionary<string> =
+    sliderVariantStyles.main as Dictionary<string>
 
   return (
     <div className={styles.wrapper}>
@@ -54,17 +55,18 @@ const MainSlider: React.FC = () => {
           ))}
       </Swiper>
 
-      <SliderSurface.MainSliderSurface />
+      <SliderSurface.Main />
     </div>
   )
 }
 
-const GallerySlider: React.FC = () => {
-  const styles: StringPair = sliderVariantStyles.gallery as StringPair
+const Gallery: React.FC = () => {
+  const swiperRef = useRef<SwiperType>()
+  const styles: Dictionary<string> =
+    sliderVariantStyles.gallery as Dictionary<string>
   const gallerySliderImages = Array(3)
     .fill([galleryImg1, galleryImg2, galleryImg3])
     .flat()
-  const swiperRef = useRef<SwiperType>()
 
   return (
     <div className={styles.container}>
@@ -85,9 +87,11 @@ const GallerySlider: React.FC = () => {
               spaceBetween: 27,
             },
             1440: {
+              slidesPerView: 3,
               spaceBetween: 40,
             },
           }}
+          touchEventsTarget='container'
         >
           {gallerySliderImages?.map((img, i) => (
             <SwiperSlide
@@ -99,6 +103,7 @@ const GallerySlider: React.FC = () => {
                 alt='embakitchen product'
                 className={styles.img}
               />
+              <SliderSurface.Gallery />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -125,8 +130,9 @@ const GallerySlider: React.FC = () => {
   )
 }
 
-const PartnersSlider: React.FC = () => {
-  const styles: StringPair = sliderVariantStyles.partners as StringPair
+const Partners: React.FC = () => {
+  const styles: Dictionary<string> =
+    sliderVariantStyles.partners as Dictionary<string>
   const partners = Array(2)
     .fill([partner1, partner2, partner3, partner4, partner5, partner6])
     .flat()
@@ -174,7 +180,7 @@ const PartnersSlider: React.FC = () => {
 }
 
 export const SliderVariant = {
-  MainSlider,
-  GallerySlider,
-  PartnersSlider,
+  Main,
+  Gallery,
+  Partners,
 }

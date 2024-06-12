@@ -10,7 +10,8 @@ interface SocialContactsItemProps {
 export const SocialContactsItem: React.FC<SocialContactsItemProps> = ({
   contact,
 }) => {
-  const styles: StringPair = socialContactsItemStyles as StringPair
+  const styles: Dictionary<string> =
+    socialContactsItemStyles as Dictionary<string>
 
   return (
     <li key={contact.url}>

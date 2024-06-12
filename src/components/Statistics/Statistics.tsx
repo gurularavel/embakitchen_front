@@ -26,7 +26,7 @@ const statisticsItems: StatisticsEntry[] = [
 ]
 
 export const Statistics: React.FC = () => {
-  const styles: StringPair = statisticsStyles as StringPair
+  const styles: Dictionary<string> = statisticsStyles as Dictionary<string>
 
   useEffect(() => {
     const containers: HTMLElement[] = Array.from(

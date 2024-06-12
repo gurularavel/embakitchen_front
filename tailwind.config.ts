@@ -21,6 +21,9 @@ const config: Config = {
           '3': '#EA7F52',
           '5': '#F0A17F',
         },
+        secondary: {
+          '2': '#FFC35C',
+        },
         dark: {
           gray: {
             '1': '#333333',
