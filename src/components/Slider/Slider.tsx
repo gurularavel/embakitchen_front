@@ -6,6 +6,7 @@ import type { SliderOption } from '@embakitchen/types'
 
 const sliders: Record<string, React.ReactNode> = {
   main: <SliderVariant.MainSlider />,
+  gallery: <SliderVariant.GallerySlider />,
   partners: <SliderVariant.PartnersSlider />,
 }
 

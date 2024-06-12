@@ -30,7 +30,10 @@ const config: Config = {
         },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
-          gray: '#FAFAFA',
+          gray: {
+            '1': '#FAFAFA',
+            '2': 'rgba(42, 45, 47, 0.5)',
+          },
           dark: '#1A1A1A',
         },
         light: {
