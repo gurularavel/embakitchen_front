@@ -8,3 +8,4 @@ export * from '@embakitchen/components/SocialContacts/SocialContactsItem/SocialC
 export * from '@embakitchen/components/Statistics/Statistics'
 export * from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem'
 export * from '@embakitchen/components/SloganSection/SloganSection'
+export * from '@embakitchen/components/Footer/Footer'
