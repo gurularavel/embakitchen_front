@@ -37,6 +37,7 @@
   background-color: #fff;
 }
 
-.partners-slider .swiper-wrapper {
+.partners-slider .swiper-wrapper,
+.gallery-slider .swiper-wrapper {
   align-items: center;
 }

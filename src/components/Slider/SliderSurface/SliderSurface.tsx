@@ -30,8 +30,9 @@ const contacts: SocialContact[] = [
   },
 ]
 
-const MainSliderSurface: React.FC = () => {
-  const styles: StringPair = sliderSurfaceStyles.main as StringPair
+const Main: React.FC = () => {
+  const styles: Dictionary<string> =
+    sliderSurfaceStyles.main as Dictionary<string>
 
   return (
     <div>
@@ -54,6 +55,19 @@ const MainSliderSurface: React.FC = () => {
   )
 }
 
+const Gallery: React.FC = () => {
+  const styles: Dictionary<string> =
+    sliderSurfaceStyles.gallery as Dictionary<string>
+
+  return (
+    <div className={styles.wrapper}>
+      <strong className={styles.tag}>Ən çox satılan</strong>
+      <h5 className={styles.title}>Adel Ral</h5>
+    </div>
+  )
+}
+
 export const SliderSurface = {
-  MainSliderSurface,
+  Main,
+  Gallery,
 }

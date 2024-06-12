@@ -8,5 +8,5 @@ export const sloganSectionStyles: TailwindStyle = {
     'text-2xl laptop:text-4xl leading-8 laptop:leading-13 font-semibold text-white text-center mt-6 mb-10',
   buttonWrapper: 'flex justify-center',
   button:
-    'text-base leading-6 font-semibold text-semi-gray bg-primary-2 w-full laptop:w-[215px] h-14 rounded-md',
+    'text-base leading-6 font-semibold text-semi-gray-1 bg-primary-2 w-full laptop:w-[215px] h-14 rounded-md',
 }

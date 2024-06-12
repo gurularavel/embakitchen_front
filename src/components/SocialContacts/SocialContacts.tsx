@@ -12,7 +12,7 @@ export const SocialContacts: React.FC<SocialContactsProps> = ({
   layout,
   contacts,
 }) => {
-  const styles: StringPair = socialContactsStyles as StringPair
+  const styles: Dictionary<string> = socialContactsStyles as Dictionary<string>
 
   const getLayoutStyles: (layout: LayoutOption) => string =
     socialContactsStyles.layout as (layout: LayoutOption) => string

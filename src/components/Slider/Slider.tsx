@@ -4,9 +4,10 @@ import React from 'react'
 import { SliderVariant } from '@embakitchen/components'
 import type { SliderOption } from '@embakitchen/types'
 
-const sliders: Record<string, React.ReactNode> = {
-  main: <SliderVariant.MainSlider />,
-  partners: <SliderVariant.PartnersSlider />,
+const sliders: Dictionary<React.ReactNode> = {
+  main: <SliderVariant.Main />,
+  gallery: <SliderVariant.Gallery />,
+  partners: <SliderVariant.Partners />,
 }
 
 interface SliderProps {

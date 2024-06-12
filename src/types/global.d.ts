@@ -7,5 +7,5 @@ declare global {
 
   type LayoutOption = 'horizontal' | 'vertical'
 
-  type StringPair = Record<string, string>
+  type Dictionary<T> = Record<string, T>
 }
