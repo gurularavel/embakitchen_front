@@ -56,14 +56,12 @@ export const Footer: React.FC = () => {
             </h5>
           </div>
 
-          <div className={styles.socialContacts}>
-            <SocialContacts
-              layout='horizontal'
-              contacts={contacts}
-              wrapperGap='gap-x-3'
-              iconStyle='w-6 h-6'
-            />
-          </div>
+          <SocialContacts
+            layout='horizontal'
+            contacts={contacts}
+            wrapperGap='gap-x-3'
+            iconStyle='w-6 h-6'
+          />
         </div>
 
         <nav className={styles.nav}>
@@ -108,13 +106,17 @@ export const Footer: React.FC = () => {
             <li className={styles.contactUsItem}>
               <span className={styles.contactUsLabel}>Əlaqə:</span>
               <a href='tel:+994552207212'>
-                <strong>+994 55 220 72 12</strong>
+                <strong className={styles.contactUsInfo}>
+                  +994 55 220 72 12
+                </strong>
               </a>
             </li>
             <li className={styles.contactUsItem}>
               <span className={styles.contactUsLabel}>Email:</span>
               <a href='mailto:support@embakitchen.az'>
-                <strong>support@embakitchen.az</strong>
+                <strong className={styles.contactUsInfo}>
+                  support@embakitchen.az
+                </strong>
               </a>
             </li>
             <li className={styles.contactUsItem}>
