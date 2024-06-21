@@ -5,18 +5,21 @@ import { socialContactsItemStyles } from '@embakitchen/components/SocialContacts
 
 interface SocialContactsItemProps {
   contact: SocialContact
+  iconStyle?: string
 }
 
 export const SocialContactsItem: React.FC<SocialContactsItemProps> = ({
   contact,
+  iconStyle,
 }) => {
-  const styles: StringPair = socialContactsItemStyles as StringPair
+  const styles: Dictionary<string> =
+    socialContactsItemStyles as Dictionary<string>
 
   return (
     <li key={contact.url}>
       <a
         href={contact.url}
-        className={styles.link}
+        className={`${styles.link} ${iconStyle}`}
       >
         <Image
           src={contact.img}

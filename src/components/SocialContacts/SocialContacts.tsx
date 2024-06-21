@@ -6,27 +6,28 @@ import { socialContactsStyles } from '@embakitchen/components/SocialContacts/Soc
 interface SocialContactsProps {
   layout: LayoutOption
   contacts: SocialContact[]
+  wrapperGap: string
+  iconStyle?: string
 }
 
 export const SocialContacts: React.FC<SocialContactsProps> = ({
   layout,
   contacts,
+  wrapperGap,
+  iconStyle,
 }) => {
-  const styles: StringPair = socialContactsStyles as StringPair
-
   const getLayoutStyles: (layout: LayoutOption) => string =
     socialContactsStyles.layout as (layout: LayoutOption) => string
 
   return (
-    <div className={styles.wrapper}>
-      <ul className={getLayoutStyles(layout)}>
-        {contacts.map((contact: SocialContact, i) => (
-          <SocialContactsItem
-            key={i}
-            contact={contact}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul className={`${getLayoutStyles(layout)} ${wrapperGap}`}>
+      {contacts.map((contact: SocialContact, i) => (
+        <SocialContactsItem
+          key={i}
+          contact={contact}
+          iconStyle={iconStyle ?? ''}
+        />
+      ))}
+    </ul>
   )
 }

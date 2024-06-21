@@ -36,3 +36,8 @@
   border-radius: 50%;
   background-color: #fff;
 }
+
+.partners-slider .swiper-wrapper,
+.gallery-slider .swiper-wrapper {
+  align-items: center;
+}

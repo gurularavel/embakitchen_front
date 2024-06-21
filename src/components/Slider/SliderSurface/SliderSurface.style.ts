@@ -12,6 +12,14 @@ export const sliderSurfaceStyles: TailwindStyle = {
     specialOrder:
       'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-primary-1 rounded-md text-white px-0 laptop:px-6 relative z-10',
     showProducts:
-      'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-white rounded-md text-dark-gray px-0 laptop:px-6 relative z-10',
+      'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-white rounded-md text-dark-gray-1 px-0 laptop:px-6 relative z-10',
+    socialContacts:
+      'absolute right-25 top-1/2 -translate-y-1/2 z-10 hidden laptop:block',
+  },
+  gallery: {
+    wrapper:
+      'gallery-slider-surface bg-dark-gray-1 rounded-lg py-3 px-6 mobile:w-[254px] laptop:w-[183px] absolute bottom-4 left-4 right-4 mobile:left-1/2 mobile:right-auto mobile:-translate-x-1/2 laptop:left-auto laptop:right-4 laptop:translate-x-full laptop:opacity-0 laptop:invisible laptop:group-hover:visible laptop:group-hover:opacity-100 laptop:group-hover:translate-x-0 transition-all duration-200',
+    tag: 'text-sm font-medium text-secondary-2 leading-5 mb-1',
+    title: 'text-base font-medium text-white leading-6',
   },
 }

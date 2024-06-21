@@ -16,7 +16,7 @@ export const StatisticsItem: React.FC<StatisticsItemProps> = ({
   entry,
   line,
 }) => {
-  const styles: StringPair = statisticsItemStyles as StringPair
+  const styles: Dictionary<string> = statisticsItemStyles as Dictionary<string>
 
   const getContainerStyles: (row: number) => string =
     statisticsItemStyles.container as (row: number) => string

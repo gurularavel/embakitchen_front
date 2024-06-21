@@ -1,4 +1,4 @@
-export type SliderOption = 'main' | 'gallery'
+export type SliderOption = 'main' | 'gallery' | 'partners'
 
 export interface SocialContact {
   img: string

@@ -2,10 +2,10 @@ import React from 'react'
 import { SocialContacts } from '@embakitchen/components'
 import type { SocialContact } from '@embakitchen/types'
 import { sliderSurfaceStyles } from '@embakitchen/components/Slider/SliderSurface/SliderSurface.style'
-import iconWhatsapp from '/public/assets/icons/whatsapp.svg'
-import iconFacebook from '/public/assets/icons/facebook.svg'
-import iconInstagram from '/public/assets/icons/instagram.svg'
-import iconYoutube from '/public/assets/icons/youtube.svg'
+import iconWhatsapp from '/public/assets/icons/social/white/whatsapp.svg'
+import iconFacebook from '/public/assets/icons/social/white/facebook.svg'
+import iconInstagram from '/public/assets/icons/social/white/instagram.svg'
+import iconYoutube from '/public/assets/icons/social/white/youtube.svg'
 
 const contacts: SocialContact[] = [
   {
@@ -30,8 +30,9 @@ const contacts: SocialContact[] = [
   },
 ]
 
-const MainSliderSurface: React.FC = () => {
-  const styles: StringPair = sliderSurfaceStyles.main as StringPair
+const Main: React.FC = () => {
+  const styles: Dictionary<string> =
+    sliderSurfaceStyles.main as Dictionary<string>
 
   return (
     <div>
@@ -46,14 +47,30 @@ const MainSliderSurface: React.FC = () => {
         </div>
       </div>
 
-      <SocialContacts
-        layout='vertical'
-        contacts={contacts}
-      />
+      <div className={styles.socialContacts}>
+        <SocialContacts
+          layout='vertical'
+          contacts={contacts}
+          wrapperGap='gap-y-3'
+        />
+      </div>
+    </div>
+  )
+}
+
+const Gallery: React.FC = () => {
+  const styles: Dictionary<string> =
+    sliderSurfaceStyles.gallery as Dictionary<string>
+
+  return (
+    <div className={styles.wrapper}>
+      <strong className={styles.tag}>Ən çox satılan</strong>
+      <h5 className={styles.title}>Adel Ral</h5>
     </div>
   )
 }
 
 export const SliderSurface = {
-  MainSliderSurface,
+  Main,
+  Gallery,
 }

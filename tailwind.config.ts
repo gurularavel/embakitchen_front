@@ -20,14 +20,25 @@ const config: Config = {
           '2': '#E86E3B',
           '3': '#EA7F52',
           '5': '#F0A17F',
+          '9': '#FCEBE4',
+        },
+        secondary: {
+          '2': '#FFC35C',
         },
         dark: {
-          gray: '#333333',
+          gray: {
+            '1': '#333333',
+            '2': '#18181B',
+          },
           blue: '#31373D',
         },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
-          gray: '#FAFAFA',
+          gray: {
+            '1': '#FAFAFA',
+            '2': 'rgba(42, 45, 47, 0.5)',
+            '3': '#666666',
+          },
           dark: '#1A1A1A',
         },
         light: {

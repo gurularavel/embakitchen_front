@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
-import { Header } from '@embakitchen/components'
+// import { Header } from '@embakitchen/_components'
+import { Footer } from '@embakitchen/components'
 import '@embakitchen/app/globals.css'
 
 const montserrat = Montserrat({
@@ -24,8 +25,9 @@ export default function RootLayout({
       className={`${montserrat.variable} font-montserrat`}
     >
       <body>
-        <Header />
+        {/* <Header /> */}
         {children}
+        <Footer />
       </body>
     </html>
   )
