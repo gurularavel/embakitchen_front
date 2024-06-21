@@ -13,6 +13,8 @@ export const sliderSurfaceStyles: TailwindStyle = {
       'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-primary-1 rounded-md text-white px-0 laptop:px-6 relative z-10',
     showProducts:
       'h-14 w-full tablet:w-1/2 laptop:w-auto text-center bg-white rounded-md text-dark-gray-1 px-0 laptop:px-6 relative z-10',
+    socialContacts:
+      'absolute right-25 top-1/2 -translate-y-1/2 z-10 hidden laptop:block',
   },
   gallery: {
     wrapper:

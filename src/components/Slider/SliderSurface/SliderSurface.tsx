@@ -2,10 +2,10 @@ import React from 'react'
 import { SocialContacts } from '@embakitchen/components'
 import type { SocialContact } from '@embakitchen/types'
 import { sliderSurfaceStyles } from '@embakitchen/components/Slider/SliderSurface/SliderSurface.style'
-import iconWhatsapp from '/public/assets/icons/social/whatsapp.svg'
-import iconFacebook from '/public/assets/icons/social/facebook.svg'
-import iconInstagram from '/public/assets/icons/social/instagram.svg'
-import iconYoutube from '/public/assets/icons/social/youtube.svg'
+import iconWhatsapp from '/public/assets/icons/social/white/whatsapp.svg'
+import iconFacebook from '/public/assets/icons/social/white/facebook.svg'
+import iconInstagram from '/public/assets/icons/social/white/instagram.svg'
+import iconYoutube from '/public/assets/icons/social/white/youtube.svg'
 
 const contacts: SocialContact[] = [
   {
@@ -47,10 +47,13 @@ const Main: React.FC = () => {
         </div>
       </div>
 
-      <SocialContacts
-        layout='vertical'
-        contacts={contacts}
-      />
+      <div className={styles.socialContacts}>
+        <SocialContacts
+          layout='vertical'
+          contacts={contacts}
+          wrapperGap='gap-y-3'
+        />
+      </div>
     </div>
   )
 }
