@@ -1,9 +1,13 @@
 export const navbarStyles: TailwindStyle = {
-  container: '',
-  wrapper: '',
-  menu: '',
-  options: '',
+  nav: '',
 }
+
+// export const navbarStyles: TailwindStyle = {
+//   container: '',
+//   wrapper: '',
+//   menu: '',
+//   options: '',
+// }
 
 // export const navbarStyles: TailwindStyles = {
 //   navbar: 'mobile-s:hidden laptop:flex gap-x-[16px] items-center',

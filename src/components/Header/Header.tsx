@@ -1,53 +1,66 @@
 import React from 'react'
-import Image from 'next/image'
-import { Navbar } from '@embakitchen/components'
 import { headerStyles } from '@embakitchen/components/Header/Header.style'
-import logo from '/public/assets/images/logo.svg'
-
-interface MenuLink {
-  text: string
-  url: string
-}
-
-const menuLinks: MenuLink[] = [
-  {
-    text: 'Mətbəx mebelləri',
-    url: '/',
-  },
-  {
-    text: 'Mağazalar',
-    url: '/',
-  },
-  {
-    text: 'Haqqımızda',
-    url: '/',
-  },
-  {
-    text: 'Blog',
-    url: '/',
-  },
-  {
-    text: 'Kampaniyalar',
-    url: '/',
-  },
-]
 
 export const Header: React.FC = () => {
-  const styles: StringPair = headerStyles as StringPair
+  const styles: Dictionary<string> = headerStyles as Dictionary<string>
 
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>
-        <Image
-          src={logo}
-          alt='embakitchen logo'
-        />
-      </div>
-
-      <Navbar />
+      <h1>Header</h1>
     </header>
   )
 }
+
+// import React from 'react'
+// import Image from 'next/image'
+// import { Navbar } from '@embakitchen/components'
+// import { headerStyles } from '@embakitchen/components/Header/Header.style'
+// import logo from '/public/assets/images/logo.svg'
+
+// interface MenuLink {
+//   text: string
+//   url: string
+// }
+
+// const menuLinks: MenuLink[] = [
+//   {
+//     text: 'Mətbəx mebelləri',
+//     url: '/',
+//   },
+//   {
+//     text: 'Mağazalar',
+//     url: '/',
+//   },
+//   {
+//     text: 'Haqqımızda',
+//     url: '/',
+//   },
+//   {
+//     text: 'Blog',
+//     url: '/',
+//   },
+//   {
+//     text: 'Kampaniyalar',
+//     url: '/',
+//   },
+// ]
+
+// export const Header: React.FC = () => {
+//   const styles: Dictionary<string> = headerStyles as Dictionary<string>
+
+//   return (
+//     <header className={styles.header}>
+//       <div className={styles.logo}>
+//         <Image
+//           src={logo}
+//           alt='embakitchen logo'
+//         />
+//       </div>
+
+//       <Navbar />
+//     </header>
+//   )
+// }
 
 // export const Header: React.FC = () => {
 //   return (
