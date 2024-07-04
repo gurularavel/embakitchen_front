@@ -13,6 +13,8 @@ const config: Config = {
         // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'slogan-section':
           'url("../../public/assets/images/slogan_section_bg.png")',
+        'order-stages-section':
+          'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
         primary: {
@@ -56,6 +58,7 @@ const config: Config = {
         '16': '5.625rem', // 90px
       },
       fontSize: {
+        '2.5xl': '1.75rem', // 28px
         '3xl': '2rem', // 32px
         '4xl': '2.5rem', // 40px
         '6xl': '3.5rem', // 56px

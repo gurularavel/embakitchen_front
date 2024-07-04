@@ -27,7 +27,7 @@ interface MainSliderEntry {
   alt: string
 }
 
-const Main: React.FC = () => {
+export const Main: React.FC = () => {
   const styles: Dictionary<string> =
     sliderVariantStyles.main as Dictionary<string>
 
@@ -60,7 +60,7 @@ const Main: React.FC = () => {
   )
 }
 
-const Gallery: React.FC = () => {
+export const Gallery: React.FC = () => {
   const swiperRef = useRef<SwiperType>()
   const styles: Dictionary<string> =
     sliderVariantStyles.gallery as Dictionary<string>
@@ -130,7 +130,7 @@ const Gallery: React.FC = () => {
   )
 }
 
-const Partners: React.FC = () => {
+export const Partners: React.FC = () => {
   const styles: Dictionary<string> =
     sliderVariantStyles.partners as Dictionary<string>
   const partners = Array(2)
@@ -177,10 +177,4 @@ const Partners: React.FC = () => {
       </div>
     </div>
   )
-}
-
-export const SliderVariant = {
-  Main,
-  Gallery,
-  Partners,
 }

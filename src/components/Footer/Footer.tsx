@@ -11,26 +11,52 @@ import iconInstagram from '/public/assets/icons/social/dark/instagram.svg'
 import iconYoutube from '/public/assets/icons/social/dark/youtube.svg'
 import rightArrowOrange from '/public/assets/icons/right_arrow_orange.svg'
 
+interface FooterMenuItem {
+  title: string
+  links: Dictionary<string>[]
+}
+
 const contacts: SocialContact[] = [
   {
     img: iconWhatsapp,
-    url: '/',
+    url: '/whatsapp',
     alt: 'embakitchen whatsapp account',
   },
   {
     img: iconFacebook,
-    url: '/',
+    url: '/facebook',
     alt: 'embakitchen facebook account',
   },
   {
     img: iconInstagram,
-    url: '/',
+    url: '/instagram',
     alt: 'embakitchen instagram account',
   },
   {
     img: iconYoutube,
-    url: '/',
+    url: '/youtube',
     alt: 'embakitchen youtube account',
+  },
+]
+
+const footerMenuItems: FooterMenuItem[] = [
+  {
+    title: 'ŞİRKƏT',
+    links: [
+      { text: 'Haqqımızda', url: '/about' },
+      { text: 'Mağazalar', url: '/stores' },
+      { text: 'Kampaniyalar', url: '/campaigns' },
+      { text: 'Blog', url: '/blogs' },
+    ],
+  },
+  {
+    title: 'MƏHSULLAR',
+    links: [
+      { text: 'Legno', url: '/legno' },
+      { text: 'Adel Ral', url: '/adel-ral' },
+      { text: 'Franchesco Cream', url: '/franchesco-cream' },
+      { text: 'Aldo Ray Gray', url: '/aldo-ray-gray' },
+    ],
   },
 ]
 
@@ -65,40 +91,24 @@ export const Footer: React.FC = () => {
         </div>
 
         <nav className={styles.nav}>
-          <div className={styles.navItem}>
-            <h6 className={styles.navTitle}>ŞİRKƏT</h6>
-            <ul className={styles.navList}>
-              <li className={styles.navLink}>
-                <Link href='/'>Haqqımızda</Link>
-              </li>
-              <li className={styles.navLink}>
-                <Link href='/'>Mağazalar</Link>
-              </li>
-              <li className={styles.navLink}>
-                <Link href='/'>Kampaniyalar</Link>
-              </li>
-              <li className={styles.navLink}>
-                <Link href='/'>Blog</Link>
-              </li>
-            </ul>
-          </div>
-          <div className={styles.navItem}>
-            <h6 className={styles.navTitle}>MƏHSULLAR</h6>
-            <ul className={styles.navList}>
-              <li className={styles.navLink}>
-                <Link href='/'>Legno</Link>
-              </li>
-              <li className={styles.navLink}>
-                <Link href='/'>Adel Ral</Link>
-              </li>
-              <li className={styles.navLink}>
-                <Link href='/'>Franchesco Cream</Link>
-              </li>
-              <li className={styles.navLink}>
-                <Link href='/'>Aldo Ray Gray</Link>
-              </li>
-            </ul>
-          </div>
+          {footerMenuItems?.map((item: FooterMenuItem, i: number) => (
+            <div
+              className={styles.navItem}
+              key={i}
+            >
+              <h6 className={styles.navTitle}>{item.title}</h6>
+              <ul className={styles.navList}>
+                {item?.links.map((link: Dictionary<string>, i: number) => (
+                  <li
+                    className={styles.navLink}
+                    key={link.text}
+                  >
+                    <Link href={link.url}>{link.text}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
 
         <div className={styles.contactUs}>

@@ -10,3 +10,8 @@ export interface StatisticsEntry {
   quantity: number
   title: string
 }
+
+interface OrderStageEntry {
+  title: string
+  description: string
+}
