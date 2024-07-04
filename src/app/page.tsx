@@ -1,4 +1,5 @@
 import {
+  Campaigns,
   OrderStages,
   Slider,
   SloganSection,
@@ -17,6 +18,7 @@ export default function Home() {
         description='Xəyallarınızdakı mətbəxi bizə həvalə edin'
       />
       <Slider variant='partners' />
+      <Campaigns />
     </main>
   )
 }

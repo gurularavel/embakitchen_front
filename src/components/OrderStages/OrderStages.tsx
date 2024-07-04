@@ -1,6 +1,6 @@
 import React from 'react'
 import { OrderStageItem } from '@embakitchen/components'
-import { OrderStageEntry } from '@embakitchen/types'
+import type { OrderStageEntry } from '@embakitchen/types'
 import { orderStagesStyles } from '@embakitchen/components/OrderStages/OrderStages.style'
 
 const stages: OrderStageEntry[] = [

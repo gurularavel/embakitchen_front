@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 export type SliderOption = 'main' | 'gallery' | 'partners'
 
 export interface SocialContact {
@@ -14,4 +16,12 @@ export interface StatisticsEntry {
 interface OrderStageEntry {
   title: string
   description: string
+}
+
+interface CampaignEntry {
+  img: string | StaticImageData
+  title: string
+  description: string
+  startDate: string
+  endDate: string
 }

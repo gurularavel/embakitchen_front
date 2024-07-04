@@ -1,5 +1,5 @@
 import React from 'react'
-import { OrderStageEntry } from '@embakitchen/types'
+import type { OrderStageEntry } from '@embakitchen/types'
 import { orderStageItemStyles } from '@embakitchen/components/OrderStages/OrderStageItem/OrderStageItem.style'
 
 interface OrderStageItemProps extends OrderStageEntry {

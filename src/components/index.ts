@@ -15,4 +15,7 @@ export { OrderStageItem } from '@embakitchen/components/OrderStages/OrderStageIt
 
 export { SloganSection } from '@embakitchen/components/SloganSection/SloganSection'
 
+export { Campaigns } from '@embakitchen/components/Campaigns/Campaigns'
+export { CampaignItem } from '@embakitchen/components/Campaigns/CampaignItem/CampaignItem'
+
 export { Footer } from '@embakitchen/components/Footer/Footer'
