@@ -22,6 +22,6 @@ interface CampaignEntry {
   img: string | StaticImageData
   title: string
   description: string
-  startDate: string
-  endDate: string
+  startDate: string | Date
+  endDate: string | Date
 }
