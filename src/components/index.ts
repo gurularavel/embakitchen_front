@@ -1,11 +1,22 @@
 export * from '@embakitchen/components/Header/Header'
 export * from '@embakitchen/components/Header/Navbar/Navbar'
-export * from '@embakitchen/components/Slider/Slider'
-export * from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
-export * from '@embakitchen/components/Slider/SliderSurface/SliderSurface'
-export * from '@embakitchen/components/SocialContacts/SocialContacts'
-export * from '@embakitchen/components/SocialContacts/SocialContactsItem/SocialContactsItem'
-export * from '@embakitchen/components/Statistics/Statistics'
-export * from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem'
-export * from '@embakitchen/components/SloganSection/SloganSection'
-export * from '@embakitchen/components/Footer/Footer'
+export { Slider } from '@embakitchen/components/Slider/Slider'
+export * as SliderVariant from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
+export * as SliderSurface from '@embakitchen/components/Slider/SliderSurface/SliderSurface'
+
+export { SocialContacts } from '@embakitchen/components/SocialContacts/SocialContacts'
+export { SocialContactsItem } from '@embakitchen/components/SocialContacts/SocialContactsItem/SocialContactsItem'
+
+export { Statistics } from '@embakitchen/components/Statistics/Statistics'
+export { StatisticsItem } from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem'
+
+export { OrderStages } from '@embakitchen/components/OrderStages/OrderStages'
+export { OrderStageItem } from '@embakitchen/components/OrderStages/OrderStageItem/OrderStageItem'
+
+export { SloganSection } from '@embakitchen/components/SloganSection/SloganSection'
+
+export { Campaigns } from '@embakitchen/components/Campaigns/Campaigns'
+export { CampaignItem } from '@embakitchen/components/Campaigns/CampaignItem/CampaignItem'
+export { Timer } from '@embakitchen/components/Campaigns/CampaignItem/Timer/Timer'
+
+export { Footer } from '@embakitchen/components/Footer/Footer'

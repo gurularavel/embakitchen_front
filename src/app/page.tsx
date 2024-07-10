@@ -1,4 +1,10 @@
-import { Slider, Statistics, SloganSection } from '@embakitchen/components'
+import {
+  Campaigns,
+  OrderStages,
+  Slider,
+  SloganSection,
+  Statistics,
+} from '@embakitchen/components'
 
 export default function Home() {
   return (
@@ -6,11 +12,13 @@ export default function Home() {
       <Slider variant='main' />
       <Slider variant='gallery' />
       <Statistics />
+      <OrderStages />
       <SloganSection
         title='Siz arzulayın, biz reallaşdıraq'
         description='Xəyallarınızdakı mətbəxi bizə həvalə edin'
       />
       <Slider variant='partners' />
+      <Campaigns />
     </main>
   )
 }
