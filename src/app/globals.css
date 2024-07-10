@@ -41,3 +41,8 @@
 .gallery-slider .swiper-wrapper {
   align-items: center;
 }
+
+.stage-number {
+  -webkit-text-stroke: 1px #ffffff;
+  color: transparent;
+}
