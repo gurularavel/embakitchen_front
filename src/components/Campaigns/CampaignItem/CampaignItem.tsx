@@ -1,8 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { format } from 'date-fns'
+import { Timer } from '@embakitchen/components'
 import { CampaignEntry } from '@embakitchen/types'
 import { campaignItemStyles } from '@embakitchen/components/Campaigns/CampaignItem/CampaignItem.style'
+import rightChevron from '/public/assets/icons/right_chevron.svg'
 
 export const CampaignItem: React.FC<Omit<CampaignEntry, 'description'>> = ({
   title,
@@ -13,22 +16,12 @@ export const CampaignItem: React.FC<Omit<CampaignEntry, 'description'>> = ({
   const styles: Dictionary<string> = campaignItemStyles as Dictionary<string>
 
   return (
-    <div
-      className={styles.container}
-      style={{ border: '3px solid red' }}
-    >
-      <div
-        className={styles.content}
-        style={{ border: '3pz solid blue' }}
-      >
-        <div
-          className={styles.imgWrapper}
-          style={{ border: '3px solid green' }}
-        >
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div className={styles.imgWrapper}>
           <Image
             src={img}
             alt={`Embakitchen campaign - ${title}`}
-            style={{ border: '3px solid red' }}
             className={styles.img}
           />
         </div>
@@ -41,6 +34,21 @@ export const CampaignItem: React.FC<Omit<CampaignEntry, 'description'>> = ({
             </strong>
           </span>
           <h5 className={styles.title}>{title}</h5>
+          <div className={styles.info}>
+            <Timer endDate={endDate} />
+            <Link
+              href={`/campaign/${title}`}
+              className={styles.link}
+            >
+              <span>Ətraflı</span>
+              <span>
+                <Image
+                  src={rightChevron}
+                  alt='right chevron'
+                />
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

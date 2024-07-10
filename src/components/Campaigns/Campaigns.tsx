@@ -26,8 +26,8 @@ const campaignsData: CampaignData = {
       description:
         'Kampaniya haqqında ətraflı məlumat. Kampaniya səhifəsinə keçid etdikdə görünəcək!',
       img: campaignImages[i],
-      startDate: today,
-      endDate: addDays(today, 5),
+      startDate: addDays(today, i - 1),
+      endDate: addDays(today, i + 5),
     })),
 }
 

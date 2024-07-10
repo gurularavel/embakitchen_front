@@ -17,5 +17,6 @@ export { SloganSection } from '@embakitchen/components/SloganSection/SloganSecti
 
 export { Campaigns } from '@embakitchen/components/Campaigns/Campaigns'
 export { CampaignItem } from '@embakitchen/components/Campaigns/CampaignItem/CampaignItem'
+export { Timer } from '@embakitchen/components/Campaigns/CampaignItem/Timer/Timer'
 
 export { Footer } from '@embakitchen/components/Footer/Footer'
