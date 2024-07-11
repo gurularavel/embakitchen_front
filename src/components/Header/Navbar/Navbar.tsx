@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { navbarStyles } from '@embakitchen/components/Header/Navbar/Navbar.style'
 
 export const Navbar: React.FC = () => {
@@ -6,31 +7,65 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className={styles.nav}>
-      <h1>Navbar</h1>
+      <div>
+        <ul className={styles.menu}>
+          <li>
+            <Link
+              href='/kitchen-furnitures'
+              className={styles.menuLink}
+            >
+              Mətbəx mebelləri
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/stores'
+              className={styles.menuLink}
+            >
+              Mağazalar
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/about'
+              className={styles.menuLink}
+            >
+              Haqqımızda
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/blog'
+              className={styles.menuLink}
+            >
+              Blog
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/campaigns'
+              className={styles.menuLink}
+            >
+              Kampaniyalar
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/special-order'
+              className={styles.menuLink}
+            >
+              Özəl sifariş
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className={styles.options}>
+        <ul></ul>
+      </div>
     </nav>
   )
 }
-
-// import React from 'react'
-// import { navbarStyles } from '@embakitchen/components/Header/Navbar/Navbar.style'
-
-// export const Navbar: React.FC = () => {
-//   const styles: Dictionary<string> = navbarStyles as Dictionary<string>
-
-//   return (
-//     <div className={styles.container}>
-//       <div className={styles.wrapper}>
-//         <div className={styles.menu}>
-//           <ul></ul>
-//         </div>
-
-//         <div className={styles.options}>
-//           <ul></ul>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
 
 // // 'use client'
 

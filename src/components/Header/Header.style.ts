@@ -1,10 +1,8 @@
 export const headerStyles: TailwindStyle = {
-  header: '',
+  header: 'h-19 bg-dark-blue flex items-center justify-between gap-x-10 px-25',
+  logo: ' pb-[9px] pr-[30px]',
+  logoImg: '',
 }
-
-// export const headerStyles: TailwindStyle = {
-//   header: 'h-19 bg-dark-blue flex items-center px-25',
-// }
 
 // export const headerStyles: TailwindStyles = {
 //   header:

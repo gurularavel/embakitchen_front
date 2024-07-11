@@ -1,5 +1,7 @@
 export const navbarStyles: TailwindStyle = {
-  nav: '',
+  nav: 'shrink w-full',
+  menu: 'flex items-center gap-x-4',
+  menuLink: 'text-sm font-medium leading-5 text-white',
 }
 
 // export const navbarStyles: TailwindStyle = {

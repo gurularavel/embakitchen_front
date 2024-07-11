@@ -1,21 +1,26 @@
 import React from 'react'
+import Image from 'next/image'
+import { Navbar } from '@embakitchen/components'
 import { headerStyles } from '@embakitchen/components/Header/Header.style'
+import logo from '/public/assets/images/logo.svg'
 
 export const Header: React.FC = () => {
   const styles: Dictionary<string> = headerStyles as Dictionary<string>
 
   return (
     <header className={styles.header}>
-      <h1>Header</h1>
+      <div className={styles.logo}>
+        <Image
+          src={logo}
+          alt='embakitchen logo'
+          className={styles.logoImg}
+        />
+      </div>
+
+      <Navbar />
     </header>
   )
 }
-
-// import React from 'react'
-// import Image from 'next/image'
-// import { Navbar } from '@embakitchen/components'
-// import { headerStyles } from '@embakitchen/components/Header/Header.style'
-// import logo from '/public/assets/images/logo.svg'
 
 // interface MenuLink {
 //   text: string
@@ -44,23 +49,6 @@ export const Header: React.FC = () => {
 //     url: '/',
 //   },
 // ]
-
-// export const Header: React.FC = () => {
-//   const styles: Dictionary<string> = headerStyles as Dictionary<string>
-
-//   return (
-//     <header className={styles.header}>
-//       <div className={styles.logo}>
-//         <Image
-//           src={logo}
-//           alt='embakitchen logo'
-//         />
-//       </div>
-
-//       <Navbar />
-//     </header>
-//   )
-// }
 
 // export const Header: React.FC = () => {
 //   return (
