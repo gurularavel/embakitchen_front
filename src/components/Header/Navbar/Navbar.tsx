@@ -1,6 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { navbarStyles } from '@embakitchen/components/Header/Navbar/Navbar.style'
+import phone from '/public/assets/icons/phone.svg'
+import search from '/public/assets/icons/search.svg'
+import profile from '/public/assets/icons/profile.svg'
+import downChevron from '/public/assets/icons/down_chevron.svg'
 
 export const Navbar: React.FC = () => {
   const styles: Dictionary<string> = navbarStyles as Dictionary<string>
@@ -12,7 +17,7 @@ export const Navbar: React.FC = () => {
           <li>
             <Link
               href='/kitchen-furnitures'
-              className={styles.menuLink}
+              className={styles.link}
             >
               Mətbəx mebelləri
             </Link>
@@ -20,7 +25,7 @@ export const Navbar: React.FC = () => {
           <li>
             <Link
               href='/stores'
-              className={styles.menuLink}
+              className={styles.link}
             >
               Mağazalar
             </Link>
@@ -28,7 +33,7 @@ export const Navbar: React.FC = () => {
           <li>
             <Link
               href='/about'
-              className={styles.menuLink}
+              className={styles.link}
             >
               Haqqımızda
             </Link>
@@ -36,7 +41,7 @@ export const Navbar: React.FC = () => {
           <li>
             <Link
               href='/blog'
-              className={styles.menuLink}
+              className={styles.link}
             >
               Blog
             </Link>
@@ -44,7 +49,7 @@ export const Navbar: React.FC = () => {
           <li>
             <Link
               href='/campaigns'
-              className={styles.menuLink}
+              className={`${styles.link} ${styles.highlightedLink}`}
             >
               Kampaniyalar
             </Link>
@@ -52,7 +57,7 @@ export const Navbar: React.FC = () => {
           <li>
             <Link
               href='/special-order'
-              className={styles.menuLink}
+              className={`${styles.link} ${styles.highlightedLink} ${styles.specialOrder}`}
             >
               Özəl sifariş
             </Link>
@@ -60,8 +65,58 @@ export const Navbar: React.FC = () => {
         </ul>
       </div>
 
-      <div className={styles.options}>
-        <ul></ul>
+      <div>
+        <ul className={styles.options}>
+          <li>
+            <a
+              href='tel:126'
+              className={styles.phone}
+            >
+              <Image
+                src={phone}
+                alt='call embakitchen'
+                className={styles.phoneIcon}
+              />
+              <span className={styles.phoneNumber}>126</span>
+            </a>
+          </li>
+
+          <li>
+            <button>
+              <Image
+                src={search}
+                alt='embakitchen search'
+                className={styles.searchIcon}
+              />
+            </button>
+          </li>
+
+          <li className={styles.additionalOptions}>
+            <div className={styles.language}>
+              <div className={styles.selectedLanguage}>
+                <span>Az</span>
+                <Image
+                  src={downChevron}
+                  alt='embakitchen dropdown icon'
+                />
+              </div>
+            </div>
+
+            <div>
+              <Link
+                href='/profile'
+                className={styles.profileLink}
+              >
+                <Image
+                  src={profile}
+                  alt='embakitchen profile page'
+                  className={styles.profileIcon}
+                />
+                <span>Şəxsi kabinet</span>
+              </Link>
+            </div>
+          </li>
+        </ul>
       </div>
     </nav>
   )

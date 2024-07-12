@@ -48,7 +48,11 @@ const config: Config = {
           dark: '#1A1A1A',
         },
         light: {
-          gray: '#E6E6E6',
+          gray: {
+            '1': '#E6E6E6',
+            '3': '#49525B',
+            '10': '#F7F7F8',
+          },
         },
       },
       fontFamily: {

@@ -1,7 +1,20 @@
 export const navbarStyles: TailwindStyle = {
-  nav: 'shrink w-full',
+  nav: 'shrink w-full flex justify-between items-center',
   menu: 'flex items-center gap-x-4',
-  menuLink: 'text-sm font-medium leading-5 text-white',
+  options: 'flex gap-x-5 items-center justify-between',
+  link: 'text-sm font-medium leading-5 text-white',
+  highlightedLink: '[&]:text-secondary-2',
+  specialOrder: 'border border-solid border-semi-gray-4 py-2.5 px-6 rounded-lg',
+  phone: 'flex items-center gap-x-2',
+  phoneIcon: 'w-[30px] h-[30px]',
+  phoneNumber: 'text-xl font-medium leading-7 text-secondary-2',
+  searchIcon: 'w-6 h-6',
+  additionalOptions: 'flex items-center gap-x-3',
+  selectedLanguage:
+    'flex items-center gap-x-2 p-2.5 rounded-lg text-base font-medium leading-6 text-light-gray-10 bg-light-gray-3 cursor-pointer',
+  profileLink:
+    'flex items-center justify-between gap-x-2 py-2.5 px-6 bg-light-gray-3 rounded-lg text-base font-semibold leading-6 text-white',
+  profileIcon: 'w-6 h-6',
 }
 
 // export const navbarStyles: TailwindStyle = {
