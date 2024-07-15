@@ -8,6 +8,7 @@ export const navbarStyles: TailwindStyle = {
   phone: 'flex items-center gap-x-2',
   phoneIcon: 'w-[30px] h-[30px]',
   phoneNumber: 'text-xl font-medium leading-7 text-secondary-2',
+  searchBtn: 'flex',
   searchIcon: 'w-6 h-6',
   additionalOptions: 'flex items-center gap-x-3',
   selectedLanguage:
@@ -16,13 +17,6 @@ export const navbarStyles: TailwindStyle = {
     'flex items-center justify-between gap-x-2 py-2.5 px-6 bg-light-gray-3 rounded-lg text-base font-semibold leading-6 text-white',
   profileIcon: 'w-6 h-6',
 }
-
-// export const navbarStyles: TailwindStyle = {
-//   container: '',
-//   wrapper: '',
-//   menu: '',
-//   options: '',
-// }
 
 // export const navbarStyles: TailwindStyles = {
 //   navbar: 'mobile-s:hidden laptop:flex gap-x-[16px] items-center',

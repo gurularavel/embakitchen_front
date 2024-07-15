@@ -7,6 +7,41 @@ import search from '/public/assets/icons/search.svg'
 import profile from '/public/assets/icons/profile.svg'
 import downChevron from '/public/assets/icons/down_chevron.svg'
 
+interface Menu {
+  text: string
+  href: string
+  classes?: string
+}
+
+const menu: Menu[] = [
+  {
+    text: 'Mətbəx mebelləri',
+    href: '/kitchen-furnitures',
+  },
+  {
+    text: 'Mağazalar',
+    href: '/stores',
+  },
+  {
+    text: 'Haqqımızda',
+    href: '/about',
+  },
+  {
+    text: 'Blog',
+    href: '/blog',
+  },
+  {
+    text: 'Kampaniyalar',
+    href: '/campaigns',
+    classes: navbarStyles.highlightedLink as string,
+  },
+  {
+    text: 'Özəl sifariş',
+    href: '/special-order',
+    classes: `${navbarStyles.highlightedLink} ${navbarStyles.specialOrder}`,
+  },
+]
+
 export const Navbar: React.FC = () => {
   const styles: Dictionary<string> = navbarStyles as Dictionary<string>
 
@@ -14,54 +49,16 @@ export const Navbar: React.FC = () => {
     <nav className={styles.nav}>
       <div>
         <ul className={styles.menu}>
-          <li>
-            <Link
-              href='/kitchen-furnitures'
-              className={styles.link}
-            >
-              Mətbəx mebelləri
-            </Link>
-          </li>
-          <li>
-            <Link
-              href='/stores'
-              className={styles.link}
-            >
-              Mağazalar
-            </Link>
-          </li>
-          <li>
-            <Link
-              href='/about'
-              className={styles.link}
-            >
-              Haqqımızda
-            </Link>
-          </li>
-          <li>
-            <Link
-              href='/blog'
-              className={styles.link}
-            >
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link
-              href='/campaigns'
-              className={`${styles.link} ${styles.highlightedLink}`}
-            >
-              Kampaniyalar
-            </Link>
-          </li>
-          <li>
-            <Link
-              href='/special-order'
-              className={`${styles.link} ${styles.highlightedLink} ${styles.specialOrder}`}
-            >
-              Özəl sifariş
-            </Link>
-          </li>
+          {menu.map(m => (
+            <li key={m.href}>
+              <Link
+                href={m.href}
+                className={`${styles.link} ${m.classes ?? ''}`}
+              >
+                {m.text}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -82,7 +79,7 @@ export const Navbar: React.FC = () => {
           </li>
 
           <li>
-            <button>
+            <button className={styles.searchBtn}>
               <Image
                 src={search}
                 alt='embakitchen search'
