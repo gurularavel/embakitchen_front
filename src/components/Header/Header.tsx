@@ -22,34 +22,6 @@ export const Header: React.FC = () => {
   )
 }
 
-// interface MenuLink {
-//   text: string
-//   url: string
-// }
-
-// const menuLinks: MenuLink[] = [
-//   {
-//     text: 'Mətbəx mebelləri',
-//     url: '/',
-//   },
-//   {
-//     text: 'Mağazalar',
-//     url: '/',
-//   },
-//   {
-//     text: 'Haqqımızda',
-//     url: '/',
-//   },
-//   {
-//     text: 'Blog',
-//     url: '/',
-//   },
-//   {
-//     text: 'Kampaniyalar',
-//     url: '/',
-//   },
-// ]
-
 // export const Header: React.FC = () => {
 //   return (
 //     <header className={styles.header}>

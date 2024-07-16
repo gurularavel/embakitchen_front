@@ -7,13 +7,14 @@ import search from '/public/assets/icons/search.svg'
 import profile from '/public/assets/icons/profile.svg'
 import downChevron from '/public/assets/icons/down_chevron.svg'
 
-interface Menu {
+interface MenuLink {
   text: string
   href: string
   classes?: string
+  dropdown?: MenuLink[]
 }
 
-const menu: Menu[] = [
+const menu: MenuLink[] = [
   {
     text: 'Mətbəx mebelləri',
     href: '/kitchen-furnitures',
@@ -25,6 +26,20 @@ const menu: Menu[] = [
   {
     text: 'Haqqımızda',
     href: '/about',
+    dropdown: [
+      {
+        text: 'Şirkət haqqında',
+        href: '/about/company',
+      },
+      {
+        text: 'Layihələrimiz',
+        href: '/about/projects',
+      },
+      {
+        text: 'Partnyorlar',
+        href: '/about/partners',
+      },
+    ],
   },
   {
     text: 'Blog',
@@ -44,6 +59,9 @@ const menu: Menu[] = [
 
 export const Navbar: React.FC = () => {
   const styles: Dictionary<string> = navbarStyles as Dictionary<string>
+  const getLinkStyles: (hasDropdown: boolean) => string = navbarStyles.link as (
+    hasDropdown: boolean,
+  ) => string
 
   return (
     <nav className={styles.nav}>
@@ -53,9 +71,17 @@ export const Navbar: React.FC = () => {
             <li key={m.href}>
               <Link
                 href={m.href}
-                className={`${styles.link} ${m.classes ?? ''}`}
+                className={`${getLinkStyles(!!m.dropdown)} ${m.classes ?? ''}`}
               >
-                {m.text}
+                <span>{m.text}</span>
+                {m.dropdown && (
+                  <button style={{ border: '3px solid red' }}>
+                    <Image
+                      src={downChevron}
+                      alt='embakitchen dropdown icon'
+                    />
+                  </button>
+                )}
               </Link>
             </li>
           ))}

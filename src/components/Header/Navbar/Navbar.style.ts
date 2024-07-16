@@ -2,7 +2,8 @@ export const navbarStyles: TailwindStyle = {
   nav: 'shrink w-full flex justify-between items-center',
   menu: 'flex items-center gap-x-4',
   options: 'flex gap-x-5 items-center justify-between',
-  link: 'text-sm font-medium leading-5 text-white',
+  link: (p: unknown) =>
+    `text-sm font-medium leading-5 text-white ${(p as boolean) ? 'flex gap-x-0.5' : ''}`,
   highlightedLink: '[&]:text-secondary-2',
   specialOrder: 'border border-solid border-semi-gray-4 py-2.5 px-6 rounded-lg',
   phone: 'flex items-center gap-x-2',
