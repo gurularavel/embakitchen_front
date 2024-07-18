@@ -1,11 +1,19 @@
 export const navbarStyles: TailwindStyle = {
-  nav: 'shrink w-full flex justify-between items-center',
-  menu: 'flex items-center gap-x-4',
-  options: 'flex gap-x-5 items-center justify-between',
-  link: (p: unknown) =>
-    `text-sm font-medium leading-5 text-white ${(p as boolean) ? 'flex gap-x-0.5' : ''}`,
+  nav: 'shrink w-full h-full flex justify-between items-center',
+  menuWrapper: 'h-full',
+  menu: 'h-full flex items-center gap-x-4',
+  menuItem: 'h-full flex',
+  options: 'h-full flex items-center justify-between gap-x-5',
+  link: 'h-full flex items-center text-sm font-medium leading-5 text-white',
   highlightedLink: '[&]:text-secondary-2',
   specialOrder: 'border border-solid border-semi-gray-4 py-2.5 px-6 rounded-lg',
+  dropdown: 'group relative [&>a]:flex [&>a]:gap-x-0.5',
+  dropdownIcon: 'transition-transform duration-200 group-hover:rotate-180',
+  dropdownWrapper:
+    'absolute top-full left-1/2 -translate-x-1/2 z-20 bg-dark-blue scale-y-0 origin-top transition-transform duration-300 group-hover:scale-y-100',
+  dropdownItem: 'h-18 hover:bg-dark-gray-3',
+  dropdownLink:
+    'h-full flex items-center px-6 whitespace-nowrap text-base font-medium leading-6 text-white',
   phone: 'flex items-center gap-x-2',
   phoneIcon: 'w-[30px] h-[30px]',
   phoneNumber: 'text-xl font-medium leading-7 text-secondary-2',

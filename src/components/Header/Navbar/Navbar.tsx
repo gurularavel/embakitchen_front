@@ -7,84 +7,99 @@ import search from '/public/assets/icons/search.svg'
 import profile from '/public/assets/icons/profile.svg'
 import downChevron from '/public/assets/icons/down_chevron.svg'
 
-interface MenuLink {
-  text: string
-  href: string
-  classes?: string
-  dropdown?: MenuLink[]
-}
-
-const menu: MenuLink[] = [
-  {
-    text: 'Mətbəx mebelləri',
-    href: '/kitchen-furnitures',
-  },
-  {
-    text: 'Mağazalar',
-    href: '/stores',
-  },
-  {
-    text: 'Haqqımızda',
-    href: '/about',
-    dropdown: [
-      {
-        text: 'Şirkət haqqında',
-        href: '/about/company',
-      },
-      {
-        text: 'Layihələrimiz',
-        href: '/about/projects',
-      },
-      {
-        text: 'Partnyorlar',
-        href: '/about/partners',
-      },
-    ],
-  },
-  {
-    text: 'Blog',
-    href: '/blog',
-  },
-  {
-    text: 'Kampaniyalar',
-    href: '/campaigns',
-    classes: navbarStyles.highlightedLink as string,
-  },
-  {
-    text: 'Özəl sifariş',
-    href: '/special-order',
-    classes: `${navbarStyles.highlightedLink} ${navbarStyles.specialOrder}`,
-  },
-]
-
 export const Navbar: React.FC = () => {
   const styles: Dictionary<string> = navbarStyles as Dictionary<string>
-  const getLinkStyles: (hasDropdown: boolean) => string = navbarStyles.link as (
-    hasDropdown: boolean,
-  ) => string
 
   return (
     <nav className={styles.nav}>
-      <div>
+      <div className={styles.menuWrapper}>
         <ul className={styles.menu}>
-          {menu.map(m => (
-            <li key={m.href}>
-              <Link
-                href={m.href}
-                className={`${getLinkStyles(!!m.dropdown)} ${m.classes ?? ''}`}
-              >
-                <span>{m.text}</span>
-                {m.dropdown && (
-                  <button style={{ border: '3px solid red' }}>
-                    <Image
-                      src={downChevron}
-                      alt='embakitchen dropdown icon'
-                    />
-                  </button>
-                )}
-              </Link>
-            </li>
-          ))}
+          <li className={styles.menuItem}>
+            <Link
+              className={styles.link}
+              href='/kitchen-furnitures'
+            >
+              Mətbəx mebelləri
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link
+              className={styles.link}
+              href='/stores'
+            >
+              Mağazalar
+            </Link>
+          </li>
+          <li className={[styles.menuItem, styles.dropdown].join(' ')}>
+            <Link
+              className={styles.link}
+              href='/about'
+            >
+              <span>Haqqımızda</span>
+              <button className={styles.dropdownIcon}>
+                <Image
+                  src={downChevron}
+                  alt='embakitchen dropdown icon'
+                />
+              </button>
+            </Link>
+            <div className={styles.dropdownWrapper}>
+              <ul>
+                <li className={styles.dropdownItem}>
+                  <Link
+                    href='/about/company'
+                    className={styles.dropdownLink}
+                  >
+                    Şirkət haqqında
+                  </Link>
+                </li>
+                <li className={styles.dropdownItem}>
+                  <Link
+                    href='/about/projects'
+                    className={styles.dropdownLink}
+                  >
+                    Layihələrimiz
+                  </Link>
+                </li>
+                <li className={styles.dropdownItem}>
+                  <Link
+                    href='/about/partners'
+                    className={styles.dropdownLink}
+                  >
+                    Partnyorlar
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li className={styles.menuItem}>
+            <Link
+              className={styles.link}
+              href='/blog'
+            >
+              Blog
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link
+              className={[styles.link, styles.highlightedLink].join(' ')}
+              href='/campaigns'
+            >
+              Kampaniyalar
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={[
+                styles.link,
+                styles.highlightedLink,
+                styles.specialOrder,
+              ].join(' ')}
+              href='/special-order'
+            >
+              Özəl sifariş
+            </Link>
+          </li>
         </ul>
       </div>
 
