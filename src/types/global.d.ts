@@ -5,7 +5,12 @@ declare global {
     [key: string]: string | TailwindStyle | ((p: unknown) => string)
   }
 
+  type StyleRecord = Record<string, string>
+
   type LayoutOption = 'horizontal' | 'vertical'
 
-  type Dictionary<T> = Record<string, T>
+  type Dictionary<ValueType, KeyType extends string> = Record<
+    KeyType,
+    ValueType
+  >
 }

@@ -11,79 +11,84 @@ const config: Config = {
       backgroundImage: {
         // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'slogan-section':
-          'url("../../public/assets/images/slogan_section_bg.png")',
-        'order-stages-section':
-          'url("../../public/assets/images/order_stages_section_bg.jpg")',
+        // 'slogan-section':
+        //   'url("../../public/assets/images/slogan_section_bg.png")',
+        // 'order-stages-section':
+        //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
-        primary: {
-          '1': '#E55E25',
-          '2': '#E86E3B',
-          '3': '#EA7F52',
-          '5': '#F0A17F',
-          '9': '#FCEBE4',
-        },
-        secondary: {
-          '2': '#FFC35C',
-        },
         dark: {
           gray: {
-            '1': '#333333',
-            '2': '#18181B',
-            '3': '#3D454C',
-          },
-          blue: '#31373D',
-        },
-        semi: {
-          white: 'rgba(255, 255, 255, 0.5)',
-          gray: {
-            '1': '#FAFAFA',
-            '2': 'rgba(42, 45, 47, 0.5)',
-            '3': '#666666',
-            '4': '#5F6B77',
-            '8': '#CCD1D6',
-            '9': '#E8EBED',
-          },
-          dark: '#1A1A1A',
-        },
-        light: {
-          gray: {
-            '1': '#E6E6E6',
-            '3': '#49525B',
-            '10': '#F7F7F8',
+            '1': '#31373D',
           },
         },
+        // primary: {
+        //   '1': '#E55E25',
+        //   '2': '#E86E3B',
+        //   '3': '#EA7F52',
+        //   '5': '#F0A17F',
+        //   '9': '#FCEBE4',
+        // },
+        // secondary: {
+        //   '2': '#FFC35C',
+        // },
+        // dark: {
+        //   gray: {
+        //     '1': '#333333',
+        //     '2': '#18181B',
+        //     '3': '#3D454C',
+        //   },
+        //   blue: '#31373D',
+        // },
+        // semi: {
+        //   white: 'rgba(255, 255, 255, 0.5)',
+        //   gray: {
+        //     '1': '#FAFAFA',
+        //     '2': 'rgba(42, 45, 47, 0.5)',
+        //     '3': '#666666',
+        //     '4': '#5F6B77',
+        //     '8': '#CCD1D6',
+        //     '9': '#E8EBED',
+        //   },
+        //   dark: '#1A1A1A',
+        // },
+        // light: {
+        //   gray: {
+        //     '1': '#E6E6E6',
+        //     '3': '#49525B',
+        //     '10': '#F7F7F8',
+        //   },
+        // },
       },
       fontFamily: {
         montserrat: ['var(--font-montserrat)'],
       },
       lineHeight: {
-        '7': '1.875rem', // 30px
-        '11': '3rem', // 48px
-        '13': '3.5rem', // 56px
-        '14': '3.75rem', // 60px
-        '16': '5.625rem', // 90px
+        // '7': '1.875rem', // 30px
+        // '11': '3rem', // 48px
+        // '13': '3.5rem', // 56px
+        // '14': '3.75rem', // 60px
+        // '16': '5.625rem', // 90px
       },
       fontSize: {
-        '2.5xl': '1.75rem', // 28px
-        '3xl': '2rem', // 32px
-        '4xl': '2.5rem', // 40px
-        '6xl': '3.5rem', // 56px
-        '7xl': '4.25rem', // 68px
+        // '2.5xl': '1.75rem', // 28px
+        // '3xl': '2rem', // 32px
+        // '4xl': '2.5rem', // 40px
+        // '6xl': '3.5rem', // 56px
+        // '7xl': '4.25rem', // 68px
       },
       maxWidth: {
-        '4xl': '54.5rem', // 872px
+        // '4xl': '54.5rem', // 872px
       },
       spacing: {
-        '1.25': '0.3125rem', // 5px
-        '15': '3.75rem', // 60px
-        '18': '4.5rem', // 72px
-        '25': '6.25rem', // 100px
+        // '1.25': '0.3125rem', // 5px
+        // '15': '3.75rem', // 60px
+        // '18': '4.5rem', // 72px
+        // '25': '6.25rem', // 100px
       },
       height: {
-        '18': '4.5rem', // 72px
-        '19': '4.75rem', // 76px
+        // '18': '4.5rem', // 72px
+        // '19': '4.75rem', // 76px
       },
     },
     screens: {

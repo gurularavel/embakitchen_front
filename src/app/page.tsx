@@ -1,15 +1,15 @@
-import {
-  Campaigns,
-  OrderStages,
-  Slider,
-  SloganSection,
-  Statistics,
-} from '@embakitchen/components'
+// import {
+//   Campaigns,
+//   OrderStages,
+//   Slider,
+//   SloganSection,
+//   Statistics,
+// } from '@embakitchen/components'
 
 export default function Home() {
   return (
     <main>
-      <Slider variant='main' />
+      {/* <Slider variant='main' />
       <Slider variant='gallery' />
       <Statistics />
       <OrderStages />
@@ -18,7 +18,7 @@ export default function Home() {
         description='Xəyallarınızdakı mətbəxi bizə həvalə edin'
       />
       <Slider variant='partners' />
-      <Campaigns />
+      <Campaigns /> */}
     </main>
   )
 }
