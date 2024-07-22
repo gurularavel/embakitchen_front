@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { logoStyles } from '@ek/components/atoms/logo/logo.style'
-import logoHeaderImg from '/public/assets/images/logo/logo-header.svg'
+import logoHeaderImg from '/public/assets/images/logo/header.svg'
 
 const styles: StyleRecord = logoStyles as StyleRecord
 

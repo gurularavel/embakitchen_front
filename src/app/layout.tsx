@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
-// import { Header, Footer } from '@embakitchen/components'
-import { Header } from '@embakitchen/components/organisms'
-import '@embakitchen/app/globals.css'
+import { Header } from '@ek/components/organisms'
+import '@ek/app/globals.css'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -26,8 +25,7 @@ export default function RootLayout({
     >
       <body>
         <Header />
-        {/* {children} */}
-        {/* <Footer /> */}
+        {children}
       </body>
     </html>
   )

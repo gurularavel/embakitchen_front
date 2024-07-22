@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-slider .swiper-pagination.swiper-pagination-bullets {
+/* .main-slider .swiper-pagination.swiper-pagination-bullets {
   bottom: 212px;
   display: flex;
   align-items: center;
@@ -45,4 +45,4 @@
 .stage-number {
   -webkit-text-stroke: 1px #ffffff;
   color: transparent;
-}
+} */

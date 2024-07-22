@@ -11,7 +11,7 @@ interface IconProps {
   variant: IconVariant
 }
 
-const icons: Record<string, string | StaticImageData> = {
+const icons: Record<IconVariant, StaticImageData> = {
   menu: menuIcon,
 }
 

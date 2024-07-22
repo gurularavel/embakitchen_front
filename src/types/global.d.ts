@@ -7,10 +7,10 @@ declare global {
 
   type StyleRecord = Record<string, string>
 
-  type LayoutOption = 'horizontal' | 'vertical'
+  // type LayoutOption = 'horizontal' | 'vertical'
 
-  type Dictionary<ValueType, KeyType extends string> = Record<
-    KeyType,
-    ValueType
-  >
+  // type Dictionary<ValueType, KeyType extends string> = Record<
+  //   KeyType,
+  //   ValueType
+  // >
 }
