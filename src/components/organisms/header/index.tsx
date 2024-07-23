@@ -1,28 +1,19 @@
-'use client'
-
-import React, { useState } from 'react'
-import { Button, Icon, Logo } from '@ek/components/atoms'
-import { headerStyles } from '@ek/components/organisms/header/header.style'
+import React from 'react'
+import { Icon, Logo } from '@ek/components/atoms'
 import { Search } from '@ek/components/molecules'
+import { headerStyles } from '@ek/components/organisms/header/header.style'
 
-const styles: StyleRecord = headerStyles as StyleRecord
+const styles: Readonly<StyleRecord> = headerStyles as StyleRecord
 
 interface HeaderProps {}
 
-export function Header({}: HeaderProps): React.ReactElement {
-  const [isSearchShown, setIsSearchShown] = useState<boolean>(false)
-
-  const toggleSearchBar = () => setIsSearchShown(!isSearchShown)
-
+export function Header({}: Readonly<HeaderProps>): React.ReactElement {
   return (
     <header className={styles.container}>
       <div className={styles.wrapper}>
         <Icon variant='menu' />
         <Logo variant='header' />
-        <Button onClick={toggleSearchBar}>
-          <Icon variant='search-1' />
-        </Button>
-        <Search isSearchShown={isSearchShown} />
+        <Search />
       </div>
     </header>
   )

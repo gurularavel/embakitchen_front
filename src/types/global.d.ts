@@ -2,10 +2,11 @@ export {}
 
 declare global {
   interface TailwindStyle {
-    [key: string]: string | TailwindStyle | ((p: unknown) => string)
+    [key: string]: string | TailwindStyle | ((param: unknown) => string)
   }
 
   type StyleRecord = Record<string, string>
+  type StyleGetter = (param: unknown) => string
 
   // type LayoutOption = 'horizontal' | 'vertical'
 

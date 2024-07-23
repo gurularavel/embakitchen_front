@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { logoStyles } from '@ek/components/atoms/logo/logo.style'
 import logoHeaderImg from '/public/assets/images/logo/header.svg'
 
-const styles: StyleRecord = logoStyles as StyleRecord
+const styles: Readonly<StyleRecord> = logoStyles as StyleRecord
 
 type LogoVariant = 'header'
 
@@ -11,7 +11,7 @@ interface LogoProps {
   variant: LogoVariant
 }
 
-const logos: Record<LogoVariant, React.ReactElement> = {
+const logos: Readonly<Record<LogoVariant, React.ReactElement>> = {
   header: <LogoHeader />,
 }
 
@@ -26,6 +26,6 @@ function LogoHeader(): React.ReactElement {
   )
 }
 
-export function Logo({ variant }: LogoProps): React.ReactElement {
+export function Logo({ variant }: Readonly<LogoProps>): React.ReactElement {
   return logos[variant]
 }

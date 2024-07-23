@@ -1,7 +1,7 @@
 import React from 'react'
 import { inputStyles } from '@ek/components/atoms/input/input.style'
 
-const styles: StyleRecord = inputStyles as StyleRecord
+const styles: Readonly<StyleRecord> = inputStyles as StyleRecord
 
 interface InputProps {
   twStyles?: string
@@ -10,7 +10,10 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export function Input({ twStyles, ...props }: InputProps): React.ReactElement {
+export function Input({
+  twStyles,
+  ...props
+}: Readonly<InputProps>): React.ReactElement {
   return (
     <input
       className={`${styles.container} ${twStyles}`}
