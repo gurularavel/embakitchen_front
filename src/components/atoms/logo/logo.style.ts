@@ -1,3 +1,7 @@
 export const logoStyles: TailwindStyle = {
-  container: '',
+  header: {
+    container: '',
+    link: 'flex items-center',
+    img: '',
+  },
 }

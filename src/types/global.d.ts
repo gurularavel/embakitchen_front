@@ -1,10 +1,10 @@
 export {}
 
 declare global {
+  type Style = string | TailwindStyle | ((param: unknown) => string)
   interface TailwindStyle {
-    [key: string]: string | TailwindStyle | ((param: unknown) => string)
+    [key: string]: Style
   }
-
   type StyleRecord = Record<string, string>
   type StyleGetter = (param: unknown) => string
 
