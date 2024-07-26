@@ -1,6 +1,6 @@
 import React from 'react'
 import { Logo, Search, Sidebar } from '@ek/components'
-import { headerStyles } from '@ek/components/organisms/header/header.style'
+import { headerStyles } from '@ek/components/organisms/styles'
 
 const styles: Readonly<StyleRecord> = headerStyles as StyleRecord
 

@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Button, Icon } from '@ek/components'
-import { sidebarStyles } from '@ek/components/organisms/sidebar/sidebar.style'
+import { Button, Icon, Navbar } from '@ek/components'
+import { sidebarStyles } from '@ek/components/organisms/styles'
 
 const getSidebarContentStyles: StyleGetter =
   sidebarStyles.sidebarContent as StyleGetter
@@ -23,7 +23,13 @@ export function Sidebar({}: Readonly<SidebarProps>): React.ReactElement {
       </Button>
 
       <div className={getSidebarContentStyles(isSidebarVisible)}>
-        <h1>Sidebar</h1>
+        <div className={styles.closeBtnWrapper}>
+          <Button onClick={() => toggleSidebarVisibility(false)}>
+            <Icon variant='close' />
+          </Button>
+        </div>
+
+        <Navbar />
       </div>
     </aside>
   )

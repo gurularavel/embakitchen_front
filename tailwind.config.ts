@@ -17,6 +17,9 @@ const config: Config = {
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
+        secondary: {
+          '4': '#FFC35C',
+        },
         dark: {
           gray: {
             '1': '#31373D',

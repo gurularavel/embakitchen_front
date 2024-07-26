@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { logoStyles } from '@ek/components/atoms/logo/logo.style'
+import { logoStyles } from '@ek/components/atoms/styles'
 import logoHeaderImg from '/public/assets/images/logo/header.png'
 
 const logoHeaderStyles: Readonly<StyleRecord> = logoStyles.header as StyleRecord

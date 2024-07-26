@@ -1,5 +1,5 @@
 import React from 'react'
-import { inputStyles } from '@ek/components/atoms/input/input.style'
+import { inputStyles } from '@ek/components/atoms/styles'
 
 const styles: Readonly<StyleRecord> = inputStyles as StyleRecord
 

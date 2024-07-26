@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react'
 import { Button, Icon, Input } from '@ek/components'
-import { searchStyles } from '@ek/components/molecules/search/search.style'
+import { searchStyles } from '@ek/components/molecules/styles'
 
 const getContainerStyles: StyleGetter = searchStyles.container as StyleGetter
 const styles: Readonly<StyleRecord> = searchStyles as StyleRecord
