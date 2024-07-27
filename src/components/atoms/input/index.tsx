@@ -1,22 +1,25 @@
-import React from 'react'
-import { inputStyles } from '@ek/components/atoms/styles'
-
-const styles: Readonly<StyleRecord> = inputStyles as StyleRecord
+import * as React from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface InputProps {
-  twStyles?: string
-  type?: string
-  placeholder?: string
+  classes?: string
+  type: string
+  placeholder: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
+const inputStyles: Readonly<TailwindStyle> = {
+  input: 'bg-transparent focus:outline-none',
+}
+const styles: Readonly<StyleRecord> = inputStyles as StyleRecord
+
 export function Input({
-  twStyles,
+  classes,
   ...props
 }: Readonly<InputProps>): React.ReactElement {
   return (
     <input
-      className={`${styles.container} ${twStyles}`}
+      className={twMerge(styles.input, classes ?? '')}
       {...props}
     />
   )

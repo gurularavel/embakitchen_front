@@ -1,17 +1,22 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import * as React from 'react'
 import { Button, Icon, Input } from '@ek/components'
-import { searchStyles } from '@ek/components/molecules/styles'
-
-const getContainerStyles: StyleGetter = searchStyles.container as StyleGetter
-const styles: Readonly<StyleRecord> = searchStyles as StyleRecord
 
 interface SearchProps {}
 
+const searchStyles: Readonly<TailwindStyle> = {
+  search: (isSearchVisible: unknown) =>
+    `h-11 bg-light-gray-4 absolute left-0 right-0 flex gap-x-2 px-3.5 rounded-lg transition-all duration-300 ${(isSearchVisible as boolean) ? 'top-14 translate-y-0 opacity-100' : '-top-full -translate-y-full opacity-0'}`,
+  input:
+    'placeholder:text-light-gray-10 placeholder:font-normal placeholder:text-sm text-light-gray-10',
+}
+const getSearchStyles: StyleGetter = searchStyles.search as StyleGetter
+const styles: Readonly<StyleRecord> = searchStyles as StyleRecord
+
 export function Search({}: Readonly<SearchProps>): React.ReactElement {
-  const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false)
-  const searchInputRef = useRef<HTMLInputElement | null>(null)
+  const [isSearchVisible, setIsSearchVisible] = React.useState<boolean>(false)
+  const searchInputRef = React.useRef<HTMLInputElement | null>(null)
 
   const toggleSearchVisibility = (shouldBeVisible: boolean): void =>
     setIsSearchVisible(shouldBeVisible)
@@ -21,10 +26,11 @@ export function Search({}: Readonly<SearchProps>): React.ReactElement {
       <Button onClick={() => toggleSearchVisibility(!isSearchVisible)}>
         <Icon variant='search-1' />
       </Button>
-      <div className={getContainerStyles(isSearchVisible)}>
+      <div className={getSearchStyles(isSearchVisible)}>
         <Icon variant='search-2' />
         <Input
-          twStyles={styles.input}
+          classes={styles.input}
+          type='search'
           placeholder='Axtar'
           // ref={searchInputRef}
         />

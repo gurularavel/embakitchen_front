@@ -1,23 +1,26 @@
-import React, { ButtonHTMLAttributes } from 'react'
-import { buttonStyles } from '@ek/components/atoms/styles'
-
-const styles: Readonly<StyleRecord> = buttonStyles as StyleRecord
+import * as React from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface ButtonProps {
-  twStyles?: string
   children: React.ReactNode
-  type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
+  classes?: string
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type']
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
+const buttonStyles: Readonly<TailwindStyle> = {
+  button: '',
+}
+const styles: Readonly<StyleRecord> = buttonStyles as StyleRecord
+
 export function Button({
-  twStyles,
   children,
+  classes,
   ...props
 }: Readonly<ButtonProps>): React.ReactElement {
   return (
     <button
-      className={`${styles.container} ${twStyles ?? ''}`}
+      className={twMerge(styles.button, classes ?? '')}
       {...props}
     >
       {children}

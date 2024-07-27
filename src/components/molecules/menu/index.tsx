@@ -1,28 +1,38 @@
-import React from 'react'
+import * as React from 'react'
+import { twMerge } from 'tailwind-merge'
 import { Button, Dropdown, MenuItem } from '@ek/components'
-import { menuStyles } from '@ek/components/molecules/styles'
-
-const styles: StyleRecord = menuStyles as StyleRecord
 
 interface MenuProps {}
 
-export function Menu({}: MenuProps): React.ReactElement {
+const menuStyles: Readonly<TailwindStyle> = {
+  menu: '',
+  highlightedLink: 'text-secondary-4',
+  specialOrderBtn:
+    'w-[135px] h-11 border border-solid border-light-gray-4 rounded-lg',
+}
+const styles: Readonly<StyleRecord> = menuStyles as StyleRecord
+
+export function Menu({}: Readonly<MenuProps>): React.ReactElement {
   return (
-    <ul className={styles.container}>
+    <ul className={styles.menu}>
       <MenuItem href='/kitchen-furniture'>Mətbəx mebelləri</MenuItem>
       <MenuItem href='/stores'>Mağazalar</MenuItem>
       <Dropdown
         text='Haqqımızda'
-        items={[]}
+        items={[
+          { text: 'Şirkət haqqında', href: '/about/company' },
+          { text: 'Layihələrimiz', href: '/about/projects' },
+          { text: 'Partnyorlar', href: '/about/partners' },
+        ]}
       />
       <MenuItem href='/blog'>Blog</MenuItem>
       <MenuItem
         href='/campaigns'
-        twStyles={styles.highlightedLink}
+        classes={styles.highlightedLink}
       >
         Kampaniyalar
       </MenuItem>
-      <Button twStyles={`${styles.highlightedLink} ${styles.specialOrderBtn}`}>
+      <Button classes={twMerge(styles.highlightedLink, styles.specialOrderBtn)}>
         Özəl sifariş
       </Button>
     </ul>

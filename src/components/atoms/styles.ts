@@ -1,5 +1,0 @@
-export { logoStyles } from '@ek/components/atoms/logo/logo.style'
-export { iconStyles } from '@ek/components/atoms/icon/icon.style'
-export { inputStyles } from '@ek/components/atoms/input/input.style'
-export { buttonStyles } from '@ek/components/atoms/button/button.style'
-export { menuItemStyles } from '@ek/components/atoms/menu-item/menu-item.style'

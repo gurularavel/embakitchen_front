@@ -1,19 +1,21 @@
-import React from 'react'
+import * as React from 'react'
 import Image, { StaticImageData } from 'next/image'
-import { iconStyles } from '@ek/components/atoms/styles'
 import menuIcon from '/public/assets/icons/menu.svg'
 import searchIcon1 from '/public/assets/icons/search-1.svg'
 import searchIcon2 from '/public/assets/icons/search-2.svg'
 import closeIcon from '/public/assets/icons/close.svg'
 import downChevronIcon1 from '/public/assets/icons/down-chevron-1.svg'
 
-const styles: Readonly<StyleRecord> = iconStyles as StyleRecord
-
 type IconVariant = 'menu' | 'search-1' | 'search-2' | 'close' | 'down-chevron-1'
 
 interface IconProps {
   variant: IconVariant
 }
+
+const iconStyles: Readonly<TailwindStyle> = {
+  icon: '',
+}
+const styles: Readonly<StyleRecord> = iconStyles as StyleRecord
 
 const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   menu: menuIcon,
@@ -28,6 +30,7 @@ export function Icon({ variant }: Readonly<IconProps>): React.ReactElement {
     <Image
       src={icons[variant]}
       alt={`embakitchen ${variant} icon`}
+      className={styles.icon}
     />
   )
 }
