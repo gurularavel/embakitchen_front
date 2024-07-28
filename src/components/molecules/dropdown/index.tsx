@@ -14,16 +14,18 @@ interface DropdownProps {
 }
 
 const dropdownStyles: Readonly<TailwindStyle> = {
-  dropdown: '',
-  dropdownToggler: (isOpen: unknown) =>
-    `w-full mb-2 flex justify-between items-center text-base font-normal leading-6 text-white [&>img]:transition-transform [&>img]:duration-300 ${(isOpen as boolean) ? '[&>img]:rotate-180' : '[&>img]:rotate-0'}`,
+  dropdown: 'mb-6',
+  dropdownToggler:
+    'w-full mb-2 flex justify-between items-center text-base font-normal leading-6 text-white',
+  dropdownTogglerIcon: (isOpen: unknown) =>
+    `transition-transform duration-300 ${(isOpen as boolean) ? 'rotate-180' : 'rotate-0'}`,
   dropdownContent: (isOpen: unknown) =>
     `${(isOpen as boolean) ? 'block' : 'hidden'}`,
   dropdownItem: 'px-6 h-12 mb-0 flex items-center',
 }
 const styles: Readonly<StyleRecord> = dropdownStyles as StyleRecord
-const getDropdownTogglerStyles: StyleGetter =
-  dropdownStyles.dropdownToggler as StyleGetter
+const getDropdownTogglerIconStyles: StyleGetter =
+  dropdownStyles.dropdownTogglerIcon as StyleGetter
 const getDropdownContentStyles: StyleGetter =
   dropdownStyles.dropdownContent as StyleGetter
 
@@ -39,10 +41,13 @@ export function Dropdown({
     <div className={styles.dropdown}>
       <Button
         onClick={toggleIsOpen}
-        classes={getDropdownTogglerStyles(isOpen)}
+        classes={styles.dropdownToggler}
       >
         <span>{text}</span>
-        <Icon variant='down-chevron-1' />
+        <Icon
+          variant='down-chevron-1'
+          classes={getDropdownTogglerIconStyles(isOpen)}
+        />
       </Button>
 
       <div className={getDropdownContentStyles(isOpen)}>

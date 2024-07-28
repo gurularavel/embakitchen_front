@@ -11,7 +11,7 @@ interface LogoProps {
 
 const logoStyles: Readonly<TailwindStyle> = {
   header: {
-    logo: 'flex items-center',
+    logoLink: 'flex items-center',
     img: '',
   },
 }
@@ -23,16 +23,18 @@ const logos: Readonly<Record<LogoVariant, React.ReactElement>> = {
 
 function LogoHeader(): React.ReactElement {
   return (
-    <Link
-      href='/'
-      className={logoHeaderStyles.logo}
-    >
-      <Image
-        src={logoHeaderImg}
-        alt='embakitchen logo'
-        className={logoHeaderStyles.img}
-      />
-    </Link>
+    <div>
+      <Link
+        href='/'
+        className={logoHeaderStyles.logoLink}
+      >
+        <Image
+          src={logoHeaderImg}
+          alt='embakitchen logo'
+          className={logoHeaderStyles.img}
+        />
+      </Link>
+    </div>
   )
 }
 
