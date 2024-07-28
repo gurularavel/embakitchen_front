@@ -20,7 +20,7 @@ const dropdownStyles: Readonly<TailwindStyle> = {
   dropdownTogglerIcon: (isOpen: unknown) =>
     `transition-transform duration-300 ${(isOpen as boolean) ? 'rotate-180' : 'rotate-0'}`,
   dropdownContent: (isOpen: unknown) =>
-    `mt-2 transition-all duration-300 ${(isOpen as boolean) ? 'static translate-y-0 opacity-100' : 'absolute translate-y-full opacity-0'}`,
+    `mt-2 ${(isOpen as boolean) ? 'static translate-y-0 opacity-100 transition-all duration-300' : 'absolute -translate-y-4 opacity-0'}`,
   dropdownItem: 'px-6 h-12 mb-0 flex items-center',
 }
 const styles: Readonly<StyleRecord> = dropdownStyles as StyleRecord
