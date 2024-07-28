@@ -34,6 +34,9 @@ const config: Config = {
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
         },
+        gray: {
+          '3': '#49525B',
+        },
         // primary: {
         //   '1': '#E55E25',
         //   '2': '#E86E3B',
@@ -76,7 +79,7 @@ const config: Config = {
         montserrat: ['var(--font-montserrat)'],
       },
       lineHeight: {
-        // '7': '1.875rem', // 30px
+        '7': '1.875rem', // 30px
         // '11': '3rem', // 48px
         // '13': '3.5rem', // 56px
         // '14': '3.75rem', // 60px

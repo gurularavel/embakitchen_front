@@ -10,7 +10,7 @@ interface MenuItemProps {
 }
 
 const menuItemStyles: Readonly<TailwindStyle> = {
-  menuItem: 'mb-6 text-base font-normal leading-6 text-white',
+  menuItem: '',
 }
 const styles: Readonly<StyleRecord> = menuItemStyles as StyleRecord
 

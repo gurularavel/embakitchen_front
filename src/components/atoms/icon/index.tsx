@@ -11,6 +11,9 @@ import whatsappIcon from '/public/assets/icons/social/whatsapp.svg'
 import facebookIcon from '/public/assets/icons/social/facebook.svg'
 import instagramIcon from '/public/assets/icons/social/instagram.svg'
 import youtubeIcon from '/public/assets/icons/social/youtube.svg'
+import phoneIcon from '/public/assets/icons/phone.svg'
+import profileIcon from '/public/assets/icons/profile.svg'
+import downChevronIcon2 from '/public/assets/icons/down-chevron-2.svg'
 
 type IconVariant =
   | 'menu'
@@ -19,6 +22,9 @@ type IconVariant =
   | 'close'
   | 'down-chevron-1'
   | SocialContact
+  | 'phone'
+  | 'profile'
+  | 'down-chevron-2'
 
 interface IconProps {
   variant: IconVariant
@@ -40,6 +46,9 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   facebook: facebookIcon,
   instagram: instagramIcon,
   youtube: youtubeIcon,
+  phone: phoneIcon,
+  profile: profileIcon,
+  'down-chevron-2': downChevronIcon2,
 }
 
 export function Icon({
