@@ -1,13 +1,24 @@
 import * as React from 'react'
 import Image, { StaticImageData } from 'next/image'
 import { twMerge } from 'tailwind-merge'
+import { SocialContact } from '@ek/types'
 import menuIcon from '/public/assets/icons/menu.svg'
 import searchIcon1 from '/public/assets/icons/search-1.svg'
 import searchIcon2 from '/public/assets/icons/search-2.svg'
 import closeIcon from '/public/assets/icons/close.svg'
 import downChevronIcon1 from '/public/assets/icons/down-chevron-1.svg'
+import whatsappIcon from '/public/assets/icons/social/whatsapp.svg'
+import facebookIcon from '/public/assets/icons/social/facebook.svg'
+import instagramIcon from '/public/assets/icons/social/instagram.svg'
+import youtubeIcon from '/public/assets/icons/social/youtube.svg'
 
-type IconVariant = 'menu' | 'search-1' | 'search-2' | 'close' | 'down-chevron-1'
+type IconVariant =
+  | 'menu'
+  | 'search-1'
+  | 'search-2'
+  | 'close'
+  | 'down-chevron-1'
+  | SocialContact
 
 interface IconProps {
   variant: IconVariant
@@ -25,6 +36,10 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'search-2': searchIcon2,
   close: closeIcon,
   'down-chevron-1': downChevronIcon1,
+  whatsapp: whatsappIcon,
+  facebook: facebookIcon,
+  instagram: instagramIcon,
+  youtube: youtubeIcon,
 }
 
 export function Icon({

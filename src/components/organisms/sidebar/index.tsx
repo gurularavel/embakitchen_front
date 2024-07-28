@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Button, Icon, Navbar } from '@ek/components'
+import { Button, Icon, Navbar, SocialContacts } from '@ek/components'
 
 interface SidebarProps {}
 
@@ -35,6 +35,7 @@ export function Sidebar({}: Readonly<SidebarProps>): React.ReactElement {
         </div>
 
         <Navbar />
+        <SocialContacts layout='horizontal' />
       </div>
     </aside>
   )

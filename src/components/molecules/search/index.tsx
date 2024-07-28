@@ -11,8 +11,8 @@ const searchStyles: Readonly<TailwindStyle> = {
   input:
     'placeholder:text-light-gray-10 placeholder:font-normal placeholder:text-sm text-light-gray-10',
 }
-const getSearchStyles: StyleGetter = searchStyles.search as StyleGetter
 const styles: Readonly<StyleRecord> = searchStyles as StyleRecord
+const getSearchStyles: StyleGetter = searchStyles.search as StyleGetter
 
 export function Search({}: Readonly<SearchProps>): React.ReactElement {
   const [isSearchVisible, setIsSearchVisible] = React.useState<boolean>(false)

@@ -31,6 +31,9 @@ const config: Config = {
             '10': '#F7F7F8',
           },
         },
+        semi: {
+          white: 'rgba(255, 255, 255, 0.5)',
+        },
         // primary: {
         //   '1': '#E55E25',
         //   '2': '#E86E3B',

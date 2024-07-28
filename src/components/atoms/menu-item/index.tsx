@@ -6,6 +6,7 @@ interface MenuItemProps {
   href: string
   children: React.ReactNode
   classes?: string
+  openInNewWindow?: boolean
 }
 
 const menuItemStyles: Readonly<TailwindStyle> = {
@@ -17,10 +18,20 @@ export function MenuItem({
   href,
   children,
   classes,
+  openInNewWindow,
 }: Readonly<MenuItemProps>): React.ReactElement {
+  const props = openInNewWindow
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {}
+
   return (
     <li className={twMerge(styles.menuItem, classes ?? '')}>
-      <Link href={href}>{children}</Link>
+      <Link
+        href={href}
+        {...props}
+      >
+        {children}
+      </Link>
     </li>
   )
 }

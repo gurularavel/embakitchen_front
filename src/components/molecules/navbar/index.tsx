@@ -4,7 +4,7 @@ import { Menu } from '@ek/components'
 interface NavbarProps {}
 
 const navbarStyles: Readonly<TailwindStyle> = {
-  navbar: '',
+  navbar: 'mb-6',
 }
 const styles: Readonly<StyleRecord> = navbarStyles as StyleRecord
 
