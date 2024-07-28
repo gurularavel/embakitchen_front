@@ -14,13 +14,13 @@ interface DropdownProps {
 }
 
 const dropdownStyles: Readonly<TailwindStyle> = {
-  dropdown: 'mb-6',
+  dropdown: 'mb-6 overflow-hidden',
   dropdownToggler:
-    'w-full mb-2 flex justify-between items-center text-base font-normal leading-6 text-white',
+    'w-full flex justify-between items-center text-base font-normal leading-6 text-white',
   dropdownTogglerIcon: (isOpen: unknown) =>
     `transition-transform duration-300 ${(isOpen as boolean) ? 'rotate-180' : 'rotate-0'}`,
   dropdownContent: (isOpen: unknown) =>
-    `${(isOpen as boolean) ? 'block' : 'hidden'}`,
+    `mt-2 transition-all duration-300 ${(isOpen as boolean) ? 'static translate-y-0 opacity-100' : 'absolute translate-y-full opacity-0'}`,
   dropdownItem: 'px-6 h-12 mb-0 flex items-center',
 }
 const styles: Readonly<StyleRecord> = dropdownStyles as StyleRecord
