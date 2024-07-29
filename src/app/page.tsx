@@ -1,3 +1,5 @@
+import { Homepage } from '@ek/components'
+
 export default function Home() {
-  return <main>Home Page</main>
+  return <Homepage />
 }
