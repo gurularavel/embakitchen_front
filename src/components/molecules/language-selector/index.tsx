@@ -2,12 +2,12 @@
 
 import * as React from 'react'
 import { Icon } from '@ek/components'
+import { Language } from '@ek/types'
 
-type Language = 'Az' | 'En' | 'Ru'
 interface LanguageSelectorProps {}
 
 const languageSelectorStyles: Readonly<TailwindStyle> = {
-  languageSelector: 'relative',
+  languageSelector: 'relative mobile:flex-1',
   selectedLanguage:
     'w-full bg-gray-3 h-11 rounded-lg flex items-center justify-center gap-x-2 text-base font-semibold leading-6 text-light-gray-10 cursor-pointer relative z-10',
   selectedLanguageIcon: (isVisible: unknown) =>

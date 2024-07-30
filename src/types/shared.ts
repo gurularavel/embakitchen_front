@@ -1,5 +1,7 @@
 export type LayoutOption = 'horizontal' | 'vertical'
 
+export type Language = 'Az' | 'En' | 'Ru'
+
 // import { StaticImageData } from 'next/image'
 
 // export type SliderOption = 'main' | 'gallery' | 'partners'

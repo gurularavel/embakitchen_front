@@ -1,12 +1,12 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
 import {
   Button,
   Icon,
   LanguageSelector,
   Navbar,
+  PhoneNumber,
   SocialContacts,
 } from '@ek/components'
 
@@ -20,10 +20,11 @@ const sidebarStyles: Readonly<TailwindStyle> = {
   sidebarBody: '',
   sidebarNavTop: 'mb-6',
   sidebarNavBottom: 'pt-2',
-  phone:
-    'flex items-center gap-x-2 text-xl font-medium leading-7 text-secondary-4 mb-6',
+  phone: 'mb-6',
+  options:
+    'flex flex-col mobile:flex-row gap-y-3 mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
   profileButton:
-    'w-full bg-gray-3 h-11 rounded-lg flex items-center justify-center gap-x-2 text-base font-semibold leading-6 text-light-gray-10 mb-3',
+    'w-full mobile:flex-1 bg-gray-3 h-11 rounded-lg flex items-center justify-center gap-x-2 text-base font-semibold leading-6 text-light-gray-10',
 }
 const styles: Readonly<StyleRecord> = sidebarStyles as StyleRecord
 const getSidebarContentStyles: StyleGetter =
@@ -55,20 +56,16 @@ export function Sidebar({}: Readonly<SidebarProps>): React.ReactElement {
           </div>
 
           <div className={styles.sidebarNavBottom}>
-            <Link
-              href='tel:126'
-              className={styles.phone}
-            >
-              <Icon variant='phone' />
-              <span>126</span>
-            </Link>
+            <PhoneNumber classes={styles.phone} />
 
-            <Button classes={styles.profileButton}>
-              <Icon variant='profile' />
-              <span>Şəxsi kabinet</span>
-            </Button>
+            <div className={styles.options}>
+              <Button classes={styles.profileButton}>
+                <Icon variant='profile' />
+                <span>Şəxsi kabinet</span>
+              </Button>
 
-            <LanguageSelector />
+              <LanguageSelector />
+            </div>
           </div>
         </div>
       </div>
