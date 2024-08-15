@@ -7,5 +7,6 @@
     "className",
     ".*Styles.*"
   ],
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "css.lint.unknownAtRules": "ignore"
 }
