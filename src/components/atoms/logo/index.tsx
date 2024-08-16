@@ -11,33 +11,31 @@ interface LogoProps {
 
 const logoStyles: Readonly<TailwindStyle> = {
   header: {
-    logoLink: 'flex items-center',
-    img: '',
+    link: 'h-full flex items-center',
+    img: 'w-25 h-[17px]',
   },
 }
 const logoHeaderStyles: Readonly<StyleRecord> = logoStyles.header as StyleRecord
 
-const logos: Readonly<Record<LogoVariant, React.ReactElement>> = {
+const logos: Readonly<Record<LogoVariant, ReactComponent>> = {
   header: <LogoHeader />,
 }
 
-function LogoHeader(): React.ReactElement {
+function LogoHeader(): ReactComponent {
   return (
-    <div>
-      <Link
-        href='/'
-        className={logoHeaderStyles.logoLink}
-      >
-        <Image
-          src={logoHeaderImg}
-          alt='embakitchen logo'
-          className={logoHeaderStyles.img}
-        />
-      </Link>
-    </div>
+    <Link
+      href='/'
+      className={logoHeaderStyles.link}
+    >
+      <Image
+        src={logoHeaderImg}
+        alt='embakitchen logo on header'
+        className={logoHeaderStyles.img}
+      />
+    </Link>
   )
 }
 
-export function Logo({ variant }: Readonly<LogoProps>): React.ReactElement {
+export function Logo({ variant }: Readonly<LogoProps>): ReactComponent {
   return logos[variant]
 }

@@ -18,7 +18,7 @@
       }
     ],
     "paths": {
-      "@ek/*": ["./src/*"]
+      "~ek/*": ["./src/*"]
     },
     "typeRoots": ["./types", "./node_modules/@types"]
   },

@@ -9,7 +9,8 @@ interface ButtonProps {
 }
 
 const buttonStyles: Readonly<TailwindStyle> = {
-  button: '',
+  button:
+    'bg-transparent border-none outline-none focus:bg-transparent focus:border-none focus:outline-none',
 }
 const styles: Readonly<StyleRecord> = buttonStyles as StyleRecord
 
@@ -17,7 +18,7 @@ export function Button({
   children,
   classes,
   ...props
-}: Readonly<ButtonProps>): React.ReactElement {
+}: Readonly<ButtonProps>): ReactComponent {
   return (
     <button
       className={twMerge(styles.button, classes ?? '')}

@@ -1,7 +1,7 @@
-export * from '@ek/components/atoms'
-export * from '@ek/components/molecules'
-export * from '@ek/components/organisms'
-export * from '@ek/components/templates'
+export * from '~ek/components/atoms'
+// export * from '@ek/components/molecules'
+export * from '~ek/components/organisms'
+export * from '~ek/components/templates'
 
 // export { Header } from '@embakitchen/components/Header/Header'
 // export { Navbar } from '@embakitchen/components/Header/Navbar/Navbar'

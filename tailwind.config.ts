@@ -17,26 +17,26 @@ const config: Config = {
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
-        secondary: {
-          '4': '#FFC35C',
-        },
-        dark: {
-          gray: {
-            '1': '#31373D',
-          },
-        },
-        light: {
-          gray: {
-            '4': '#5F6B77',
-            '10': '#F7F7F8',
-          },
-        },
-        semi: {
-          white: 'rgba(255, 255, 255, 0.5)',
-        },
         gray: {
-          '3': '#49525B',
+          '1': '#31373D',
         },
+
+        // secondary: {
+        //   '4': '#FFC35C',
+        // },
+        // light: {
+        //   gray: {
+        //     '4': '#5F6B77',
+        //     '10': '#F7F7F8',
+        //   },
+        // },
+        // semi: {
+        //   white: 'rgba(255, 255, 255, 0.5)',
+        // },
+        // gray: {
+        //   '3': '#49525B',
+        // },
+
         // primary: {
         //   '1': '#E55E25',
         //   '2': '#E86E3B',
@@ -79,7 +79,7 @@ const config: Config = {
         montserrat: ['var(--font-montserrat)'],
       },
       lineHeight: {
-        '7': '1.875rem', // 30px
+        // '7': '1.875rem', // 30px
         // '11': '3rem', // 48px
         // '13': '3.5rem', // 56px
         // '14': '3.75rem', // 60px
@@ -92,6 +92,9 @@ const config: Config = {
         // '6xl': '3.5rem', // 56px
         // '7xl': '4.25rem', // 68px
       },
+      width: {
+        '25': '6.25rem', // 100px
+      },
       maxWidth: {
         // '4xl': '54.5rem', // 872px
       },
@@ -102,7 +105,7 @@ const config: Config = {
         // '25': '6.25rem', // 100px
       },
       height: {
-        '18': '4.5rem', // 72px
+        // '18': '4.5rem', // 72px
         // '19': '4.75rem', // 76px
       },
     },

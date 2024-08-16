@@ -1,5 +1,10 @@
-import { Homepage } from '@ek/components'
+import type { Metadata } from 'next'
+import { Main } from '~ek/components'
+
+export const metadata: Metadata = {
+  title: 'Embakitchen Ana Səhifə',
+}
 
 export default function Home() {
-  return <Homepage />
+  return <Main />
 }
