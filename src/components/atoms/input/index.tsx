@@ -1,26 +1,31 @@
-// import * as React from 'react'
-// import { twMerge } from 'tailwind-merge'
+import * as React from 'react'
+import { twMerge } from 'tailwind-merge'
 
-// interface InputProps {
-//   classes?: string
-//   type: string
-//   placeholder: string
-//   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-// }
+type InputRef = HTMLInputElement
 
-// const inputStyles: Readonly<TailwindStyle> = {
-//   input: 'bg-transparent focus:outline-none',
-// }
-// const styles: Readonly<StyleRecord> = inputStyles as StyleRecord
+interface InputProps {
+  type: string
+  placeholder: string
+  classes?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-// export function Input({
-//   classes,
-//   ...props
-// }: Readonly<InputProps>): React.ReactElement {
-//   return (
-//     <input
-//       className={twMerge(styles.input, classes ?? '')}
-//       {...props}
-//     />
-//   )
-// }
+const inputStyles: Readonly<TailwindStyle> = {
+  input:
+    'appearance-none bg-transparent border-none outline-none focus:bg-transparent focus:border-none focus:outline-none',
+}
+const styles: Readonly<StyleRecord> = inputStyles as StyleRecord
+
+export const Input = React.forwardRef<InputRef, Readonly<InputProps>>(
+  ({ classes, ...props }, inputRef) => {
+    return (
+      <input
+        className={twMerge(styles.input, classes ?? '')}
+        {...props}
+        ref={inputRef}
+      />
+    )
+  },
+)
+
+Input.displayName = 'Input'

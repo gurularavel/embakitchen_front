@@ -19,6 +19,11 @@ const config: Config = {
       colors: {
         gray: {
           '1': '#31373D',
+          '4': '#5F6B77',
+          '10': '#F7F7F8',
+        },
+        auxiliary: {
+          '1': '#101828',
         },
 
         // secondary: {

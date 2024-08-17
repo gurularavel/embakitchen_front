@@ -1,5 +1,5 @@
 export { Logo } from '~ek/components/atoms/logo'
 export { Icon } from '~ek/components/atoms/icon'
-// export { Input } from '@ek/components/atoms/input'
+export { Input } from '~ek/components/atoms/input'
 export { Button } from '~ek/components/atoms/button'
 // export { MenuItem } from '@ek/components/atoms/menu-item'
