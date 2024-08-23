@@ -6,6 +6,7 @@ import menuIcon from '/public/assets/icons/menu.svg'
 import searchIcon1 from '/public/assets/icons/search-1.svg'
 import searchIcon2 from '/public/assets/icons/search-2.svg'
 import closeIcon from '/public/assets/icons/close.svg'
+import dropdownChevronMobile from '/public/assets/icons/dropdown-chevron-mobile.svg'
 // import downChevronIcon1 from '/public/assets/icons/down-chevron-1.svg'
 // import whatsappIcon from '/public/assets/icons/social/whatsapp.svg'
 // import facebookIcon from '/public/assets/icons/social/facebook.svg'
@@ -15,7 +16,12 @@ import closeIcon from '/public/assets/icons/close.svg'
 // import profileIcon from '/public/assets/icons/profile.svg'
 // import downChevronIcon2 from '/public/assets/icons/down-chevron-2.svg'
 
-type IconVariant = 'menu' | 'search-1' | 'search-2' | 'close'
+type IconVariant =
+  | 'menu'
+  | 'search-1'
+  | 'search-2'
+  | 'close'
+  | 'dropdown-chevron-mobile'
 
 // type IconVariant =
 //   | 'down-chevron-1'
@@ -50,6 +56,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'search-1': searchIcon1,
   'search-2': searchIcon2,
   close: closeIcon,
+  'dropdown-chevron-mobile': dropdownChevronMobile,
 }
 
 export function Icon({

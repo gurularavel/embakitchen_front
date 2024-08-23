@@ -2,6 +2,13 @@ export type LayoutOption = 'horizontal' | 'vertical'
 
 export type Language = 'Az' | 'En' | 'Ru'
 
+export interface NavLinkEntry {
+  text: string
+  href?: string
+  isHighlighted?: boolean
+  items?: Array<Omit<NavLinkEntry, 'items'>>
+}
+
 // import { StaticImageData } from 'next/image'
 
 // export type SliderOption = 'main' | 'gallery' | 'partners'

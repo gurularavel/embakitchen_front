@@ -22,13 +22,13 @@ const config: Config = {
           '4': '#5F6B77',
           '10': '#F7F7F8',
         },
+        secondary: {
+          '4': '#FFC35C',
+        },
         auxiliary: {
           '1': '#101828',
         },
 
-        // secondary: {
-        //   '4': '#FFC35C',
-        // },
         // light: {
         //   gray: {
         //     '4': '#5F6B77',
