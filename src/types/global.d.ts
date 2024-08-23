@@ -7,6 +7,8 @@ declare global {
   }
 
   type ReactComponent = React.ReactElement | React.ReactNode | JSX.Element
+
+  type TailwindUtilityNumber = number
 }
 
 export {}

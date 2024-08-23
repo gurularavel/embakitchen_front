@@ -28,15 +28,15 @@ const config: Config = {
         auxiliary: {
           '1': '#101828',
         },
+        semi: {
+          white: 'rgba(255, 255, 255, 0.5)',
+        },
 
         // light: {
         //   gray: {
         //     '4': '#5F6B77',
         //     '10': '#F7F7F8',
         //   },
-        // },
-        // semi: {
-        //   white: 'rgba(255, 255, 255, 0.5)',
         // },
         // gray: {
         //   '3': '#49525B',

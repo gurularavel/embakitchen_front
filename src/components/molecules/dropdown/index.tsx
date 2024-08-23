@@ -44,7 +44,7 @@ export function Dropdown({
       >
         <span>{text}</span>
         <Icon
-          variant='dropdown-chevron-mobile'
+          variant='dropdown-mobile'
           classes={getDropdownTogglerIconStyles(isDropdownVisible)}
         />
       </Button>

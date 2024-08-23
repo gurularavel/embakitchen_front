@@ -5,9 +5,9 @@ import {
   Button,
   Icon,
   Navbar,
+  SocialContacts,
   //   LanguageSelector,
   //   PhoneNumber,
-  //   SocialContacts,
 } from '~ek/components'
 
 interface SidebarProps {}
@@ -65,6 +65,10 @@ export function Sidebar({}: Readonly<SidebarProps>): ReactComponent {
         <div className={styles.sidebarBody}>
           <div className={styles.sidebarBodyTop}>
             <Navbar />
+            <SocialContacts
+              layout='horizontal'
+              gap={3}
+            />
           </div>
 
           <div className={styles.sidebarBodyBottom}>
@@ -75,10 +79,6 @@ export function Sidebar({}: Readonly<SidebarProps>): ReactComponent {
     </aside>
   )
 }
-
-//           <div className={styles.sidebarNavTop}>
-//             <SocialContacts layout='horizontal' />
-//           </div>
 
 //           <div className={styles.sidebarNavBottom}>
 //             <PhoneNumber classes={styles.phone} />
