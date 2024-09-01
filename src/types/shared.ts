@@ -1,6 +1,23 @@
+import type { SocialContact } from '~ek/types'
+
+export type IconVariant =
+  | 'menu'
+  | 'search-1'
+  | 'search-2'
+  | 'close'
+  | 'dropdown-mobile'
+  | SocialContact
+  | 'phone'
+  | 'profile'
+  | 'down-chevron'
+
 export type LayoutOption = 'horizontal' | 'vertical'
 
-export type Language = 'Az' | 'En' | 'Ru'
+export enum Language {
+  'Az' = 'Az',
+  'En' = 'En',
+  'Ru' = 'Ru',
+}
 
 export interface NavLinkEntry {
   text: string

@@ -19,6 +19,7 @@ const config: Config = {
       colors: {
         gray: {
           '1': '#31373D',
+          '3': '#49525B',
           '4': '#5F6B77',
           '10': '#F7F7F8',
         },
@@ -31,16 +32,6 @@ const config: Config = {
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
         },
-
-        // light: {
-        //   gray: {
-        //     '4': '#5F6B77',
-        //     '10': '#F7F7F8',
-        //   },
-        // },
-        // gray: {
-        //   '3': '#49525B',
-        // },
 
         // primary: {
         //   '1': '#E55E25',
@@ -84,7 +75,7 @@ const config: Config = {
         montserrat: ['var(--font-montserrat)'],
       },
       lineHeight: {
-        // '7': '1.875rem', // 30px
+        '7': '1.875rem', // 30px
         // '11': '3rem', // 48px
         // '13': '3.5rem', // 56px
         // '14': '3.75rem', // 60px
@@ -110,7 +101,7 @@ const config: Config = {
         // '25': '6.25rem', // 100px
       },
       height: {
-        // '18': '4.5rem', // 72px
+        '18': '4.5rem', // 72px
         // '19': '4.75rem', // 76px
       },
     },

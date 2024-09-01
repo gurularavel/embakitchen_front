@@ -7,11 +7,6 @@ interface SocialContactsProps {
   gap: TailwindUtilityNumber
 }
 
-interface SocialContactStyleGetterParams {
-  layout: LayoutOption
-  gapClass: string
-}
-
 const socialContactsStyles: Readonly<TailwindStyle> = {
   socialContacts: (dynamicClasses: unknown) =>
     `flex ${dynamicClasses as string}`,
