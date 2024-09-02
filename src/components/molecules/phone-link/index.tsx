@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
 import { Icon } from '~ek/components'
 import { IconVariant } from '~ek/types'
@@ -25,12 +24,12 @@ export function PhoneLink({
   classes,
 }: Readonly<PhoneLinkProps>): ReactComponent {
   return (
-    <Link
+    <a
       href={href}
       className={twMerge(styles.phone, `gap-x-${gap}`, classes ?? '')}
     >
       <Icon variant={iconVariant} />
       <span>{phone}</span>
-    </Link>
+    </a>
   )
 }

@@ -9,11 +9,11 @@ interface LanguageSelectorProps {}
 const languageSelectorStyles: Readonly<TailwindStyle> = {
   languageSelector: 'relative', // mobile:flex-1
   selectedLanguage:
-    'bg-gray-3 h-11 relative z-10 rounded-lg flex items-center justify-center gap-x-2 text-base font-medium text-gray-10', // w-full cursor-pointer
+    'w-full h-11 bg-gray-3 relative z-10 rounded-lg flex items-center justify-center gap-x-2 text-base font-medium text-gray-10', // cursor-pointer
   selectedLanguageIcon: (isVisible: unknown) =>
     `transition-transform duration-200 ${(isVisible as boolean) ? 'rotate-180' : 'rotate-0'}`,
   languageDropdown: (isVisible: unknown) =>
-    `absolute right-0 bottom-12 left-0 border border-solid border-gray-4 transition-all duration-200 ${(isVisible as boolean) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`, // w-full
+    `absolute right-0 bottom-12 left-0 border border-solid border-gray-4 transition-all duration-200 origin-bottom ${(isVisible as boolean) ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'}`,
   language:
     'h-18 flex items-center justify-center text-base font-medium text-white bg-gray-1',
 }
