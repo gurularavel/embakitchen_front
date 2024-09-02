@@ -22,7 +22,7 @@ const sidebarStyles: Readonly<TailwindStyle> = {
   sidebarBody: 'flex flex-col gap-y-6',
   sidebarBodyTop: '',
   sidebarBodyBottom: 'pt-2',
-  phone: 'mb-6',
+  phone: 'mb-6 relative z-10',
   options: 'flex flex-col gap-y-3',
   profileButton:
     'w-full h-11 bg-gray-3 rounded-lg flex justify-center items-center gap-x-2 text-base font-semibold text-gray-10',
