@@ -1,23 +1,15 @@
 import * as React from 'react'
-// import { PhoneNumber } from '@ek/components'
-import { Logo, Search, Sidebar } from '~ek/components'
+import { Logo, PhoneLink, Search, Sidebar } from '~ek/components'
 
 interface HeaderProps {}
 
 const headerStyles: Readonly<TailwindStyle> = {
   header: 'w-full h-10 bg-gray-1 px-5',
   wrapper: 'relative h-full flex items-center justify-between',
+  options: 'flex items-center gap-x-4', // w-[90px]
+  phone: 'hidden mobile:flex', // w-[50px]
 }
 const styles: Readonly<StyleRecord> = headerStyles as StyleRecord
-
-// const headerStyles: Readonly<TailwindStyle> = {
-//   right: 'flex items-center gap-x-4',
-//   phone: 'hidden tablet:flex',
-// }
-
-// <div className={styles.right}>
-//   <PhoneNumber classes={styles.phone} />
-// </div>
 
 export function Header({}: Readonly<HeaderProps>): ReactComponent {
   return (
@@ -25,7 +17,17 @@ export function Header({}: Readonly<HeaderProps>): ReactComponent {
       <div className={styles.wrapper}>
         <Sidebar />
         <Logo variant='header' />
-        <Search />
+        <div className={styles.options}>
+          <PhoneLink
+            href='tel:126'
+            phone='126'
+            iconVariant='phone'
+            gap={2}
+            classes={styles.phone}
+          />
+
+          <Search />
+        </div>
       </div>
     </header>
   )

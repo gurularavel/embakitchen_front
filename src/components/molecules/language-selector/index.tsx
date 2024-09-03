@@ -7,7 +7,7 @@ import { Language } from '~ek/types'
 interface LanguageSelectorProps {}
 
 const languageSelectorStyles: Readonly<TailwindStyle> = {
-  languageSelector: 'relative', // mobile:flex-1
+  languageSelector: 'relative mobile:flex-1',
   selectedLanguage:
     'w-full h-11 bg-gray-3 relative z-10 rounded-lg flex items-center justify-center gap-x-2 text-base font-medium text-gray-10', // cursor-pointer
   selectedLanguageIcon: (isVisible: unknown) =>

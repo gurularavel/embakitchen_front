@@ -13,7 +13,7 @@ import {
 interface SidebarProps {}
 
 const sidebarStyles: Readonly<TailwindStyle> = {
-  sidebar: 'flex items-center',
+  sidebar: 'flex items-center', // w-[90px]
   menuIcon: 'w-6 h-6',
   sidebarContent: (isSidebarVisible: unknown) =>
     `p-10 bg-gray-1 fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isSidebarVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`,
@@ -23,17 +23,16 @@ const sidebarStyles: Readonly<TailwindStyle> = {
   sidebarBodyTop: '',
   sidebarBodyBottom: 'pt-2',
   phone: 'mb-6 relative z-10',
-  options: 'flex flex-col gap-y-3',
+  options:
+    'flex flex-col mobile:flex-row gap-y-3 mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
   profileButton:
-    'w-full h-11 bg-gray-3 rounded-lg flex justify-center items-center gap-x-2 text-base font-semibold text-gray-10',
+    'w-full h-11 mobile:flex-1 bg-gray-3 rounded-lg flex justify-center items-center gap-x-2 text-base font-semibold text-gray-10',
 }
 const styles: Readonly<StyleRecord> = sidebarStyles as StyleRecord
 const getSidebarContentStyles: StyleGetter =
   sidebarStyles.sidebarContent as StyleGetter
 
-// sidebarContent: (isSidebarVisible: unknown) => `z-10 overflow-y-auto`,
-// options: 'mobile:flex-row  mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
-// profileButton: 'mobile:flex-1'
+// sidebarContent: (isSidebarVisible: unknown) => z-10 overflow-y-auto
 
 export function Sidebar({}: Readonly<SidebarProps>): ReactComponent {
   const [isSidebarVisible, setIsSidebarVisible] = React.useState<boolean>(false)
