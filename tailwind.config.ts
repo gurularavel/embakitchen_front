@@ -28,6 +28,7 @@ const config: Config = {
         },
         auxiliary: {
           '1': '#101828',
+          '2': '#666666',
         },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',

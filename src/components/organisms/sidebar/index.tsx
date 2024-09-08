@@ -62,6 +62,7 @@ export function Sidebar({}: Readonly<SidebarProps>): ReactComponent {
             <Navbar />
             <SocialContacts
               layout='horizontal'
+              theme='light'
               gap={3}
             />
           </div>

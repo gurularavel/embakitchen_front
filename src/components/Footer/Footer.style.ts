@@ -1,11 +1,8 @@
 export const footerStyles: TailwindStyle = {
   footer:
-    'px-5 mobile:px-10 laptop:px-15 widescreen:px-25 pb-6 laptop:pb-20 mx-4 w-auto mobile:mx-0 mobile:w-full',
+    'px-5 mobile:px-10 laptop:px-15 widescreen:px-25 pb-6 laptop:pb-20 mobile:mx-0 mobile:w-full',
   wrapper: 'flex justify-between flex-col laptop:flex-row',
   companyInfo: 'mb-6 laptop:mb-0 laptop:mr-6 w-full laptop:max-w-[424px]',
-  logo: 'py-[25.5px] mb-6',
-  logoImg: 'w-[132px] h-[21px]',
-  description: 'mb-6 text-base font-medium leading-6 text-semi-gray-3',
   nav: 'flex flex-col laptop:flex-row justify-between laptop:gap-x-6 desktop:gap-x-[157.33px] laptop:mr-6',
   navItem: 'mb-6 laptop:mb-0 w-full laptop:w-[200px]',
   navTitle: 'text-sm font-semibold leading-4 text-semi-dark uppercase mb-6',

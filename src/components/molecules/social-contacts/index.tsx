@@ -1,10 +1,18 @@
 import * as React from 'react'
+import { twMerge } from 'tailwind-merge'
 import { Icon, NavLink } from '~ek/components'
-import { LayoutOption, SocialContact, SocialContactEntry } from '~ek/types'
+import {
+  LayoutOption,
+  SocialContact,
+  SocialContactEntry,
+  Theme,
+} from '~ek/types'
 
 interface SocialContactsProps {
   layout: LayoutOption
+  theme: Theme
   gap: TailwindUtilityNumber
+  classes?: string
 }
 
 const socialContactsStyles: Readonly<TailwindStyle> = {
@@ -17,28 +25,36 @@ const styles: Readonly<StyleRecord> = socialContactsStyles as StyleRecord
 const getSocialContactsStyles: StyleGetter =
   socialContactsStyles.socialContacts as StyleGetter
 
-const socialIcons: Readonly<Record<SocialContact, SocialContactEntry>> = {
+const renderSocialContactIcon = (socialContact: string, theme: Theme) => (
+  <Icon variant={`${socialContact}-${theme}` as SocialContact} />
+)
+
+const getSocialIcons = (
+  theme: Theme,
+): Readonly<Record<string, SocialContactEntry>> => ({
   whatsapp: {
     href: 'https://web.whatsapp.com/',
-    icon: <Icon variant='whatsapp' />,
+    icon: renderSocialContactIcon('whatsapp', theme),
   },
   facebook: {
     href: 'https://www.facebook.com/',
-    icon: <Icon variant='facebook' />,
+    icon: renderSocialContactIcon('facebook', theme),
   },
   instagram: {
     href: 'https://www.instagram.com/',
-    icon: <Icon variant='instagram' />,
+    icon: renderSocialContactIcon('instagram', theme),
   },
   youtube: {
     href: 'https://www.youtube.com/',
-    icon: <Icon variant='youtube' />,
+    icon: renderSocialContactIcon('youtube', theme),
   },
-}
+})
 
 export function SocialContacts({
   layout,
+  theme,
   gap,
+  classes,
 }: Readonly<SocialContactsProps>): ReactComponent {
   const dynamicClasses = Object.values({
     layout: (layout as LayoutOption) === 'vertical' ? 'flex-col' : 'flex-row',
@@ -47,11 +63,11 @@ export function SocialContacts({
 
   return (
     <ul className={getSocialContactsStyles(dynamicClasses)}>
-      {Object.entries(socialIcons).map(([key, value]) => (
+      {Object.entries(getSocialIcons(theme)).map(([key, value]) => (
         <li key={key}>
           <NavLink
             href={value.href}
-            classes={styles.socialLink}
+            classes={twMerge(styles.socialLink, classes ?? '')}
             openInNewWindow={true}
           >
             {value.icon}

@@ -26,6 +26,8 @@ export interface NavLinkEntry {
   items?: Array<Omit<NavLinkEntry, 'items'>>
 }
 
+export type Theme = 'light' | 'dark'
+
 // import { StaticImageData } from 'next/image'
 
 // export type SliderOption = 'main' | 'gallery' | 'partners'

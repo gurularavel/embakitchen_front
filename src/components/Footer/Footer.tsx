@@ -67,27 +67,27 @@ export const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.wrapper}>
         <div className={styles.companyInfo}>
-          <div className={styles.logo}>
+          {/* <div className={styles.logo}>
             <Image
               src={logo}
               alt='embakitchen logo'
               className={styles.logoImg}
             />
-          </div>
+          </div> */}
 
-          <div className={styles.description}>
+          {/* <div className={styles.description}>
             <h5>
               Embakitchen - Embawood şirkətinin mətbəx mebeli üzrə ixtisaslaşmış
               brendidir.
             </h5>
-          </div>
+          </div> */}
 
-          <SocialContacts
+          {/* <SocialContacts
             layout='horizontal'
             contacts={contacts}
             wrapperGap='gap-x-3'
             iconStyle='w-6 h-6'
-          />
+          /> */}
         </div>
 
         <nav className={styles.nav}>

@@ -1,9 +1,10 @@
 import * as React from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
-import logoHeaderImg from '/public/assets/images/logo/header.png'
+import logoHeader from '/public/assets/images/logo/header.svg'
+import logoFooter from '/public/assets/images/logo/footer.svg'
 
-type LogoVariant = 'header'
+type LogoVariant = 'header' | 'footer'
 
 interface LogoProps {
   variant: LogoVariant
@@ -14,28 +15,30 @@ const logoStyles: Readonly<TailwindStyle> = {
     link: 'h-full flex items-center',
     img: 'w-25 h-[17px]',
   },
+  footer: {
+    link: 'inline-block py-[25.5px] mb-6',
+    img: 'w-[132px] h-[21px]',
+  },
 }
-const logoHeaderStyles: Readonly<StyleRecord> = logoStyles.header as StyleRecord
 
-const logos: Readonly<Record<LogoVariant, ReactComponent>> = {
-  header: <LogoHeader />,
-}
-
-function LogoHeader(): ReactComponent {
-  return (
-    <Link
-      href='/'
-      className={logoHeaderStyles.link}
-    >
-      <Image
-        src={logoHeaderImg}
-        alt='embakitchen logo on header'
-        className={logoHeaderStyles.img}
-      />
-    </Link>
-  )
+const logos: Readonly<Record<LogoVariant, StaticImageData>> = {
+  header: logoHeader,
+  footer: logoFooter,
 }
 
 export function Logo({ variant }: Readonly<LogoProps>): ReactComponent {
-  return logos[variant]
+  const styles: Readonly<StyleRecord> = logoStyles[variant] as StyleRecord
+
+  return (
+    <Link
+      href='/'
+      className={styles.link}
+    >
+      <Image
+        src={logos[variant]}
+        alt={`embakitchen logo on ${variant}`}
+        className={styles.img}
+      />
+    </Link>
+  )
 }
