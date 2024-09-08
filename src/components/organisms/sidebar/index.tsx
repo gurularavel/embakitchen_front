@@ -16,7 +16,7 @@ const sidebarStyles: Readonly<TailwindStyle> = {
   sidebar: 'flex items-center', // w-[90px]
   menuIcon: 'w-6 h-6',
   sidebarContent: (isSidebarVisible: unknown) =>
-    `p-10 bg-gray-1 fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isSidebarVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`,
+    `p-10 bg-gray-1 fixed top-0 right-0 bottom-0 left-0 overflow-y-auto transition-all duration-300 ease-in ${(isSidebarVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`, // z-10
   closeButton: 'h-6 mb-6 flex justify-end',
   closeIcon: 'w-4 h-4',
   sidebarBody: 'flex flex-col gap-y-6',
@@ -31,8 +31,6 @@ const sidebarStyles: Readonly<TailwindStyle> = {
 const styles: Readonly<StyleRecord> = sidebarStyles as StyleRecord
 const getSidebarContentStyles: StyleGetter =
   sidebarStyles.sidebarContent as StyleGetter
-
-// sidebarContent: (isSidebarVisible: unknown) => z-10 overflow-y-auto
 
 export function Sidebar({}: Readonly<SidebarProps>): ReactComponent {
   const [isSidebarVisible, setIsSidebarVisible] = React.useState<boolean>(false)
