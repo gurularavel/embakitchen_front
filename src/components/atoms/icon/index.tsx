@@ -18,6 +18,7 @@ import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
 import phoneIcon from '/public/assets/icons/phone.svg'
 import profileIcon from '/public/assets/icons/profile.svg'
 import downChevronIcon from '/public/assets/icons/down-chevron.svg'
+import rightArrowOrange from '/public/assets/icons/right-arrow-orange.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -46,6 +47,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   phone: phoneIcon,
   profile: profileIcon,
   'down-chevron': downChevronIcon,
+  'right-arrow-orange': rightArrowOrange,
 }
 
 export function Icon({

@@ -1,7 +1,6 @@
 export { Search } from '~ek/components/molecules/search'
 export { Navbar } from '~ek/components/molecules/navbar'
-export { Nav } from '~ek/components/molecules/nav'
 export { Dropdown } from '~ek/components/molecules/dropdown'
 export { SocialContacts } from '~ek/components/molecules/social-contacts'
-export { PhoneLink } from '~ek/components/molecules/phone-link'
+export { ActionLink } from '~ek/components/molecules/action-link'
 export { LanguageSelector } from '~ek/components/molecules/language-selector'

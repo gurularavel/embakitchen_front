@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Logo, PhoneLink, Search, Sidebar } from '~ek/components'
+import { ActionLink, Logo, Search, Sidebar } from '~ek/components'
 
 interface HeaderProps {}
 
@@ -18,9 +18,9 @@ export function Header({}: Readonly<HeaderProps>): ReactComponent {
         <Sidebar />
         <Logo variant='header' />
         <div className={styles.options}>
-          <PhoneLink
+          <ActionLink
             href='tel:126'
-            phone='126'
+            text='126'
             iconVariant='phone'
             gap={2}
             classes={styles.phone}

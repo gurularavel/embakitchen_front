@@ -10,6 +10,7 @@ export type IconVariant =
   | 'phone'
   | 'profile'
   | 'down-chevron'
+  | 'right-arrow-orange'
 
 export type LayoutOption = 'horizontal' | 'vertical'
 

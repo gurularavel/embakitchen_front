@@ -2,11 +2,11 @@
 
 import * as React from 'react'
 import {
+  ActionLink,
   Button,
   Icon,
   LanguageSelector,
   Navbar,
-  PhoneLink,
   SocialContacts,
 } from '~ek/components'
 
@@ -59,7 +59,7 @@ export function Sidebar({}: Readonly<SidebarProps>): ReactComponent {
 
         <div className={styles.sidebarBody}>
           <div className={styles.sidebarBodyTop}>
-            <Navbar />
+            <Navbar context='header' />
             <SocialContacts
               layout='horizontal'
               theme='light'
@@ -68,9 +68,9 @@ export function Sidebar({}: Readonly<SidebarProps>): ReactComponent {
           </div>
 
           <div className={styles.sidebarBodyBottom}>
-            <PhoneLink
+            <ActionLink
               href='tel:126'
-              phone='126'
+              text='126'
               iconVariant='phone'
               gap={2}
               classes={styles.phone}
