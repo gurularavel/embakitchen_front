@@ -9,6 +9,7 @@ interface ActionLinkProps {
   iconVariant?: IconVariant
   gap?: TailwindUtilityNumber
   classes?: string
+  iconSize?: string
 }
 
 const actionLinkStyles: Readonly<TailwindStyle> = {
@@ -22,13 +23,19 @@ export function ActionLink({
   iconVariant,
   gap,
   classes,
+  iconSize,
 }: Readonly<ActionLinkProps>): ReactComponent {
   return (
     <a
       href={href}
       className={twMerge(styles.text, gap ? `gap-x-${gap}` : '', classes ?? '')}
     >
-      {iconVariant && <Icon variant={iconVariant} />}
+      {iconVariant && (
+        <Icon
+          variant={iconVariant}
+          classes={iconSize ?? ''}
+        />
+      )}
       <span>{text}</span>
     </a>
   )

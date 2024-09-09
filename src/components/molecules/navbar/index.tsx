@@ -18,15 +18,15 @@ interface NavbarProps {
 
 const navbarStyles: Readonly<TailwindStyle> = {
   header: {
-    nav: 'mb-6',
-    navItem: 'mb-6',
+    nav: 'h-auto laptop:h-full flex flex-col laptop:flex-row items-center mb-6 laptop:mb-0',
+    navItem: 'mb-6 laptop:mb-0',
     navLink: 'text-base font-normal leading-6 text-white',
     highlightedLink: 'text-secondary-4',
     specialOrderBtn:
       'w-[135px] h-11 border border-solid border-gray-4 rounded-lg',
   },
   footer: {
-    nav: 'w-full laptop:w-[200px] mb-6 laptop:mb-0',
+    nav: 'w-full laptop:w-[200px]',
     title: 'text-sm font-semibold leading-4 text-auxiliary-3 uppercase mb-6',
     navList: '',
     link: 'text-sm font-medium leading-4 text-auxiliary-2 mb-4 last:mb-0',
@@ -134,15 +134,18 @@ function NavbarHeader(): ReactComponent {
           </li>
         )
       })}
-      <Button
-        classes={twMerge(
-          headerStyles.navLink,
-          headerStyles.highlightedLink,
-          headerStyles.specialOrderBtn,
-        )}
-      >
-        Özəl sifariş
-      </Button>
+
+      <li>
+        <Button
+          classes={twMerge(
+            headerStyles.navLink,
+            headerStyles.highlightedLink,
+            headerStyles.specialOrderBtn,
+          )}
+        >
+          Özəl sifariş
+        </Button>
+      </li>
     </ul>
   )
 }

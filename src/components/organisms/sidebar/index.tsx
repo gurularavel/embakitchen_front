@@ -13,7 +13,7 @@ import {
 interface SidebarProps {}
 
 const sidebarStyles: Readonly<TailwindStyle> = {
-  sidebar: 'flex items-center', // w-[90px]
+  sidebar: 'w-[90px] flex items-center laptop:hidden',
   menuIcon: 'w-6 h-6',
   sidebarContent: (isSidebarVisible: unknown) =>
     `p-10 bg-gray-1 fixed top-0 right-0 bottom-0 left-0 overflow-y-auto transition-all duration-300 ease-in ${(isSidebarVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`, // z-10

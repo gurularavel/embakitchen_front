@@ -18,7 +18,7 @@ const footerStyles: Readonly<TailwindStyle> = {
   description: 'mb-6 text-base font-medium text-auxiliary-2',
   footerItem: 'mb-6 last:mb-0 laptop:mb-0',
   footerNav:
-    'flex flex-col laptop:flex-row justify-between laptop:gap-x-6 desktop:gap-x-[157.33px] laptop:mr-6',
+    'flex flex-col laptop:flex-row justify-between gap-y-6 laptop:gap-x-6 desktop:gap-x-[157.33px] laptop:mr-6',
   companyInfo: 'w-full laptop:max-w-[424px] mr-0 laptop:mr-6',
   contactUs: '',
   contactUsItem: 'mb-6 last:mb-0 flex items-center gap-x-2',
