@@ -13,12 +13,12 @@ interface FooterNav {
 
 interface NavbarProps {
   context: NavbarContext
+  classes?: string
 }
 
 const navbarStyles: Readonly<TailwindStyle> = {
-  navbar: 'mb-6',
   header: {
-    nav: '',
+    nav: 'mb-6',
     navItem: 'mb-6',
     navLink: 'text-base font-normal leading-6 text-white',
     highlightedLink: 'text-secondary-4',
@@ -26,13 +26,12 @@ const navbarStyles: Readonly<TailwindStyle> = {
       'w-[135px] h-11 border border-solid border-gray-4 rounded-lg',
   },
   footer: {
-    nav: 'w-full mb-6',
+    nav: 'w-full laptop:w-[200px] mb-6 laptop:mb-0',
     title: 'text-sm font-semibold leading-4 text-auxiliary-3 uppercase mb-6',
     navList: '',
     link: 'text-sm font-medium leading-4 text-auxiliary-2 mb-4 last:mb-0',
   },
 }
-const styles: Readonly<StyleRecord> = navbarStyles as StyleRecord
 const headerStyles: Readonly<StyleRecord> = navbarStyles.header as StyleRecord
 const footerStyles: Readonly<StyleRecord> = navbarStyles.footer as StyleRecord
 
@@ -173,6 +172,9 @@ function NavbarFooter(): ReactComponent {
   )
 }
 
-export function Navbar({ context }: Readonly<NavbarProps>): ReactComponent {
-  return <nav className={styles.navbar}>{navbars[context]}</nav>
+export function Navbar({
+  context,
+  classes,
+}: Readonly<NavbarProps>): ReactComponent {
+  return <nav className={classes ?? ''}>{navbars[context]}</nav>
 }
