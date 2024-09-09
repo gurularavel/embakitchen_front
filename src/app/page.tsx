@@ -1,24 +1,10 @@
-import {
-  Campaigns,
-  OrderStages,
-  Slider,
-  SloganSection,
-  Statistics,
-} from '@embakitchen/components'
+import type { Metadata } from 'next'
+import { Main } from '~ek/components'
+
+export const metadata: Metadata = {
+  title: 'Embakitchen Ana Səhifə',
+}
 
 export default function Home() {
-  return (
-    <main>
-      <Slider variant='main' />
-      <Slider variant='gallery' />
-      <Statistics />
-      <OrderStages />
-      <SloganSection
-        title='Siz arzulayın, biz reallaşdıraq'
-        description='Xəyallarınızdakı mətbəxi bizə həvalə edin'
-      />
-      <Slider variant='partners' />
-      <Campaigns />
-    </main>
-  )
+  return <Main />
 }

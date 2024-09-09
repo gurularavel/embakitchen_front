@@ -1,18 +1,13 @@
-import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
-// import { Header } from '@embakitchen/_components'
-import { Footer } from '@embakitchen/components'
-import '@embakitchen/app/globals.css'
+import { twMerge } from 'tailwind-merge'
+import { Footer, Header } from '~ek/components'
+import '~ek/app/globals.css'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
   display: 'swap',
 })
-
-export const metadata: Metadata = {
-  title: 'Embakitchen',
-}
 
 export default function RootLayout({
   children,
@@ -22,10 +17,10 @@ export default function RootLayout({
   return (
     <html
       lang='en'
-      className={`${montserrat.variable} font-montserrat`}
+      className={twMerge(montserrat.variable, 'font-montserrat')}
     >
       <body>
-        {/* <Header /> */}
+        <Header />
         {children}
         <Footer />
       </body>

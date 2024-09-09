@@ -1,11 +1,14 @@
-export {}
-
 declare global {
+  type StyleRecord = Record<string, string>
+  type StyleGetter = (param: unknown) => string
+  type Style = string | TailwindStyle | StyleGetter
   interface TailwindStyle {
-    [key: string]: string | TailwindStyle | ((p: unknown) => string)
+    [key: string]: Style
   }
 
-  type LayoutOption = 'horizontal' | 'vertical'
+  type ReactComponent = React.ReactElement | React.ReactNode | JSX.Element
 
-  type Dictionary<T> = Record<string, T>
+  type TailwindUtilityNumber = number
 }
+
+export {}

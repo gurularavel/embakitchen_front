@@ -1,22 +1,26 @@
-// export * from '@embakitchen/_components/Header/Header'
-// export * from '@embakitchen/_components/Navbar/Navbar'
-export { Slider } from '@embakitchen/components/Slider/Slider'
-export * as SliderVariant from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
-export * as SliderSurface from '@embakitchen/components/Slider/SliderSurface/SliderSurface'
+export * from '~ek/components/atoms'
+export * from '~ek/components/molecules'
+export * from '~ek/components/organisms'
+export * from '~ek/components/templates'
 
-export { SocialContacts } from '@embakitchen/components/SocialContacts/SocialContacts'
-export { SocialContactsItem } from '@embakitchen/components/SocialContacts/SocialContactsItem/SocialContactsItem'
+// export { Header } from '@embakitchen/components/Header/Header'
+// export { Navbar } from '@embakitchen/components/Header/Navbar/Navbar'
 
-export { Statistics } from '@embakitchen/components/Statistics/Statistics'
-export { StatisticsItem } from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem'
+// export { Slider } from '@embakitchen/components/Slider/Slider'
+// export * as SliderVariant from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
+// export * as SliderSurface from '@embakitchen/components/Slider/SliderSurface/SliderSurface'
 
-export { OrderStages } from '@embakitchen/components/OrderStages/OrderStages'
-export { OrderStageItem } from '@embakitchen/components/OrderStages/OrderStageItem/OrderStageItem'
+// export { SocialContacts } from '@embakitchen/components/SocialContacts/SocialContacts'
+// export { SocialContactsItem } from '@embakitchen/components/SocialContacts/SocialContactsItem/SocialContactsItem'
 
-export { SloganSection } from '@embakitchen/components/SloganSection/SloganSection'
+// export { Statistics } from '@embakitchen/components/Statistics/Statistics'
+// export { StatisticsItem } from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem'
 
-export { Campaigns } from '@embakitchen/components/Campaigns/Campaigns'
-export { CampaignItem } from '@embakitchen/components/Campaigns/CampaignItem/CampaignItem'
-export { Timer } from '@embakitchen/components/Campaigns/CampaignItem/Timer/Timer'
+// export { OrderStages } from '@embakitchen/components/OrderStages/OrderStages'
+// export { OrderStageItem } from '@embakitchen/components/OrderStages/OrderStageItem/OrderStageItem'
 
-export { Footer } from '@embakitchen/components/Footer/Footer'
+// export { SloganSection } from '@embakitchen/components/SloganSection/SloganSection'
+
+// export { Campaigns } from '@embakitchen/components/Campaigns/Campaigns'
+// export { CampaignItem } from '@embakitchen/components/Campaigns/CampaignItem/CampaignItem'
+// export { Timer } from '@embakitchen/components/Campaigns/CampaignItem/Timer/Timer'
