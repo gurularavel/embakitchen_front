@@ -6,6 +6,11 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    {
+      pattern: /gap-(x|y)-(3)/,
+    },
+  ],
   theme: {
     extend: {
       backgroundImage: {

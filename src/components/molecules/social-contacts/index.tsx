@@ -16,8 +16,11 @@ interface SocialContactsProps {
 }
 
 const socialContactsStyles: Readonly<TailwindStyle> = {
-  socialContacts: (dynamicClasses: unknown) =>
-    `flex ${dynamicClasses as string}`,
+  socialContacts: (param: unknown) => {
+    const { layout, gap } = param as Partial<SocialContactsProps>
+
+    return `flex ${(layout as LayoutOption) === 'vertical' ? `flex-col gap-y-${gap}` : `flex-row gap-x-${gap}`}`
+  },
   socialLink:
     'w-10 h-10 bg-semi-white flex items-center justify-center rounded',
 }
@@ -56,13 +59,8 @@ export function SocialContacts({
   gap,
   classes,
 }: Readonly<SocialContactsProps>): ReactComponent {
-  const dynamicClasses = Object.values({
-    layout: (layout as LayoutOption) === 'vertical' ? 'flex-col' : 'flex-row',
-    gap: `gap-${(layout as LayoutOption) === 'vertical' ? 'y' : 'x'}-${gap}`,
-  }).join(' ')
-
   return (
-    <ul className={getSocialContactsStyles(dynamicClasses)}>
+    <ul className={getSocialContactsStyles({ layout, gap })}>
       {Object.entries(getSocialIcons(theme)).map(([key, value]) => (
         <li key={key}>
           <NavLink
