@@ -1,11 +1,13 @@
 import * as React from 'react'
-import { Slogan, Statistics } from '~ek/components'
+import { Slider, Slogan, Statistics } from '~ek/components'
 
 interface MainProps {}
 
 export function Main({}: Readonly<MainProps>): ReactComponent {
   return (
     <>
+      <Slider />
+
       <Statistics />
 
       <Slogan

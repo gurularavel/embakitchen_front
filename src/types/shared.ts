@@ -31,7 +31,7 @@ export type Theme = 'light' | 'dark'
 
 // import { StaticImageData } from 'next/image'
 
-// export type SliderOption = 'main' | 'gallery' | 'partners'
+export type SliderOption = 'main' | 'gallery' | 'partners'
 
 // export interface SocialContact {
 //   img: string
