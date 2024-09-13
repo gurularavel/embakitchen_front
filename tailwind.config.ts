@@ -16,8 +16,8 @@ const config: Config = {
       backgroundImage: {
         // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        // 'slogan-section':
-        //   'url("../../public/assets/images/slogan_section_bg.png")',
+        'slogan-section':
+          'url("../../public/assets/images/slogan_section_bg.png")',
         // 'order-stages-section':
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
@@ -30,6 +30,7 @@ const config: Config = {
         },
         primary: {
           '2': '#E86E3B',
+          '5': '#F0A17F',
           '9': '#FCEBE4',
         },
         secondary: {
@@ -39,6 +40,7 @@ const config: Config = {
           '1': '#101828',
           '2': '#666666',
           '3': '#1A1A1A',
+          '4': '#FAFAFA',
         },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
@@ -47,7 +49,6 @@ const config: Config = {
         // primary: {
         //   '1': '#E55E25',
         //   '3': '#EA7F52',
-        //   '5': '#F0A17F',
         // },
         // dark: {
         //   gray: {
@@ -58,7 +59,6 @@ const config: Config = {
         // },
         // semi: {
         //   gray: {
-        //     '1': '#FAFAFA',
         //     '2': 'rgba(42, 45, 47, 0.5)',
         //     '4': '#5F6B77',
         //     '8': '#CCD1D6',
