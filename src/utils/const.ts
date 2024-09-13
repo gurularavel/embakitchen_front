@@ -1,1 +1,1 @@
-// export const STATISTICS_INTERVAL_LIMIT: number = 1500
+export const STATISTICS_INTERVAL_LIMIT: number = 1500

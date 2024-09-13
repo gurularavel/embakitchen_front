@@ -1,11 +1,13 @@
 import * as React from 'react'
-import { Slogan } from '~ek/components'
+import { Slogan, Statistics } from '~ek/components'
 
 interface MainProps {}
 
 export function Main({}: Readonly<MainProps>): ReactComponent {
   return (
     <>
+      <Statistics />
+
       <Slogan
         slogans={[
           'Siz arzulayın, biz reallaşdıraq',

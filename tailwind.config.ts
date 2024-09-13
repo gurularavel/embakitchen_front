@@ -30,6 +30,7 @@ const config: Config = {
         },
         primary: {
           '2': '#E86E3B',
+          '3': '#EA7F52',
           '5': '#F0A17F',
           '9': '#FCEBE4',
         },
@@ -41,6 +42,7 @@ const config: Config = {
           '2': '#666666',
           '3': '#1A1A1A',
           '4': '#FAFAFA',
+          '5': '#E6E6E6',
         },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
@@ -48,7 +50,6 @@ const config: Config = {
 
         // primary: {
         //   '1': '#E55E25',
-        //   '3': '#EA7F52',
         // },
         // dark: {
         //   gray: {
@@ -63,11 +64,6 @@ const config: Config = {
         //     '4': '#5F6B77',
         //     '8': '#CCD1D6',
         //     '9': '#E8EBED',
-        //   },
-        // },
-        // light: {
-        //   gray: {
-        //     '1': '#E6E6E6',
         //   },
         // },
       },

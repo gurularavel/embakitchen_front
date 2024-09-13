@@ -39,10 +39,10 @@ export type Theme = 'light' | 'dark'
 //   alt: string
 // }
 
-// export interface StatisticsEntry {
-//   quantity: number
-//   title: string
-// }
+export interface StatisticsEntry {
+  quantity: number
+  title: string
+}
 
 // interface OrderStageEntry {
 //   title: string
