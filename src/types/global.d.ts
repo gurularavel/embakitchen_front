@@ -1,14 +1,10 @@
 declare global {
   type StyleRecord = Record<string, string>
-  type StyleGetter = (param: unknown) => string
-  type Style = string | TailwindStyle | StyleGetter
-  interface TailwindStyle {
+  type StyleGetter = (p: unknown) => string
+  type Style = string | StyleGetter | TwClasses
+  interface TwClasses {
     [key: string]: Style
   }
-
-  type ReactComponent = React.ReactElement | React.ReactNode | JSX.Element
-
-  type TailwindUtilityNumber = number
 }
 
 export {}

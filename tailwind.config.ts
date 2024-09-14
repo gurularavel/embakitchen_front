@@ -6,47 +6,50 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  safelist: [
-    {
-      pattern: /gap-(x|y)-(3)/,
-    },
-  ],
+  // safelist: [
+  //   {
+  //     pattern: /gap-(x|y)-(3)/,
+  //   },
+  // ],
   theme: {
     extend: {
       backgroundImage: {
         // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'slogan-section':
-          'url("../../public/assets/images/slogan_section_bg.png")',
+        // 'slogan-section':
+        //   'url("../../public/assets/images/slogan_section_bg.png")',
         // 'order-stages-section':
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
         gray: {
           '1': '#31373D',
-          '3': '#49525B',
-          '4': '#5F6B77',
-          '10': '#F7F7F8',
         },
-        primary: {
-          '2': '#E86E3B',
-          '3': '#EA7F52',
-          '5': '#F0A17F',
-          '9': '#FCEBE4',
-        },
-        secondary: {
-          '4': '#FFC35C',
-        },
-        auxiliary: {
-          '1': '#101828',
-          '2': '#666666',
-          '3': '#1A1A1A',
-          '4': '#FAFAFA',
-          '5': '#E6E6E6',
-        },
-        semi: {
-          white: 'rgba(255, 255, 255, 0.5)',
-        },
+
+        // gray: {
+        //   '3': '#49525B',
+        //   '4': '#5F6B77',
+        //   '10': '#F7F7F8',
+        // },
+        // primary: {
+        //   '2': '#E86E3B',
+        //   '3': '#EA7F52',
+        //   '5': '#F0A17F',
+        //   '9': '#FCEBE4',
+        // },
+        // secondary: {
+        //   '4': '#FFC35C',
+        // },
+        // auxiliary: {
+        //   '1': '#101828',
+        //   '2': '#666666',
+        //   '3': '#1A1A1A',
+        //   '4': '#FAFAFA',
+        //   '5': '#E6E6E6',
+        // },
+        // semi: {
+        //   white: 'rgba(255, 255, 255, 0.5)',
+        // },
 
         // primary: {
         //   '1': '#E55E25',
@@ -71,7 +74,7 @@ const config: Config = {
         montserrat: ['var(--font-montserrat)'],
       },
       lineHeight: {
-        '7': '1.875rem', // 30px
+        // '7': '1.875rem', // 30px
         // '11': '3rem', // 48px
         // '13': '3.5rem', // 56px
         // '14': '3.75rem', // 60px
@@ -92,12 +95,12 @@ const config: Config = {
       },
       spacing: {
         // '1.25': '0.3125rem', // 5px
-        // '15': '3.75rem', // 60px
+        '15': '3.75rem', // 60px
         // '18': '4.5rem', // 72px
         '25': '6.25rem', // 100px
       },
       height: {
-        '18': '4.5rem', // 72px
+        // '18': '4.5rem', // 72px
         '19': '4.75rem', // 76px
       },
     },

@@ -1,5 +1,6 @@
 export { Logo } from '~ek/components/atoms/logo'
 export { Icon } from '~ek/components/atoms/icon'
-export { Input } from '~ek/components/atoms/input'
 export { Button } from '~ek/components/atoms/button'
-export { NavLink } from '~ek/components/atoms/nav-link'
+
+// export { Input } from '~ek/components/atoms/input'
+// export { NavLink } from '~ek/components/atoms/nav-link'

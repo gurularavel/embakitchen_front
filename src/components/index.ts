@@ -1,7 +1,8 @@
 export * from '~ek/components/atoms'
 export * from '~ek/components/molecules'
 export * from '~ek/components/organisms'
-export * from '~ek/components/templates'
+
+// export * from '~ek/components/templates'
 
 // export { Slider } from '@embakitchen/components/Slider/Slider'
 // export * as SliderVariant from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
