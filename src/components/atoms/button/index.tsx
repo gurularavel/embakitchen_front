@@ -8,8 +8,7 @@ interface ButtonProps {
 }
 
 const buttonStyles: Readonly<TwClasses> = {
-  button:
-    'bg-transparent border-none outline-none focus:border-none focus:outline-none',
+  button: 'bg-transparent border-none outline-none focus:outline-none',
 }
 const styles = buttonStyles as Readonly<StyleRecord>
 

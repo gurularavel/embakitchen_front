@@ -4,16 +4,25 @@
  */
 export type ImgSize = string
 
-export type IconVariant = 'menu'
+export type IconVariant =
+  | 'menu'
+  | 'close'
+  | 'dropdown-compact'
+  | 'dropdown-wide'
+
+export type TimeoutId = NodeJS.Timeout | null
+
+export interface NavLinkEntry {
+  label: string
+  href?: string
+  nestedLinks?: Array<Omit<NavLinkEntry, 'nestedLinks'>>
+}
 
 // import type { SocialContact } from '~ek/types'
 
 // export type IconVariant =
-//   | 'menu'
 //   | 'search-1'
 //   | 'search-2'
-//   | 'close'
-//   | 'dropdown-mobile'
 //   | SocialContact
 //   | 'phone'
 //   | 'profile'
@@ -26,13 +35,6 @@ export type IconVariant = 'menu'
 //   'Az' = 'Az',
 //   'En' = 'En',
 //   'Ru' = 'Ru',
-// }
-
-// export interface NavLinkEntry {
-//   text: string
-//   href?: string
-//   isHighlighted?: boolean
-//   items?: Array<Omit<NavLinkEntry, 'items'>>
 // }
 
 // export type Theme = 'light' | 'dark'

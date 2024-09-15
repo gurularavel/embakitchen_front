@@ -1,33 +1,40 @@
 import Image, { StaticImageData } from 'next/image'
+import { twMerge } from 'tailwind-merge'
 import type { IconVariant, ImgSize } from '~ek/types'
 import menuIcon from '/public/assets/icons/menu.svg'
+import closeIcon from '/public/assets/icons/close.svg'
+import dropdownCompactIcon from '/public/assets/icons/dropdown-compact.svg'
+import dropdownWideIcon from '/public/assets/icons/dropdown-wide.svg'
 
 interface IconProps {
   variant: IconVariant
   sizes: ImgSize
+  classes?: string
 }
 
 const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   menu: menuIcon,
+  close: closeIcon,
+  'dropdown-compact': dropdownCompactIcon,
+  'dropdown-wide': dropdownWideIcon,
 }
 
 export function Icon({
   variant,
   sizes,
+  classes,
 }: Readonly<IconProps>): React.ReactElement {
   return (
     <Image
       src={icons[variant]}
       alt={`embakitchen ${variant} icon`}
-      className={sizes}
+      className={twMerge(sizes, classes ?? '')}
     />
   )
 }
 
 // import searchIcon1 from '/public/assets/icons/search-1.svg'
 // import searchIcon2 from '/public/assets/icons/search-2.svg'
-// import closeIcon from '/public/assets/icons/close.svg'
-// import dropdownMobileIcon from '/public/assets/icons/dropdown-mobile.svg'
 // import whatsappLightIcon from '/public/assets/icons/social/light/whatsapp.svg'
 // import whatsappDarkIcon from '/public/assets/icons/social/dark/whatsapp.svg'
 // import facebookLightIcon from '/public/assets/icons/social/light/facebook.svg'
@@ -44,8 +51,6 @@ export function Icon({
 // const icons: Readonly<Record<IconVariant, StaticImageData>> = {
 //   'search-1': searchIcon1,
 //   'search-2': searchIcon2,
-//   close: closeIcon,
-//   'dropdown-mobile': dropdownMobileIcon,
 //   'whatsapp-light': whatsappLightIcon,
 //   'whatsapp-dark': whatsappDarkIcon,
 //   'facebook-light': facebookLightIcon,

@@ -1,4 +1,9 @@
+'use client'
+
+import * as React from 'react'
 import { Logo, Search, Sidebar } from '~ek/components'
+import { useScreenSize } from '~ek/hooks'
+import { WIDE_SCREEN_HEADER_BREAKPOINT } from '~ek/utils'
 
 const headerStyles: Readonly<TwClasses> = {
   header: 'h-10 laptop:h-19 bg-gray-1 px-5 laptop:px-15 widescreen:px-25',
@@ -6,17 +11,41 @@ const headerStyles: Readonly<TwClasses> = {
 }
 const styles = headerStyles as Readonly<StyleRecord>
 
-export function Header(): React.ReactElement {
+function CompactScreenHeader(): React.ReactElement {
+  return (
+    <div className={styles.wrapper}>
+      <Sidebar />
+      <Logo
+        context='header'
+        sizes='w-25 h-[17px] laptop:w-[158px] laptop:h-[27px]'
+      />
+      <Search />
+    </div>
+  )
+}
+
+function WideScreenHeader(): React.ReactElement {
+  return (
+    <div className={styles.wrapper}>
+      <p>Wide screen header</p>
+    </div>
+  )
+}
+
+export function Header(): React.ReactElement | null {
+  const { width } = useScreenSize()
+  const [isClient, setIsClient] = React.useState<boolean>(false)
+
+  React.useEffect(() => setIsClient(true), [])
+
   return (
     <header className={styles.header}>
-      <div className={styles.wrapper}>
-        <Sidebar />
-        <Logo
-          context='header'
-          sizes='w-25 h-[17px] laptop:w-[158px] laptop:h-[27px]'
-        />
-        <Search />
-      </div>
+      {isClient &&
+        (width < WIDE_SCREEN_HEADER_BREAKPOINT ? (
+          <CompactScreenHeader />
+        ) : (
+          <WideScreenHeader />
+        ))}
     </header>
   )
 }
@@ -61,13 +90,4 @@ export function Header(): React.ReactElement {
 
 // function LargeScreenHeader(): ReactComponent {
 //   return <div className={largeScreenHeaderStyles.header}>Laptop Header</div>
-// }
-
-// export function Header({}: Readonly<HeaderProps>): ReactComponent {
-//   return (
-//     <header className={styles.header}>
-//       <CompactHeader />
-//       <LargeScreenHeader />
-//     </header>
-//   )
 // }

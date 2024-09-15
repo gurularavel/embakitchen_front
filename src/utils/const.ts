@@ -1,1 +1,14 @@
-export const STATISTICS_INTERVAL_LIMIT: number = 1500
+import { ScreenBreakpoint } from '~ek/types'
+
+export const SCREENS: Readonly<Record<ScreenBreakpoint, number>> = {
+  compact: 375,
+  mobile: 576,
+  tablet: 768,
+  laptop: 1024,
+  desktop: 1440,
+  widescreen: 1920,
+}
+
+export const WIDE_SCREEN_HEADER_BREAKPOINT: number = SCREENS.laptop
+
+// export const STATISTICS_INTERVAL_LIMIT: number = 1500

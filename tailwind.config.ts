@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+const { SCREENS } = require('./src/utils/const')
 
 const config: Config = {
   content: [
@@ -22,13 +23,16 @@ const config: Config = {
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
+        secondary: {
+          '4': '#FFC35C',
+        },
         gray: {
           '1': '#31373D',
+          '4': '#5F6B77',
         },
 
         // gray: {
         //   '3': '#49525B',
-        //   '4': '#5F6B77',
         //   '10': '#F7F7F8',
         // },
         // primary: {
@@ -36,9 +40,6 @@ const config: Config = {
         //   '3': '#EA7F52',
         //   '5': '#F0A17F',
         //   '9': '#FCEBE4',
-        // },
-        // secondary: {
-        //   '4': '#FFC35C',
         // },
         // auxiliary: {
         //   '1': '#101828',
@@ -104,14 +105,13 @@ const config: Config = {
         '19': '4.75rem', // 76px
       },
     },
-    screens: {
-      compact: '375px',
-      mobile: '576px',
-      tablet: '768px',
-      laptop: '1024px',
-      desktop: '1440px',
-      widescreen: '1920px',
-    },
+    screens: Object.entries(SCREENS).reduce(
+      (result, [key, value]) => ({
+        ...result,
+        [key]: `${value}px`,
+      }),
+      {},
+    ),
   },
   plugins: [],
 }
