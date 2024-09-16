@@ -1,7 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import { Button, Icon, Navbar } from '~ek/components'
+import {
+  ActionLink,
+  Button,
+  Icon,
+  Navbar,
+  SocialContacts,
+} from '~ek/components'
 
 const sidebarStyles: Readonly<TwClasses> = {
   sidebar: 'w-auto h-full flex items-center',
@@ -11,6 +17,8 @@ const sidebarStyles: Readonly<TwClasses> = {
   closeSidebar: 'h-6 mb-6 flex justify-end',
   closeIcon: 'w-4 h-4',
   sidebarBody: '',
+  socialContacts: 'mb-6',
+  phone: 'mb-6 pt-2', // relative z-10 mobile:pt-3.5
 }
 const styles = sidebarStyles as Readonly<StyleRecord>
 const getSidebarContentStyles: StyleGetter =
@@ -50,44 +58,34 @@ export function Sidebar(): React.ReactElement {
 
         <div className={styles.sidebarBody}>
           <Navbar context='sidebar' />
+
+          <SocialContacts
+            layout='horizontal'
+            colorScheme='light'
+            gap={12}
+            classes={styles.socialContacts}
+          />
+
+          <ActionLink
+            href='tel:126'
+            label='126'
+            actionLinkIcon={{ variant: 'phone', sizes: 'w-[30px] h-[30px]' }}
+            gap={8}
+            classes={styles.phone}
+          />
         </div>
       </div>
     </aside>
   )
 }
 
-// import {
-//   ActionLink,
-//   LanguageSelector,
-//   Navbar,
-//   SocialContacts,
-// } from '~ek/components'
+// import { LanguageSelector } from '~ek/components'
 
 //   sidebar: 'mobile:w-[90px]',
-//   socialContacts: 'mb-6',
-//   phone: 'mb-6 pt-2', // relative z-10
-//   options:
-//     'flex flex-col mobile:flex-row gap-y-3 mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
-//   profileButton:
-//     'w-full h-11 bg-gray-3 rounded-lg flex mobile:flex-1 justify-center items-center gap-x-2 text-base font-semibold text-gray-10',
+//   options: 'flex flex-col mobile:flex-row gap-y-3 mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
+//   profileButton: 'w-full h-11 bg-gray-3 rounded-lg flex mobile:flex-1 justify-center items-center gap-x-2 text-base font-semibold text-gray-10',
 
-//       <div className={getSidebarContentStyles(isSidebarVisible)}>
 //         <div className={styles.sidebarBody}>
-//           <SocialContacts
-//             layout='horizontal'
-//             theme='light'
-//             gap={3}
-//             classes={styles.socialContacts}
-//           />
-
-//           <ActionLink
-//             href='tel:126'
-//             text='126'
-//             iconVariant='phone'
-//             gap={2}
-//             classes={styles.phone}
-//           />
-
 //           <div className={styles.options}>
 //             <Button classes={styles.profileButton}>
 //               <Icon variant='profile' />
@@ -97,8 +95,3 @@ export function Sidebar(): React.ReactElement {
 //             <LanguageSelector />
 //           </div>
 //         </div>
-//       </div>
-
-//       {/* <div className={styles.sidebarBodyTop}>
-//         <Navbar context='header' />
-//       </div> */}

@@ -5,6 +5,11 @@ import menuIcon from '/public/assets/icons/menu.svg'
 import closeIcon from '/public/assets/icons/close.svg'
 import dropdownCompactIcon from '/public/assets/icons/dropdown-compact.svg'
 import dropdownWideIcon from '/public/assets/icons/dropdown-wide.svg'
+import whatsappLightIcon from '/public/assets/icons/social/light/whatsapp.svg'
+import facebookLightIcon from '/public/assets/icons/social/light/facebook.svg'
+import instagramLightIcon from '/public/assets/icons/social/light/instagram.svg'
+import youtubeLightIcon from '/public/assets/icons/social/light/youtube.svg'
+import phoneIcon from '/public/assets/icons/phone.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -17,6 +22,11 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   close: closeIcon,
   'dropdown-compact': dropdownCompactIcon,
   'dropdown-wide': dropdownWideIcon,
+  'whatsapp-light': whatsappLightIcon,
+  'facebook-light': facebookLightIcon,
+  'instagram-light': instagramLightIcon,
+  'youtube-light': youtubeLightIcon,
+  phone: phoneIcon,
 }
 
 export function Icon({
@@ -35,15 +45,10 @@ export function Icon({
 
 // import searchIcon1 from '/public/assets/icons/search-1.svg'
 // import searchIcon2 from '/public/assets/icons/search-2.svg'
-// import whatsappLightIcon from '/public/assets/icons/social/light/whatsapp.svg'
 // import whatsappDarkIcon from '/public/assets/icons/social/dark/whatsapp.svg'
-// import facebookLightIcon from '/public/assets/icons/social/light/facebook.svg'
 // import facebookDarkIcon from '/public/assets/icons/social/dark/facebook.svg'
-// import instagramLightIcon from '/public/assets/icons/social/light/instagram.svg'
 // import instagramDarkIcon from '/public/assets/icons/social/dark/instagram.svg'
-// import youtubeLightIcon from '/public/assets/icons/social/light/youtube.svg'
 // import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
-// import phoneIcon from '/public/assets/icons/phone.svg'
 // import profileIcon from '/public/assets/icons/profile.svg'
 // import downChevronIcon from '/public/assets/icons/down-chevron.svg'
 // import rightArrowOrange from '/public/assets/icons/right-arrow-orange.svg'
@@ -51,15 +56,10 @@ export function Icon({
 // const icons: Readonly<Record<IconVariant, StaticImageData>> = {
 //   'search-1': searchIcon1,
 //   'search-2': searchIcon2,
-//   'whatsapp-light': whatsappLightIcon,
 //   'whatsapp-dark': whatsappDarkIcon,
-//   'facebook-light': facebookLightIcon,
 //   'facebook-dark': facebookDarkIcon,
-//   'instagram-light': instagramLightIcon,
 //   'instagram-dark': instagramDarkIcon,
-//   'youtube-light': youtubeLightIcon,
 //   'youtube-dark': youtubeDarkIcon,
-//   phone: phoneIcon,
 //   profile: profileIcon,
 //   'down-chevron': downChevronIcon,
 //   'right-arrow-orange': rightArrowOrange,

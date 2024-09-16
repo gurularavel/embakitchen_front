@@ -9,6 +9,11 @@ export type IconVariant =
   | 'close'
   | 'dropdown-compact'
   | 'dropdown-wide'
+  | 'whatsapp-light'
+  | 'facebook-light'
+  | 'instagram-light'
+  | 'youtube-light'
+  | 'phone'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -18,26 +23,28 @@ export interface NavLinkEntry {
   nestedLinks?: Array<Omit<NavLinkEntry, 'nestedLinks'>>
 }
 
-// import type { SocialContact } from '~ek/types'
+export type LayoutOption = 'horizontal' | 'vertical'
+
+export type ColorScheme = 'light' // | 'dark'
+
+/**
+ * @description Represents gap between UI Elements in pixels
+ * @example const gap: Gap = 30, where gap is '30px'
+ */
+export type Gap = number
 
 // export type IconVariant =
 //   | 'search-1'
 //   | 'search-2'
-//   | SocialContact
-//   | 'phone'
 //   | 'profile'
 //   | 'down-chevron'
 //   | 'right-arrow-orange'
-
-// export type LayoutOption = 'horizontal' | 'vertical'
 
 // export enum Language {
 //   'Az' = 'Az',
 //   'En' = 'En',
 //   'Ru' = 'Ru',
 // }
-
-// export type Theme = 'light' | 'dark'
 
 // // import { StaticImageData } from 'next/image'
 

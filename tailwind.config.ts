@@ -7,11 +7,6 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  // safelist: [
-  //   {
-  //     pattern: /gap-(x|y)-(3)/,
-  //   },
-  // ],
   theme: {
     extend: {
       backgroundImage: {
@@ -30,6 +25,9 @@ const config: Config = {
           '1': '#31373D',
           '4': '#5F6B77',
         },
+        semi: {
+          white: 'rgba(255, 255, 255, 0.5)',
+        },
 
         // gray: {
         //   '3': '#49525B',
@@ -47,9 +45,6 @@ const config: Config = {
         //   '3': '#1A1A1A',
         //   '4': '#FAFAFA',
         //   '5': '#E6E6E6',
-        // },
-        // semi: {
-        //   white: 'rgba(255, 255, 255, 0.5)',
         // },
 
         // primary: {
@@ -75,7 +70,7 @@ const config: Config = {
         montserrat: ['var(--font-montserrat)'],
       },
       lineHeight: {
-        // '7': '1.875rem', // 30px
+        '7': '1.875rem', // 30px
         // '11': '3rem', // 48px
         // '13': '3.5rem', // 56px
         // '14': '3.75rem', // 60px
