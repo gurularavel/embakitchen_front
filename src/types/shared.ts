@@ -14,6 +14,8 @@ export type IconVariant =
   | 'instagram-light'
   | 'youtube-light'
   | 'phone'
+  | 'profile'
+  | 'chevron-down'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -33,18 +35,16 @@ export type ColorScheme = 'light' // | 'dark'
  */
 export type Gap = number
 
+export enum Language {
+  'Az' = 'Az',
+  'En' = 'En',
+  'Ru' = 'Ru',
+}
+
 // export type IconVariant =
 //   | 'search-1'
 //   | 'search-2'
-//   | 'profile'
-//   | 'down-chevron'
 //   | 'right-arrow-orange'
-
-// export enum Language {
-//   'Az' = 'Az',
-//   'En' = 'En',
-//   'Ru' = 'Ru',
-// }
 
 // // import { StaticImageData } from 'next/image'
 

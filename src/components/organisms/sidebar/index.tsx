@@ -5,20 +5,24 @@ import {
   ActionLink,
   Button,
   Icon,
+  LanguageSelector,
   Navbar,
   SocialContacts,
 } from '~ek/components'
 
 const sidebarStyles: Readonly<TwClasses> = {
-  sidebar: 'w-auto h-full flex items-center',
+  sidebar: 'w-auto h-full flex items-center', // mobile:w-[90px]
   menuIcon: 'w-6 h-6',
   sidebarContent: (isVisible: unknown) =>
-    `bg-gray-1 p-10 fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`, // overflow-y-auto z-10
+    `bg-gray-1 p-10 overflow-y-auto fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`, // z-10
   closeSidebar: 'h-6 mb-6 flex justify-end',
   closeIcon: 'w-4 h-4',
   sidebarBody: '',
   socialContacts: 'mb-6',
   phone: 'mb-6 pt-2', // relative z-10 mobile:pt-3.5
+  options: 'flex flex-col gap-y-3 gap-x-0 ', // mobile:flex-row mobile:gap-y-0 mobile:gap-x-6
+  profileButton:
+    'w-full h-11 bg-gray-3 rounded-lg flex gap-x-2 justify-center items-center text-base font-semibold text-gray-10', // mobile:flex-1
 }
 const styles = sidebarStyles as Readonly<StyleRecord>
 const getSidebarContentStyles: StyleGetter =
@@ -73,25 +77,20 @@ export function Sidebar(): React.ReactElement {
             gap={8}
             classes={styles.phone}
           />
+
+          <div className={styles.options}>
+            <Button classes={styles.profileButton}>
+              <Icon
+                variant='profile'
+                sizes='w-6 h-6'
+              />
+              <span>Şəxsi kabinet</span>
+            </Button>
+
+            <LanguageSelector />
+          </div>
         </div>
       </div>
     </aside>
   )
 }
-
-// import { LanguageSelector } from '~ek/components'
-
-//   sidebar: 'mobile:w-[90px]',
-//   options: 'flex flex-col mobile:flex-row gap-y-3 mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
-//   profileButton: 'w-full h-11 bg-gray-3 rounded-lg flex mobile:flex-1 justify-center items-center gap-x-2 text-base font-semibold text-gray-10',
-
-//         <div className={styles.sidebarBody}>
-//           <div className={styles.options}>
-//             <Button classes={styles.profileButton}>
-//               <Icon variant='profile' />
-//               <span>Şəxsi kabinet</span>
-//             </Button>
-
-//             <LanguageSelector />
-//           </div>
-//         </div>

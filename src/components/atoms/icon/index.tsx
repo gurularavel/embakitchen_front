@@ -10,6 +10,8 @@ import facebookLightIcon from '/public/assets/icons/social/light/facebook.svg'
 import instagramLightIcon from '/public/assets/icons/social/light/instagram.svg'
 import youtubeLightIcon from '/public/assets/icons/social/light/youtube.svg'
 import phoneIcon from '/public/assets/icons/phone.svg'
+import profileIcon from '/public/assets/icons/profile.svg'
+import chevronDownIcon from '/public/assets/icons/chevron-down.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -27,6 +29,8 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'instagram-light': instagramLightIcon,
   'youtube-light': youtubeLightIcon,
   phone: phoneIcon,
+  profile: profileIcon,
+  'chevron-down': chevronDownIcon,
 }
 
 export function Icon({
