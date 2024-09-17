@@ -7,28 +7,30 @@ interface UseInputFocusOptions {
 }
 
 interface UseInputFocusParams {
-  isInputVisible: boolean
+  isVisible: boolean
   options?: UseInputFocusOptions
 }
 
 export function useInputFocus({
-  isInputVisible,
+  isVisible,
   options: { clearValue, onFocus, onBlur } = {} as UseInputFocusOptions,
-}: UseInputFocusParams) {
+}: UseInputFocusParams): React.RefObject<HTMLInputElement> {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
-    if (inputRef.current) {
-      if (isInputVisible) {
-        inputRef.current.focus()
-        if (onFocus) onFocus()
-      } else {
-        inputRef.current.blur()
-        if (onBlur) onBlur()
-        if (clearValue) inputRef.current.value = ''
-      }
+    const input = inputRef.current
+
+    if (!input) return
+
+    if (isVisible) {
+      input.focus()
+      onFocus?.()
+    } else {
+      input.blur()
+      onBlur?.()
+      if (clearValue) input.value = ''
     }
-  }, [isInputVisible, onFocus, onBlur, clearValue])
+  }, [isVisible, onFocus, onBlur, clearValue])
 
   return inputRef
 }

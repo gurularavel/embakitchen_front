@@ -4,17 +4,17 @@ import { twMerge } from 'tailwind-merge'
 type InputRef = HTMLInputElement
 
 interface InputProps {
-  type: string
+  type: React.HTMLInputTypeAttribute
   placeholder: string
   classes?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const inputStyles: Readonly<TailwindStyle> = {
+const inputStyles: Readonly<TwClasses> = {
   input:
-    'appearance-none bg-transparent border-none outline-none focus:bg-transparent focus:border-none focus:outline-none',
+    'bg-transparent border-none outline-none focus:bg-transparent focus:border-none focus:outline-none',
 }
-const styles: Readonly<StyleRecord> = inputStyles as StyleRecord
+const styles = inputStyles as Readonly<StyleRecord>
 
 export const Input = React.forwardRef<InputRef, Readonly<InputProps>>(
   ({ classes, ...props }, inputRef) => {

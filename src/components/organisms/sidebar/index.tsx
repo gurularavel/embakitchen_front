@@ -11,15 +11,15 @@ import {
 } from '~ek/components'
 
 const sidebarStyles: Readonly<TwClasses> = {
-  sidebar: 'w-auto h-full flex items-center', // mobile:w-[90px]
+  sidebar: 'w-auto mobile:w-[90px] h-full flex items-center',
   menuIcon: 'w-6 h-6',
   sidebarContent: (isVisible: unknown) =>
-    `bg-gray-1 p-10 overflow-y-auto fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`, // z-10
+    `bg-gray-1 p-10 overflow-y-auto fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`,
   closeSidebar: 'h-6 mb-6 flex justify-end',
   closeIcon: 'w-4 h-4',
   sidebarBody: '',
   socialContacts: 'mb-6',
-  phone: 'mb-6 pt-2', // relative z-10 mobile:pt-3.5
+  phone: 'mb-6 pt-2 mobile:pt-3.5',
   options:
     'flex flex-col mobile:flex-row gap-y-3 mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
   profileButton:
@@ -40,10 +40,7 @@ export function Sidebar(): React.ReactElement {
     setIsVisible(shouldBeVisible)
 
   return (
-    <aside
-      className={styles.sidebar}
-      style={{ border: '2px solid red' }}
-    >
+    <aside className={styles.sidebar}>
       <Button onClick={() => handleSidebarVisibility(true)}>
         <Icon
           variant='menu'

@@ -1,15 +1,22 @@
 'use client'
 
 import * as React from 'react'
-import { Logo, Search, Sidebar } from '~ek/components'
+import { ActionLink, Logo, Search, Sidebar } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
 import { WIDE_SCREEN_HEADER_BREAKPOINT } from '~ek/utils'
 
 const headerStyles: Readonly<TwClasses> = {
   header: 'h-10 laptop:h-19 bg-gray-1 px-5 laptop:px-15 widescreen:px-25',
-  wrapper: 'h-full flex items-center justify-between',
+  wrapper: 'h-full flex items-center justify-between relative',
+  compact: {
+    options: 'w-6 mobile:w-[90px] h-full flex items-center gap-x-4',
+    phone: 'w-[50px] h-full hidden mobile:flex gap-x-2 text-sm font-medium',
+  },
+  wide: {},
 }
 const styles = headerStyles as Readonly<StyleRecord>
+const compactHeaderStyles = headerStyles.compact as Readonly<StyleRecord>
+const wideHeaderStyles = headerStyles.wide as Readonly<StyleRecord>
 
 function CompactScreenHeader(): React.ReactElement {
   return (
@@ -19,7 +26,17 @@ function CompactScreenHeader(): React.ReactElement {
         context='header'
         sizes='w-25 h-[17px] laptop:w-[158px] laptop:h-[27px]'
       />
-      <Search />
+      <div className={compactHeaderStyles.options}>
+        <ActionLink
+          href='tel:126'
+          label='126'
+          actionLinkIcon={{ variant: 'phone', sizes: 'w-5 h-5' }}
+          gap={8}
+          classes={compactHeaderStyles.phone}
+        />
+
+        <Search />
+      </div>
     </div>
   )
 }
@@ -50,44 +67,10 @@ export function Header(): React.ReactElement {
   )
 }
 
-// import { ActionLink, Navbar } from '~ek/components'
-
-// const headerStyles: Readonly<TailwindStyle> = {
+//   import { Navbar } from '~ek/components'
 //   compact: {
 //     header: 'h-full flex items-center justify-between laptop:hidden relative',
-//     options: 'w-6 mobile:w-[90px] flex items-center gap-x-4',
-//     phone: 'w-[50px] hidden mobile:flex gap-x-2 text-sm font-medium',
 //   },
 //   largeScreen: {
 //     header: 'hidden laptop:flex',
 //   },
-// }
-// const compactHeaderStyles: Readonly<StyleRecord> =
-//   headerStyles.compact as StyleRecord
-// const largeScreenHeaderStyles: Readonly<StyleRecord> =
-//   headerStyles.largeScreen as StyleRecord
-
-// function CompactHeader(): ReactComponent {
-//   return (
-//     <div className={compactHeaderStyles.header}>
-//       <Sidebar />
-//       <Logo variant='header' />
-//       <div className={compactHeaderStyles.options}>
-//         <ActionLink
-//           href='tel:126'
-//           text='126'
-//           iconVariant='phone'
-//           gap={2}
-//           classes={compactHeaderStyles.phone}
-//           iconSize='w-5 h-5'
-//         />
-
-//         <Search />
-//       </div>
-//     </div>
-//   )
-// }
-
-// function LargeScreenHeader(): ReactComponent {
-//   return <div className={largeScreenHeaderStyles.header}>Laptop Header</div>
-// }

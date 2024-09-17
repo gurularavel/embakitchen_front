@@ -17,6 +17,7 @@ export type IconVariant =
   | 'profile'
   | 'chevron-down'
   | 'search-1'
+  | 'search-2'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -42,9 +43,7 @@ export enum Language {
   'Ru' = 'Ru',
 }
 
-// export type IconVariant =
-//   | 'search-2'
-//   | 'right-arrow-orange'
+// export type IconVariant = 'right-arrow-orange'
 
 // // import { StaticImageData } from 'next/image'
 

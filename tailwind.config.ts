@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import type { PluginAPI } from 'tailwindcss/types/config'
 const { SCREENS } = require('./src/utils/const')
 
 const config: Config = {
@@ -30,6 +31,9 @@ const config: Config = {
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
         },
+        supplementary: {
+          '1': '#101828',
+        },
         // primary: {
         //   '2': '#E86E3B',
         //   '3': '#EA7F52',
@@ -37,7 +41,6 @@ const config: Config = {
         //   '9': '#FCEBE4',
         // },
         // auxiliary: {
-        //   '1': '#101828',
         //   '2': '#666666',
         //   '3': '#1A1A1A',
         //   '4': '#FAFAFA',
@@ -105,6 +108,17 @@ const config: Config = {
       {},
     ),
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase }: PluginAPI) {
+      addBase({
+        'input[type="search"]::-webkit-search-cancel-button': {
+          display: 'none',
+        },
+        'input[type="search"]::-moz-search-cancel-button': {
+          display: 'none',
+        },
+      })
+    },
+  ],
 }
 export default config
