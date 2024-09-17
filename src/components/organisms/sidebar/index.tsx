@@ -20,9 +20,10 @@ const sidebarStyles: Readonly<TwClasses> = {
   sidebarBody: '',
   socialContacts: 'mb-6',
   phone: 'mb-6 pt-2', // relative z-10 mobile:pt-3.5
-  options: 'flex flex-col gap-y-3 gap-x-0 ', // mobile:flex-row mobile:gap-y-0 mobile:gap-x-6
+  options:
+    'flex flex-col mobile:flex-row gap-y-3 mobile:gap-y-0 gap-x-0 mobile:gap-x-6',
   profileButton:
-    'w-full h-11 bg-gray-3 rounded-lg flex gap-x-2 justify-center items-center text-base font-semibold text-gray-10', // mobile:flex-1
+    'w-full h-11 bg-gray-3 rounded-lg flex mobile:flex-1 gap-x-2 justify-center items-center text-base font-semibold text-gray-10',
 }
 const styles = sidebarStyles as Readonly<StyleRecord>
 const getSidebarContentStyles: StyleGetter =

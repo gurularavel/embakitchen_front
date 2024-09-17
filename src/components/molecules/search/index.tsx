@@ -1,18 +1,30 @@
+'use client'
+
+import * as React from 'react'
+import { Button, Icon } from '~ek/components'
+
 const searchStyles: Readonly<TwClasses> = {}
 const styles = searchStyles as Readonly<StyleRecord>
 
 export function Search(): React.ReactElement {
+  const [isVisible, setIsVisible] = React.useState<boolean>(false)
+
+  const handleSearchVisibility = (shouldBeVisible: boolean): void =>
+    setIsVisible(shouldBeVisible)
+
   return (
-    <div>
-      <p>Search</p>
+    <div className={styles.search}>
+      <Button>
+        <Icon
+          variant='search-1'
+          sizes='w-6 h-6'
+        />
+      </Button>
     </div>
   )
 }
 
-// 'use client'
-
-// import * as React from 'react'
-// import { Button, Icon, Input } from '~ek/components'
+// import { Input } from '~ek/components'
 // import { useInputFocus } from '~ek/hooks'
 
 // const searchStyles: Readonly<TailwindStyle> = {
@@ -30,7 +42,6 @@ export function Search(): React.ReactElement {
 //   searchStyles.searchContainer as StyleGetter
 
 // export function Search(): ReactComponent {
-//   const [isSearchVisible, setIsSearchVisible] = React.useState<boolean>(false)
 //   const searchInputRef = useInputFocus({
 //     isInputVisible: isSearchVisible,
 //     options: {
@@ -38,10 +49,6 @@ export function Search(): React.ReactElement {
 //     },
 //   })
 
-//   const searchVisibilityHandler = (shouldBeVisible: boolean): void =>
-//     setIsSearchVisible(shouldBeVisible)
-
-//   return (
 //     <div className={styles.search}>
 //       <Button
 //         classes={styles.searchTogglerBtn}
@@ -66,5 +73,3 @@ export function Search(): React.ReactElement {
 //         />
 //       </div>
 //     </div>
-//   )
-// }

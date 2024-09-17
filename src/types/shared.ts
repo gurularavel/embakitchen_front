@@ -16,6 +16,7 @@ export type IconVariant =
   | 'phone'
   | 'profile'
   | 'chevron-down'
+  | 'search-1'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -42,7 +43,6 @@ export enum Language {
 }
 
 // export type IconVariant =
-//   | 'search-1'
 //   | 'search-2'
 //   | 'right-arrow-orange'
 

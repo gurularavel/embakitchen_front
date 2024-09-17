@@ -32,7 +32,7 @@ function WideScreenHeader(): React.ReactElement {
   )
 }
 
-export function Header(): React.ReactElement | null {
+export function Header(): React.ReactElement {
   const { width } = useScreenSize()
   const [isClient, setIsClient] = React.useState<boolean>(false)
 

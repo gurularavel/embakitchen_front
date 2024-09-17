@@ -5,7 +5,7 @@ import { Button, Icon } from '~ek/components'
 import { Language } from '~ek/types'
 
 const languageSelectorStyles: Readonly<TwClasses> = {
-  languageSelector: 'relative', // mobile:flex-1
+  languageSelector: 'relative mobile:flex-1',
   selectedLanguage: 'relative z-10',
   selectedLanguageButton:
     'w-full h-11 bg-gray-3 rounded-lg flex items-center justify-center gap-x-2 text-base font-medium text-gray-10',
