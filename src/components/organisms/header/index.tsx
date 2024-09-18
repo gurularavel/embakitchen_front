@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ActionLink, Logo, Search, Sidebar } from '~ek/components'
+import { ActionLink, Logo, Navbar, Search, Sidebar } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
 import { WIDE_SCREEN_HEADER_BREAKPOINT } from '~ek/utils'
 
@@ -24,7 +24,7 @@ function CompactScreenHeader(): React.ReactElement {
       <Sidebar />
       <Logo
         context='header'
-        sizes='w-25 h-[17px] laptop:w-[158px] laptop:h-[27px]'
+        sizes='w-25 h-[17px]'
       />
       <div className={compactHeaderStyles.options}>
         <ActionLink
@@ -44,7 +44,12 @@ function CompactScreenHeader(): React.ReactElement {
 function WideScreenHeader(): React.ReactElement {
   return (
     <div className={styles.wrapper}>
-      <p>Wide screen header</p>
+      <Logo
+        context='header'
+        sizes='w-[158px] h-[27px]'
+      />
+
+      <Navbar context='header' />
     </div>
   )
 }

@@ -81,10 +81,34 @@ const renderNavLink = (link: NavLinkEntry, classes?: string) => (
 )
 
 function NavbarHeader(): React.ReactElement {
+  const pathname = usePathname()
+
   return (
-    <div>
-      <p>Navbar Header</p>
-    </div>
+    <ul>
+      {commonNavLinks.map(link => {
+        const navLinkClass = twMerge(
+          navbarSidebarStyles.navLink,
+          pathname === link.href ? navbarSidebarStyles.navLinkActive : '',
+        )
+
+        return (
+          <li
+            key={link.label}
+            className={navbarSidebarStyles.navItem}
+          >
+            {!link.nestedLinks
+              ? renderNavLink(link, navLinkClass)
+              : renderDropdown(link)}
+          </li>
+        )
+      })}
+
+      <li className={navbarSidebarStyles.navItem}>
+        <Button classes={navbarSidebarStyles.specialOrderButton}>
+          Özəl sifariş
+        </Button>
+      </li>
+    </ul>
   )
 }
 
