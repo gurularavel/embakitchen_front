@@ -11,7 +11,8 @@ import {
 } from '~ek/components'
 
 const sidebarStyles: Readonly<TwClasses> = {
-  sidebar: 'w-auto mobile:w-[90px] h-full flex items-center',
+  sidebar:
+    'w-auto mobile:w-[90px] laptop:w-[269px] h-full flex items-center relative z-20',
   menuIcon: 'w-6 h-6',
   sidebarContent: (isVisible: unknown) =>
     `bg-gray-1 p-10 overflow-y-auto fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`,
@@ -89,7 +90,10 @@ export function Sidebar(): React.ReactElement {
               <span>Şəxsi kabinet</span>
             </Button>
 
-            <LanguageSelector />
+            <LanguageSelector
+              context='sidebar'
+              dropdownClasses='bottom-12 border border-solid border-gray-4'
+            />
           </div>
         </div>
       </div>
