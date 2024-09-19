@@ -70,9 +70,10 @@ const commonNavLinks: NavLinkEntry[] = [
 const navbarStyles: Readonly<TwClasses> = {
   header: {
     nav: (layout: unknown) =>
-      `h-auto flex ${(layout as LayoutOption) === 'vertical' ? 'flex-col' : 'flex-row'}`, // h-full
-    navItem: '',
-    navLink: 'text-base font-normal text-white',
+      `h-auto desktop:h-full mb-6 desktop:mb-0 flex ${(layout as LayoutOption) === 'vertical' ? 'flex-col' : 'flex-row'}`,
+    navItem: 'desktop:last:flex desktop:last:items-center',
+    navLink:
+      'desktop:h-full desktop:flex desktop:items-center text-base desktop:text-sm font-normal desktop:font-medium text-white desktop:text-nowrap',
     navLinkActive: 'text-secondary-4',
     specialOrderButton:
       'w-[135px] h-11 border border-solid border-gray-4 rounded-lg text-base font-medium text-secondary-4',
@@ -106,10 +107,7 @@ function NavbarHeader({
   return (
     <ul
       className={getHeaderNavStyles(layout)}
-      style={{
-        border: '2px solid green',
-        [getGapProperty(layout)]: `${gap}px`,
-      }}
+      style={{ [getGapProperty(layout)]: `${gap}px` }}
     >
       {commonNavLinks.map(link => {
         const navLinkClass = twMerge(
@@ -121,7 +119,6 @@ function NavbarHeader({
           <li
             key={link.label}
             className={navbarHeaderStyles.navItem}
-            style={{ border: '2px solid red' }}
           >
             {!link.nestedLinks
               ? renderNavLink(link, navLinkClass)

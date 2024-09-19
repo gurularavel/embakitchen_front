@@ -23,8 +23,8 @@ const headerStyles: Readonly<TwClasses> = {
     phone: 'w-[50px] h-full hidden mobile:flex gap-x-2 text-sm font-medium',
   },
   wide: {
-    wrapper: '',
-    left: 'h-full flex',
+    wrapper: 'desktop:gap-x-[33px]',
+    left: 'h-full flex gap-x-[70px]',
     right: 'w-auto min-w-[269px] h-full flex items-center gap-x-5',
     options: 'h-full flex gap-x-3',
     languageSelectorButton: 'w-[67px]',
@@ -67,10 +67,7 @@ function WideScreenHeader(): React.ReactElement {
     <div className={twMerge(styles.wrapper, wideHeaderStyles.wrapper)}>
       {width < SCREENS.desktop && <Sidebar />}
 
-      <div
-        className={wideHeaderStyles.left}
-        style={{ border: '2px solid red' }}
-      >
+      <div className={wideHeaderStyles.left}>
         <Logo
           context='header'
           sizes='w-[158px] h-[27px]'
