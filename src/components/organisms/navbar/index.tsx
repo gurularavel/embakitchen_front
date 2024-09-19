@@ -3,18 +3,32 @@
 import { usePathname } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import { Button, Dropdown, NavLink } from '~ek/components'
-import type { NavLinkEntry } from '~ek/types'
+import type { Gap, LayoutOption, NavLinkEntry } from '~ek/types'
+import { getGapProperty } from '~ek/utils'
 
-type NavbarContext = 'header' | 'sidebar' | 'footer'
+type NavbarContext = 'header' | 'footer'
 
 interface NavbarProps {
   context: NavbarContext
+  layout: LayoutOption
+  gap: Gap
 }
 
-const navbars: Readonly<Record<NavbarContext, React.ReactElement>> = {
-  header: <NavbarHeader />,
-  sidebar: <NavbarSidebar />,
-  footer: <NavbarFooter />,
+type NavbarHeaderProps = Omit<NavbarProps, 'context'>
+
+type NavbarsPropertyValue = (
+  layout: LayoutOption,
+  gap: Gap,
+) => React.ReactElement
+
+const navbars: Readonly<Record<NavbarContext, NavbarsPropertyValue>> = {
+  header: (layout: LayoutOption, gap: Gap) => (
+    <NavbarHeader
+      layout={layout!}
+      gap={gap}
+    />
+  ),
+  footer: () => <NavbarFooter />,
 }
 
 const commonNavLinks: NavLinkEntry[] = [
@@ -54,15 +68,18 @@ const commonNavLinks: NavLinkEntry[] = [
 ]
 
 const navbarStyles: Readonly<TwClasses> = {
-  sidebar: {
-    navItem: 'mb-6',
+  header: {
+    nav: (layout: unknown) =>
+      `h-auto flex ${(layout as LayoutOption) === 'vertical' ? 'flex-col' : 'flex-row'}`, // h-full
+    navItem: '',
     navLink: 'text-base font-normal text-white',
     navLinkActive: 'text-secondary-4',
     specialOrderButton:
       'w-[135px] h-11 border border-solid border-gray-4 rounded-lg text-base font-medium text-secondary-4',
   },
 }
-const navbarSidebarStyles = navbarStyles.sidebar as Readonly<StyleRecord>
+const navbarHeaderStyles = navbarStyles.header as Readonly<StyleRecord>
+const getHeaderNavStyles = (navbarStyles.header as TwClasses).nav as StyleGetter
 
 const renderDropdown = (link: NavLinkEntry) => (
   <Dropdown
@@ -80,21 +97,31 @@ const renderNavLink = (link: NavLinkEntry, classes?: string) => (
   </NavLink>
 )
 
-function NavbarHeader(): React.ReactElement {
+function NavbarHeader({
+  layout,
+  gap,
+}: Readonly<NavbarHeaderProps>): React.ReactElement {
   const pathname = usePathname()
 
   return (
-    <ul>
+    <ul
+      className={getHeaderNavStyles(layout)}
+      style={{
+        border: '2px solid green',
+        [getGapProperty(layout)]: `${gap}px`,
+      }}
+    >
       {commonNavLinks.map(link => {
         const navLinkClass = twMerge(
-          navbarSidebarStyles.navLink,
-          pathname === link.href ? navbarSidebarStyles.navLinkActive : '',
+          navbarHeaderStyles.navLink,
+          pathname === link.href ? navbarHeaderStyles.navLinkActive : '',
         )
 
         return (
           <li
             key={link.label}
-            className={navbarSidebarStyles.navItem}
+            className={navbarHeaderStyles.navItem}
+            style={{ border: '2px solid red' }}
           >
             {!link.nestedLinks
               ? renderNavLink(link, navLinkClass)
@@ -102,41 +129,8 @@ function NavbarHeader(): React.ReactElement {
           </li>
         )
       })}
-
-      <li className={navbarSidebarStyles.navItem}>
-        <Button classes={navbarSidebarStyles.specialOrderButton}>
-          Özəl sifariş
-        </Button>
-      </li>
-    </ul>
-  )
-}
-
-function NavbarSidebar(): React.ReactElement {
-  const pathname = usePathname()
-
-  return (
-    <ul>
-      {commonNavLinks.map(link => {
-        const navLinkClass = twMerge(
-          navbarSidebarStyles.navLink,
-          pathname === link.href ? navbarSidebarStyles.navLinkActive : '',
-        )
-
-        return (
-          <li
-            key={link.label}
-            className={navbarSidebarStyles.navItem}
-          >
-            {!link.nestedLinks
-              ? renderNavLink(link, navLinkClass)
-              : renderDropdown(link)}
-          </li>
-        )
-      })}
-
-      <li className={navbarSidebarStyles.navItem}>
-        <Button classes={navbarSidebarStyles.specialOrderButton}>
+      <li className={navbarHeaderStyles.navItem}>
+        <Button classes={navbarHeaderStyles.specialOrderButton}>
           Özəl sifariş
         </Button>
       </li>
@@ -152,8 +146,12 @@ function NavbarFooter(): React.ReactElement {
   )
 }
 
-export function Navbar({ context }: Readonly<NavbarProps>): React.ReactElement {
-  return <nav>{navbars[context]}</nav>
+export function Navbar({
+  context,
+  layout,
+  gap,
+}: Readonly<NavbarProps>): React.ReactElement {
+  return <nav>{navbars[context](layout, gap)}</nav>
 }
 
 // interface FooterNav {

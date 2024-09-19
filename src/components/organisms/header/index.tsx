@@ -49,7 +49,11 @@ function WideScreenHeader(): React.ReactElement {
         sizes='w-[158px] h-[27px]'
       />
 
-      <Navbar context='header' />
+      <Navbar
+        context='header'
+        layout='horizontal'
+        gap={16}
+      />
     </div>
   )
 }
