@@ -13,7 +13,11 @@ import {
   Sidebar,
 } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
-import { SCREENS, WIDE_SCREEN_HEADER_BREAKPOINT } from '~ek/utils'
+import { SCREENS } from '~ek/utils'
+
+interface WideScreenHeaderProps {
+  screenWidth: number
+}
 
 const headerStyles: Readonly<TwClasses> = {
   header: 'h-10 laptop:h-19 bg-gray-1 px-5 laptop:px-15 widescreen:px-25',
@@ -60,12 +64,12 @@ function CompactScreenHeader(): React.ReactElement {
   )
 }
 
-function WideScreenHeader(): React.ReactElement {
-  const { width } = useScreenSize()
-
+function WideScreenHeader({
+  screenWidth,
+}: Readonly<WideScreenHeaderProps>): React.ReactElement {
   return (
     <div className={twMerge(styles.wrapper, wideHeaderStyles.wrapper)}>
-      {width < SCREENS.desktop && <Sidebar />}
+      {screenWidth < SCREENS.desktop && <Sidebar />}
 
       <div className={wideHeaderStyles.left}>
         <Logo
@@ -73,7 +77,7 @@ function WideScreenHeader(): React.ReactElement {
           sizes='w-[158px] h-[27px]'
         />
 
-        {width >= SCREENS.desktop && (
+        {screenWidth >= SCREENS.desktop && (
           <Navbar
             context='header'
             layout='horizontal'
@@ -120,19 +124,11 @@ export function Header(): React.ReactElement {
   return (
     <header className={styles.header}>
       {isClient &&
-        (width < WIDE_SCREEN_HEADER_BREAKPOINT ? (
+        (width < SCREENS.laptop ? (
           <CompactScreenHeader />
         ) : (
-          <WideScreenHeader />
+          <WideScreenHeader screenWidth={width} />
         ))}
     </header>
   )
 }
-
-//   import { Navbar } from '~ek/components'
-//   compact: {
-//     header: 'h-full flex items-center justify-between laptop:hidden relative',
-//   },
-//   largeScreen: {
-//     header: 'hidden laptop:flex',
-//   },

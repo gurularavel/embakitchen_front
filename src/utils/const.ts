@@ -9,6 +9,4 @@ export const SCREENS: Readonly<Record<ScreenBreakpoint, number>> = {
   widescreen: 1920,
 }
 
-export const WIDE_SCREEN_HEADER_BREAKPOINT: number = SCREENS.laptop
-
 // export const STATISTICS_INTERVAL_LIMIT: number = 1500
