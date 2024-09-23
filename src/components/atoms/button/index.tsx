@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface ButtonProps {
@@ -8,17 +7,16 @@ interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const buttonStyles: Readonly<TailwindStyle> = {
-  button:
-    'bg-transparent border-none outline-none focus:bg-transparent focus:border-none focus:outline-none',
+const buttonStyles: Readonly<TwClasses> = {
+  button: 'bg-transparent border-none outline-none focus:outline-none',
 }
-const styles: Readonly<StyleRecord> = buttonStyles as StyleRecord
+const styles = buttonStyles as Readonly<StyleRecord>
 
 export function Button({
   children,
   classes,
   ...props
-}: Readonly<ButtonProps>): ReactComponent {
+}: Readonly<ButtonProps>): React.ReactElement {
   return (
     <button
       className={twMerge(styles.button, classes ?? '')}

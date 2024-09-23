@@ -1,10 +1,15 @@
 'use client'
 
-import React, { useEffect } from 'react'
-import { StatisticsItem } from '@embakitchen/components'
-import { updateStatisticsContainer } from '@embakitchen/utils'
-import type { StatisticsEntry } from '@embakitchen/types'
-import { statisticsStyles } from '@embakitchen/components/Statistics/Statistics.style'
+import * as React from 'react'
+import { StatisticsItem } from '~ek/components'
+import { StatisticsEntry } from '~ek/types'
+import { updateStatisticsContainer } from '~ek/utils'
+
+export const statisticsStyles: Readonly<TailwindStyle> = {
+  wrapper:
+    'w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6 px-10 mobile:px-15',
+}
+const styles = statisticsStyles as Readonly<StyleRecord>
 
 const statisticsItems: StatisticsEntry[] = [
   {
@@ -25,10 +30,8 @@ const statisticsItems: StatisticsEntry[] = [
   },
 ]
 
-export const Statistics: React.FC = () => {
-  const styles: Dictionary<string> = statisticsStyles as Dictionary<string>
-
-  useEffect(() => {
+export function Statistics(): ReactComponent {
+  React.useEffect(() => {
     const containers: HTMLElement[] = Array.from(
       document.querySelectorAll('.statistics-container'),
     )
@@ -65,7 +68,7 @@ export const Statistics: React.FC = () => {
   }, [])
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.wrapper}>
         {statisticsItems?.map((item, i) => (
           <StatisticsItem
@@ -79,6 +82,6 @@ export const Statistics: React.FC = () => {
         ))}
       </div>
       <div className='statistics-observer'></div>
-    </>
+    </div>
   )
 }

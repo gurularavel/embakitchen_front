@@ -1,18 +1,41 @@
-import type { SocialContact } from '~ek/types'
+/**
+ * @description Represents responsive image sizes as tailwind classes
+ * @example const sizes: ImgSize = 'w-4 h-4 laptop:w-10 laptop:h-10'
+ */
+export type ImgSize = string
 
 export type IconVariant =
   | 'menu'
-  | 'search-1'
-  | 'search-2'
   | 'close'
-  | 'dropdown-mobile'
-  | SocialContact
+  | 'dropdown-compact'
+  | 'dropdown-wide'
+  | 'whatsapp-light'
+  | 'facebook-light'
+  | 'instagram-light'
+  | 'youtube-light'
   | 'phone'
   | 'profile'
-  | 'down-chevron'
-  | 'right-arrow-orange'
+  | 'chevron-down'
+  | 'search-1'
+  | 'search-2'
+
+export type TimeoutId = NodeJS.Timeout | null
+
+export interface NavLinkEntry {
+  label: string
+  href?: string
+  nestedLinks?: Array<Omit<NavLinkEntry, 'nestedLinks'>>
+}
 
 export type LayoutOption = 'horizontal' | 'vertical'
+
+export type ColorScheme = 'light' // | 'dark'
+
+/**
+ * @description Represents gap between UI Elements in pixels
+ * @example const gap: Gap = 30, where gap is '30px'
+ */
+export type Gap = number
 
 export enum Language {
   'Az' = 'Az',
@@ -20,39 +43,32 @@ export enum Language {
   'Ru' = 'Ru',
 }
 
-export interface NavLinkEntry {
-  text: string
-  href?: string
-  isHighlighted?: boolean
-  items?: Array<Omit<NavLinkEntry, 'items'>>
-}
+// export type IconVariant = 'right-arrow-orange'
 
-export type Theme = 'light' | 'dark'
-
-// import { StaticImageData } from 'next/image'
+// // import { StaticImageData } from 'next/image'
 
 // export type SliderOption = 'main' | 'gallery' | 'partners'
 
-// export interface SocialContact {
-//   img: string
-//   url: string
-//   alt: string
-// }
+// // export interface SocialContact {
+// //   img: string
+// //   url: string
+// //   alt: string
+// // }
 
 // export interface StatisticsEntry {
 //   quantity: number
 //   title: string
 // }
 
-// interface OrderStageEntry {
-//   title: string
-//   description: string
-// }
+// // interface OrderStageEntry {
+// //   title: string
+// //   description: string
+// // }
 
-// interface CampaignEntry {
-//   img: string | StaticImageData
-//   title: string
-//   description: string
-//   startDate: string | Date
-//   endDate: string | Date
-// }
+// // interface CampaignEntry {
+// //   img: string | StaticImageData
+// //   title: string
+// //   description: string
+// //   startDate: string | Date
+// //   endDate: string | Date
+// // }

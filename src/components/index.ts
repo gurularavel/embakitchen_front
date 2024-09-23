@@ -1,10 +1,8 @@
 export * from '~ek/components/atoms'
 export * from '~ek/components/molecules'
 export * from '~ek/components/organisms'
-export * from '~ek/components/templates'
 
-// export { Header } from '@embakitchen/components/Header/Header'
-// export { Navbar } from '@embakitchen/components/Header/Navbar/Navbar'
+// export * from '~ek/components/templates'
 
 // export { Slider } from '@embakitchen/components/Slider/Slider'
 // export * as SliderVariant from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
@@ -18,8 +16,6 @@ export * from '~ek/components/templates'
 
 // export { OrderStages } from '@embakitchen/components/OrderStages/OrderStages'
 // export { OrderStageItem } from '@embakitchen/components/OrderStages/OrderStageItem/OrderStageItem'
-
-// export { SloganSection } from '@embakitchen/components/SloganSection/SloganSection'
 
 // export { Campaigns } from '@embakitchen/components/Campaigns/Campaigns'
 // export { CampaignItem } from '@embakitchen/components/Campaigns/CampaignItem/CampaignItem'

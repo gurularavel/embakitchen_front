@@ -1,4 +1,12 @@
-// import { STATISTICS_INTERVAL_LIMIT } from '@embakitchen/utils'
+import type { LayoutOption } from '~ek/types'
+
+export const getGapProperty = (
+  layout: LayoutOption,
+): keyof React.CSSProperties => {
+  return layout === 'horizontal' ? 'columnGap' : 'rowGap'
+}
+
+// import { STATISTICS_INTERVAL_LIMIT } from '~ek/utils'
 
 // export const updateStatisticsContainer = (container: HTMLElement) => {
 //   const quantity: number = +container.dataset.quantity!

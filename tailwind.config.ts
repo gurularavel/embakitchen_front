@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+import type { PluginAPI } from 'tailwindcss/types/config'
+const { SCREENS } = require('./src/utils/const')
 
 const config: Config = {
   content: [
@@ -17,32 +19,37 @@ const config: Config = {
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
+        secondary: {
+          '4': '#FFC35C',
+        },
         gray: {
           '1': '#31373D',
+          '2': '#3D454C',
           '3': '#49525B',
           '4': '#5F6B77',
           '10': '#F7F7F8',
         },
-        primary: {
-          '2': '#E86E3B',
-          '9': '#FCEBE4',
-        },
-        secondary: {
-          '4': '#FFC35C',
-        },
-        auxiliary: {
-          '1': '#101828',
-          '2': '#666666',
-          '3': '#1A1A1A',
-        },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
         },
+        supplementary: {
+          '1': '#101828',
+        },
+        // primary: {
+        //   '2': '#E86E3B',
+        //   '3': '#EA7F52',
+        //   '5': '#F0A17F',
+        //   '9': '#FCEBE4',
+        // },
+        // auxiliary: {
+        //   '2': '#666666',
+        //   '3': '#1A1A1A',
+        //   '4': '#FAFAFA',
+        //   '5': '#E6E6E6',
+        // },
 
         // primary: {
         //   '1': '#E55E25',
-        //   '3': '#EA7F52',
-        //   '5': '#F0A17F',
         // },
         // dark: {
         //   gray: {
@@ -53,16 +60,10 @@ const config: Config = {
         // },
         // semi: {
         //   gray: {
-        //     '1': '#FAFAFA',
         //     '2': 'rgba(42, 45, 47, 0.5)',
         //     '4': '#5F6B77',
         //     '8': '#CCD1D6',
         //     '9': '#E8EBED',
-        //   },
-        // },
-        // light: {
-        //   gray: {
-        //     '1': '#E6E6E6',
         //   },
         // },
       },
@@ -91,24 +92,34 @@ const config: Config = {
       },
       spacing: {
         // '1.25': '0.3125rem', // 5px
-        // '15': '3.75rem', // 60px
+        '15': '3.75rem', // 60px
         // '18': '4.5rem', // 72px
         '25': '6.25rem', // 100px
       },
       height: {
         '18': '4.5rem', // 72px
-        // '19': '4.75rem', // 76px
+        '19': '4.75rem', // 76px
       },
     },
-    screens: {
-      compact: '375px',
-      mobile: '576px',
-      tablet: '768px',
-      laptop: '1024px',
-      desktop: '1440px',
-      widescreen: '1920px',
-    },
+    screens: Object.entries(SCREENS).reduce(
+      (result, [key, value]) => ({
+        ...result,
+        [key]: `${value}px`,
+      }),
+      {},
+    ),
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase }: PluginAPI) {
+      addBase({
+        'input[type="search"]::-webkit-search-cancel-button': {
+          display: 'none',
+        },
+        'input[type="search"]::-moz-search-cancel-button': {
+          display: 'none',
+        },
+      })
+    },
+  ],
 }
 export default config

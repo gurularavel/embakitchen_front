@@ -1,74 +1,82 @@
-import * as React from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Icon, NavLink } from '~ek/components'
-import {
+import type {
   LayoutOption,
   SocialContact,
   SocialContactEntry,
-  Theme,
+  ColorScheme,
+  Gap,
+  ImgSize,
 } from '~ek/types'
+import { getGapProperty } from '~ek/utils'
 
 interface SocialContactsProps {
   layout: LayoutOption
-  theme: Theme
-  gap: TailwindUtilityNumber
+  colorScheme: ColorScheme
+  gap: Gap
   classes?: string
 }
 
-const socialContactsStyles: Readonly<TailwindStyle> = {
-  socialContacts: (dynamicClasses: unknown) =>
-    `flex ${dynamicClasses as string}`,
-  socialLink:
-    'w-10 h-10 bg-semi-white flex items-center justify-center rounded',
+const renderSocialContactsIcon = (
+  socialContact: SocialContact,
+  colorScheme: ColorScheme,
+  sizes: ImgSize = 'w-6 h-6',
+) => (
+  <Icon
+    variant={`${socialContact}-${colorScheme}`}
+    sizes={sizes}
+  />
+)
+
+const socialContacts: Readonly<
+  Record<ColorScheme, Record<SocialContact, SocialContactEntry>>
+> = {
+  light: {
+    whatsapp: {
+      href: 'https://web.whatsapp.com',
+      icon: renderSocialContactsIcon('whatsapp', 'light'),
+    },
+    facebook: {
+      href: 'https://www.facebook.com',
+      icon: renderSocialContactsIcon('facebook', 'light'),
+    },
+    instagram: {
+      href: 'https://www.instagram.com',
+      icon: renderSocialContactsIcon('instagram', 'light'),
+    },
+    youtube: {
+      href: 'https://www.youtube.com',
+      icon: renderSocialContactsIcon('youtube', 'light'),
+    },
+  },
 }
-const styles: Readonly<StyleRecord> = socialContactsStyles as StyleRecord
+
+const socialContactsStyles: Readonly<TwClasses> = {
+  socialContacts: (layout: unknown) =>
+    `flex ${(layout as LayoutOption) === 'horizontal' ? 'flex-row' : 'flex-col'}`,
+  link: 'w-10 h-10 flex items-center justify-center bg-semi-white rounded',
+}
+const styles = socialContactsStyles as Readonly<StyleRecord>
 const getSocialContactsStyles: StyleGetter =
   socialContactsStyles.socialContacts as StyleGetter
 
-const renderSocialContactIcon = (socialContact: string, theme: Theme) => (
-  <Icon variant={`${socialContact}-${theme}` as SocialContact} />
-)
-
-const getSocialIcons = (
-  theme: Theme,
-): Readonly<Record<string, SocialContactEntry>> => ({
-  whatsapp: {
-    href: 'https://web.whatsapp.com/',
-    icon: renderSocialContactIcon('whatsapp', theme),
-  },
-  facebook: {
-    href: 'https://www.facebook.com/',
-    icon: renderSocialContactIcon('facebook', theme),
-  },
-  instagram: {
-    href: 'https://www.instagram.com/',
-    icon: renderSocialContactIcon('instagram', theme),
-  },
-  youtube: {
-    href: 'https://www.youtube.com/',
-    icon: renderSocialContactIcon('youtube', theme),
-  },
-})
-
 export function SocialContacts({
   layout,
-  theme,
+  colorScheme,
   gap,
   classes,
-}: Readonly<SocialContactsProps>): ReactComponent {
-  const dynamicClasses = Object.values({
-    layout: (layout as LayoutOption) === 'vertical' ? 'flex-col' : 'flex-row',
-    gap: `gap-${(layout as LayoutOption) === 'vertical' ? 'y' : 'x'}-${gap}`,
-  }).join(' ')
-
+}: Readonly<SocialContactsProps>): React.ReactElement {
   return (
-    <ul className={getSocialContactsStyles(dynamicClasses)}>
-      {Object.entries(getSocialIcons(theme)).map(([key, value]) => (
-        <li key={key}>
+    <ul
+      className={getSocialContactsStyles(layout)}
+      style={{ [getGapProperty(layout)]: `${gap}px` }}
+    >
+      {Object.entries(socialContacts[colorScheme]).map(([, value]) => (
+        <li key={value.href}>
           <NavLink
             href={value.href}
-            classes={twMerge(styles.socialLink, classes ?? '')}
-            openInNewWindow={true}
+            openInNewTab={true}
+            classes={twMerge(styles.link, classes ?? '')}
           >
             {value.icon}
           </NavLink>
