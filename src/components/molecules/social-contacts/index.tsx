@@ -49,6 +49,24 @@ const socialContacts: Readonly<
       icon: renderSocialContactsIcon('youtube', 'light'),
     },
   },
+  dark: {
+    whatsapp: {
+      href: 'https://web.whatsapp.com',
+      icon: renderSocialContactsIcon('whatsapp', 'dark'),
+    },
+    facebook: {
+      href: 'https://www.facebook.com',
+      icon: renderSocialContactsIcon('facebook', 'dark'),
+    },
+    instagram: {
+      href: 'https://www.instagram.com',
+      icon: renderSocialContactsIcon('instagram', 'dark'),
+    },
+    youtube: {
+      href: 'https://www.youtube.com',
+      icon: renderSocialContactsIcon('youtube', 'dark'),
+    },
+  },
 }
 
 const socialContactsStyles: Readonly<TwClasses> = {

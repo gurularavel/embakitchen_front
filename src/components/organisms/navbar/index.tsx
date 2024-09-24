@@ -16,6 +16,11 @@ interface NavbarProps {
 
 type NavbarHeaderProps = Omit<NavbarProps, 'context'>
 
+interface FooterNav {
+  title: string
+  links: Partial<NavLinkEntry>[]
+}
+
 type NavbarsPropertyValue = (
   layout: LayoutOption,
   gap: Gap,
@@ -64,6 +69,27 @@ const commonNavLinks: NavLinkEntry[] = [
   {
     label: 'Kampaniyalar',
     href: '/campaigns',
+  },
+]
+
+const footerNav: FooterNav[] = [
+  {
+    title: 'ŞİRKƏT',
+    links: [
+      { label: 'Haqqımızda', href: '/about' },
+      { label: 'Mağazalar', href: '/stores' },
+      { label: 'Kampaniyalar', href: '/campaigns' },
+      { label: 'Blog', href: '/blogs' },
+    ],
+  },
+  {
+    title: 'MƏHSULLAR',
+    links: [
+      { label: 'Legno', href: '/legno' },
+      { label: 'Adel Ral', href: '/adel-ral' },
+      { label: 'Franchesco Cream', href: '/franchesco-cream' },
+      { label: 'Aldo Ray Gray', href: '/aldo-ray-gray' },
+    ],
   },
 ]
 
@@ -151,11 +177,6 @@ export function Navbar({
   return <nav>{navbars[context](layout, gap)}</nav>
 }
 
-// interface FooterNav {
-//   title: string
-//   links: Partial<NavLinkEntry>[]
-// }
-
 // interface NavbarProps { classes?: string }
 
 // const navbarStyles: Readonly<TailwindStyle> = {
@@ -171,27 +192,6 @@ export function Navbar({
 // }
 // const headerStyles: Readonly<StyleRecord> = navbarStyles.header as StyleRecord
 // const footerStyles: Readonly<StyleRecord> = navbarStyles.footer as StyleRecord
-
-// const footerNav: FooterNav[] = [
-//   {
-//     title: 'ŞİRKƏT',
-//     links: [
-//       { text: 'Haqqımızda', href: '/about' },
-//       { text: 'Mağazalar', href: '/stores' },
-//       { text: 'Kampaniyalar', href: '/campaigns' },
-//       { text: 'Blog', href: '/blogs' },
-//     ],
-//   },
-//   {
-//     title: 'MƏHSULLAR',
-//     links: [
-//       { text: 'Legno', href: '/legno' },
-//       { text: 'Adel Ral', href: '/adel-ral' },
-//       { text: 'Franchesco Cream', href: '/franchesco-cream' },
-//       { text: 'Aldo Ray Gray', href: '/aldo-ray-gray' },
-//     ],
-//   },
-// ]
 
 // function NavbarFooter(): ReactComponent {
 //   return (

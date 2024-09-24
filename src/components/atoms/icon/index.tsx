@@ -14,6 +14,10 @@ import profileIcon from '/public/assets/icons/profile.svg'
 import chevronDownIcon from '/public/assets/icons/chevron-down.svg'
 import searchIcon1 from '/public/assets/icons/search-1.svg'
 import searchIcon2 from '/public/assets/icons/search-2.svg'
+import whatsappDarkIcon from '/public/assets/icons/social/dark/whatsapp.svg'
+import facebookDarkIcon from '/public/assets/icons/social/dark/facebook.svg'
+import instagramDarkIcon from '/public/assets/icons/social/dark/instagram.svg'
+import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -35,6 +39,10 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'chevron-down': chevronDownIcon,
   'search-1': searchIcon1,
   'search-2': searchIcon2,
+  'whatsapp-dark': whatsappDarkIcon,
+  'facebook-dark': facebookDarkIcon,
+  'instagram-dark': instagramDarkIcon,
+  'youtube-dark': youtubeDarkIcon,
 }
 
 export function Icon({
@@ -51,18 +59,10 @@ export function Icon({
   )
 }
 
-// import whatsappDarkIcon from '/public/assets/icons/social/dark/whatsapp.svg'
-// import facebookDarkIcon from '/public/assets/icons/social/dark/facebook.svg'
-// import instagramDarkIcon from '/public/assets/icons/social/dark/instagram.svg'
-// import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
 // import downChevronIcon from '/public/assets/icons/down-chevron.svg'
 // import rightArrowOrange from '/public/assets/icons/right-arrow-orange.svg'
 
 // const icons: Readonly<Record<IconVariant, StaticImageData>> = {
-//   'whatsapp-dark': whatsappDarkIcon,
-//   'facebook-dark': facebookDarkIcon,
-//   'instagram-dark': instagramDarkIcon,
-//   'youtube-dark': youtubeDarkIcon,
 //   'down-chevron': downChevronIcon,
 //   'right-arrow-orange': rightArrowOrange,
 // }

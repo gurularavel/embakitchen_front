@@ -18,6 +18,10 @@ export type IconVariant =
   | 'chevron-down'
   | 'search-1'
   | 'search-2'
+  | 'whatsapp-dark'
+  | 'facebook-dark'
+  | 'instagram-dark'
+  | 'youtube-dark'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -29,7 +33,7 @@ export interface NavLinkEntry {
 
 export type LayoutOption = 'horizontal' | 'vertical'
 
-export type ColorScheme = 'light' // | 'dark'
+export type ColorScheme = 'light' | 'dark'
 
 /**
  * @description Represents gap between UI Elements in pixels
