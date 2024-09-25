@@ -77,13 +77,7 @@ function WideScreenHeader({
           sizes='w-[158px] h-[27px]'
         />
 
-        {screenWidth >= SCREENS.desktop && (
-          <Navbar
-            context='header'
-            layout='horizontal'
-            gap={16}
-          />
-        )}
+        {screenWidth >= SCREENS.desktop && <Navbar context='header' />}
       </div>
       <div className={wideHeaderStyles.right}>
         <ActionLink

@@ -3,37 +3,22 @@
 import { usePathname } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import { Button, Dropdown, NavLink } from '~ek/components'
-import type { Gap, LayoutOption, NavLinkEntry } from '~ek/types'
-import { getGapProperty } from '~ek/utils'
+import type { NavLinkEntry } from '~ek/types'
 
 type NavbarContext = 'header' | 'footer'
 
 interface NavbarProps {
   context: NavbarContext
-  layout: LayoutOption
-  gap: Gap
 }
-
-type NavbarHeaderProps = Omit<NavbarProps, 'context'>
 
 interface FooterNav {
   title: string
   links: Partial<NavLinkEntry>[]
 }
 
-type NavbarsPropertyValue = (
-  layout: LayoutOption,
-  gap: Gap,
-) => React.ReactElement
-
-const navbars: Readonly<Record<NavbarContext, NavbarsPropertyValue>> = {
-  header: (layout: LayoutOption, gap: Gap) => (
-    <NavbarHeader
-      layout={layout!}
-      gap={gap}
-    />
-  ),
-  footer: () => <NavbarFooter />,
+const navbars: Readonly<Record<NavbarContext, React.ReactElement>> = {
+  header: <NavbarHeader />,
+  footer: <NavbarFooter />,
 }
 
 const commonNavLinks: NavLinkEntry[] = [
@@ -95,8 +80,7 @@ const footerNav: FooterNav[] = [
 
 const navbarStyles: Readonly<TwClasses> = {
   header: {
-    nav: (layout: unknown) =>
-      `h-auto desktop:h-full mb-6 desktop:mb-0 flex ${(layout as LayoutOption) === 'vertical' ? 'flex-col' : 'flex-row'}`,
+    nav: 'h-auto desktop:h-full mb-6 desktop:mb-0 flex flex-col gap-y-6 desktop:flex-row desktop:gap-x-4',
     navItem: 'desktop:last:flex desktop:last:items-center',
     navLink:
       'desktop:h-full desktop:flex desktop:items-center text-base desktop:text-sm font-normal desktop:font-medium text-white desktop:text-nowrap',
@@ -106,7 +90,6 @@ const navbarStyles: Readonly<TwClasses> = {
   },
 }
 const navbarHeaderStyles = navbarStyles.header as Readonly<StyleRecord>
-const getHeaderNavStyles = (navbarStyles.header as TwClasses).nav as StyleGetter
 
 const renderDropdown = (link: NavLinkEntry) => (
   <Dropdown
@@ -124,17 +107,11 @@ const renderNavLink = (link: NavLinkEntry, classes?: string) => (
   </NavLink>
 )
 
-function NavbarHeader({
-  layout,
-  gap,
-}: Readonly<NavbarHeaderProps>): React.ReactElement {
+function NavbarHeader(): React.ReactElement {
   const pathname = usePathname()
 
   return (
-    <ul
-      className={getHeaderNavStyles(layout)}
-      style={{ [getGapProperty(layout)]: `${gap}px` }}
-    >
+    <ul className={navbarHeaderStyles.nav}>
       {commonNavLinks.map(link => {
         const navLinkClass = twMerge(
           navbarHeaderStyles.navLink,
@@ -169,12 +146,8 @@ function NavbarFooter(): React.ReactElement {
   )
 }
 
-export function Navbar({
-  context,
-  layout,
-  gap,
-}: Readonly<NavbarProps>): React.ReactElement {
-  return <nav>{navbars[context](layout, gap)}</nav>
+export function Navbar({ context }: Readonly<NavbarProps>): React.ReactElement {
+  return <nav>{navbars[context]}</nav>
 }
 
 // interface NavbarProps { classes?: string }

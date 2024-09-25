@@ -3,6 +3,7 @@ import { Logo, Navbar, SocialContacts } from '~ek/components'
 const footerStyles: Readonly<TwClasses> = {
   footer: '',
   footerContent: '',
+  footerItem: '',
 }
 const styles = footerStyles as Readonly<StyleRecord>
 
@@ -30,7 +31,7 @@ export function Footer(): React.ReactElement {
         </li>
 
         <li className={styles.footerItem}>
-          {/* <Navbar context='footer' /> */}
+          <Navbar context='footer' />
         </li>
       </ul>
     </footer>
