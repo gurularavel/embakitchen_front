@@ -22,13 +22,14 @@ export type IconVariant =
   | 'facebook-dark'
   | 'instagram-dark'
   | 'youtube-dark'
+  | 'chevron-right-orange'
 
 export type TimeoutId = NodeJS.Timeout | null
 
 export interface NavLinkEntry {
   label: string
   href?: string
-  nestedLinks?: Array<Omit<NavLinkEntry, 'nestedLinks'>>
+  nestedLinks?: Required<Omit<NavLinkEntry, 'nestedLinks'>>[]
 }
 
 export type LayoutOption = 'horizontal' | 'vertical'
@@ -46,8 +47,6 @@ export enum Language {
   'En' = 'En',
   'Ru' = 'Ru',
 }
-
-// export type IconVariant = 'right-arrow-orange'
 
 // // import { StaticImageData } from 'next/image'
 

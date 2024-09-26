@@ -18,6 +18,7 @@ import whatsappDarkIcon from '/public/assets/icons/social/dark/whatsapp.svg'
 import facebookDarkIcon from '/public/assets/icons/social/dark/facebook.svg'
 import instagramDarkIcon from '/public/assets/icons/social/dark/instagram.svg'
 import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
+import chevronRightOrange from '/public/assets/icons/chevron-right-orange.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -43,6 +44,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'facebook-dark': facebookDarkIcon,
   'instagram-dark': instagramDarkIcon,
   'youtube-dark': youtubeDarkIcon,
+  'chevron-right-orange': chevronRightOrange,
 }
 
 export function Icon({
@@ -60,9 +62,6 @@ export function Icon({
 }
 
 // import downChevronIcon from '/public/assets/icons/down-chevron.svg'
-// import rightArrowOrange from '/public/assets/icons/right-arrow-orange.svg'
-
 // const icons: Readonly<Record<IconVariant, StaticImageData>> = {
 //   'down-chevron': downChevronIcon,
-//   'right-arrow-orange': rightArrowOrange,
 // }
