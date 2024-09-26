@@ -1,6 +1,6 @@
 import { Montserrat } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
-import { Header } from '~ek/components'
+import { Footer, Header } from '~ek/components'
 import '~ek/app/globals.css'
 
 const montserrat = Montserrat({
@@ -21,8 +21,8 @@ export default function RootLayout({
     >
       <body>
         <Header />
-        {/* {children}
-        <Footer /> */}
+        {/* {children} */}
+        <Footer />
       </body>
     </html>
   )

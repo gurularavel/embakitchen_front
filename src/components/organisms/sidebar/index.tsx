@@ -60,11 +60,7 @@ export function Sidebar(): React.ReactElement {
         </div>
 
         <div className={styles.sidebarBody}>
-          <Navbar
-            context='header'
-            layout='vertical'
-            gap={24}
-          />
+          <Navbar context='header' />
 
           <SocialContacts
             layout='horizontal'

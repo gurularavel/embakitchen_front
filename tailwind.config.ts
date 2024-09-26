@@ -19,8 +19,16 @@ const config: Config = {
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
+        primary: {
+          '2': '#E86E3B',
+          '9': '#FCEBE4',
+        },
         secondary: {
           '4': '#FFC35C',
+        },
+        tertiary: {
+          '1': '#1A1A1A',
+          '4': '#666666',
         },
         gray: {
           '1': '#31373D',
@@ -36,14 +44,10 @@ const config: Config = {
           '1': '#101828',
         },
         // primary: {
-        //   '2': '#E86E3B',
         //   '3': '#EA7F52',
         //   '5': '#F0A17F',
-        //   '9': '#FCEBE4',
         // },
         // auxiliary: {
-        //   '2': '#666666',
-        //   '3': '#1A1A1A',
         //   '4': '#FAFAFA',
         //   '5': '#E6E6E6',
         // },
