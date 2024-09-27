@@ -21,6 +21,7 @@ const config: Config = {
       colors: {
         primary: {
           '2': '#E86E3B',
+          '3': '#EA7F52',
           '9': '#FCEBE4',
         },
         secondary: {
@@ -44,7 +45,6 @@ const config: Config = {
           '1': '#101828',
         },
         // primary: {
-        //   '3': '#EA7F52',
         //   '5': '#F0A17F',
         // },
         // auxiliary: {
@@ -78,13 +78,13 @@ const config: Config = {
         '7': '1.875rem', // 30px
         // '11': '3rem', // 48px
         // '13': '3.5rem', // 56px
-        // '14': '3.75rem', // 60px
+        '15': '3.75rem', // 60px
         // '16': '5.625rem', // 90px
       },
       fontSize: {
         // '2.5xl': '1.75rem', // 28px
-        // '3xl': '2rem', // 32px
-        // '4xl': '2.5rem', // 40px
+        '3xl': '2rem', // 32px
+        '4xl': '2.5rem', // 40px
         // '6xl': '3.5rem', // 56px
         // '7xl': '4.25rem', // 68px
       },

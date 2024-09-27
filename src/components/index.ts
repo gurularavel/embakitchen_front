@@ -1,8 +1,7 @@
 export * from '~ek/components/atoms'
 export * from '~ek/components/molecules'
 export * from '~ek/components/organisms'
-
-// export * from '~ek/components/templates'
+export * from '~ek/components/templates'
 
 // export { Slider } from '@embakitchen/components/Slider/Slider'
 // export * as SliderVariant from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
@@ -10,9 +9,6 @@ export * from '~ek/components/organisms'
 
 // export { SocialContacts } from '@embakitchen/components/SocialContacts/SocialContacts'
 // export { SocialContactsItem } from '@embakitchen/components/SocialContacts/SocialContactsItem/SocialContactsItem'
-
-// export { Statistics } from '@embakitchen/components/Statistics/Statistics'
-// export { StatisticsItem } from '@embakitchen/components/Statistics/StatisticsItem/StatisticsItem'
 
 // export { OrderStages } from '@embakitchen/components/OrderStages/OrderStages'
 // export { OrderStageItem } from '@embakitchen/components/OrderStages/OrderStageItem/OrderStageItem'

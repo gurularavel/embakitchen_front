@@ -1,1 +1,1 @@
-export { Main } from '~ek/components/templates/main'
+export { Home } from '~ek/components/templates/home'

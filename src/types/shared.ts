@@ -48,6 +48,11 @@ export enum Language {
   'Ru' = 'Ru',
 }
 
+export interface StatisticEntry {
+  quantity: number
+  label: string
+}
+
 // // import { StaticImageData } from 'next/image'
 
 // export type SliderOption = 'main' | 'gallery' | 'partners'
@@ -57,11 +62,6 @@ export enum Language {
 // //   url: string
 // //   alt: string
 // // }
-
-// export interface StatisticsEntry {
-//   quantity: number
-//   title: string
-// }
 
 // // interface OrderStageEntry {
 // //   title: string
