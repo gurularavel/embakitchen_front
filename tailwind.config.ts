@@ -92,10 +92,9 @@ const config: Config = {
         '25': '6.25rem', // 100px
       },
       maxWidth: {
-        // '4xl': '54.5rem', // 872px
+        '4xl': '54.5rem', // 872px
       },
       spacing: {
-        // '1.25': '0.3125rem', // 5px
         '15': '3.75rem', // 60px
         // '18': '4.5rem', // 72px
         '25': '6.25rem', // 100px

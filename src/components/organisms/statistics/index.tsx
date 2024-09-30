@@ -21,24 +21,26 @@ const statisticItems: StatisticEntry[] = [
 ]
 
 const statisticsStyles: Readonly<TwClasses> = {
-  statistics: '',
-  statisticsContent: '', // w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6 px-10 mobile:px-15
+  statistics:
+    'w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 px-10 mobile:px-15 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6',
 }
 const styles = statisticsStyles as Readonly<StyleRecord>
 
 export function Statistics(): React.ReactElement {
   return (
-    <div className={styles.statistics}>
-      <div className={styles.statisticsContent}>
-        {statisticItems.map((item: StatisticEntry) => (
-          <StatisticItem
-            key={item.label}
-            entry={item}
-          />
-        ))}
-      </div>
-
-      <div className='statistics-observer'></div>
+    <div
+      className={`statistics-observer ${styles.statistics}`}
+      style={{ border: '2px solid red' }}
+    >
+      {statisticItems.map((item: StatisticEntry, i: number) => (
+        <StatisticItem
+          key={item.label}
+          entry={item}
+          line={{
+            isLast: i === statisticItems.length - 1,
+          }}
+        />
+      ))}
     </div>
   )
 }
@@ -87,5 +89,4 @@ export function Statistics(): React.ReactElement {
 
 //             line={{
 //               row: i,
-//               isLast: i === statisticsItems.length - 1,
 //             }}
