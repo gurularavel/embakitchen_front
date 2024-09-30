@@ -9,4 +9,11 @@ export const SCREENS: Readonly<Record<ScreenBreakpoint, number>> = {
   widescreen: 1920,
 }
 
-// export const STATISTICS_INTERVAL_LIMIT: number = 1500
+export const DEFAULT_INTERSECTION_OBSERVER_OPTIONS: Readonly<IntersectionObserverInit> =
+  {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0,
+  }
+
+export const STATISTICS_INTERVAL_LIMIT: number = 1500

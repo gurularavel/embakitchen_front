@@ -1,4 +1,5 @@
 import type { LayoutOption } from '~ek/types'
+import { STATISTICS_INTERVAL_LIMIT } from '~ek/utils'
 
 export const getGapProperty = (
   layout: LayoutOption,
@@ -6,24 +7,27 @@ export const getGapProperty = (
   return layout === 'horizontal' ? 'columnGap' : 'rowGap'
 }
 
-// import { STATISTICS_INTERVAL_LIMIT } from '~ek/utils'
+export const statisticsObserverCallback = (
+  container: HTMLElement | null,
+): void => {
+  if (container) {
+    const statisticQuantityWrappers: HTMLElement[] = Array.from(
+      container.querySelectorAll('[data-quantity]'),
+    )
 
-// export const updateStatisticsContainer = (container: HTMLElement) => {
-//   const quantity: number = +container.dataset.quantity!
-//   const quantityWrapper: HTMLElement = container.querySelector(
-//     '.statistics-quantity',
-//   ) as HTMLElement
+    statisticQuantityWrappers.forEach((wrapper: HTMLElement) => {
+      const quantity: number = +wrapper.dataset.quantity!
 
-//   const interval: ReturnType<typeof setInterval> = setInterval(() => {
-//     if (+quantityWrapper.textContent! < quantity) {
-//       quantityWrapper.textContent = (
-//         +quantityWrapper.textContent! + 1
-//       ).toString()
-//     } else {
-//       if (!quantityWrapper.textContent?.includes('+')) {
-//         quantityWrapper.textContent += '+'
-//       }
-//       clearInterval(interval)
-//     }
-//   }, STATISTICS_INTERVAL_LIMIT / quantity)
-// }
+      const interval: ReturnType<typeof setInterval> = setInterval(() => {
+        if (+wrapper.textContent! < quantity) {
+          wrapper.textContent = (+wrapper.textContent! + 1).toString()
+        } else {
+          if (!wrapper.textContent?.includes('+')) {
+            wrapper.textContent += '+'
+          }
+          clearInterval(interval)
+        }
+      }, STATISTICS_INTERVAL_LIMIT / quantity)
+    })
+  }
+}
