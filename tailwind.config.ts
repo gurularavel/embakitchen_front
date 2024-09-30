@@ -30,6 +30,7 @@ const config: Config = {
         tertiary: {
           '1': '#1A1A1A',
           '4': '#666666',
+          '9': '#E6E6E6',
         },
         gray: {
           '1': '#31373D',
@@ -49,7 +50,6 @@ const config: Config = {
         // },
         // auxiliary: {
         //   '4': '#FAFAFA',
-        //   '5': '#E6E6E6',
         // },
 
         // primary: {

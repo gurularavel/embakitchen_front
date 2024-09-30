@@ -1,5 +1,13 @@
+'use client'
+
+import * as React from 'react'
 import { StatisticItem } from '~ek/components'
+import { useInView } from '~ek/hooks'
 import type { StatisticEntry } from '~ek/types'
+import {
+  DEFAULT_INTERSECTION_OBSERVER_OPTIONS,
+  statisticsObserverCallback,
+} from '~ek/utils'
 
 const statisticItems: StatisticEntry[] = [
   {
@@ -27,66 +35,29 @@ const statisticsStyles: Readonly<TwClasses> = {
 const styles = statisticsStyles as Readonly<StyleRecord>
 
 export function Statistics(): React.ReactElement {
+  const statisticsRef = React.useRef<HTMLDivElement | null>(null)
+  useInView({
+    ref: statisticsRef,
+    cb: () => statisticsObserverCallback(statisticsRef.current),
+    options: {
+      ...DEFAULT_INTERSECTION_OBSERVER_OPTIONS,
+      threshold: 0.15,
+    },
+    shouldUnobserve: true,
+  })
+
   return (
     <div
-      className={`statistics-observer ${styles.statistics}`}
-      style={{ border: '2px solid red' }}
+      ref={statisticsRef}
+      className={`statistics ${styles.statistics}`}
     >
       {statisticItems.map((item: StatisticEntry, i: number) => (
         <StatisticItem
           key={item.label}
           entry={item}
-          line={{
-            isLast: i === statisticItems.length - 1,
-          }}
+          isLast={i === statisticItems.length - 1}
         />
       ))}
     </div>
   )
 }
-
-// 'use client'
-
-// import * as React from 'react'
-// import { updateStatisticsContainer } from '~ek/utils'
-
-// export function Statistics(): ReactComponent {
-//   React.useEffect(() => {
-//     const containers: HTMLElement[] = Array.from(
-//       document.querySelectorAll('.statistics-container'),
-//     )
-
-//     const statisticsObserverCallback = (
-//       entries: IntersectionObserverEntry[],
-//       observer: IntersectionObserver,
-//     ) => {
-//       const [entry] = entries
-
-//       if (entry.isIntersecting) {
-//         containers.forEach((container: HTMLElement) => {
-//           updateStatisticsContainer(container)
-//         })
-//         observer.unobserve(entry.target)
-//       }
-//     }
-
-//     const statisticsObserver = new IntersectionObserver(
-//       statisticsObserverCallback,
-//       {
-//         root: null,
-//         rootMargin: '0px',
-//         threshold: 1.0,
-//       },
-//     )
-
-//     const target = document.querySelector('.statistics-observer')
-//     if (target) {
-//       statisticsObserver.observe(target)
-//     }
-
-//     return () => statisticsObserver.disconnect()
-//   }, [])
-
-//             line={{
-//               row: i,
-//             }}
