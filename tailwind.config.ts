@@ -11,10 +11,10 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
+        'slogans-section':
+          'url("../../public/assets/images/slogans_section_bg.png")',
         // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        // 'slogan-section':
-        //   'url("../../public/assets/images/slogan_section_bg.png")',
         // 'order-stages-section':
         //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
@@ -22,6 +22,7 @@ const config: Config = {
         primary: {
           '2': '#E86E3B',
           '3': '#EA7F52',
+          '5': '#F0A17F',
           '9': '#FCEBE4',
         },
         secondary: {
@@ -31,6 +32,7 @@ const config: Config = {
           '1': '#1A1A1A',
           '4': '#666666',
           '9': '#E6E6E6',
+          '11': '#FAFAFA',
         },
         gray: {
           '1': '#31373D',
@@ -45,13 +47,6 @@ const config: Config = {
         supplementary: {
           '1': '#101828',
         },
-        // primary: {
-        //   '5': '#F0A17F',
-        // },
-        // auxiliary: {
-        //   '4': '#FAFAFA',
-        // },
-
         // primary: {
         //   '1': '#E55E25',
         // },
@@ -77,7 +72,7 @@ const config: Config = {
       lineHeight: {
         '7': '1.875rem', // 30px
         // '11': '3rem', // 48px
-        // '13': '3.5rem', // 56px
+        '14': '3.5rem', // 56px
         '15': '3.75rem', // 60px
         // '16': '5.625rem', // 90px
       },
