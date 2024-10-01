@@ -53,25 +53,19 @@ export interface StatisticEntry {
   label: string
 }
 
-// // import { StaticImageData } from 'next/image'
+export type SliderVariant = 'main' | 'gallery' | 'partners'
 
-// export type SliderOption = 'main' | 'gallery' | 'partners'
+// import { StaticImageData } from 'next/image'
 
-// // export interface SocialContact {
-// //   img: string
-// //   url: string
-// //   alt: string
-// // }
+// interface OrderStageEntry {
+//   title: string
+//   description: string
+// }
 
-// // interface OrderStageEntry {
-// //   title: string
-// //   description: string
-// // }
-
-// // interface CampaignEntry {
-// //   img: string | StaticImageData
-// //   title: string
-// //   description: string
-// //   startDate: string | Date
-// //   endDate: string | Date
-// // }
+// interface CampaignEntry {
+//   img: string | StaticImageData
+//   title: string
+//   description: string
+//   startDate: string | Date
+//   endDate: string | Date
+// }
