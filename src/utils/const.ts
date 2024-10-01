@@ -1,4 +1,4 @@
-import { ScreenBreakpoint } from '~ek/types'
+import type { ScreenBreakpoint } from '~ek/types'
 
 export const SCREENS: Readonly<Record<ScreenBreakpoint, number>> = {
   compact: 375,
@@ -16,4 +16,4 @@ export const DEFAULT_INTERSECTION_OBSERVER_OPTIONS: Readonly<IntersectionObserve
     threshold: 1.0,
   }
 
-export const STATISTICS_INTERVAL_LIMIT: number = 1500
+export const STATISTICS_SECTION_INTERVAL_LIMIT: number = 1500

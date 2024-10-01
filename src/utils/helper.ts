@@ -1,5 +1,5 @@
 import type { LayoutOption } from '~ek/types'
-import { STATISTICS_INTERVAL_LIMIT } from '~ek/utils'
+import { STATISTICS_SECTION_INTERVAL_LIMIT } from '~ek/utils'
 
 export const getGapProperty = (
   layout: LayoutOption,
@@ -27,7 +27,7 @@ export const statisticsObserverCallback = (
           }
           clearInterval(interval)
         }
-      }, STATISTICS_INTERVAL_LIMIT / quantity)
+      }, STATISTICS_SECTION_INTERVAL_LIMIT / quantity)
     })
   }
 }
