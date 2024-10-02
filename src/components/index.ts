@@ -3,10 +3,6 @@ export * from '~ek/components/molecules'
 export * from '~ek/components/organisms'
 export * from '~ek/components/templates'
 
-// export { Slider } from '@embakitchen/components/Slider/Slider'
-// export * as SliderVariant from '@embakitchen/components/Slider/SliderVariant/SliderVariant'
-// export * as SliderSurface from '@embakitchen/components/Slider/SliderSurface/SliderSurface'
-
 // export { OrderStages } from '@embakitchen/components/OrderStages/OrderStages'
 // export { OrderStageItem } from '@embakitchen/components/OrderStages/OrderStageItem/OrderStageItem'
 
