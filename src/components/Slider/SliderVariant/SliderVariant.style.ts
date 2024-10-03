@@ -1,10 +1,4 @@
 export const sliderVariantStyles: TailwindStyle = {
-  main: {
-    wrapper:
-      'h-[565px] tablet:h-[493px] laptop:h-[582px] relative mb-6 laptop:mb-25',
-    slider: 'h-full',
-    img: 'w-auto widescreen:w-full h-full object-cover',
-  },
   gallery: {
     container:
       'bg-dark-blue mb-6 laptop:mb-25 px-[17px] tablet:px-10 laptop:px-[148px] widescreen:px-25 flex items-center h-[420px] laptop:h-[513px]',

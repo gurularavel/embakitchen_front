@@ -1,53 +1,14 @@
 import React, { useRef } from 'react'
 import Image from 'next/image'
-import { Pagination, Navigation } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperType } from 'swiper'
 import { SliderSurface } from '@embakitchen/components'
 import leftArrow from '/public/assets/icons/left_arrow.svg'
 import rightArrow from '/public/assets/icons/right_arrow.svg'
-import mainSliderImg from '/public/assets/images/slider/main_slider_img.jpg'
 import galleryImg1 from '/public/assets/images/slider/gallery_1.png'
 import galleryImg2 from '/public/assets/images/slider/gallery_2.png'
 import galleryImg3 from '/public/assets/images/slider/gallery_3.png'
-
-interface MainSliderEntry {
-  img: StaticImageData
-  alt: string
-}
-
-export const Main: React.FC = () => {
-  const styles: Dictionary<string> =
-    sliderVariantStyles.main as Dictionary<string>
-
-  return (
-    <div className={styles.wrapper}>
-      <Swiper
-        pagination={{ clickable: true }}
-        modules={[Pagination]}
-        loop={true}
-        className={`main-slider ${styles.slider}`}
-      >
-        {Array<MainSliderEntry>(3)
-          .fill({
-            img: mainSliderImg,
-            alt: 'embakitchen homepage slider mock image',
-          })
-          .map((item, i) => (
-            <SwiperSlide key={i}>
-              <Image
-                src={item.img}
-                alt={item.alt}
-                className={styles.img}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
-
-      <SliderSurface.Main />
-    </div>
-  )
-}
 
 export const Gallery: React.FC = () => {
   const swiperRef = useRef<SwiperType>()
