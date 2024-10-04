@@ -41,7 +41,7 @@ const sliderStyles: Readonly<TwClasses> = {
     img: 'w-auto widescreen:w-full h-full object-cover',
     surface: '',
     overlay:
-      'absolute top-0 left-0 right-0 bottom-0 px-[17px] tablet:px-[41px] laptop:px-15 desktop:px-[100px] pt-18 tablet:pt-[111px] desktop:pt-[138px] pb-16 flex flex-col justify-between', // tablet:pb-0 tablet:block
+      'absolute top-0 left-0 right-0 bottom-0 px-[17px] tablet:px-[41px] laptop:px-15 widescreen:px-[100px] pt-18 tablet:pt-[111px] desktop:pt-[138px] pb-16 tablet:pb-[84px] laptop:pb-0 mb-0 tablet:mb-6 flex flex-col justify-between laptop:block',
     text: 'flex flex-col items-start mb-0 mobile:mb-15 laptop:mb-10 text-white',
     textTop:
       'relative z-10 text-3xl tablet:text-4xl laptop:text-[56px] font-medium leading-12 tablet:leading-15 laptop:leading-[90px] whitespace-nowrap',
@@ -75,7 +75,7 @@ function Main(): React.ReactElement {
   React.useEffect(() => setIsClient(true), [])
 
   return (
-    <div className={mainSliderStyles.slider}>
+    <div className={`main-slider ${mainSliderStyles.slider}`}>
       <Swiper
         loop={true}
         modules={[Pagination]}

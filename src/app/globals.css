@@ -2,27 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Clears the remove icon (X) from search input on Internet Explorer */
-/* input[type='search']::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
-}
-input[type='search']::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-} */
-
-/* Clears the remove icon (X) from search input on Chrome and other webkit browsers */
-/* input[type='search']::-webkit-search-decoration,
-input[type='search']::-webkit-search-cancel-button,
-input[type='search']::-webkit-search-results-button,
-input[type='search']::-webkit-search-results-decoration {
-  display: none;
-} */
-
-/* .main-slider .swiper-pagination.swiper-pagination-bullets {
+.main-slider .swiper-pagination.swiper-pagination-bullets {
   bottom: 212px;
   display: flex;
   align-items: center;
@@ -57,7 +37,7 @@ input[type='search']::-webkit-search-results-decoration {
   background-color: #fff;
 }
 
-.partners-slider .swiper-wrapper,
+/* .partners-slider .swiper-wrapper,
 .gallery-slider .swiper-wrapper {
   align-items: center;
 }
