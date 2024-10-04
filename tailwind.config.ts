@@ -49,6 +49,7 @@ const config: Config = {
         },
         supplementary: {
           '1': '#101828',
+          '2': '#2A2D2F',
         },
         // dark: {
         //   gray: {

@@ -23,6 +23,8 @@ export type IconVariant =
   | 'instagram-dark'
   | 'youtube-dark'
   | 'chevron-right-orange'
+  | 'arrow-right'
+  | 'arrow-left'
 
 export type TimeoutId = NodeJS.Timeout | null
 

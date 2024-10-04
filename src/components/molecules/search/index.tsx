@@ -8,7 +8,7 @@ const searchStyles: Readonly<TwClasses> = {
   search: 'w-auto h-full',
   searchButton: 'w-auto h-full flex items-center',
   searchContainer: (isVisible: unknown) =>
-    `h-11 bg-[rgba(255,255,255,0.2)] shadow-sm shadow-supplementary-1/5 px-3.5 absolute left-0 right-0 z-10 border border-solid border-gray-4 rounded-lg flex items-center gap-x-2 transition-all duration-300 ease-in-out ${(isVisible as boolean) ? 'top-14 laptop:top-24 opacity-100 translate-y-0' : '-top-full opacity-0 -translate-y-full'}`,
+    `h-11 bg-[rgba(255,255,255,0.2)] shadow-sm shadow-supplementary-1/20 px-3.5 absolute left-0 right-0 z-10 border border-solid border-gray-4 rounded-lg flex items-center gap-x-2 transition-all duration-300 ease-in-out ${(isVisible as boolean) ? 'top-14 laptop:top-24 opacity-100 translate-y-0' : '-top-full opacity-0 -translate-y-full'}`,
   searchInputIcon: 'w-6 h-6',
   input:
     'w-full h-full text-sm placeholder:text-sm font-normal placeholder:font-normal text-gray-10 placeholder:text-gray-10',

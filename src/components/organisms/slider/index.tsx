@@ -3,14 +3,19 @@
 import * as React from 'react'
 import Image, { type StaticImageData } from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Pagination } from 'swiper/modules'
-import { Button, SocialContacts } from '~ek/components'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import type { Swiper as SwiperType } from 'swiper'
+import { twMerge } from 'tailwind-merge'
+import { Button, Icon, SocialContacts } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
 import type { SliderVariant } from '~ek/types'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import mainSliderImg from '/public/assets/images/slider/main-slider-img.png'
+import galleryImg1 from '/public/assets/images/slider/gallery/gallery-img-1.png'
+import galleryImg2 from '/public/assets/images/slider/gallery/gallery-img-2.png'
+import galleryImg3 from '/public/assets/images/slider/gallery/gallery-img-3.png'
 import partner1 from '/public/assets/images/slider/partners/partner-1.png'
 import partner2 from '/public/assets/images/slider/partners/partner-2.png'
 import partner3 from '/public/assets/images/slider/partners/partner-3.png'
@@ -56,6 +61,18 @@ const sliderStyles: Readonly<TwClasses> = {
     socialContacts:
       'hidden laptop:block absolute z-10 laptop:top-[117px] widescreen:top-1/2 laptop:right-15 widescreen:right-25 widescreen:-translate-y-1/2',
   },
+  gallery: {
+    slider:
+      'h-[420px] laptop:h-[513px] bg-gray-1 mb-6 laptop:mb-25 px-[17px] tablet:px-10 laptop:px-[148px] widescreen:px-25 flex items-center',
+    sliderWrapper: 'w-full h-[372px] relative',
+    swiper: 'h-full cursor-pointer',
+    slide:
+      'laptop:[&.swiper-slide-next_img]:h-[372px] laptop:!flex laptop:items-center laptop:[&.swiper-slide-active]:!w-[calc((100%-570px)/2)] laptop:[&.swiper-slide-next]:!w-[570px] laptop:[&.swiper-slide-next+.swiper-slide]:!w-[calc((100%-570px)/2)] widescreen:[&.swiper-slide-active]:!w-1/3 widescreen:[&.swiper-slide-next]:!w-1/3 widescreen:[&.swiper-slide-next+.swiper-slide]:!w-1/3',
+    img: 'w-full h-full laptop:h-[340px] object-cover',
+    nav: 'absolute top-1/2 -translate-1/2 z-10 w-[33.33px] h-[33.33px] flex items-center justify-center bg-supplementary-2/80',
+    prev: 'left-[3.33px] laptop:-left-[calc(33.33px/2)] rounded-full',
+    next: 'right-[3.33px] laptop:-right-[calc(33.33px/2)] rounded-full',
+  },
   partners: {
     slider: 'mb-6 laptop:mb-25',
     title: 'text-xl leading-7 font-medium text-center text-gray-9 mb-10',
@@ -64,8 +81,8 @@ const sliderStyles: Readonly<TwClasses> = {
     slide: '!w-auto h-auto',
   },
 }
-const styles = sliderStyles as Readonly<StyleRecord>
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
+const gallerySliderStyles = sliderStyles.gallery as Readonly<StyleRecord>
 const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
@@ -98,14 +115,8 @@ function Main(): React.ReactElement {
           ))}
       </Swiper>
 
-      <div
-        className={mainSliderStyles.surface}
-        style={{ border: '2px solid red' }}
-      >
-        <div
-          className={mainSliderStyles.overlay}
-          style={{ border: '2px solid green' }}
-        >
+      <div className={mainSliderStyles.surface}>
+        <div className={mainSliderStyles.overlay}>
           <h3 className={mainSliderStyles.text}>
             <span className={mainSliderStyles.textTop}>Büdcənizə uyğun</span>
             <span className={mainSliderStyles.textBottom}>Mətbəx mebeli</span>
@@ -136,9 +147,67 @@ function Main(): React.ReactElement {
 }
 
 function Gallery(): React.ReactElement {
+  const gallerySliderRef = React.useRef<SwiperType>()
+  const gallerySliderImages: StaticImageData[] = Array(2)
+    .fill([galleryImg1, galleryImg2, galleryImg3])
+    .flat()
+
   return (
-    <div>
-      <p>Gallery Slider</p>
+    <div className={gallerySliderStyles.slider}>
+      <div className={gallerySliderStyles.sliderWrapper}>
+        <Swiper
+          className={gallerySliderStyles.swiper}
+          onBeforeInit={swiper => (gallerySliderRef.current = swiper)}
+          slidesPerView={1}
+          spaceBetween={0}
+          breakpoints={{
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 27,
+            },
+            1920: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
+          modules={[Navigation]}
+          touchEventsTarget='container'
+        >
+          {gallerySliderImages.map((img: StaticImageData, i: number) => (
+            <SwiperSlide
+              key={i}
+              className={gallerySliderStyles.slide}
+            >
+              <Image
+                src={img}
+                alt='Embakitchen product'
+                className={gallerySliderStyles.img}
+              />
+
+              <div className='surface'></div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <Button
+          classes={twMerge(gallerySliderStyles.nav, gallerySliderStyles.prev)}
+          onClick={() => gallerySliderRef.current?.slidePrev()}
+        >
+          <Icon
+            variant='arrow-left'
+            sizes='w-3 h-2.5'
+          />
+        </Button>
+        <Button
+          classes={twMerge(gallerySliderStyles.nav, gallerySliderStyles.next)}
+          onClick={() => gallerySliderRef.current?.slideNext()}
+        >
+          <Icon
+            variant='arrow-right'
+            sizes='w-3 h-2.5'
+          />
+        </Button>
+      </div>
     </div>
   )
 }
