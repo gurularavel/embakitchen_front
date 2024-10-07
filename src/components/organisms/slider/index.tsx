@@ -67,11 +67,15 @@ const sliderStyles: Readonly<TwClasses> = {
     sliderWrapper: 'w-full h-[372px] relative',
     swiper: 'h-full cursor-pointer',
     slide:
-      'laptop:[&.swiper-slide-next_img]:h-[372px] laptop:!flex laptop:items-center laptop:[&.swiper-slide-active]:!w-[calc((100%-570px)/2)] laptop:[&.swiper-slide-next]:!w-[570px] laptop:[&.swiper-slide-next+.swiper-slide]:!w-[calc((100%-570px)/2)] widescreen:[&.swiper-slide-active]:!w-1/3 widescreen:[&.swiper-slide-next]:!w-1/3 widescreen:[&.swiper-slide-next+.swiper-slide]:!w-1/3',
+      'group laptop:[&.swiper-slide-next_img]:h-[372px] laptop:!flex laptop:items-center laptop:[&.swiper-slide-active]:!w-[calc((100%-570px)/2)] laptop:[&.swiper-slide-next]:!w-[570px] laptop:[&.swiper-slide-next+.swiper-slide]:!w-[calc((100%-570px)/2)] widescreen:[&.swiper-slide-active]:!w-1/3 widescreen:[&.swiper-slide-next]:!w-1/3 widescreen:[&.swiper-slide-next+.swiper-slide]:!w-1/3',
     img: 'w-full h-full laptop:h-[340px] object-cover',
     nav: 'absolute top-1/2 -translate-1/2 z-10 w-[33.33px] h-[33.33px] flex items-center justify-center bg-supplementary-2/80',
     prev: 'left-[3.33px] laptop:-left-[calc(33.33px/2)] rounded-full',
     next: 'right-[3.33px] laptop:-right-[calc(33.33px/2)] rounded-full',
+    surface:
+      'w-auto mobile:min-w-[254px] laptop:min-w-[183px] bg-tertiary-2 rounded-lg py-3 px-6 absolute bottom-4 left-4 right-4 mobile:left-1/2 mobile:right-auto mobile:-translate-x-1/2 laptop:translate-x-full laptop:right-4 laptop:opacity-0 laptop:invisible laptop:group-hover:visible laptop:group-hover:opacity-100 laptop:group-hover:translate-x-0 transition-all duration-200', // gallery-slider-surface
+    tag: 'text-sm font-medium text-secondary-4 leading-5 mb-1',
+    title: 'text-base font-medium text-white leading-6',
   },
   partners: {
     slider: 'mb-6 laptop:mb-25',
@@ -184,7 +188,10 @@ function Gallery(): React.ReactElement {
                 className={gallerySliderStyles.img}
               />
 
-              <div className='surface'></div>
+              <div className={gallerySliderStyles.surface}>
+                <span className={gallerySliderStyles.tag}>Ən çox satılan</span>
+                <h6 className={gallerySliderStyles.title}>Adel Ral</h6>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
