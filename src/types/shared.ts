@@ -57,12 +57,12 @@ export interface StatisticEntry {
 
 export type SliderVariant = 'main' | 'gallery' | 'partners'
 
-// import { StaticImageData } from 'next/image'
+export interface OrderStageEntry {
+  title: string
+  description: string
+}
 
-// interface OrderStageEntry {
-//   title: string
-//   description: string
-// }
+// import { StaticImageData } from 'next/image'
 
 // interface CampaignEntry {
 //   img: string | StaticImageData

@@ -1,9 +1,7 @@
-import React from 'react'
-import { OrderStageItem } from '@embakitchen/components'
-import type { OrderStageEntry } from '@embakitchen/types'
-import { orderStagesStyles } from '@embakitchen/components/OrderStages/OrderStages.style'
+import { OrderStageItem, type OrderStageItemProps } from '~ek/components'
+import type { OrderStageEntry } from '~ek/types'
 
-const stages: OrderStageEntry[] = [
+const orderStages: OrderStageEntry[] = [
   {
     title: 'Dizayn konsultasiya',
     description:
@@ -21,17 +19,25 @@ const stages: OrderStageEntry[] = [
   },
 ]
 
-export const OrderStages: React.FC = () => {
-  const styles: Dictionary<string> = orderStagesStyles as Dictionary<string>
+const orderStagesStyles: Readonly<TwClasses> = {
+  container:
+    'h-[2226px] laptop:h-[680px] mb-6 laptop:mb-25 mx-0 laptop:mx-15 widescreen:mx-0 bg-order-stages-section bg-no-repeat bg-cover bg-black/20',
+  wrapper:
+    'h-full px-4 tablet:px-10 laptop:px-0 widescreen:px-25 pb-[186px] tablet:pb-[93px] laptop:pb-0',
+  stages:
+    'h-full flex flex-col laptop:flex-row justify-stretch gap-x-0 widescreen:gap-x-[200px]',
+}
+const styles = orderStagesStyles as Readonly<StyleRecord>
 
+export function OrderStages(): React.ReactElement {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.stages}>
-          {stages.map((stage: OrderStageEntry, i: number) => {
-            const orderStageItemProps = {
+          {orderStages.map((stage: OrderStageEntry, i: number) => {
+            const orderStageItemProps: OrderStageItemProps = {
               ...stage,
-              row: i + 1,
+              position: i + 1,
             }
 
             return (
