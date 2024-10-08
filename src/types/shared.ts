@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 /**
  * @description Represents responsive image sizes as tailwind classes
  * @example const sizes: ImgSize = 'w-4 h-4 laptop:w-10 laptop:h-10'
@@ -62,12 +64,10 @@ export interface OrderStageEntry {
   description: string
 }
 
-// import { StaticImageData } from 'next/image'
-
-// interface CampaignEntry {
-//   img: string | StaticImageData
-//   title: string
-//   description: string
-//   startDate: string | Date
-//   endDate: string | Date
-// }
+export interface CampaignEntry {
+  img: string | StaticImageData
+  title: string
+  description: string
+  startDate: string | Date
+  endDate: string | Date
+}
