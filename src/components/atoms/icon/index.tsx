@@ -19,6 +19,8 @@ import facebookDarkIcon from '/public/assets/icons/social/dark/facebook.svg'
 import instagramDarkIcon from '/public/assets/icons/social/dark/instagram.svg'
 import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
 import chevronRightOrange from '/public/assets/icons/chevron-right-orange.svg'
+import arrowRightIcon from '/public/assets/icons/arrow-right.svg'
+import arrowLeftIcon from '/public/assets/icons/arrow-left.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -45,6 +47,8 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'instagram-dark': instagramDarkIcon,
   'youtube-dark': youtubeDarkIcon,
   'chevron-right-orange': chevronRightOrange,
+  'arrow-left': arrowLeftIcon,
+  'arrow-right': arrowRightIcon,
 }
 
 export function Icon({

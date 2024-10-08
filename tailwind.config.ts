@@ -20,6 +20,7 @@ const config: Config = {
       },
       colors: {
         primary: {
+          '1': '#E55E25',
           '2': '#E86E3B',
           '3': '#EA7F52',
           '5': '#F0A17F',
@@ -30,6 +31,7 @@ const config: Config = {
         },
         tertiary: {
           '1': '#1A1A1A',
+          '2': '#333333',
           '4': '#666666',
           '9': '#E6E6E6',
           '11': '#FAFAFA',
@@ -39,6 +41,7 @@ const config: Config = {
           '2': '#3D454C',
           '3': '#49525B',
           '4': '#5F6B77',
+          '9': '#18181B',
           '10': '#F7F7F8',
         },
         semi: {
@@ -46,14 +49,10 @@ const config: Config = {
         },
         supplementary: {
           '1': '#101828',
+          '2': '#2A2D2F',
         },
-        // primary: {
-        //   '1': '#E55E25',
-        // },
         // dark: {
         //   gray: {
-        //     '1': '#333333',
-        //     '2': '#18181B',
         //     '3': '#3D454C',
         //   },
         // },
@@ -71,17 +70,14 @@ const config: Config = {
       },
       lineHeight: {
         '7': '1.875rem', // 30px
-        // '11': '3rem', // 48px
+        '12': '3rem', // 48px
         '14': '3.5rem', // 56px
         '15': '3.75rem', // 60px
-        // '16': '5.625rem', // 90px
       },
       fontSize: {
         // '2.5xl': '1.75rem', // 28px
         '3xl': '2rem', // 32px
         '4xl': '2.5rem', // 40px
-        // '6xl': '3.5rem', // 56px
-        // '7xl': '4.25rem', // 68px
       },
       width: {
         '25': '6.25rem', // 100px
@@ -91,7 +87,7 @@ const config: Config = {
       },
       spacing: {
         '15': '3.75rem', // 60px
-        // '18': '4.5rem', // 72px
+        '18': '4.5rem', // 72px
         '25': '6.25rem', // 100px
       },
       height: {
@@ -110,10 +106,27 @@ const config: Config = {
   plugins: [
     function ({ addBase }: PluginAPI) {
       addBase({
+        'input[type="search"]::-ms-clear': {
+          display: 'none',
+          width: '0px',
+          height: '0px',
+        },
+        'input[type="search"]::-ms-reveal': {
+          display: 'none',
+          width: '0px',
+          height: '0px',
+        },
+
+        'input[type="search"]::-webkit-search-decoration': {
+          display: 'none',
+        },
         'input[type="search"]::-webkit-search-cancel-button': {
           display: 'none',
         },
-        'input[type="search"]::-moz-search-cancel-button': {
+        'input[type="search"]::-webkit-search-results-button': {
+          display: 'none',
+        },
+        'input[type="search"]::-webkit-search-results-decoration': {
           display: 'none',
         },
       })

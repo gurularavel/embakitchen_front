@@ -1,8 +1,12 @@
-import { SlogansSection, Statistics } from '~ek/components'
+import { Slider, SlogansSection, Statistics } from '~ek/components'
 
 export function Home(): React.ReactElement {
   return (
     <>
+      <Slider variant='main' />
+
+      <Slider variant='gallery' />
+
       <Statistics />
 
       <SlogansSection
@@ -11,16 +15,8 @@ export function Home(): React.ReactElement {
           'Xəyallarınızdakı mətbəxi bizə həvalə edin',
         ]}
       />
+
+      <Slider variant='partners' />
     </>
   )
 }
-
-// import { Slider } from '~ek/components'
-
-// export function Main() {
-//   return (
-//     <>
-//       <Slider />
-//     </>
-//   )
-// }
