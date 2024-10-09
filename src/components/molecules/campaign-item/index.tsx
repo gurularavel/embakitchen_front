@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { format } from 'date-fns'
-import { Icon } from '~ek/components'
+import { Icon, Timer } from '~ek/components'
 import type { CampaignEntry } from '~ek/types'
 
 const campaignItemStyles: Readonly<TwClasses> = {
@@ -44,7 +44,10 @@ export function CampaignItem({
           <h5 className={styles.title}>{title}</h5>
 
           <div className={styles.info}>
-            <div>Timer</div>
+            <Timer
+              start={startDate}
+              end={endDate}
+            />
 
             <Link
               href={`/campaign/${title}`}
