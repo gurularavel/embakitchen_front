@@ -7,3 +7,4 @@ export {
   OrderStageItem,
   type OrderStageItemProps,
 } from '~ek/components/molecules/order-stage-item'
+export { CampaignItem } from '~ek/components/molecules/campaign-item'
