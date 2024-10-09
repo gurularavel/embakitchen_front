@@ -79,7 +79,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   partners: {
     slider: 'mb-6 laptop:mb-25',
-    title: 'text-xl leading-7 font-medium text-center text-gray-9 mb-10',
+    title: 'text-xl leading-7 font-medium text-center text-gray-900 mb-10',
     sliderWrapper: 'px-4 laptop:px-15 widescreen:px-25',
     swiper: 'h-12',
     slide: '!w-auto h-auto',

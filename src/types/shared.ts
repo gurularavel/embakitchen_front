@@ -27,6 +27,7 @@ export type IconVariant =
   | 'chevron-right-orange'
   | 'arrow-right'
   | 'arrow-left'
+  | 'chevron-right'
 
 export type TimeoutId = NodeJS.Timeout | null
 

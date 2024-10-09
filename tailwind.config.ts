@@ -43,8 +43,10 @@ const config: Config = {
           '2': '#3D454C',
           '3': '#49525B',
           '4': '#5F6B77',
-          '9': '#18181B',
+          '8': '#CCD1D6',
+          '9': '#E8EBED',
           '10': '#F7F7F8',
+          '900': '#18181B',
         },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
@@ -56,8 +58,6 @@ const config: Config = {
         // semi: {
         //   gray: {
         //     '2': 'rgba(42, 45, 47, 0.5)',
-        //     '8': '#CCD1D6',
-        //     '9': '#E8EBED',
         //   },
         // },
       },
@@ -129,4 +129,5 @@ const config: Config = {
     },
   ],
 }
+
 export default config
