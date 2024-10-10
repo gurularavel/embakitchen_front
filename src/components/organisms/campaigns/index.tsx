@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { addDays } from 'date-fns'
 import { CampaignItem } from '~ek/components'
 import type { CampaignEntry } from '~ek/types'
 import campaign1 from '/public/assets/images/campaigns/campaign-1.png'
@@ -23,8 +22,22 @@ const campaignsData: CampaignData = {
       description:
         'Kampaniya haqqında ətraflı məlumat. Kampaniya səhifəsinə keçid etdikdə görünəcək!',
       img: campaignImages[i],
-      startDate: addDays(today, i - 1),
-      endDate: addDays(today, i + 5),
+      start: new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() + (i - 1),
+        today.getHours(),
+        today.getMinutes(),
+        today.getSeconds(),
+      ),
+      end: new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() + (i + 5),
+        20,
+        30,
+        0,
+      ),
     })),
 }
 

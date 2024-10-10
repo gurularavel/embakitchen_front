@@ -1,4 +1,4 @@
-import { StaticImageData } from 'next/image'
+import type { StaticImageData } from 'next/image'
 
 /**
  * @description Represents responsive image sizes as tailwind classes
@@ -69,6 +69,6 @@ export interface CampaignEntry {
   title: string
   description: string
   img: string | StaticImageData
-  startDate: string | Date
-  endDate: string | Date
+  start: Date
+  end: Date
 }

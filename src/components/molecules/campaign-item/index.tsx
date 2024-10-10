@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { format } from 'date-fns'
+import { az } from 'date-fns/locale'
 import { Icon, Timer } from '~ek/components'
 import type { CampaignEntry } from '~ek/types'
 
@@ -10,18 +11,19 @@ const campaignItemStyles: Readonly<TwClasses> = {
   imgWrapper: 'h-60',
   img: 'w-full h-full',
   body: 'p-6 border border-solid border-gray-8 border-t-0',
-  dates: 'text-sm font-semibold leading-5 text-gray-4 inline-block mb-2.5',
+  dates:
+    'text-sm font-semibold leading-5 text-gray-4 inline-block mb-2.5 capitalize',
   title: 'text-xl font-semibold leading-5 text-gray-1 mb-[33px]',
-  info: 'flex justify-between gap-x-6',
-  link: 'flex-1 flex justify-between items-center p-4 text-base font-medium text-gray-2 border border-solid border-gray-9',
+  info: 'flex flex-col mobile:flex-row laptop:flex-col desktop:flex-row justify-between gap-x-6 gap-y-1',
+  link: 'h-14 px-4 w-full mobile:w-1/2 laptop:w-full desktop:w-1/2 flex justify-between items-center text-base font-medium text-gray-2 border border-solid border-gray-9',
 }
 const styles = campaignItemStyles as Readonly<StyleRecord>
 
 export function CampaignItem({
   title,
   img,
-  startDate,
-  endDate,
+  start,
+  end,
 }: Readonly<Omit<CampaignEntry, 'description'>>): React.ReactElement {
   return (
     <div className={styles.container}>
@@ -36,18 +38,15 @@ export function CampaignItem({
 
         <div className={styles.body}>
           <span className={styles.dates}>
-            {format(startDate, 'd MMMM')}
+            {format(start, 'd MMMM', { locale: az })}
             &nbsp;-&nbsp;
-            {format(endDate, 'd MMMM')}
+            {format(end, 'd MMMM', { locale: az })}
           </span>
 
           <h5 className={styles.title}>{title}</h5>
 
           <div className={styles.info}>
-            <Timer
-              start={startDate}
-              end={endDate}
-            />
+            <Timer end={end} />
 
             <Link
               href={`/campaign/${title}`}
