@@ -12,7 +12,7 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'slogans-section':
-          'url("../../public/assets/images/slogans_section_bg.png")',
+          'url("../../public/assets/images/slogans-section-bg.png")',
         'order-stages-section':
           'url("../../public/assets/images/order-stages-section-bg.png")',
         // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
