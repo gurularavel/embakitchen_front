@@ -1,3 +1,5 @@
+import type { StaticImageData } from 'next/image'
+
 /**
  * @description Represents responsive image sizes as tailwind classes
  * @example const sizes: ImgSize = 'w-4 h-4 laptop:w-10 laptop:h-10'
@@ -25,6 +27,7 @@ export type IconVariant =
   | 'chevron-right-orange'
   | 'arrow-right'
   | 'arrow-left'
+  | 'chevron-right'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -57,17 +60,15 @@ export interface StatisticEntry {
 
 export type SliderVariant = 'main' | 'gallery' | 'partners'
 
-// import { StaticImageData } from 'next/image'
+export interface OrderStageEntry {
+  title: string
+  description: string
+}
 
-// interface OrderStageEntry {
-//   title: string
-//   description: string
-// }
-
-// interface CampaignEntry {
-//   img: string | StaticImageData
-//   title: string
-//   description: string
-//   startDate: string | Date
-//   endDate: string | Date
-// }
+export interface CampaignEntry {
+  title: string
+  description: string
+  img: string | StaticImageData
+  start: Date
+  end: Date
+}

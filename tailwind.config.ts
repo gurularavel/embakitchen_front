@@ -13,6 +13,8 @@ const config: Config = {
       backgroundImage: {
         'slogans-section':
           'url("../../public/assets/images/slogans_section_bg.png")',
+        'order-stages-section':
+          'url("../../public/assets/images/order-stages-section-bg.png")',
         // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         // 'order-stages-section':
@@ -41,8 +43,10 @@ const config: Config = {
           '2': '#3D454C',
           '3': '#49525B',
           '4': '#5F6B77',
-          '9': '#18181B',
+          '8': '#CCD1D6',
+          '9': '#E8EBED',
           '10': '#F7F7F8',
+          '900': '#18181B',
         },
         semi: {
           white: 'rgba(255, 255, 255, 0.5)',
@@ -51,17 +55,9 @@ const config: Config = {
           '1': '#101828',
           '2': '#2A2D2F',
         },
-        // dark: {
-        //   gray: {
-        //     '3': '#3D454C',
-        //   },
-        // },
         // semi: {
         //   gray: {
         //     '2': 'rgba(42, 45, 47, 0.5)',
-        //     '4': '#5F6B77',
-        //     '8': '#CCD1D6',
-        //     '9': '#E8EBED',
         //   },
         // },
       },
@@ -75,7 +71,7 @@ const config: Config = {
         '15': '3.75rem', // 60px
       },
       fontSize: {
-        // '2.5xl': '1.75rem', // 28px
+        '2.5xl': '1.75rem', // 28px
         '3xl': '2rem', // 32px
         '4xl': '2.5rem', // 40px
       },
@@ -133,4 +129,5 @@ const config: Config = {
     },
   ],
 }
+
 export default config

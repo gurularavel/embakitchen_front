@@ -21,6 +21,7 @@ import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
 import chevronRightOrange from '/public/assets/icons/chevron-right-orange.svg'
 import arrowRightIcon from '/public/assets/icons/arrow-right.svg'
 import arrowLeftIcon from '/public/assets/icons/arrow-left.svg'
+import chevronRightIcon from '/public/assets/icons/chevron-right.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -49,6 +50,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'chevron-right-orange': chevronRightOrange,
   'arrow-left': arrowLeftIcon,
   'arrow-right': arrowRightIcon,
+  'chevron-right': chevronRightIcon,
 }
 
 export function Icon({
@@ -64,8 +66,3 @@ export function Icon({
     />
   )
 }
-
-// import downChevronIcon from '/public/assets/icons/down-chevron.svg'
-// const icons: Readonly<Record<IconVariant, StaticImageData>> = {
-//   'down-chevron': downChevronIcon,
-// }

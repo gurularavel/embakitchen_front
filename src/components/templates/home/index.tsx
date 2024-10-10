@@ -1,4 +1,10 @@
-import { Slider, SlogansSection, Statistics } from '~ek/components'
+import {
+  Campaigns,
+  OrderStages,
+  Slider,
+  SlogansSection,
+  Statistics,
+} from '~ek/components'
 
 export function Home(): React.ReactElement {
   return (
@@ -9,6 +15,8 @@ export function Home(): React.ReactElement {
 
       <Statistics />
 
+      <OrderStages />
+
       <SlogansSection
         slogans={[
           'Siz arzulayın, biz reallaşdıraq',
@@ -17,6 +25,8 @@ export function Home(): React.ReactElement {
       />
 
       <Slider variant='partners' />
+
+      <Campaigns />
     </>
   )
 }
