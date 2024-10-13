@@ -1,14 +1,26 @@
 'use client'
 
 import * as React from 'react'
+import type { Duration } from 'date-fns'
 import { useTimer } from '~ek/hooks'
 
-const printTime = (number: number | undefined, isDay?: boolean): string => {
-  if (isDay) {
-    return number ? `${number} gün` : ''
-  }
+const printDays = (days: number | undefined): string =>
+  days ? `${days} gün` : ''
 
-  return number ? `${number >= 10 ? number : `0${number}`}` : '00'
+const getTimePartial = (number: number | undefined): string =>
+  number ? `${number >= 10 ? number : `0${number}`}` : '00'
+
+const printTime = (duration: Duration): string => {
+  const { hours, minutes, seconds } = duration
+  return [hours, minutes, seconds].map(getTimePartial).join(':')
+}
+
+const printDuration = (duration: Duration): JSX.Element => {
+  return (
+    <p>
+      {printDays(duration.days)} {printTime(duration)}
+    </p>
+  )
 }
 
 interface TimerProps {
@@ -32,13 +44,7 @@ export function Timer({ end }: Readonly<TimerProps>): React.ReactElement {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        {isClient && (
-          <p>
-            {printTime(duration.days, true)}&nbsp;
-            {printTime(duration.hours)}:{printTime(duration.minutes)}:
-            {printTime(duration.seconds)}
-          </p>
-        )}
+        {isClient && printDuration(duration)}
       </div>
     </div>
   )

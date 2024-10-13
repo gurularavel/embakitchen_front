@@ -7,7 +7,8 @@
     "comma-dangle": ["error", "always-multiline"],
     "jsx-quotes": ["error", "prefer-single"],
     "no-console": [
-      "error", {
+      "error",
+      {
         "allow": ["warn", "error"]
       }
     ]

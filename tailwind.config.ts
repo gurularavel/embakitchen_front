@@ -15,10 +15,6 @@ const config: Config = {
           'url("../../public/assets/images/slogans-section-bg.png")',
         'order-stages-section':
           'url("../../public/assets/images/order-stages-section-bg.png")',
-        // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        // 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        // 'order-stages-section':
-        //   'url("../../public/assets/images/order_stages_section_bg.jpg")',
       },
       colors: {
         primary: {
@@ -55,11 +51,6 @@ const config: Config = {
           '1': '#101828',
           '2': '#2A2D2F',
         },
-        // semi: {
-        //   gray: {
-        //     '2': 'rgba(42, 45, 47, 0.5)',
-        //   },
-        // },
       },
       fontFamily: {
         montserrat: ['var(--font-montserrat)'],
