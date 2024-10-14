@@ -20,7 +20,7 @@ const dropdownStyles: Readonly<TwClasses> = {
   dropdownCompactIcon: 'w-6 h-6',
   dropdownWideIcon: 'w-5 h-5',
   dropdownContent: (isVisible: unknown) =>
-    `bg-gray-1 desktop:absolute desktop:top-full desktop:right-0 transition-all duration-300 origin-top ${(isVisible as boolean) ? 'opacity-100 max-h-[1000px] mt-2 desktop:mt-0' : 'opacity-0 max-h-0'}`,
+    `bg-gray-1 desktop:absolute desktop:z-20 desktop:top-full desktop:right-0 transition-all duration-300 origin-top ${(isVisible as boolean) ? 'opacity-100 max-h-[1000px] mt-2 desktop:mt-0' : 'opacity-0 max-h-0'}`,
   nestedItem:
     'h-12 desktop:h-18 mb-0 px-6 desktop:px-0 flex items-center bg-gray-1 desktop:hover:bg-gray-2',
   nestedLink:
@@ -81,6 +81,7 @@ export function Dropdown({
           <li
             key={link.href}
             className={styles.nestedItem}
+            onClick={() => handleDropdownVisibility(false)}
           >
             <NavLink
               href={link.href ?? ''}
