@@ -68,7 +68,7 @@ export interface OrderStageEntry {
 export interface CampaignEntry {
   title: string
   description: string
-  img: string | StaticImageData
+  img: StaticImageData
   start: Date
   end: Date
 }
