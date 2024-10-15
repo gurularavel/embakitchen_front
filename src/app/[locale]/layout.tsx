@@ -1,10 +1,15 @@
 import { Montserrat } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 import { Footer, Header } from '~ek/components'
 import '~ek/app/globals.css'
 
 interface RootLayoutProps {
   children: React.ReactNode
+  params: {
+    locale: string
+  }
 }
 
 const montserrat = Montserrat({
@@ -13,16 +18,23 @@ const montserrat = Montserrat({
   display: 'swap',
 })
 
-export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
+export default async function RootLayout({
+  children,
+  params: { locale },
+}: Readonly<RootLayoutProps>) {
+  const messages = await getMessages()
+
   return (
     <html
-      lang='en'
+      lang={locale}
       className={twMerge(montserrat.variable, 'font-montserrat')}
     >
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <NextIntlClientProvider messages={messages}>
+          <Header />
+          {children}
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   )

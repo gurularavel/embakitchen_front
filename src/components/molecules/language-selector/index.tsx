@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { Link, usePathname } from '~ek/i18n/routing'
 import { twMerge } from 'tailwind-merge'
 import { Button, Icon } from '~ek/components'
 import { Language } from '~ek/types'
@@ -39,6 +40,7 @@ export function LanguageSelector({
   classes,
   dropdownClasses,
 }: Readonly<LanguageSelectorProps>): React.ReactElement {
+  const pathname = usePathname()
   const [selectedLanguage, setSelectedLanguage] = React.useState<Language>(
     Language.Az,
   )
@@ -80,7 +82,12 @@ export function LanguageSelector({
             className={styles.language}
             onClick={() => selectLanguage(value)}
           >
-            {value}
+            <Link
+              href={pathname}
+              locale={value.toLowerCase()}
+            >
+              {value}
+            </Link>
           </li>
         ))}
       </ul>
