@@ -23,7 +23,7 @@ const languageSelectorStyles: Readonly<TwClasses> = {
   selectedLanguageIcon: (isVisible: unknown) =>
     `transition-transform duration-200 ${(isVisible as boolean) ? 'rotate-180' : 'rotate-0'}`,
   languageDropdown: (isVisible: unknown) =>
-    `absolute right-0 left-0 transition-all duration-300 origin-bottom ease-in-out ${(isVisible as boolean) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`,
+    `absolute right-0 left-0 z-20 transition-all duration-300 origin-bottom ease-in-out ${(isVisible as boolean) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`,
   language:
     'h-18 flex items-center justify-center text-base font-medium text-white bg-gray-1 hover:bg-gray-2 cursor-pointer',
 }
