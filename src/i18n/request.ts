@@ -3,7 +3,9 @@ import { getRequestConfig } from 'next-intl/server'
 import { routing } from '~ek/i18n/routing'
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!routing.locales.includes(locale as any)) notFound()
+  if (!routing.locales.includes(locale as any)) {
+    notFound()
+  }
 
   return {
     messages: (await import(`../../messages/${locale}.json`)).default,

@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 
 export default function AboutCompanyPage(): React.ReactElement {
-  const t = useTranslations('aboutPage')
+  const t = useTranslations('AboutCompanyPage')
 
   return (
     <div>

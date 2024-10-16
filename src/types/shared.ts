@@ -48,9 +48,9 @@ export type ColorScheme = 'light' | 'dark'
 export type Gap = number
 
 export enum Language {
-  'Az' = 'Az',
-  'En' = 'En',
-  'Ru' = 'Ru',
+  Azerbaijani = 'az',
+  Russian = 'ru',
+  English = 'en',
 }
 
 export interface StatisticEntry {
