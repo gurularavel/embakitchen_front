@@ -1,8 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { Link, usePathname } from '~ek/i18n/routing'
 import { twMerge } from 'tailwind-merge'
+import { useLocale } from 'next-intl'
+import { Link, usePathname } from '~ek/i18n/routing'
 import { Button, Icon } from '~ek/components'
 import { Language } from '~ek/types'
 
@@ -25,7 +26,8 @@ const languageSelectorStyles: Readonly<TwClasses> = {
   languageDropdown: (isVisible: unknown) =>
     `absolute right-0 left-0 z-20 transition-all duration-300 origin-bottom ease-in-out ${(isVisible as boolean) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`,
   language:
-    'h-18 flex items-center justify-center text-base font-medium text-white bg-gray-1 hover:bg-gray-2 cursor-pointer capitalize',
+    'h-18 text-base font-medium text-white bg-gray-1 hover:bg-gray-2 cursor-pointer capitalize',
+  languageOption: 'w-full h-full flex items-center justify-center',
 }
 const styles = languageSelectorStyles as Readonly<StyleRecord>
 const getLanguageSelectorStyles =
@@ -40,19 +42,12 @@ export function LanguageSelector({
   classes,
   dropdownClasses,
 }: Readonly<LanguageSelectorProps>): React.ReactElement {
+  const locale = useLocale()
   const pathname: string = usePathname()
-  const [selectedLanguage, setSelectedLanguage] = React.useState<Language>(
-    Language.Azerbaijani,
-  )
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
 
   const handleLanguageSelectorVisibility = (shouldBeVisible: boolean): void =>
     setIsVisible(shouldBeVisible)
-
-  const selectLanguage = (language: Language): void => {
-    setSelectedLanguage(language)
-    handleLanguageSelectorVisibility(false)
-  }
 
   return (
     <div className={getLanguageSelectorStyles(context)}>
@@ -61,7 +56,7 @@ export function LanguageSelector({
           onClick={() => handleLanguageSelectorVisibility(!isVisible)}
           classes={twMerge(styles.selectedLanguageButton, classes ?? '')}
         >
-          <span>{selectedLanguage}</span>
+          <span>{locale}</span>
           <Icon
             variant='chevron-down'
             sizes='w-6 h-6'
@@ -80,11 +75,12 @@ export function LanguageSelector({
           <li
             key={value}
             className={styles.language}
-            onClick={() => selectLanguage(value)}
+            onClick={() => handleLanguageSelectorVisibility(false)}
           >
             <Link
               href={pathname}
               locale={value}
+              className={styles.languageOption}
             >
               {value}
             </Link>
