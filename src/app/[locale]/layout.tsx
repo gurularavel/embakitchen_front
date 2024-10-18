@@ -5,6 +5,7 @@ import { getMessages } from 'next-intl/server'
 import { Footer, Header } from '~ek/components'
 import type { Language } from '~ek/types'
 import '~ek/app/globals.css'
+import { AppStoreProvider } from '~ek/providers'
 
 interface Params {
   locale: `${Language}`
@@ -34,9 +35,11 @@ export default async function RootLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          {children}
-          <Footer />
+          <AppStoreProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AppStoreProvider>
         </NextIntlClientProvider>
       </body>
     </html>

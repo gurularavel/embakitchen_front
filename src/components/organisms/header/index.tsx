@@ -13,6 +13,7 @@ import {
   Sidebar,
 } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
+import { useAppStore } from '~ek/providers'
 import { SCREENS } from '~ek/utils'
 
 interface WideScreenHeaderProps {
@@ -111,13 +112,13 @@ function WideScreenHeader({
 
 export function Header(): React.ReactElement {
   const { width } = useScreenSize()
-  const [isClient, setIsClient] = React.useState<boolean>(false)
+  const { isClientRendering, setClientRendering } = useAppStore(state => state)
 
-  React.useEffect(() => setIsClient(true), [])
+  React.useEffect(() => setClientRendering(true), [setClientRendering])
 
   return (
     <header className={styles.header}>
-      {isClient &&
+      {isClientRendering &&
         (width < SCREENS.laptop ? (
           <CompactScreenHeader />
         ) : (

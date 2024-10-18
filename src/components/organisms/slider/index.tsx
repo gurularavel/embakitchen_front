@@ -22,6 +22,7 @@ import partner3 from '/public/assets/images/slider/partners/partner-3.png'
 import partner4 from '/public/assets/images/slider/partners/partner-4.png'
 import partner5 from '/public/assets/images/slider/partners/partner-5.png'
 import partner6 from '/public/assets/images/slider/partners/partner-6.png'
+import { useAppStore } from '~ek/providers'
 
 interface SliderProps {
   variant: SliderVariant
@@ -91,9 +92,7 @@ const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
-  const [isClient, setIsClient] = React.useState<boolean>(false)
-
-  React.useEffect(() => setIsClient(true), [])
+  const { isClientRendering } = useAppStore(state => state)
 
   return (
     <div className={`main-slider ${mainSliderStyles.slider}`}>
@@ -136,7 +135,7 @@ function Main(): React.ReactElement {
           </div>
         </div>
 
-        {isClient && width >= SCREENS.laptop && (
+        {isClientRendering && width >= SCREENS.laptop && (
           <div className={mainSliderStyles.socialContacts}>
             <SocialContacts
               layout='vertical'
