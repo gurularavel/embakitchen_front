@@ -3,7 +3,7 @@
 import * as React from 'react'
 import type { Duration } from 'date-fns'
 import { useTimer } from '~ek/hooks'
-import { useAppStore } from '~ek/providers'
+import { useClientStore } from '~ek/providers'
 
 const printDays = (days: number | undefined): string =>
   days ? `${days} gün` : ''
@@ -38,7 +38,7 @@ const styles = timerStyles as Readonly<StyleRecord>
 
 export function Timer({ end }: Readonly<TimerProps>): React.ReactElement {
   const duration = useTimer({ end })
-  const { isClientRendering } = useAppStore(state => state)
+  const { isClientRendering } = useClientStore(state => state)
 
   return (
     <div className={styles.container}>

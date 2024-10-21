@@ -4,8 +4,8 @@ import { type AbstractIntlMessages, NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { Footer, Header } from '~ek/components'
 import type { Language } from '~ek/types'
+import { ClientStoreProvider } from '~ek/providers'
 import '~ek/app/globals.css'
-import { AppStoreProvider } from '~ek/providers'
 
 interface Params {
   locale: `${Language}`
@@ -35,11 +35,11 @@ export default async function RootLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
-          <AppStoreProvider>
+          <ClientStoreProvider>
             <Header />
             {children}
             <Footer />
-          </AppStoreProvider>
+          </ClientStoreProvider>
         </NextIntlClientProvider>
       </body>
     </html>

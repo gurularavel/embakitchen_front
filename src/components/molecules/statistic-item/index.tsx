@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useScreenSize } from '~ek/hooks'
-import { useAppStore } from '~ek/providers'
+import { useClientStore } from '~ek/providers'
 import type { StatisticEntry } from '~ek/types'
 import { SCREENS } from '~ek/utils'
 
@@ -28,7 +28,7 @@ export function StatisticItem({
   isLast,
 }: Readonly<StatisticItemProps>): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering } = useAppStore(state => state)
+  const { isClientRendering } = useClientStore(state => state)
 
   return (
     <>

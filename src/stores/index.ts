@@ -1,1 +1,1 @@
-export { createAppStore } from '~ek/stores/app-store'
+export { createClientStore } from '~ek/stores/client-store'

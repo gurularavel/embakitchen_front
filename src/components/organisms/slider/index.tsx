@@ -10,6 +10,7 @@ import { Button, Icon, SocialContacts } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
 import type { SliderVariant } from '~ek/types'
+import { useClientStore } from '~ek/providers'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import mainSliderImg from '/public/assets/images/slider/main-slider-img.png'
@@ -22,7 +23,6 @@ import partner3 from '/public/assets/images/slider/partners/partner-3.png'
 import partner4 from '/public/assets/images/slider/partners/partner-4.png'
 import partner5 from '/public/assets/images/slider/partners/partner-5.png'
 import partner6 from '/public/assets/images/slider/partners/partner-6.png'
-import { useAppStore } from '~ek/providers'
 
 interface SliderProps {
   variant: SliderVariant
@@ -92,7 +92,7 @@ const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering } = useAppStore(state => state)
+  const { isClientRendering } = useClientStore(state => state)
 
   return (
     <div className={`main-slider ${mainSliderStyles.slider}`}>
