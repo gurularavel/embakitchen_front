@@ -3,6 +3,7 @@
 import * as React from 'react'
 import type { Duration } from 'date-fns'
 import { useTimer } from '~ek/hooks'
+import { useClientStore } from '~ek/providers'
 
 const printDays = (days: number | undefined): string =>
   days ? `${days} gün` : ''
@@ -36,15 +37,13 @@ const timerStyles: Readonly<TwClasses> = {
 const styles = timerStyles as Readonly<StyleRecord>
 
 export function Timer({ end }: Readonly<TimerProps>): React.ReactElement {
-  const [isClient, setIsClient] = React.useState<boolean>(false)
   const duration = useTimer({ end })
-
-  React.useEffect(() => setIsClient(true), [])
+  const { isClientRendering } = useClientStore(state => state)
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        {isClient && printDuration(duration)}
+        {isClientRendering && printDuration(duration)}
       </div>
     </div>
   )

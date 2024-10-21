@@ -10,6 +10,7 @@ import { Button, Icon, SocialContacts } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
 import type { SliderVariant } from '~ek/types'
+import { useClientStore } from '~ek/providers'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import mainSliderImg from '/public/assets/images/slider/main-slider-img.png'
@@ -91,9 +92,7 @@ const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
-  const [isClient, setIsClient] = React.useState<boolean>(false)
-
-  React.useEffect(() => setIsClient(true), [])
+  const { isClientRendering } = useClientStore(state => state)
 
   return (
     <div className={`main-slider ${mainSliderStyles.slider}`}>
@@ -136,7 +135,7 @@ function Main(): React.ReactElement {
           </div>
         </div>
 
-        {isClient && width >= SCREENS.laptop && (
+        {isClientRendering && width >= SCREENS.laptop && (
           <div className={mainSliderStyles.socialContacts}>
             <SocialContacts
               layout='vertical'
