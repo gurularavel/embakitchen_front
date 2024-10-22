@@ -80,6 +80,7 @@ const config: Config = {
       height: {
         '18': '4.5rem', // 72px
         '19': '4.75rem', // 76px
+        '50': '12.5rem', // 200px
       },
     },
     screens: Object.entries(SCREENS).reduce(
