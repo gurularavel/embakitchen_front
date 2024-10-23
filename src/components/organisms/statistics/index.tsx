@@ -3,11 +3,15 @@
 import * as React from 'react'
 import { StatisticItem } from '~ek/components'
 import { useInView } from '~ek/hooks'
-import type { StatisticEntry } from '~ek/types'
+import type { StatisticEntry, StatisticsContext } from '~ek/types'
 import {
   DEFAULT_INTERSECTION_OBSERVER_OPTIONS,
   statisticsObserverCallback,
 } from '~ek/utils'
+
+interface StatisticsProps {
+  context: StatisticsContext
+}
 
 const statisticItems: StatisticEntry[] = [
   {
@@ -34,7 +38,9 @@ const statisticsStyles: Readonly<TwClasses> = {
 }
 const styles = statisticsStyles as Readonly<StyleRecord>
 
-export function Statistics(): React.ReactElement {
+export function Statistics({
+  context,
+}: Readonly<StatisticsProps>): React.ReactElement {
   const statisticsRef = React.useRef<HTMLDivElement | null>(null)
   useInView({
     ref: statisticsRef,
@@ -56,6 +62,7 @@ export function Statistics(): React.ReactElement {
           key={item.label}
           entry={item}
           isLast={i === statisticItems.length - 1}
+          context={context}
         />
       ))}
     </div>

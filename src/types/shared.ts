@@ -53,6 +53,8 @@ export enum Language {
   English = 'en',
 }
 
+export type StatisticsContext = 'home' | 'about'
+
 export interface StatisticEntry {
   quantity: number
   label: string

@@ -6,7 +6,7 @@ interface SlogansSectionProps {
 
 const slogansSectionStyles: Readonly<TwClasses> = {
   slogansSection:
-    'bg-gray-1 bg-slogans-section h-[360px] laptop:h-[440px] flex items-center justify-center mb-6 laptop:mb-25',
+    'bg-gray-1 bg-section-bg-1 h-[360px] laptop:h-[440px] flex items-center justify-center mb-6 laptop:mb-25',
   slogansContent: 'max-w-72 laptop:max-w-4xl',
   s1: 'text-base laptop:text-xl leading-6 laptop:leading-7 font-medium text-primary-5 text-center uppercase mb-6',
   s2: 'text-2xl laptop:text-4xl leading-8 laptop:leading-14 font-semibold text-white text-center mb-10',

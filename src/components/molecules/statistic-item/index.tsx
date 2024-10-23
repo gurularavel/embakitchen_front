@@ -1,12 +1,14 @@
 'use client'
 
 import * as React from 'react'
+import { twMerge } from 'tailwind-merge'
 import { useScreenSize } from '~ek/hooks'
 import { useClientStore } from '~ek/providers'
-import type { StatisticEntry } from '~ek/types'
+import type { StatisticEntry, StatisticsContext } from '~ek/types'
 import { SCREENS } from '~ek/utils'
 
 interface StatisticItemProps {
+  context: StatisticsContext
   entry: StatisticEntry
   isLast: boolean
 }
@@ -24,23 +26,28 @@ const statisticItemStyles: Readonly<TwClasses> = {
 const styles = statisticItemStyles as Readonly<StyleRecord>
 
 export function StatisticItem({
+  context,
   entry,
   isLast,
 }: Readonly<StatisticItemProps>): React.ReactElement {
   const { width } = useScreenSize()
   const { isClientRendering } = useClientStore(state => state)
+  const quantityColor = context === 'about' ? 'text-secondary-3' : ''
+  const labelColor = context === 'about' ? 'text-gray-8' : ''
 
   return (
     <>
       <div className={styles.statisticItem}>
         <div className={styles.statisticItemContent}>
           <span
-            className={styles.quantity}
+            className={twMerge(styles.quantity, quantityColor ?? '')}
             data-quantity={entry.quantity}
           >
             0
           </span>
-          <span className={styles.label}>{entry.label}</span>
+          <span className={twMerge(styles.label, labelColor ?? '')}>
+            {entry.label}
+          </span>
         </div>
       </div>
 

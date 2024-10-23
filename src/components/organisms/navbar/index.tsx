@@ -42,10 +42,6 @@ const commonNavLinks: NavLinkEntry[] = [
         label: 'Layihələrimiz',
         href: '/about/projects',
       },
-      {
-        label: 'Partnyorlar',
-        href: '/about/partners',
-      },
     ],
   },
   {

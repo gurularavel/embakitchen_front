@@ -13,7 +13,7 @@ export function Home(): React.ReactElement {
 
       <Slider variant='gallery' />
 
-      <Statistics />
+      <Statistics context='home' />
 
       <OrderStages />
 
