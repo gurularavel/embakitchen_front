@@ -33,10 +33,14 @@ const statisticItems: StatisticEntry[] = [
 ]
 
 const statisticsStyles: Readonly<TwClasses> = {
-  statistics:
-    'w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 px-10 mobile:px-15 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6',
+  home: {
+    statistics:
+      'w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 px-10 mobile:px-15 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6',
+  },
+  about: {
+    statistics: '',
+  },
 }
-const styles = statisticsStyles as Readonly<StyleRecord>
 
 export function Statistics({
   context,
@@ -51,6 +55,7 @@ export function Statistics({
     },
     shouldUnobserve: true,
   })
+  const styles = statisticsStyles[context] as Readonly<StyleRecord>
 
   return (
     <div

@@ -14,16 +14,26 @@ interface StatisticItemProps {
 }
 
 const statisticItemStyles: Readonly<TwClasses> = {
-  statisticItem:
-    'w-1/2 mobile:w-auto border-solid border-tertiary-9 odd:border-r mobile:odd:border-r-0 even:pl-5 mobile:even:pl-0',
-  statisticItemContent: 'flex flex-col gap-y-[5px]',
-  quantity:
-    'text-3xl tablet:text-4xl leading-10 tablet:leading-15 text-primary-3 font-bold',
-  label:
-    'text-base tablet:text-xl leading-6 tablet:leading-7 text-tertiary-1 font-medium',
-  line: 'hidden mobile:block w-px bg-tertiary-9',
+  home: {
+    statisticItem:
+      'w-1/2 mobile:w-auto border-solid border-tertiary-9 odd:border-r mobile:odd:border-r-0 even:pl-5 mobile:even:pl-0',
+    statisticItemContent: 'flex flex-col gap-y-[5px]',
+    quantity:
+      'text-3xl tablet:text-4xl leading-10 tablet:leading-15 text-primary-3 font-bold',
+    label:
+      'text-base tablet:text-xl leading-6 tablet:leading-7 text-tertiary-1 font-medium',
+    line: 'hidden mobile:block w-px bg-tertiary-9',
+  },
+  about: {
+    statisticItem: 'w-1/2 mobile:w-auto',
+    statisticItemContent: 'flex flex-col gap-y-[5px]',
+    quantity:
+      'text-3xl tablet:text-4xl leading-10 tablet:leading-15 text-secondary-3 font-bold',
+    label:
+      'text-base tablet:text-xl leading-6 tablet:leading-7 text-gray-8 font-medium',
+    line: '',
+  },
 }
-const styles = statisticItemStyles as Readonly<StyleRecord>
 
 export function StatisticItem({
   context,
@@ -32,22 +42,19 @@ export function StatisticItem({
 }: Readonly<StatisticItemProps>): React.ReactElement {
   const { width } = useScreenSize()
   const { isClientRendering } = useClientStore(state => state)
-  const quantityColor = context === 'about' ? 'text-secondary-3' : ''
-  const labelColor = context === 'about' ? 'text-gray-8' : ''
+  const styles = statisticItemStyles[context] as Readonly<StyleRecord>
 
   return (
     <>
       <div className={styles.statisticItem}>
         <div className={styles.statisticItemContent}>
           <span
-            className={twMerge(styles.quantity, quantityColor ?? '')}
+            className={styles.quantity}
             data-quantity={entry.quantity}
           >
             0
           </span>
-          <span className={twMerge(styles.label, labelColor ?? '')}>
-            {entry.label}
-          </span>
+          <span className={styles.label}>{entry.label}</span>
         </div>
       </div>
 
