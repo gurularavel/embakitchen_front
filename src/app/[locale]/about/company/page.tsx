@@ -17,9 +17,8 @@ export default async function AboutCompanyPage({
   const aboutCompanyProps = {
     banner: {
       title: aboutCompanyPageData.title[locale],
-      image: (
-        Object.values(aboutCompanyPageData.image)[0] as { original_url: string }
-      ).original_url,
+      image: (aboutCompanyPageData.image[0] as { original_url: string })
+        .original_url,
     },
     description: aboutCompanyPageData.content[locale],
   }
