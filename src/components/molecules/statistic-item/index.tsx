@@ -25,13 +25,13 @@ const statisticItemStyles: Readonly<TwClasses> = {
     line: 'hidden mobile:block w-px bg-tertiary-9',
   },
   about: {
-    statisticItem: 'w-1/2 mobile:w-auto',
+    statisticItem: 'w-[calc((100%-49px)/2)] mobile:w-auto',
     statisticItemContent: 'flex flex-col gap-y-[5px]',
     quantity:
       'text-3xl tablet:text-4xl leading-10 tablet:leading-15 text-secondary-3 font-bold',
     label:
       'text-base tablet:text-xl leading-6 tablet:leading-7 text-gray-8 font-medium',
-    line: '',
+    line: 'hidden mobile:block',
   },
 }
 

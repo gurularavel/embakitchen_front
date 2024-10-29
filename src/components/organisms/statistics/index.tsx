@@ -38,7 +38,8 @@ const statisticsStyles: Readonly<TwClasses> = {
       'w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 px-10 mobile:px-15 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6',
   },
   about: {
-    statistics: '',
+    statistics:
+      'flex flex-wrap mobile:flex-nowrap justify-between gap-[49px] pt-[50px] px-8',
   },
 }
 
