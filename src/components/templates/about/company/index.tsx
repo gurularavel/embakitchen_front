@@ -1,5 +1,4 @@
 import { Banner, Statistics, Video } from '~ek/components'
-import aboutPageBg from '/public/assets/images/about-page-bg.jpg'
 
 interface AboutCompanyProps {
   banner: {

@@ -55,9 +55,11 @@ export enum Language {
 
 export type StatisticsContext = 'home' | 'about'
 
-export interface StatisticEntry {
-  quantity: number
-  label: string
+export interface StatisticEntry<T extends Language | string = string> {
+  id: number
+  count: number
+  title: T extends Language ? Record<Language, string> : T
+  status: boolean
 }
 
 export type SliderVariant = 'main' | 'gallery' | 'partners'

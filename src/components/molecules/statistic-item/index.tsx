@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { twMerge } from 'tailwind-merge'
 import { useScreenSize } from '~ek/hooks'
 import { useClientStore } from '~ek/providers'
 import type { StatisticEntry, StatisticsContext } from '~ek/types'
@@ -43,6 +42,8 @@ export function StatisticItem({
   const { width } = useScreenSize()
   const { isClientRendering } = useClientStore(state => state)
   const styles = statisticItemStyles[context] as Readonly<StyleRecord>
+  const breakpointForLines =
+    context === 'home' ? SCREENS.mobile : SCREENS.laptop
 
   return (
     <>
@@ -50,15 +51,15 @@ export function StatisticItem({
         <div className={styles.statisticItemContent}>
           <span
             className={styles.quantity}
-            data-quantity={entry.quantity}
+            data-quantity={entry.count}
           >
             0
           </span>
-          <span className={styles.label}>{entry.label}</span>
+          <span className={styles.label}>{entry.title}</span>
         </div>
       </div>
 
-      {isClientRendering && width >= SCREENS.mobile && !isLast && (
+      {isClientRendering && width >= breakpointForLines && !isLast && (
         <div className={styles.line}></div>
       )}
     </>

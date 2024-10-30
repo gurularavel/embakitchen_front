@@ -1,9 +1,10 @@
 'use client'
 
 import * as React from 'react'
+import { useLocale } from 'next-intl'
 import { StatisticItem } from '~ek/components'
 import { useInView } from '~ek/hooks'
-import type { StatisticEntry, StatisticsContext } from '~ek/types'
+import type { Language, StatisticEntry, StatisticsContext } from '~ek/types'
 import {
   DEFAULT_INTERSECTION_OBSERVER_OPTIONS,
   statisticsObserverCallback,
@@ -13,25 +14,6 @@ interface StatisticsProps {
   context: StatisticsContext
 }
 
-const statisticItems: StatisticEntry[] = [
-  {
-    quantity: 30,
-    label: 'Çeşid',
-  },
-  {
-    quantity: 20,
-    label: 'Material',
-  },
-  {
-    quantity: 100,
-    label: 'Müştəri',
-  },
-  {
-    quantity: 200,
-    label: 'Layihə',
-  },
-]
-
 const statisticsStyles: Readonly<TwClasses> = {
   home: {
     statistics:
@@ -39,13 +21,14 @@ const statisticsStyles: Readonly<TwClasses> = {
   },
   about: {
     statistics:
-      'flex flex-wrap mobile:flex-nowrap justify-between gap-[49px] pt-[50px] px-8',
+      'flex flex-wrap mobile:flex-nowrap justify-between gap-[49px] pt-[50px] tablet:pt-0 px-8 tablet:px-[72px] desktop:max-w-[1096px] desktop:mx-auto',
   },
 }
 
 export function Statistics({
   context,
 }: Readonly<StatisticsProps>): React.ReactElement {
+  const locale = useLocale() as `${Language}`
   const statisticsRef = React.useRef<HTMLDivElement | null>(null)
   useInView({
     ref: statisticsRef,
@@ -56,7 +39,27 @@ export function Statistics({
     },
     shouldUnobserve: true,
   })
+  const [statisticItems, setStatisticItems] = React.useState<StatisticEntry[]>(
+    [],
+  )
+
   const styles = statisticsStyles[context] as Readonly<StyleRecord>
+
+  React.useEffect(() => {
+    async function getStatisticsData() {
+      const response = await fetch(
+        'https://embakitchen.kvadrat.az/api/counters?status=true',
+      )
+      const { data } = await response.json()
+      setStatisticItems(
+        data.map((d: StatisticEntry<Language>) => ({
+          ...d,
+          title: d.title![locale as `${Language}`],
+        })),
+      )
+    }
+    getStatisticsData()
+  }, [locale])
 
   return (
     <div
@@ -65,7 +68,7 @@ export function Statistics({
     >
       {statisticItems.map((item: StatisticEntry, i: number) => (
         <StatisticItem
-          key={item.label}
+          key={item.id}
           entry={item}
           isLast={i === statisticItems.length - 1}
           context={context}
