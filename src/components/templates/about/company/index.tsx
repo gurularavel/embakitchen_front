@@ -1,4 +1,4 @@
-import { Banner, Statistics, Video } from '~ek/components'
+import { Badge, Banner, Statistics, Video } from '~ek/components'
 
 interface AboutCompanyProps {
   banner: {
@@ -43,6 +43,18 @@ export function AboutCompany({
         </p>
 
         <Statistics context='about' />
+      </div>
+
+      <div>
+        <h5>Təqdim etdiyimiz mebel həlləri:</h5>
+        {['Özəl mətbəx mebeli', 'Qarderob', 'Dəhliz mebeli', 'Kupe dolab'].map(
+          (label: string) => (
+            <Badge
+              key={label}
+              label={label}
+            />
+          ),
+        )}
       </div>
     </>
   )
