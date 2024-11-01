@@ -1,7 +1,8 @@
-interface BadgeProps {
-  label: string
-}
+interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
-export function Badge({ label }: Readonly<BadgeProps>): React.ReactElement {
-  return <span>{label}</span>
+export function Badge({
+  children,
+  className,
+}: Readonly<BadgeProps>): React.ReactElement {
+  return <span className={className}>{children}</span>
 }
