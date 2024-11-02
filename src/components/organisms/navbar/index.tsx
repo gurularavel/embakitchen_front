@@ -1,10 +1,9 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useLocale } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
 import { Button, Dropdown, NavLink } from '~ek/components'
-import type { Language, NavLinkEntry } from '~ek/types'
+import type { NavLinkEntry } from '~ek/types'
 
 type NavbarContext = 'header' | 'footer'
 
@@ -102,14 +101,9 @@ const renderDropdown = (link: NavLinkEntry) => (
   />
 )
 
-const renderNavLink = (
-  link: NavLinkEntry,
-  locale: Language,
-  className?: string,
-) => (
+const renderNavLink = (link: NavLinkEntry, className?: string) => (
   <NavLink
     href={link.href!}
-    locale={locale}
     className={className}
   >
     {link.label}
@@ -118,7 +112,6 @@ const renderNavLink = (
 
 function NavbarHeader(): React.ReactElement {
   const pathname = usePathname()
-  const locale = useLocale() as Language
 
   return (
     <ul className={navbarHeaderStyles.nav}>
@@ -134,7 +127,7 @@ function NavbarHeader(): React.ReactElement {
             className={navbarHeaderStyles.navItem}
           >
             {!link.nestedLinks
-              ? renderNavLink(link, locale, navLinkClass)
+              ? renderNavLink(link, navLinkClass)
               : renderDropdown(link)}
           </li>
         )
@@ -149,8 +142,6 @@ function NavbarHeader(): React.ReactElement {
 }
 
 function NavbarFooter(): React.ReactElement {
-  const locale = useLocale() as Language
-
   return (
     <>
       {footerNav?.map((nav: FooterNav, i: number) => (
@@ -165,7 +156,7 @@ function NavbarFooter(): React.ReactElement {
                 key={link.label}
                 className={navbarFooterStyles.link}
               >
-                {renderNavLink(link, locale, navbarFooterStyles.link)}
+                {renderNavLink(link, navbarFooterStyles.link)}
               </li>
             ))}
           </ul>

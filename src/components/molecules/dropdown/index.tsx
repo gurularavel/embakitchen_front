@@ -1,10 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { useLocale } from 'next-intl'
 import { Button, Icon, NavLink } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
-import type { Language, NavLinkEntry } from '~ek/types'
+import type { NavLinkEntry } from '~ek/types'
 import { SCREENS } from '~ek/utils'
 
 interface DropdownProps {
@@ -37,7 +36,6 @@ export function Dropdown({
   label,
   nestedLinks,
 }: Readonly<DropdownProps>): React.ReactElement {
-  const locale = useLocale() as Language
   const { width } = useScreenSize()
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
   const [dropdownHeight, setDropdownHeight] = React.useState<number>(0)
@@ -88,7 +86,6 @@ export function Dropdown({
             <NavLink
               href={link.href}
               className={styles.nestedLink}
-              locale={locale}
             >
               {link.label}
             </NavLink>
