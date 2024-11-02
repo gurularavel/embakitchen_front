@@ -1,3 +1,4 @@
+import { useLocale } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
 import { Icon, NavLink } from '~ek/components'
 import type {
@@ -7,6 +8,7 @@ import type {
   ColorScheme,
   Gap,
   ImgSize,
+  Language,
 } from '~ek/types'
 import { getGapProperty } from '~ek/utils'
 
@@ -84,6 +86,8 @@ export function SocialContacts({
   gap,
   classes,
 }: Readonly<SocialContactsProps>): React.ReactElement {
+  const locale = useLocale() as Language
+
   return (
     <ul
       className={getSocialContactsStyles(layout)}
@@ -93,8 +97,9 @@ export function SocialContacts({
         <li key={value.href}>
           <NavLink
             href={value.href}
-            openInNewTab={true}
-            classes={twMerge(styles.link, classes ?? '')}
+            target='_blank'
+            className={twMerge(styles.link, classes ?? '')}
+            locale={locale}
           >
             {value.icon}
           </NavLink>

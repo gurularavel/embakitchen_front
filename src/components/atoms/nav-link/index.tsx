@@ -1,27 +1,26 @@
-import Link from 'next/link'
+import { Link } from '~ek/i18n/routing'
+import type { Language } from '~ek/types'
 
-interface NavLinkProps {
-  href: string
-  children: React.ReactNode
-  classes?: string
-  openInNewTab?: boolean
+interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  locale: Language | undefined
 }
 
 export function NavLink({
   href,
   children,
-  classes,
-  openInNewTab,
+  className,
+  target,
+  locale,
 }: Readonly<NavLinkProps>): React.ReactElement {
-  const props = openInNewTab
-    ? { target: '_blank', rel: 'noopener noreferrer' }
-    : {}
+  const additionalProps =
+    target === '_blank' ? { target, rel: 'noopener noreferrer' } : {}
 
   return (
     <Link
-      href={href}
-      className={classes ?? ''}
-      {...props}
+      href={href as string}
+      className={className ?? ''}
+      locale={locale}
+      {...additionalProps}
     >
       {children}
     </Link>
