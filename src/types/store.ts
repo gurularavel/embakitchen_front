@@ -1,13 +1,10 @@
-import { createClientStore } from '~ek/stores'
+import { createStore } from '~ek/store'
 
-export interface ClientState {
+export interface ClientSlice {
   isClientRendering: boolean
-}
-
-export interface ClientActions {
   setClientRendering: (isClientRendering: boolean) => void
 }
 
-export type ClientStore = ClientState & ClientActions
+export type AppState = ClientSlice
 
-export type ClientStoreApi = ReturnType<typeof createClientStore>
+export type StoreApi = ReturnType<typeof createStore>
