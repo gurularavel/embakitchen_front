@@ -111,7 +111,9 @@ function WideScreenHeader({
 
 export function Header(): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering, setClientRendering } = useStore(state => state)
+  const { isClientRendering, setClientRendering } = useStore(
+    state => state.clientSlice,
+  )
 
   React.useEffect(() => setClientRendering(true), [setClientRendering])
 

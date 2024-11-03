@@ -37,7 +37,7 @@ const styles = timerStyles as Readonly<StyleRecord>
 
 export function Timer({ end }: Readonly<TimerProps>): React.ReactElement {
   const duration = useTimer({ end })
-  const { isClientRendering } = useStore(state => state)
+  const { isClientRendering } = useStore(state => state.clientSlice)
 
   return (
     <div className={styles.container}>

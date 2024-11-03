@@ -9,5 +9,8 @@ export const createClientSlice: StateCreator<
 > = set => ({
   isClientRendering: false,
   setClientRendering: (isClientRendering: boolean) =>
-    set(() => ({ isClientRendering })),
+    set(state => ({
+      ...state,
+      clientSlice: { ...state.clientSlice, isClientRendering },
+    })),
 })

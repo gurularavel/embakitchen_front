@@ -5,6 +5,8 @@ export interface ClientSlice {
   setClientRendering: (isClientRendering: boolean) => void
 }
 
-export type AppState = ClientSlice
+export interface AppState {
+  clientSlice: ClientSlice
+}
 
 export type StoreApi = ReturnType<typeof createStore>

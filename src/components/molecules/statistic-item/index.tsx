@@ -39,7 +39,7 @@ export function StatisticItem({
   isLast,
 }: Readonly<StatisticItemProps>): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering } = useStore(state => state)
+  const { isClientRendering } = useStore(state => state.clientSlice)
   const styles = statisticItemStyles[context] as Readonly<StyleRecord>
 
   return (

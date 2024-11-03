@@ -91,7 +91,7 @@ const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering } = useStore(state => state)
+  const { isClientRendering } = useStore(state => state.clientSlice)
 
   return (
     <div className={`main-slider ${mainSliderStyles.slider}`}>

@@ -4,5 +4,5 @@ import { createClientSlice } from '~ek/store/slices'
 
 export const createStore = () =>
   createZustandStore<AppState>((...a) => ({
-    ...createClientSlice(...a),
+    clientSlice: createClientSlice(...a),
   }))
