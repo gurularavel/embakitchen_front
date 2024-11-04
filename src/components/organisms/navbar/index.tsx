@@ -42,10 +42,6 @@ const commonNavLinks: NavLinkEntry[] = [
         label: 'Layihələrimiz',
         href: '/about/projects',
       },
-      {
-        label: 'Partnyorlar',
-        href: '/about/partners',
-      },
     ],
   },
   {
@@ -105,10 +101,10 @@ const renderDropdown = (link: NavLinkEntry) => (
   />
 )
 
-const renderNavLink = (link: NavLinkEntry, classes?: string) => (
+const renderNavLink = (link: NavLinkEntry, className?: string) => (
   <NavLink
     href={link.href!}
-    classes={classes}
+    className={className}
   >
     {link.label}
   </NavLink>

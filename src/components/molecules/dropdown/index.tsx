@@ -84,8 +84,8 @@ export function Dropdown({
             onClick={() => handleDropdownVisibility(false)}
           >
             <NavLink
-              href={link.href ?? ''}
-              classes={styles.nestedLink}
+              href={link.href}
+              className={styles.nestedLink}
             >
               {link.label}
             </NavLink>

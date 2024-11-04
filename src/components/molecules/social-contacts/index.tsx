@@ -93,8 +93,8 @@ export function SocialContacts({
         <li key={value.href}>
           <NavLink
             href={value.href}
-            openInNewTab={true}
-            classes={twMerge(styles.link, classes ?? '')}
+            target='_blank'
+            className={twMerge(styles.link, classes ?? '')}
           >
             {value.icon}
           </NavLink>

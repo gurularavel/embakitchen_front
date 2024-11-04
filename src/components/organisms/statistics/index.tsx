@@ -1,40 +1,34 @@
 'use client'
 
 import * as React from 'react'
+import { useLocale } from 'next-intl'
 import { StatisticItem } from '~ek/components'
 import { useInView } from '~ek/hooks'
-import type { StatisticEntry } from '~ek/types'
+import type { Language, StatisticEntry, StatisticsContext } from '~ek/types'
 import {
   DEFAULT_INTERSECTION_OBSERVER_OPTIONS,
   statisticsObserverCallback,
 } from '~ek/utils'
 
-const statisticItems: StatisticEntry[] = [
-  {
-    quantity: 30,
-    label: 'Çeşid',
-  },
-  {
-    quantity: 20,
-    label: 'Material',
-  },
-  {
-    quantity: 100,
-    label: 'Müştəri',
-  },
-  {
-    quantity: 200,
-    label: 'Layihə',
-  },
-]
+interface StatisticsProps {
+  context: StatisticsContext
+}
 
 const statisticsStyles: Readonly<TwClasses> = {
-  statistics:
-    'w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 px-10 mobile:px-15 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6',
+  home: {
+    statistics:
+      'w-full laptop:max-w-4xl desktop:max-w-[1096px] widescreen:max-w-[1461px] laptop:mx-auto mb-6 laptop:mb-8 px-10 mobile:px-15 flex flex-wrap mobile:flex-nowrap mobile:justify-between mobile:items-stretch gap-y-6',
+  },
+  about: {
+    statistics:
+      'flex flex-wrap mobile:flex-nowrap justify-between gap-[49px] pt-[50px] tablet:pt-0 px-8 tablet:px-[72px] desktop:max-w-[1096px] desktop:mx-auto',
+  },
 }
-const styles = statisticsStyles as Readonly<StyleRecord>
 
-export function Statistics(): React.ReactElement {
+export function Statistics({
+  context,
+}: Readonly<StatisticsProps>): React.ReactElement {
+  const locale = useLocale() as `${Language}`
   const statisticsRef = React.useRef<HTMLDivElement | null>(null)
   useInView({
     ref: statisticsRef,
@@ -45,6 +39,27 @@ export function Statistics(): React.ReactElement {
     },
     shouldUnobserve: true,
   })
+  const [statisticItems, setStatisticItems] = React.useState<StatisticEntry[]>(
+    [],
+  )
+
+  const styles = statisticsStyles[context] as Readonly<StyleRecord>
+
+  React.useEffect(() => {
+    async function getStatisticsData() {
+      const response = await fetch(
+        'https://embakitchen.kvadrat.az/api/counters?status=true',
+      )
+      const { data } = await response.json()
+      setStatisticItems(
+        data.map((d: StatisticEntry<Language>) => ({
+          ...d,
+          title: d.title![locale as `${Language}`],
+        })),
+      )
+    }
+    getStatisticsData()
+  }, [locale])
 
   return (
     <div
@@ -53,9 +68,10 @@ export function Statistics(): React.ReactElement {
     >
       {statisticItems.map((item: StatisticEntry, i: number) => (
         <StatisticItem
-          key={item.label}
+          key={item.id}
           entry={item}
           isLast={i === statisticItems.length - 1}
+          context={context}
         />
       ))}
     </div>

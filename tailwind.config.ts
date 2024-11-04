@@ -11,8 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'slogans-section':
-          'url("../../public/assets/images/slogans-section-bg.png")',
+        'section-bg-1': 'url("../../public/assets/images/section-bg-1.png")',
         'order-stages-section':
           'url("../../public/assets/images/order-stages-section-bg.png")',
       },
@@ -25,6 +24,7 @@ const config: Config = {
           '9': '#FCEBE4',
         },
         secondary: {
+          '3': '#FFB029',
           '4': '#FFC35C',
         },
         tertiary: {
@@ -80,6 +80,7 @@ const config: Config = {
       height: {
         '18': '4.5rem', // 72px
         '19': '4.75rem', // 76px
+        '50': '12.5rem', // 200px
       },
     },
     screens: Object.entries(SCREENS).reduce(
