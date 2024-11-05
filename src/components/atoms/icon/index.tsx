@@ -22,6 +22,7 @@ import chevronRightOrange from '/public/assets/icons/chevron-right-orange.svg'
 import arrowRightIcon from '/public/assets/icons/arrow-right.svg'
 import arrowLeftIcon from '/public/assets/icons/arrow-left.svg'
 import chevronRightIcon from '/public/assets/icons/chevron-right.svg'
+import playVideo from '/public/assets/icons/play-video.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -51,6 +52,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'arrow-left': arrowLeftIcon,
   'arrow-right': arrowRightIcon,
   'chevron-right': chevronRightIcon,
+  'play-video': playVideo,
 }
 
 export function Icon({

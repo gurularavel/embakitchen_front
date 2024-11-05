@@ -34,6 +34,7 @@ interface AboutCompanyProps {
     image: string
   }
   description: string
+  videoSrc: string
 }
 
 const aboutCompanyStyles: Readonly<TwClasses> = {
@@ -60,6 +61,7 @@ const styles = aboutCompanyStyles as Readonly<StyleRecord>
 export function AboutCompany({
   banner,
   description,
+  videoSrc,
 }: Readonly<AboutCompanyProps>): React.ReactElement {
   return (
     <>
@@ -73,7 +75,7 @@ export function AboutCompany({
         dangerouslySetInnerHTML={{ __html: description }}
       />
 
-      <Video />
+      <Video src={videoSrc} />
 
       <div className={styles.statisticsWrapper}>
         <p className={styles.statisticsTitle}>
