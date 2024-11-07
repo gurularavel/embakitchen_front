@@ -28,7 +28,7 @@ const infoBlocks: InfoBlock[] = [
   },
 ]
 
-interface AboutCompanyProps {
+interface AboutProps {
   banner: {
     title: string
     image: string
@@ -37,7 +37,7 @@ interface AboutCompanyProps {
   videoSrc: string
 }
 
-const aboutCompanyStyles: Readonly<TwClasses> = {
+const aboutStyles: Readonly<TwClasses> = {
   description:
     'px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10 text-base laptop:text-xl font-normal laptop:leading-7 text-gray-3 flex flex-col justify-between gap-y-6',
   statisticsWrapper: 'bg-gray-1 px-4 py-[50px] mb-6 desktop:mb-10',
@@ -56,13 +56,13 @@ const aboutCompanyStyles: Readonly<TwClasses> = {
     'mb-6 text-base laptop:text-xl laptop:leading-7 font-semibold text-primary-1',
   infoBlockContent: 'text-sm laptop:text-base font-normal text-gray-4',
 }
-const styles = aboutCompanyStyles as Readonly<StyleRecord>
+const styles = aboutStyles as Readonly<StyleRecord>
 
-export function AboutCompany({
+export function About({
   banner,
   description,
   videoSrc,
-}: Readonly<AboutCompanyProps>): React.ReactElement {
+}: Readonly<AboutProps>): React.ReactElement {
   return (
     <>
       <Banner

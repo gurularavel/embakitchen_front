@@ -1,4 +1,48 @@
 {
-  "AboutCompanyPage": {
+  "NavLinks": {
+    "Common": [
+      {
+        "label": "Furnitures",
+        "nestedLinks": [
+          {
+            "label": "Kitchen furnitures",
+            "href": "/furnitures/kitchen"
+          },
+          {
+            "label": "Corridor furnitures",
+            "href": "/furnitures/corridor"
+          }
+        ]
+      },
+      {
+        "label": "Stores",
+        "href": "/stores"
+      },
+      {
+        "label": "About",
+        "nestedLinks": [
+          {
+            "label": "About company",
+            "href": "/about"
+          },
+          {
+            "label": "Projects",
+            "href": "/projects"
+          }
+        ]
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "Campaigns",
+        "href": "/campaigns"
+      }
+    ]
+  },
+  "AboutPage": {},
+  "ProjectsPage": {
+    "title": "Our Projects"
   }
 }
