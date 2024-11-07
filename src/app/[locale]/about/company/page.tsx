@@ -21,6 +21,7 @@ export default async function AboutCompanyPage({
         .original_url,
     },
     description: aboutCompanyPageData.content[locale],
+    videoSrc: aboutCompanyPageData.video[0].original_url,
   }
 
   return (
@@ -30,6 +31,7 @@ export default async function AboutCompanyPage({
         image: aboutCompanyProps.banner.image,
       }}
       description={aboutCompanyProps.description}
+      videoSrc={aboutCompanyProps.videoSrc}
     />
   )
 }

@@ -23,13 +23,13 @@ const statisticItemStyles: Readonly<TwClasses> = {
     line: 'hidden mobile:block w-px bg-tertiary-9',
   },
   about: {
-    statisticItem: 'w-1/2 mobile:w-auto',
+    statisticItem: 'w-[calc((100%-49px)/2)] mobile:w-auto',
     statisticItemContent: 'flex flex-col gap-y-[5px]',
     quantity:
       'text-3xl tablet:text-4xl leading-10 tablet:leading-15 text-secondary-3 font-bold',
     label:
       'text-base tablet:text-xl leading-6 tablet:leading-7 text-gray-8 font-medium',
-    line: '',
+    line: 'hidden mobile:block',
   },
 }
 
@@ -41,6 +41,8 @@ export function StatisticItem({
   const { width } = useScreenSize()
   const { isClientRendering } = useStore(state => state.clientSlice)
   const styles = statisticItemStyles[context] as Readonly<StyleRecord>
+  const breakpointForLines =
+    context === 'home' ? SCREENS.mobile : SCREENS.laptop
 
   return (
     <>
@@ -48,15 +50,15 @@ export function StatisticItem({
         <div className={styles.statisticItemContent}>
           <span
             className={styles.quantity}
-            data-quantity={entry.quantity}
+            data-quantity={entry.count}
           >
             0
           </span>
-          <span className={styles.label}>{entry.label}</span>
+          <span className={styles.label}>{entry.title}</span>
         </div>
       </div>
 
-      {isClientRendering && width >= SCREENS.mobile && !isLast && (
+      {isClientRendering && width >= breakpointForLines && !isLast && (
         <div className={styles.line}></div>
       )}
     </>
