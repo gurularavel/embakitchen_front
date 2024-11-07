@@ -28,6 +28,7 @@ export type IconVariant =
   | 'arrow-right'
   | 'arrow-left'
   | 'chevron-right'
+  | 'play-video'
 
 export type TimeoutId = NodeJS.Timeout | null
 

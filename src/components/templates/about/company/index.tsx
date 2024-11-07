@@ -34,6 +34,7 @@ interface AboutCompanyProps {
     image: string
   }
   description: string
+  videoSrc: string
 }
 
 const aboutCompanyStyles: Readonly<TwClasses> = {
@@ -48,7 +49,7 @@ const aboutCompanyStyles: Readonly<TwClasses> = {
   solutionsBadge:
     'flex items-center h-[52px] px-6 bg-primary-9 whitespace-nowrap text-lg leading-6 font-medium text-primary-1',
   infoBlocksWrapper:
-    'px-4 tablet:px-0 laptop:px-15 widescreen:px-0 mb-6 laptop:mb-25 flex flex-col laptop:flex-row laptop:flex-wrap gap-y-4 laptop:gap-6',
+    'px-4 tablet:px-0 laptop:px-15 widescreen:px-0 mb-6 laptop:mb-25 grid grid-cols-1 laptop:grid-cols-2 gap-y-4 laptop:gap-6',
   infoBlock:
     'p-6 border border-solid border-gray-9 basis-full laptop:basis-1/2',
   infoBlockTitle:
@@ -60,6 +61,7 @@ const styles = aboutCompanyStyles as Readonly<StyleRecord>
 export function AboutCompany({
   banner,
   description,
+  videoSrc,
 }: Readonly<AboutCompanyProps>): React.ReactElement {
   return (
     <>
@@ -73,7 +75,7 @@ export function AboutCompany({
         dangerouslySetInnerHTML={{ __html: description }}
       />
 
-      <Video />
+      <Video src={videoSrc} />
 
       <div className={styles.statisticsWrapper}>
         <p className={styles.statisticsTitle}>
