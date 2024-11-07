@@ -1,8 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useScreenSize } from '~ek/hooks'
-import { useClientStore } from '~ek/providers'
+import { useStore, useScreenSize } from '~ek/hooks'
 import type { StatisticEntry, StatisticsContext } from '~ek/types'
 import { SCREENS } from '~ek/utils'
 
@@ -40,7 +39,7 @@ export function StatisticItem({
   isLast,
 }: Readonly<StatisticItemProps>): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering } = useClientStore(state => state)
+  const { isClientRendering } = useStore(state => state.clientSlice)
   const styles = statisticItemStyles[context] as Readonly<StyleRecord>
   const breakpointForLines =
     context === 'home' ? SCREENS.mobile : SCREENS.laptop

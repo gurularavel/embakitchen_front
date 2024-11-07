@@ -12,8 +12,7 @@ import {
   Search,
   Sidebar,
 } from '~ek/components'
-import { useScreenSize } from '~ek/hooks'
-import { useClientStore } from '~ek/providers'
+import { useStore, useScreenSize } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
 
 interface WideScreenHeaderProps {
@@ -112,8 +111,8 @@ function WideScreenHeader({
 
 export function Header(): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering, setClientRendering } = useClientStore(
-    state => state,
+  const { isClientRendering, setClientRendering } = useStore(
+    state => state.clientSlice,
   )
 
   React.useEffect(() => setClientRendering(true), [setClientRendering])

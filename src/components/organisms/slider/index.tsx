@@ -7,10 +7,9 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
 import { Button, Icon, SocialContacts } from '~ek/components'
-import { useScreenSize } from '~ek/hooks'
+import { useScreenSize, useStore } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
 import type { SliderVariant } from '~ek/types'
-import { useClientStore } from '~ek/providers'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import mainSliderImg from '/public/assets/images/slider/main-slider-img.png'
@@ -92,7 +91,7 @@ const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering } = useClientStore(state => state)
+  const { isClientRendering } = useStore(state => state.clientSlice)
 
   return (
     <div className={`main-slider ${mainSliderStyles.slider}`}>
