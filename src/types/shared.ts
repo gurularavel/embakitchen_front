@@ -77,3 +77,10 @@ export interface CampaignEntry {
   start: Date
   end: Date
 }
+
+export interface ProjectEntry {
+  title: string
+  content: string
+  img: string | StaticImageData
+  tag: string
+}

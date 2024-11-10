@@ -1,5 +1,9 @@
-import type { LayoutOption } from '~ek/types'
-import { STATISTICS_SECTION_INTERVAL_LIMIT } from '~ek/utils'
+import type { LayoutOption, ScreenBreakpoint } from '~ek/types'
+import {
+  PROJECTS_QUANTITY_ON_BREAKPOINTS,
+  SCREENS,
+  STATISTICS_SECTION_INTERVAL_LIMIT,
+} from '~ek/utils'
 
 export const getGapProperty = (
   layout: LayoutOption,
@@ -30,4 +34,20 @@ export const statisticsObserverCallback = (
       }, STATISTICS_SECTION_INTERVAL_LIMIT / quantity)
     })
   }
+}
+
+export const getProjectsQuantity = (width: number): number => {
+  let selectedQuantity: number = 5
+
+  for (const [breakpoint, quantity] of Object.entries(
+    PROJECTS_QUANTITY_ON_BREAKPOINTS,
+  )) {
+    if (width >= SCREENS[breakpoint as ScreenBreakpoint]) {
+      selectedQuantity = quantity
+    } else {
+      break
+    }
+  }
+
+  return selectedQuantity
 }
