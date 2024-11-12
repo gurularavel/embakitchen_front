@@ -1,4 +1,48 @@
 {
-  "AboutCompanyPage": {
+  "NavLinks": {
+    "Common": [
+      {
+        "label": "Mebellər",
+        "nestedLinks": [
+          {
+            "label": "Mətbəx mebelləri",
+            "href": "/mebellər/mətbəx"
+          },
+          {
+            "label": "Dəhliz mebelləri",
+            "href": "/mebellər/dəhliz"
+          }
+        ]
+      },
+      {
+        "label": "Mağazalar",
+        "href": "/mağazalar"
+      },
+      {
+        "label": "Haqqımızda",
+        "nestedLinks": [
+          {
+            "label": "Şirkət haqqında",
+            "href": "/haqqımızda"
+          },
+          {
+            "label": "Layihələrimiz",
+            "href": "/layihələr"
+          }
+        ]
+      },
+      {
+        "label": "Blog",
+        "href": "/bloq"
+      },
+      {
+        "label": "Kampaniyalar",
+        "href": "/kampaniyalar"
+      }
+    ]
+  },
+  "AboutPage": {},
+  "ProjectsPage": {
+    "title": "Layihələrimiz"
   }
 }

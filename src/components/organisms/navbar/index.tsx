@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import { Button, Dropdown, NavLink } from '~ek/components'
@@ -21,38 +22,6 @@ const navbars: Readonly<Record<NavbarContext, React.ReactElement>> = {
   header: <NavbarHeader />,
   footer: <NavbarFooter />,
 }
-
-const commonNavLinks: NavLinkEntry[] = [
-  {
-    label: 'Mətbəx mebelləri',
-    href: '/kitchen-furniture',
-  },
-  {
-    label: 'Mağazalar',
-    href: '/stores',
-  },
-  {
-    label: 'Haqqımızda',
-    nestedLinks: [
-      {
-        label: 'Şirkət haqqında',
-        href: '/about/company',
-      },
-      {
-        label: 'Layihələrimiz',
-        href: '/about/projects',
-      },
-    ],
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
-  },
-  {
-    label: 'Kampaniyalar',
-    href: '/campaigns',
-  },
-]
 
 const footerNav: FooterNav[] = [
   {
@@ -112,6 +81,8 @@ const renderNavLink = (link: NavLinkEntry, className?: string) => (
 
 function NavbarHeader(): React.ReactElement {
   const pathname = usePathname()
+  const t = useTranslations('NavLinks')
+  const commonNavLinks: NavLinkEntry[] = t.raw('Common')
 
   return (
     <ul className={navbarHeaderStyles.nav}>

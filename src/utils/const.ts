@@ -17,3 +17,32 @@ export const DEFAULT_INTERSECTION_OBSERVER_OPTIONS: Readonly<IntersectionObserve
   }
 
 export const STATISTICS_SECTION_INTERVAL_LIMIT: number = 1500
+
+interface LocalizedPathname {
+  az: string
+  ru: string
+  en: string
+}
+export const LOCALIZED_PATHNAMES: Record<string, LocalizedPathname> = {
+  '/about': {
+    az: '/haqqımızda',
+    ru: '/о-нас',
+    en: '/about',
+  },
+  '/projects': {
+    az: '/layihələr',
+    ru: '/проекты',
+    en: '/projects',
+  },
+}
+
+export const PROJECTS_QUANTITY_ON_BREAKPOINTS: Readonly<
+  Record<ScreenBreakpoint, number>
+> = {
+  compact: 5,
+  mobile: 5,
+  tablet: 4,
+  laptop: 9,
+  desktop: 9,
+  widescreen: 12,
+}

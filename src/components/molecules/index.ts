@@ -10,3 +10,4 @@ export {
 export { CampaignItem } from '~ek/components/molecules/campaign-item'
 export { Banner } from '~ek/components/molecules/banner'
 export { Video } from '~ek/components/molecules/video'
+export { ProjectItem } from '~ek/components/molecules/project-item'
