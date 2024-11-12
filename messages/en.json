@@ -1,6 +1,6 @@
 {
-  "NavLinks": {
-    "Common": [
+  "links": {
+    "header": [
       {
         "label": "Furnitures",
         "nestedLinks": [
@@ -32,8 +32,8 @@
         ]
       },
       {
-        "label": "Blog",
-        "href": "/blog"
+        "label": "Blogs",
+        "href": "/blogs"
       },
       {
         "label": "Campaigns",
@@ -41,8 +41,11 @@
       }
     ]
   },
-  "AboutPage": {},
-  "ProjectsPage": {
+  "aboutPage": {},
+  "projectsPage": {
     "title": "Our Projects"
+  },
+  "blogsPage": {
+    "title": "Blogs"
   }
 }

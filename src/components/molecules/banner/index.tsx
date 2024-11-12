@@ -17,10 +17,11 @@ const bannerStyles: Readonly<TwClasses> = {
 }
 const styles = bannerStyles as Readonly<StyleRecord>
 
-export function Banner({
-  title,
-  img,
-}: Readonly<BannerProps>): React.ReactElement {
+export function Banner({ title, img }: Readonly<BannerProps>): React.ReactNode {
+  if (!title.trim() && !img) {
+    return null
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

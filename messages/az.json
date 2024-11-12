@@ -1,6 +1,6 @@
 {
-  "NavLinks": {
-    "Common": [
+  "links": {
+    "header": [
       {
         "label": "Mebellər",
         "nestedLinks": [
@@ -32,8 +32,8 @@
         ]
       },
       {
-        "label": "Blog",
-        "href": "/bloq"
+        "label": "Bloqlar",
+        "href": "/bloqlar"
       },
       {
         "label": "Kampaniyalar",
@@ -41,8 +41,11 @@
       }
     ]
   },
-  "AboutPage": {},
-  "ProjectsPage": {
+  "aboutPage": {},
+  "projectsPage": {
     "title": "Layihələrimiz"
+  },
+  "blogsPage": {
+    "title": "Bloqlar"
   }
 }

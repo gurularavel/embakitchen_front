@@ -27,7 +27,7 @@ const projects: Partial<ProjectEntry>[] = Array(9)
   .flat()
 
 export default function ProjectsPage(): React.ReactElement {
-  const t = useTranslations('ProjectsPage')
+  const t = useTranslations('projectsPage')
 
   const projectsProps = {
     banner: {

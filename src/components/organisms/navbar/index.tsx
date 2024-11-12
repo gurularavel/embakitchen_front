@@ -81,8 +81,8 @@ const renderNavLink = (link: NavLinkEntry, className?: string) => (
 
 function NavbarHeader(): React.ReactElement {
   const pathname = usePathname()
-  const t = useTranslations('NavLinks')
-  const commonNavLinks: NavLinkEntry[] = t.raw('Common')
+  const t = useTranslations('links')
+  const commonNavLinks: NavLinkEntry[] = t.raw('header')
 
   return (
     <ul className={navbarHeaderStyles.nav}>
