@@ -1,16 +1,17 @@
 'use client'
 
 import * as React from 'react'
+import { updatePrimitiveState } from '~ek/utils'
 
 interface PaginationProps {
   totalPages: number
 }
 
 const paginationStyles: Readonly<TwClasses> = {
-  wrapper: 'flex justify-center items-center',
-  pagination: 'flex gap-x-8',
+  wrapper: 'py-4 flex justify-center items-center mb-6 laptop:mb-15',
+  pagination: 'flex gap-x-6',
   page: (isActive: unknown) =>
-    `h-[26px] ${(isActive as boolean) ? 'w-[26px] flex items-center justify-center rounded-full bg-gray-1 text-white' : ''}`,
+    `w-[26px] h-[26px] flex items-center justify-center rounded-full text-sm leading-[22px] font-medium ${(isActive as boolean) ? 'bg-gray-1 text-white' : 'text-gray-5'}`,
 }
 const styles = paginationStyles as Readonly<StyleRecord>
 const getPageStyles = paginationStyles.page as StyleGetter
@@ -19,10 +20,6 @@ export function Pagination({
   totalPages,
 }: Readonly<PaginationProps>): React.ReactElement {
   const [activePage, setActivePage] = React.useState<number>(1)
-  const selectPage = React.useCallback(
-    (page: number): void => setActivePage(page),
-    [],
-  )
 
   return (
     <div className={styles.wrapper}>
@@ -34,7 +31,7 @@ export function Pagination({
             <li
               key={page}
               className={getPageStyles(page === activePage)}
-              onClick={() => selectPage(page)}
+              onClick={() => updatePrimitiveState(page, setActivePage)}
             >
               {page}
             </li>

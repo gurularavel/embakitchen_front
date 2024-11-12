@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { Button, Icon } from '~ek/components'
+import { updatePrimitiveState } from '~ek/utils'
 
 interface VideoProps {
   src: string
@@ -33,20 +34,17 @@ export function Video({ src }: Readonly<VideoProps>): React.ReactElement {
     }
   }, [shouldPlay])
 
-  const handleVideoPlay = (shouldPlay: boolean): void =>
-    setShouldPlay(shouldPlay)
-
   return (
     <div className={styles.wrapper}>
       <video
         src={src}
         className={getVideoStyles(shouldPlay)}
         ref={videoRef}
-        onClick={() => handleVideoPlay(false)}
-        onEnded={() => handleVideoPlay(false)}
+        onClick={() => updatePrimitiveState(false, setShouldPlay)}
+        onEnded={() => updatePrimitiveState(false, setShouldPlay)}
       ></video>
 
-      <Button onClick={() => handleVideoPlay(true)}>
+      <Button onClick={() => updatePrimitiveState(true, setShouldPlay)}>
         <Icon
           variant='play-video'
           sizes={getIconStyles(shouldPlay)}

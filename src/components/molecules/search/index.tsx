@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { Button, Icon, Input } from '~ek/components'
 import { useInputFocus } from '~ek/hooks'
+import { updatePrimitiveState } from '~ek/utils'
 
 const searchStyles: Readonly<TwClasses> = {
   search: 'w-auto h-full',
@@ -26,13 +27,10 @@ export function Search(): React.ReactElement {
     },
   })
 
-  const handleSearchVisibility = (shouldBeVisible: boolean): void =>
-    setIsVisible(shouldBeVisible)
-
   return (
     <div className={styles.search}>
       <Button
-        onClick={() => handleSearchVisibility(!isVisible)}
+        onClick={() => updatePrimitiveState(!isVisible, setIsVisible)}
         classes={styles.searchButton}
       >
         <Icon

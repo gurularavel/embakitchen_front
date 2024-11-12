@@ -6,6 +6,7 @@ import { useLocale } from 'next-intl'
 import { Link, usePathname } from '~ek/i18n/routing'
 import { Button, Icon } from '~ek/components'
 import { Language } from '~ek/types'
+import { updatePrimitiveState } from '~ek/utils'
 
 type LanguageSelectorContext = 'sidebar' | 'header'
 
@@ -46,14 +47,11 @@ export function LanguageSelector({
   const pathname: string = usePathname()
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
 
-  const handleLanguageSelectorVisibility = (shouldBeVisible: boolean): void =>
-    setIsVisible(shouldBeVisible)
-
   return (
     <div className={getLanguageSelectorStyles(context)}>
       <div className={styles.selectedLanguage}>
         <Button
-          onClick={() => handleLanguageSelectorVisibility(!isVisible)}
+          onClick={() => updatePrimitiveState(!isVisible, setIsVisible)}
           classes={twMerge(styles.selectedLanguageButton, classes ?? '')}
         >
           <span>{locale}</span>
@@ -75,7 +73,7 @@ export function LanguageSelector({
           <li
             key={value}
             className={styles.language}
-            onClick={() => handleLanguageSelectorVisibility(false)}
+            onClick={() => updatePrimitiveState(false, setIsVisible)}
           >
             <Link
               href={pathname}
