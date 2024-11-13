@@ -51,3 +51,8 @@ export const getProjectsQuantity = (width: number): number => {
 
   return selectedQuantity
 }
+
+export const updatePrimitiveState = <T extends boolean | number | string>(
+  newState: T,
+  setter: (newState: T) => void,
+): void => setter(newState)

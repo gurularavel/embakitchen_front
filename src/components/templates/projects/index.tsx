@@ -1,7 +1,7 @@
 'use client'
 
 import { StaticImageData } from 'next/image'
-import { Banner, ProjectItem } from '~ek/components'
+import { Banner, Pagination, ProjectItem } from '~ek/components'
 import { useScreenSize, useStore } from '~ek/hooks'
 import type { ProjectEntry } from '~ek/types'
 import { getProjectsQuantity } from '~ek/utils'
@@ -45,6 +45,8 @@ export function Projects({
             />
           ))}
       </div>
+
+      <Pagination totalPages={5} />
     </>
   )
 }

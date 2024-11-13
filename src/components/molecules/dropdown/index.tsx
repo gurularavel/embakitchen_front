@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Button, Icon, NavLink } from '~ek/components'
 import { useScreenSize } from '~ek/hooks'
 import type { NavLinkEntry } from '~ek/types'
-import { SCREENS } from '~ek/utils'
+import { SCREENS, updatePrimitiveState } from '~ek/utils'
 
 interface DropdownProps {
   label: string
@@ -47,14 +47,11 @@ export function Dropdown({
     }
   }, [isVisible])
 
-  const handleDropdownVisibility = (shouldBeVisible: boolean): void =>
-    setIsVisible(shouldBeVisible)
-
   return (
     <div className={styles.dropdown}>
       <Button
         classes={styles.dropdownButton}
-        onClick={() => handleDropdownVisibility(!isVisible)}
+        onClick={() => updatePrimitiveState(!isVisible, setIsVisible)}
       >
         <span>{label}</span>
         <Icon
@@ -81,7 +78,7 @@ export function Dropdown({
           <li
             key={link.href}
             className={styles.nestedItem}
-            onClick={() => handleDropdownVisibility(false)}
+            onClick={() => updatePrimitiveState(false, setIsVisible)}
           >
             <NavLink
               href={link.href}

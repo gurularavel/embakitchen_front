@@ -9,6 +9,7 @@ import {
   Navbar,
   SocialContacts,
 } from '~ek/components'
+import { updatePrimitiveState } from '~ek/utils'
 
 const sidebarStyles: Readonly<TwClasses> = {
   sidebar:
@@ -37,12 +38,9 @@ export function Sidebar(): React.ReactElement {
     document.body.style.overflow = isVisible ? 'hidden' : 'auto'
   }, [isVisible])
 
-  const handleSidebarVisibility = (shouldBeVisible: boolean): void =>
-    setIsVisible(shouldBeVisible)
-
   return (
     <aside className={styles.sidebar}>
-      <Button onClick={() => handleSidebarVisibility(true)}>
+      <Button onClick={() => updatePrimitiveState(true, setIsVisible)}>
         <Icon
           variant='menu'
           sizes={styles.menuIcon}
@@ -51,7 +49,7 @@ export function Sidebar(): React.ReactElement {
 
       <div className={getSidebarContentStyles(isVisible)}>
         <div className={styles.closeSidebar}>
-          <Button onClick={() => handleSidebarVisibility(false)}>
+          <Button onClick={() => updatePrimitiveState(false, setIsVisible)}>
             <Icon
               variant='close'
               sizes={styles.closeIcon}
