@@ -1,4 +1,10 @@
-import type { LayoutOption, ScreenBreakpoint } from '~ek/types'
+import {
+  Language,
+  type MediaFile,
+  type MultilingualText,
+  type LayoutOption,
+  type ScreenBreakpoint,
+} from '~ek/types'
 import {
   PROJECTS_QUANTITY_ON_BREAKPOINTS,
   SCREENS,
@@ -56,3 +62,48 @@ export const updatePrimitiveState = <T extends boolean | number | string>(
   newState: T,
   setter: (newState: T) => void,
 ): void => setter(newState)
+
+export const isMultilingualText = (obj: unknown): boolean => {
+  const languageKeys = new Set(Object.values(Language))
+
+  if (typeof obj === 'object' && obj !== null) {
+    return Object.entries(obj).every(
+      ([key, value]) =>
+        languageKeys.has(key as Language) && typeof value === 'string',
+    )
+  }
+
+  return false
+}
+
+export const isMediaFile = (value: unknown): boolean => {
+  if (
+    Array.isArray(value) &&
+    typeof value[0] === 'object' &&
+    value[0] !== null
+  ) {
+    return 'original_url' in value[0]
+  }
+
+  return false
+}
+
+export const setUiData = (value: unknown, locale: Language) => {
+  if (isMultilingualText(value)) {
+    return (value as MultilingualText<Language>)[locale]
+  } else if (isMediaFile(value)) {
+    return (value as [MediaFile])[0]
+  }
+
+  return value
+}
+
+export const transformToUiData = (data: object, locale: Language): unknown => {
+  return Object.entries(data).reduce(
+    (result, [key, value]) => ({
+      ...result,
+      [key]: setUiData(value, locale),
+    }),
+    {},
+  )
+}

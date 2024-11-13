@@ -1,41 +1,5 @@
 import { Badge, Banner, Statistics, Video } from '~ek/components'
-
-interface InfoBlock {
-  title: string
-  content: string
-}
-
-const infoBlocks: InfoBlock[] = [
-  {
-    title: 'Məqsədimiz',
-    content:
-      'Dizayn etdiyimiz hər bir özəl mebelin müştərinin mənzilində reallaşaraq öz varlığına qovuşduğunu görmək bizləri xoşbəxt edir. Mebeli dizayn etmək üçün ilk növbədə müştəriləri və onların istəklərini yaxşı anlamaq lazımdır. Özəl mətbəxləri hazırlayarkən əsas diqqət yetirdiyimiz məqam özümüzü mənzillərdə müştərilərin yerinə qoymaq, mətbəxin funksionallığı ilə rahatlığının düz mütənasibliyini təmin etmək və eyni zamanda da dizayner kimi müştərilərin və mətbəxin mexaniki ehtiyaclarını anlamaq, fərqli bucaqlardan baxaraq həllər təqdim etməkdir.',
-  },
-  {
-    title: 'Peşəkar dizayner komandamız',
-    content:
-      'Özəl mebel dizaynı yalnızca dekorativ stildən ibarət deyil. Mətbəx hazırlamaq insanların gündəlik həyat tərzini anlamaq, paylaşdığı duyğuları, söhbətləri məkanın içərisinə yansıtmaqdır. Biz mətbəx mebelinin dizaynını hazırlayarkən özümüzü müştərinin əvəzinə mətbəxin mərkəzində dayanmış şəkildə təsəvvür edirik. Müştəriyə nə diskomfort yarada bilər, hansı çətinliklə üzləşə bilər - bütün bunları nəzərdən keçirərək onlar üçün optimal həllər müəyyənləşdiririk. Özəl hazırladığımız şkaf kupe, dəhliz mebelləri, qarderoblar müştərinin mənzili üçün tam uyğun formada işlənib yığılır.',
-  },
-  {
-    title: 'İstehsal prosesi',
-    content:
-      'Özəl mətbəx mebellərinin istehsalı Embawood şirkətinə məxsus 3 böyük fabrikdə həyata keçirilir. Mebel fabriklərimiz Masallı, Xırdalan və Sumqayıt şəhərlərində yerləşir. Fabriklərimiz istehsalda Avtsriyanın beynəlxalq Blum şirkətindən və Türkiyənin Samet firmasından alınan keyfiyyətli materiallardan istifadə edir. Həmçinin istehsalda dünya mebel sənayesində yüksək iş əmsalı ilə tanınan "Holzma", "Homag", "İma", "Burkle", "Morbidelli", "Biesse" kimi avadanlıqlardan istifadə olunur ki, bunlar da mebellərimizin keyfiyyətində öz əksini tapır.',
-  },
-  {
-    title: 'Keyfiyyət',
-    content:
-      'İstehsalda istifadə edilən texnologiyalar məşhur Avstriya şirkəti Blum tərəfindən təchiz edilir. Blum-un Keyfiyyət İdarəetmə Sistemi ISO 9001 sertifikatına malikdir və bu o deməkdir ki, müştərilərimiz hər bir Blum məhsulunda ardıcıl keyfiyyət gözləyə bilərlər. Səlahiyyətli İqtisadi Operator (AEO) statusu Blumun beynəlxalq təchizat zəncirindəki rolunun etibarlı olduğunu göstərən keyfiyyət nişanıdır.',
-  },
-]
-
-interface AboutProps {
-  banner: {
-    title: string
-    image: string
-  }
-  description: string
-  videoSrc: string
-}
+import type { AboutInfoBlock, AboutProps } from '~ek/types'
 
 const aboutStyles: Readonly<TwClasses> = {
   description:
@@ -61,13 +25,14 @@ const styles = aboutStyles as Readonly<StyleRecord>
 export function About({
   banner,
   description,
-  videoSrc,
+  video,
+  infoBlocks,
 }: Readonly<AboutProps>): React.ReactElement {
   return (
     <>
       <Banner
         title={banner?.title ?? ''}
-        img={banner?.image}
+        image={banner?.image}
       />
 
       <div
@@ -75,7 +40,7 @@ export function About({
         dangerouslySetInnerHTML={{ __html: description }}
       />
 
-      <Video src={videoSrc} />
+      {video && <Video video={video} />}
 
       <div className={styles.statisticsWrapper}>
         <p className={styles.statisticsTitle}>
@@ -109,9 +74,9 @@ export function About({
       </div>
 
       <div className={styles.infoBlocksWrapper}>
-        {infoBlocks?.map((block: InfoBlock) => (
+        {infoBlocks?.map((block: AboutInfoBlock) => (
           <div
-            key={block.title}
+            key={block.id}
             className={styles.infoBlock}
           >
             <h5 className={styles.infoBlockTitle}>{block.title}</h5>

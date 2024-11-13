@@ -1,27 +1,21 @@
-import { useTranslations } from 'next-intl'
 import { Blogs } from '~ek/components'
-import blogsPageBanner from '/public/assets/images/blogs-page-banner.jpg'
-// import mockBlogImg from '/public/assets/images/mock-blog-img.jpg'
+import type { BannerProps, BlogEntry, BlogsProps } from '~ek/types'
+import { transformToUiData } from '~ek/utils'
 
-// const projects: Partial<ProjectEntry>[] = Array(9)
-//   .fill([
-//     {
-//       title: 'Not an expert? Not a problem. Here’s why.',
-//       content:
-//         'Worried about teaching or leading because you’re not an ‘expert’? Research says that’s an advantage. Learn how to leverage your inexperience for better products.',
-//       img: mockBlogImg,
-//     },
-//   ])
-//   .flat()
+export default async function BlogsPage({
+  params: { locale },
+}: PageProps): Promise<React.ReactElement> {
+  const promises = await Promise.all([
+    fetch('https://embakitchen.kvadrat.az/api/blog'),
+    fetch('https://embakitchen.kvadrat.az/api/posts'),
+  ])
+  const [{ blogPage: blogPageData }, { data: blogs }] = await Promise.all(
+    promises.map(promise => promise.json()),
+  )
 
-export default function BlogsPage(): React.ReactElement {
-  const t = useTranslations('blogsPage')
-
-  const blogsProps = {
-    banner: {
-      title: t('title'),
-      image: blogsPageBanner,
-    },
+  const blogsProps: BlogsProps = {
+    banner: transformToUiData(blogPageData, locale) as BannerProps,
+    blogs: blogs.map((blog: BlogEntry) => transformToUiData(blog, locale)),
   }
 
   return <Blogs {...blogsProps} />

@@ -1,9 +1,5 @@
-import Image, { type StaticImageData } from 'next/image'
-
-interface BannerProps {
-  title: string
-  img: string | StaticImageData
-}
+import Image from 'next/image'
+import type { BannerProps } from '~ek/types'
 
 const bannerStyles: Readonly<TwClasses> = {
   container:
@@ -13,12 +9,15 @@ const bannerStyles: Readonly<TwClasses> = {
     'flex items-center justify-center absolute top-0 right-0 bottom-0 left-0 bg-black/40 z-10',
   title:
     'text-2xl laptop:text-[56px] laptop:leading-[68.26px] font-semibold text-white',
-  img: 'w-full h-full object-cover',
+  image: 'w-full h-full object-cover',
 }
 const styles = bannerStyles as Readonly<StyleRecord>
 
-export function Banner({ title, img }: Readonly<BannerProps>): React.ReactNode {
-  if (!title.trim() && !img) {
+export function Banner({
+  title,
+  image,
+}: Readonly<BannerProps>): React.ReactNode {
+  if (!title.trim() && !image) {
     return null
   }
 
@@ -29,9 +28,9 @@ export function Banner({ title, img }: Readonly<BannerProps>): React.ReactNode {
           <h1 className={styles.title}>{title}</h1>
         </div>
         <Image
-          src={img}
+          src={image.original_url}
           alt='Embakitchen about company page'
-          className={styles.img}
+          className={styles.image}
           fill={true}
         />
       </div>
