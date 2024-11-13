@@ -5,13 +5,12 @@ import { transformToUiData } from '~ek/utils'
 export default async function AboutPage({
   params: { locale },
 }: Readonly<PageProps>): Promise<React.ReactElement> {
-  const promises = await Promise.all([
+  const [aboutPageResponse, infoBlockResponse] = await Promise.all([
     fetch('https://embakitchen.kvadrat.az/api/about'),
     fetch('https://embakitchen.kvadrat.az/api/about-info-blocks'),
   ])
-  const [aboutPageData, { data: infoBlocks }] = await Promise.all(
-    promises.map(promise => promise.json()),
-  )
+  const aboutPageData = await aboutPageResponse.json()
+  const { data: infoBlocks } = await infoBlockResponse.json()
 
   const aboutProps: AboutProps = {
     banner: transformToUiData(

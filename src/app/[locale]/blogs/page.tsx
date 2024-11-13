@@ -5,13 +5,12 @@ import { transformToUiData } from '~ek/utils'
 export default async function BlogsPage({
   params: { locale },
 }: PageProps): Promise<React.ReactElement> {
-  const promises = await Promise.all([
+  const [blogsPageResponse, blogsResponse] = await Promise.all([
     fetch('https://embakitchen.kvadrat.az/api/blog'),
     fetch('https://embakitchen.kvadrat.az/api/posts'),
   ])
-  const [{ blogPage: blogPageData }, { data: blogs }] = await Promise.all(
-    promises.map(promise => promise.json()),
-  )
+  const { blogPage: blogPageData } = await blogsPageResponse.json()
+  const { data: blogs } = await blogsResponse.json()
 
   const blogsProps: BlogsProps = {
     banner: transformToUiData(blogPageData, locale) as BannerProps,
