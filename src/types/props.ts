@@ -17,5 +17,5 @@ export interface AboutProps extends SharedProps {
 }
 
 export interface BlogsProps extends SharedProps {
-  blogs: BlogEntry
+  blogs: BlogEntry[]
 }
