@@ -39,6 +39,50 @@
         "label": "Campaigns",
         "href": "/campaigns"
       }
+    ],
+    "footer": [
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "About Us",
+            "href": "/about-us"
+          },
+          {
+            "label": "Stores",
+            "href": "/stores"
+          },
+          {
+            "label": "Campaigns",
+            "href": "/campaigns"
+          },
+          {
+            "label": "Blog",
+            "href": "/blog"
+          }
+        ]
+      },
+      {
+        "title": "Products",
+        "links": [
+          {
+            "label": "Legno",
+            "href": "/legno"
+          },
+          {
+            "label": "Adel Ral",
+            "href": "/adel-ral"
+          },
+          {
+            "label": "Franchesco Cream",
+            "href": "/franchesco-cream"
+          },
+          {
+            "label": "Aldo Ray Gray",
+            "href": "/aldo-ray-gray"
+          }
+        ]
+      }
     ]
   },
   "aboutPage": {},

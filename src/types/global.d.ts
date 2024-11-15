@@ -11,6 +11,7 @@ declare global {
   interface PageProps {
     params: {
       locale: Language
+      slug?: string
     }
   }
 }

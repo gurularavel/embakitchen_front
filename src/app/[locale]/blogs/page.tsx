@@ -9,7 +9,7 @@ export default async function BlogsPage({
     fetch('https://embakitchen.kvadrat.az/api/blog'),
     fetch('https://embakitchen.kvadrat.az/api/posts'),
   ])
-  const { blogPage: blogPageData } = await blogsPageResponse.json()
+  const blogPageData = await blogsPageResponse.json()
   const { data: blogs } = await blogsResponse.json()
 
   const blogsProps: BlogsProps = {
