@@ -1,44 +1,101 @@
 import Image from 'next/image'
 import type { BlogEntry, MediaFile } from '~ek/types'
 
+const blogs = Array(4)
+  .fill({})
+  .map(() => ({
+    title: 'Not an expert? Not a problem. Here’s why.',
+    content:
+      'Worried about teaching or leading because you’re not an ‘expert’? Research says that’s an advantage. Learn how to leverage your inexperience for better products.',
+    image:
+      'https://cdn.media.amplience.net/i/shadesoflight/furniture_1?fmt=auto&w=575',
+  }))
+
 const blogDetailsStyles: Readonly<TwClasses> = {
-  blog: '',
-  topWrapper: 'w-full h-[440px] mt-6 relative',
+  blog: 'mt-6 laptop:mt-10 mb-6 laptop:mb-15 widescreen:mb-10',
+  top: 'relative mx-0 laptop:mx-[135px] widescreen:mx-[140px]',
+  imageWrapper: 'w-full h-[440px] relative',
   image: 'w-full h-full object-cover',
-  titleWrapper: 'py-[30px] px-6 bg-white absolute -bottom-6 left-4 right-4',
-  title: 'text-2xl tracking-[0.5px] text-tertiary-1 font-semibold text-center',
-  contentWrapper: 'pt-11 px-4',
-  content: 'text-sm font-normal',
+  titleWrapper:
+    'min-h-[220px] laptop:min-h-[316px] widescreen:min-h-min flex items-center justify-center py-0 px-6 laptop:px-25 widescreen:py-10 bg-white absolute -bottom-[45px] left-4 right-4 tablet:bottom-0 tablet:left-10 tablet:right-10 laptop:-bottom-[158px] laptop:left-25 laptop:right-25 widescreen:static',
+  title:
+    'max-w-[238px] laptop:max-w-[770px] widescreen:max-w-[961px] text-2xl laptop:text-[38px] laptop:leading-[52px] tracking-[0.5px] text-tertiary-1 font-semibold text-center',
+  contentWrapper:
+    'mx-0 laptop:mx-[235px] pt-[45px] tablet:pt-6 laptop:pt-[158px] widescreen:pt-0 px-4 tablet:px-10 laptop:px-25',
+  content:
+    'mb-6 widescreen:mb-10 text-sm text-tertiary-5 font-normal widescreen:text-base',
+  content2: '[&_p]:text-sm [&_p]:text-tertiary-5 [&_p]:font-normal',
+  similarBlogs: 'px-4 tablet:px-10 laptop:px-15 widescreen:px-25',
+  similarBlogsTitle:
+    'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
+  blogs:
+    'grid grid-cols-1 laptop:grid-cols-3 widescreen:grid-cols-4 gap-6 mb-6 laptop:mb-15',
+  blogImageWrapper: 'w-full h-[290px] relative mb-8',
+  blogImage: 'w-full h-full object-cover',
+  blogTitle: 'text-xl leading-7 font-medium text-tertiary-1 mb-4',
+  blogContent: 'text-sm font-normal text-tertiary-5',
 }
 const styles = blogDetailsStyles as Readonly<StyleRecord>
 
 export function BlogDetails({
   image,
   title,
+  content,
+  content2,
 }: Readonly<BlogEntry>): React.ReactElement {
   return (
-    <div className={styles.blog}>
-      <div className={styles.topWrapper}>
-        <Image
-          src={(image as unknown as MediaFile).original_url}
-          alt='Embakitchen sample blog image'
-          className={styles.image}
-          fill
-        />
+    <>
+      <div className={styles.blog}>
+        <div className={styles.top}>
+          <div className={styles.imageWrapper}>
+            <Image
+              src={(image as unknown as MediaFile).original_url}
+              alt={`Embakitchen - ${title}`}
+              className={styles.image}
+              fill
+            />
+          </div>
 
-        <div className={styles.titleWrapper}>
-          <h5 className={styles.title}>{title}</h5>
+          <div className={styles.titleWrapper}>
+            <h3 className={styles.title}>{title}</h3>
+          </div>
+        </div>
+
+        <div className={styles.contentWrapper}>
+          <p className={styles.content}>{content2}</p>
+
+          <div
+            className={styles.content2}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
       </div>
 
-      <div className={styles.contentWrapper}>
-        <p className={styles.content}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab harum
-          quod quasi nihil velit, nostrum odio enim aspernatur rem porro
-          repellat magni accusamus, aperiam maiores veniam reiciendis, quae
-          similique consequuntur!
-        </p>
+      <div className={styles.similarBlogs}>
+        <h4 className={styles.similarBlogsTitle}>Similar Blogs</h4>
+
+        <div className={styles.blogs}>
+          {blogs.map((blog, i: number) => (
+            <div
+              className=''
+              key={i}
+            >
+              <div className={styles.blogImageWrapper}>
+                <Image
+                  src={blog.image}
+                  alt={`Embakitchen - ${blog.title}`}
+                  className={styles.blogImage}
+                  fill
+                />
+              </div>
+              <div>
+                <h4 className={styles.blogTitle}>{blog.title}</h4>
+                <p className={styles.blogContent}>{blog.content}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
