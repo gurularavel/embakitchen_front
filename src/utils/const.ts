@@ -34,6 +34,11 @@ export const LOCALIZED_PATHNAMES: Record<string, LocalizedPathname> = {
     ru: '/проекты',
     en: '/projects',
   },
+  '/projects/[slug]': {
+    az: '/layihələr/[slug]',
+    ru: '/проекты/[slug]',
+    en: '/projects/[slug]',
+  },
   '/blogs': {
     az: '/bloq',
     ru: '/блог',

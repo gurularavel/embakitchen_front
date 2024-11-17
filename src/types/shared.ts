@@ -101,11 +101,14 @@ export interface CampaignEntry {
   end: Date
 }
 
-export interface ProjectEntry {
-  title: string
-  content: string
-  img: string | StaticImageData
-  tag: string
+export interface ProjectEntry<T extends string = string> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  content: MultilingualText<T>
+  tags: T extends Language ? Record<Language, string[]> : T
+  images: [MediaFile]
+  status: boolean
 }
 
 export interface BlogEntry<T extends string = string> {

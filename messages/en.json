@@ -86,7 +86,5 @@
     ]
   },
   "aboutPage": {},
-  "projectsPage": {
-    "title": "Our Projects"
-  }
+  "projectsPage": {}
 }

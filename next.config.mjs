@@ -12,6 +12,11 @@ const nextConfig = {
         port: '',
         pathname: '/storage/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.media.amplience.net',
+        port: '',
+      },
     ],
   },
 }
