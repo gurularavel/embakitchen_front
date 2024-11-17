@@ -6,14 +6,14 @@ import campaign2 from '/public/assets/images/campaigns/campaign-2.png'
 import campaign3 from '/public/assets/images/campaigns/campaign-3.png'
 import campaignsSectionBg from '/public/assets/images/campaigns/campaigns-section-bg.png'
 
-interface CampaignData {
+interface CurrentCampaignData {
   title: string
   campaigns: CampaignEntry[]
 }
 
 const today = new Date()
-const campaignImages = [campaign1, campaign2, campaign3, campaign1]
-const campaignsData: CampaignData = {
+const currentCampaignImages = [campaign1, campaign2, campaign3, campaign1]
+const currentCampaignsData: CurrentCampaignData = {
   title: 'Cari Kampaniyalar',
   campaigns: Array(4)
     .fill(undefined)
@@ -21,7 +21,7 @@ const campaignsData: CampaignData = {
       title: 'Kampaniyanın adı burada olacaq',
       description:
         'Kampaniya haqqında ətraflı məlumat. Kampaniya səhifəsinə keçid etdikdə görünəcək!',
-      img: campaignImages[i],
+      img: currentCampaignImages[i],
       start: new Date(
         today.getFullYear(),
         today.getMonth(),
@@ -41,7 +41,7 @@ const campaignsData: CampaignData = {
     })),
 }
 
-const campaignsStyles: Readonly<TwClasses> = {
+const currentCampaignsStyles: Readonly<TwClasses> = {
   container: 'mb-6 desktop:mb-25',
   wrapper:
     'px-0 widescreen:px-25 mx-4 tablet:mx-5 desktop:mx-15 widescreen:mx-0',
@@ -53,14 +53,14 @@ const campaignsStyles: Readonly<TwClasses> = {
   titleWrapperBgImg: 'h-[61px] w-full laptop:object-cover',
   campaigns: 'flex flex-col laptop:flex-row justify-between gap-6',
 }
-const styles = campaignsStyles as Readonly<StyleRecord>
+const styles = currentCampaignsStyles as Readonly<StyleRecord>
 
-export function Campaigns(): React.ReactElement {
+export function CurrentCampaigns(): React.ReactElement {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.titleWrapper}>
-          <h4 className={styles.title}>{campaignsData?.title || ''}</h4>
+          <h4 className={styles.title}>{currentCampaignsData?.title || ''}</h4>
           <div className={styles.titleWrapperBg}>
             <Image
               src={campaignsSectionBg}
@@ -71,7 +71,7 @@ export function Campaigns(): React.ReactElement {
         </div>
 
         <div className={styles.campaigns}>
-          {campaignsData?.campaigns?.map(
+          {currentCampaignsData?.campaigns?.map(
             (campaign: CampaignEntry, i: number) => {
               const { description, ...campaignItemProps } = campaign
 
