@@ -3,7 +3,13 @@
 import * as React from 'react'
 import Image, { type StaticImageData } from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+  FreeMode,
+  Thumbs,
+} from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
 import { Button, Icon, SocialContacts } from '~ek/components'
@@ -36,6 +42,7 @@ const sliders: Readonly<Record<SliderVariant, React.ReactElement>> = {
   main: <Main />,
   gallery: <Gallery />,
   partners: <Partners />,
+  product: <Product />,
 }
 
 const sliderStyles: Readonly<TwClasses> = {
@@ -84,10 +91,12 @@ const sliderStyles: Readonly<TwClasses> = {
     swiper: 'h-12',
     slide: '!w-auto h-auto',
   },
+  product: {},
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
 const gallerySliderStyles = sliderStyles.gallery as Readonly<StyleRecord>
 const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
+const productSliderStyles = sliderStyles.product as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
@@ -261,6 +270,63 @@ function Partners(): React.ReactElement {
         </Swiper>
       </div>
     </div>
+  )
+}
+
+function Product(): React.ReactElement {
+  const [thumbsSwiper, setThumbsSwiper] = React.useState<SwiperType | null>(
+    null,
+  )
+
+  return (
+    <>
+      <Swiper
+        style={{
+          height: 300,
+        }}
+        loop={true}
+        spaceBetween={10}
+        navigation={true}
+        thumbs={{ swiper: thumbsSwiper }}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className='mySwiper2'
+      >
+        {Array(10)
+          .fill(0)
+          .map((_, i: number) => (
+            <SwiperSlide key={i}>
+              <Image
+                src={`https://swiperjs.com/demos/images/nature-${i + 1}.jpg`}
+                alt='Sample product image'
+                fill
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+
+      <Swiper
+        onSwiper={setThumbsSwiper}
+        loop={true}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className='mySwiper'
+      >
+        {Array(10)
+          .fill(0)
+          .map((_, i: number) => (
+            <SwiperSlide key={i}>
+              <Image
+                src={`https://swiperjs.com/demos/images/nature-${i + 1}.jpg`}
+                alt='Sample image for product slider'
+                fill
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+    </>
   )
 }
 

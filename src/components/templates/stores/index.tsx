@@ -8,7 +8,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility'
 
 const storesStyles: Readonly<TwClasses> = {
-  wrapper: 'relative mb-10 tablet:mb-15 laptop:mb-25',
+  wrapper: 'relative mb-10 tablet:mb-15 laptop:mb-25 mt-6 laptop:mt-10',
   stores:
     'p-6 bg-white flex flex-col gap-y-6 tablet:absolute tablet:z-10 tablet:top-6 tablet:bottom-6 tablet:left-15 widescreen:left-25',
   title: 'text-2xl leading-9 text-gray-1 font-semibold ',

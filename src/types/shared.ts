@@ -90,7 +90,7 @@ export interface StatisticEntry<T extends string = string> {
   status: boolean
 }
 
-export type SliderVariant = 'main' | 'gallery' | 'partners'
+export type SliderVariant = 'main' | 'gallery' | 'partners' | 'product'
 
 export interface OrderStageEntry {
   title: string
