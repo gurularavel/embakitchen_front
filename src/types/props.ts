@@ -40,3 +40,5 @@ export interface CampaignDetailsProps extends SharedProps {}
 export interface ProductCategoryProps extends SharedProps {
   products: ProductEntry[]
 }
+
+export interface ProductDetailsProps extends SharedProps {}
