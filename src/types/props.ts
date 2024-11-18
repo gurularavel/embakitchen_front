@@ -4,6 +4,7 @@ import type {
   BlogEntry,
   CampaignEntry,
   MediaFile,
+  ProductEntry,
   ProjectEntry,
 } from '~ek/types'
 
@@ -35,3 +36,7 @@ export interface CampaignsProps extends SharedProps {
 }
 
 export interface CampaignDetailsProps extends SharedProps {}
+
+export interface ProductCategoryProps extends SharedProps {
+  products: ProductEntry[]
+}

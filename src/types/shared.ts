@@ -121,3 +121,8 @@ export interface BlogEntry<T extends string = string> {
   image2: [MediaFile?]
   status: boolean
 }
+
+export interface ProductEntry {
+  title: string
+  image: string
+}

@@ -12,6 +12,7 @@ declare global {
     params: {
       locale: Language
       slug?: string
+      category?: string
     }
   }
 }
