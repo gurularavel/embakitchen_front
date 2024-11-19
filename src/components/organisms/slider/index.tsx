@@ -5,18 +5,21 @@ import Image, { type StaticImageData } from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import {
   Autoplay,
+  FreeMode,
+  Grid,
   Navigation,
   Pagination,
-  FreeMode,
   Thumbs,
 } from 'swiper/modules'
-import type { Swiper as SwiperType } from 'swiper'
+import SwiperCore, { type Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
 import { Button, Icon, SocialContacts } from '~ek/components'
 import { useScreenSize, useStore } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
 import type { SliderVariant } from '~ek/types'
 import 'swiper/css'
+import 'swiper/css/grid'
+import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
 import mainSliderImg from '/public/assets/images/slider/main-slider-img.png'
 import galleryImg1 from '/public/assets/images/slider/gallery/gallery-img-1.png'
@@ -28,6 +31,8 @@ import partner3 from '/public/assets/images/slider/partners/partner-3.png'
 import partner4 from '/public/assets/images/slider/partners/partner-4.png'
 import partner5 from '/public/assets/images/slider/partners/partner-5.png'
 import partner6 from '/public/assets/images/slider/partners/partner-6.png'
+
+SwiperCore.use([Thumbs, Grid])
 
 interface SliderProps {
   variant: SliderVariant
@@ -91,7 +96,10 @@ const sliderStyles: Readonly<TwClasses> = {
     swiper: 'h-12',
     slide: '!w-auto h-auto',
   },
-  product: {},
+  product: {
+    main: 'h-[300px] laptop:h-[480px] mb-6',
+    thumb: 'h-[280px] mb-6',
+  },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
 const gallerySliderStyles = sliderStyles.gallery as Readonly<StyleRecord>
@@ -281,15 +289,12 @@ function Product(): React.ReactElement {
   return (
     <>
       <Swiper
-        style={{
-          height: 300,
-        }}
         loop={true}
         spaceBetween={10}
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className='mySwiper2'
+        className={productSliderStyles.main}
       >
         {Array(10)
           .fill(0)
@@ -307,12 +312,16 @@ function Product(): React.ReactElement {
       <Swiper
         onSwiper={setThumbsSwiper}
         loop={true}
-        spaceBetween={10}
-        slidesPerView={4}
+        spaceBetween={24}
+        slidesPerView={2}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className='mySwiper'
+        className={productSliderStyles.thumb}
+        grid={{
+          rows: 2,
+          fill: 'row',
+        }}
       >
         {Array(10)
           .fill(0)

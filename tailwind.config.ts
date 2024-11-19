@@ -22,6 +22,7 @@ const config: Config = {
           '3': '#EA7F52',
           '5': '#F0A17F',
           '6': '#F3B296',
+          '7': '#F5C2AD',
           '9': '#FCEBE4',
         },
         secondary: {
