@@ -23,27 +23,6 @@ const navbars: Readonly<Record<NavbarContext, React.ReactElement>> = {
   footer: <NavbarFooter />,
 }
 
-const footerNav: FooterNav[] = [
-  {
-    title: 'ŞİRKƏT',
-    links: [
-      { label: 'Haqqımızda', href: '/about' },
-      { label: 'Mağazalar', href: '/stores' },
-      { label: 'Kampaniyalar', href: '/campaigns' },
-      { label: 'Blog', href: '/blogs' },
-    ],
-  },
-  {
-    title: 'MƏHSULLAR',
-    links: [
-      { label: 'Legno', href: '/legno' },
-      { label: 'Adel Ral', href: '/adel-ral' },
-      { label: 'Franchesco Cream', href: '/franchesco-cream' },
-      { label: 'Aldo Ray Gray', href: '/aldo-ray-gray' },
-    ],
-  },
-]
-
 const navbarStyles: Readonly<Record<NavbarContext, TwClasses>> = {
   header: {
     nav: 'h-auto desktop:h-full mb-6 desktop:mb-0 flex flex-col gap-y-6 desktop:flex-row desktop:gap-x-4',
@@ -81,8 +60,8 @@ const renderNavLink = (link: NavLinkEntry, className?: string) => (
 
 function NavbarHeader(): React.ReactElement {
   const pathname = usePathname()
-  const t = useTranslations('NavLinks')
-  const commonNavLinks: NavLinkEntry[] = t.raw('Common')
+  const t = useTranslations('links')
+  const commonNavLinks: NavLinkEntry[] = t.raw('header')
 
   return (
     <ul className={navbarHeaderStyles.nav}>
@@ -113,6 +92,9 @@ function NavbarHeader(): React.ReactElement {
 }
 
 function NavbarFooter(): React.ReactElement {
+  const t = useTranslations('links')
+  const footerNav: FooterNav[] = t.raw('footer')
+
   return (
     <>
       {footerNav?.map((nav: FooterNav, i: number) => (

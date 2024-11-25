@@ -1,40 +1,28 @@
-import { useTranslations } from 'next-intl'
 import { Projects } from '~ek/components'
-import type { ProjectEntry } from '~ek/types'
-import projectsPageBanner from '/public/assets/images/projects-page-banner.jpg'
-import project1 from '/public/assets/images/projects/project-1.jpeg'
-import project2 from '/public/assets/images/projects/project-2.jpeg'
-import project3 from '/public/assets/images/projects/project-3.jpeg'
+import type { BannerProps, ProjectEntry, ProjectsProps } from '~ek/types'
+import { transformToUiData } from '~ek/utils'
 
-const projects: Partial<ProjectEntry>[] = Array(9)
-  .fill([
-    {
-      title: 'Adel Ral',
-      tag: 'Ən çox satılan',
-      img: project1,
-    },
-    {
-      title: 'Legno',
-      tag: 'Yeni',
-      img: project2,
-    },
-    {
-      title: 'Françesko cream',
-      tag: '20% endirim',
-      img: project3,
-    },
+export default async function ProjectsPage({
+  params: { locale },
+}: Readonly<PageProps>): Promise<React.ReactElement> {
+  const [projectsPageResponse, projectsResponse] = await Promise.all([
+    fetch('https://embakitchen.kvadrat.az/api/project'),
+    fetch('https://embakitchen.kvadrat.az/api/projects'),
   ])
-  .flat()
+  const projectsPageData = await projectsPageResponse.json()
+  const { data: projects } = await projectsResponse.json()
 
-export default function ProjectsPage(): React.ReactElement {
-  const t = useTranslations('ProjectsPage')
-
-  const projectsProps = {
-    banner: {
-      title: t('title'),
-      image: projectsPageBanner,
-    },
-    projects,
+  const projectsProps: ProjectsProps = {
+    banner: transformToUiData(
+      {
+        title: projectsPageData.title,
+        image: projectsPageData.image,
+      },
+      locale,
+    ) as BannerProps,
+    projects: projects.map((project: Omit<ProjectEntry, 'content'>) =>
+      transformToUiData(project, locale),
+    ),
   }
 
   return <Projects {...projectsProps} />

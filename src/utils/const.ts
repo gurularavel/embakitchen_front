@@ -27,12 +27,27 @@ export const LOCALIZED_PATHNAMES: Record<string, LocalizedPathname> = {
   '/about': {
     az: '/haqqımızda',
     ru: '/о-нас',
-    en: '/about',
+    en: '/about-us',
   },
   '/projects': {
     az: '/layihələr',
     ru: '/проекты',
     en: '/projects',
+  },
+  '/projects/[slug]': {
+    az: '/layihələr/[slug]',
+    ru: '/проекты/[slug]',
+    en: '/projects/[slug]',
+  },
+  '/blogs': {
+    az: '/bloq',
+    ru: '/блог',
+    en: '/blog',
+  },
+  '/blogs/[slug]': {
+    az: '/bloq/[slug]',
+    ru: '/блог/[slug]',
+    en: '/blog/[slug]',
   },
 }
 

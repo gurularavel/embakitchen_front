@@ -1,6 +1,6 @@
 {
-  "NavLinks": {
-    "Common": [
+  "links": {
+    "header": [
       {
         "label": "Mebellər",
         "nestedLinks": [
@@ -32,17 +32,59 @@
         ]
       },
       {
-        "label": "Blog",
+        "label": "Bloq",
         "href": "/bloq"
       },
       {
         "label": "Kampaniyalar",
         "href": "/kampaniyalar"
       }
+    ],
+    "footer": [
+      {
+        "title": "Şirkət",
+        "links": [
+          {
+            "label": "Haqqımızda",
+            "href": "/haqqımızda"
+          },
+          {
+            "label": "Mağazalar",
+            "href": "/mağazalar"
+          },
+          {
+            "label": "Kampaniyalar",
+            "href": "/kampaniyalar"
+          },
+          {
+            "label": "Bloq",
+            "href": "/bloq"
+          }
+        ]
+      },
+      {
+        "title": "Məhsullar",
+        "links": [
+          {
+            "label": "Legno",
+            "href": "/legno"
+          },
+          {
+            "label": "Adel Ral",
+            "href": "/adel-ral"
+          },
+          {
+            "label": "Franchesco Cream",
+            "href": "/franchesco-cream"
+          },
+          {
+            "label": "Aldo Ray Gray",
+            "href": "/aldo-ray-gray"
+          }
+        ]
+      }
     ]
   },
-  "AboutPage": {},
-  "ProjectsPage": {
-    "title": "Layihələrimiz"
-  }
+  "aboutPage": {},
+  "projectsPage": {}
 }

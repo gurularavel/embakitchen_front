@@ -1,24 +1,36 @@
 import { About } from '~ek/components'
-
-interface AboutPageProps {
-  params: {
-    locale: string
-  }
-}
+import type { AboutInfoBlock, AboutProps, BannerProps } from '~ek/types'
+import { transformToUiData } from '~ek/utils'
 
 export default async function AboutPage({
   params: { locale },
-}: Readonly<AboutPageProps>): Promise<React.ReactElement> {
-  const data = await fetch('https://embakitchen.kvadrat.az/api/about')
-  const aboutPageData = await data.json()
+}: Readonly<PageProps>): Promise<React.ReactElement> {
+  const [aboutPageResponse, infoBlockResponse] = await Promise.all([
+    fetch('https://embakitchen.kvadrat.az/api/about'),
+    fetch('https://embakitchen.kvadrat.az/api/about-info-blocks'),
+  ])
+  const aboutPageData = await aboutPageResponse.json()
+  const { data: infoBlocks } = await infoBlockResponse.json()
 
-  const aboutProps = {
-    banner: {
-      title: aboutPageData.title[locale],
-      image: (aboutPageData.image[0] as { original_url: string }).original_url,
-    },
-    description: aboutPageData.content[locale],
-    videoSrc: aboutPageData.video[0].original_url,
+  const aboutProps: AboutProps = {
+    banner: transformToUiData(
+      {
+        title: aboutPageData.title,
+        image: aboutPageData.image,
+      },
+      locale,
+    ) as BannerProps,
+    ...(transformToUiData(
+      {
+        description: aboutPageData.content,
+        video: aboutPageData.video,
+      },
+      locale,
+    ) as Pick<AboutProps, 'description' | 'video'>),
+    infoBlocks: infoBlocks.map(
+      (block: AboutInfoBlock) =>
+        transformToUiData(block, locale) as AboutInfoBlock,
+    ),
   }
 
   return <About {...aboutProps} />

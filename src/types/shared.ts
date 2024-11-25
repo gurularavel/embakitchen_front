@@ -56,10 +56,33 @@ export enum Language {
 
 export type StatisticsContext = 'home' | 'about'
 
-export interface StatisticEntry<T extends Language | string = string> {
+export type MultilingualText<T extends Language | string = string> =
+  T extends Language ? Record<Language, string> : T
+
+export interface MediaFile {
+  name: string
+  file_name: string
+  uuid: string
+  preview_url: string
+  original_url: string
+  order: number
+  custom_properties: []
+  extension: string
+  size: number
+}
+
+export interface AboutInfoBlock<T extends string = string> {
+  id: number
+  title: MultilingualText<T>
+  content: MultilingualText<T>
+  slug: MultilingualText<T>
+  status: boolean
+}
+
+export interface StatisticEntry<T extends string = string> {
   id: number
   count: number
-  title: T extends Language ? Record<Language, string> : T
+  title: MultilingualText<T>
   status: boolean
 }
 
@@ -78,9 +101,23 @@ export interface CampaignEntry {
   end: Date
 }
 
-export interface ProjectEntry {
-  title: string
-  content: string
-  img: string | StaticImageData
-  tag: string
+export interface ProjectEntry<T extends string = string> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  content: MultilingualText<T>
+  tags: T extends Language ? Record<Language, string[]> : T
+  images: [MediaFile]
+  status: boolean
+}
+
+export interface BlogEntry<T extends string = string> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  content: MultilingualText<T>
+  content2: MultilingualText<T>
+  image: [MediaFile]
+  image2: [MediaFile?]
+  status: boolean
 }

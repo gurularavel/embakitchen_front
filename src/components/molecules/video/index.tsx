@@ -2,10 +2,11 @@
 
 import * as React from 'react'
 import { Button, Icon } from '~ek/components'
+import type { MediaFile } from '~ek/types'
 import { updatePrimitiveState } from '~ek/utils'
 
 interface VideoProps {
-  src: string
+  video: MediaFile
 }
 
 const videoStyles: Readonly<TwClasses> = {
@@ -20,7 +21,7 @@ const styles = videoStyles as Readonly<StyleRecord>
 const getVideoStyles = videoStyles.video as StyleGetter
 const getIconStyles = videoStyles.icon as StyleGetter
 
-export function Video({ src }: Readonly<VideoProps>): React.ReactElement {
+export function Video({ video }: Readonly<VideoProps>): React.ReactElement {
   const [shouldPlay, setShouldPlay] = React.useState<boolean>(false)
   const videoRef = React.useRef<HTMLVideoElement | null>(null)
 
@@ -37,7 +38,7 @@ export function Video({ src }: Readonly<VideoProps>): React.ReactElement {
   return (
     <div className={styles.wrapper}>
       <video
-        src={src}
+        src={video.original_url}
         className={getVideoStyles(shouldPlay)}
         ref={videoRef}
         onClick={() => updatePrimitiveState(false, setShouldPlay)}
