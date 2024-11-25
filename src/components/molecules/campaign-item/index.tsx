@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { az } from 'date-fns/locale'
+import { useLocale } from 'next-intl'
 import { Icon, Timer } from '~ek/components'
 import type { CampaignEntry } from '~ek/types'
 
@@ -9,7 +10,7 @@ const campaignItemStyles: Readonly<TwClasses> = {
   container:
     'w-full laptop:w-1/3 widescreen:w-1/4 last:hidden widescreen:last:block',
   imgWrapper: 'h-60',
-  img: 'w-full h-full',
+  img: 'w-full h-full object-cover',
   body: 'p-6 border border-solid border-gray-8 border-t-0',
   dates:
     'text-sm font-semibold leading-5 text-gray-4 inline-block mb-2.5 capitalize',
@@ -25,6 +26,8 @@ export function CampaignItem({
   start,
   end,
 }: Readonly<Omit<CampaignEntry, 'description'>>): React.ReactElement {
+  const locale = useLocale()
+
   return (
     <div className={styles.container}>
       <div>
@@ -49,7 +52,7 @@ export function CampaignItem({
             <Timer end={end} />
 
             <Link
-              href={`/campaign/${title}`}
+              href={`/${locale}/campaigns/${title.toLowerCase().split(' ').join('-')}`}
               className={styles.link}
             >
               <span>Ətraflı</span>

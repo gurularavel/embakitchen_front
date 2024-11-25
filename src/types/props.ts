@@ -2,6 +2,7 @@
 import type {
   AboutInfoBlock,
   BlogEntry,
+  CampaignEntry,
   MediaFile,
   ProjectEntry,
 } from '~ek/types'
@@ -28,3 +29,9 @@ export interface ProjectsProps extends SharedProps {
 export interface BlogsProps extends SharedProps {
   blogs: BlogEntry[]
 }
+
+export interface CampaignsProps extends SharedProps {
+  campaigns: CampaignEntry[]
+}
+
+export interface CampaignDetailsProps extends SharedProps {}

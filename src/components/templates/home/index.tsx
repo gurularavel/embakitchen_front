@@ -1,5 +1,5 @@
 import {
-  Campaigns,
+  CurrentCampaigns,
   OrderStages,
   Slider,
   SlogansSection,
@@ -26,7 +26,7 @@ export function Home(): React.ReactElement {
 
       <Slider variant='partners' />
 
-      <Campaigns />
+      <CurrentCampaigns />
     </>
   )
 }
