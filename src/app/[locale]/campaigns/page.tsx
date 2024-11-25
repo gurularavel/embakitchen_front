@@ -1,5 +1,5 @@
 import { Campaigns } from '~ek/components'
-import { CampaignEntry, CampaignsProps } from '~ek/types'
+import type { CampaignEntry, CampaignsProps } from '~ek/types'
 import campaign1 from '/public/assets/images/campaigns/campaign-1.png'
 import campaign2 from '/public/assets/images/campaigns/campaign-2.png'
 import campaign3 from '/public/assets/images/campaigns/campaign-3.png'
