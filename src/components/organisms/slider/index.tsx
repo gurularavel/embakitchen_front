@@ -225,7 +225,7 @@ function Gallery(): React.ReactElement {
           onClick={() => gallerySliderRef.current?.slideNext()}
         >
           <Icon
-            variant='arrow-right'
+            variant='arrow-right-gray'
             sizes='w-3 h-2.5'
           />
         </Button>

@@ -25,7 +25,7 @@ export type IconVariant =
   | 'instagram-dark'
   | 'youtube-dark'
   | 'chevron-right-orange'
-  | 'arrow-right'
+  | 'arrow-right-gray'
   | 'arrow-left'
   | 'chevron-right'
   | 'play-video'
@@ -33,6 +33,7 @@ export type IconVariant =
   | 'clock'
   | 'location'
   | 'email'
+  | 'arrow-right-white'
 
 export type TimeoutId = NodeJS.Timeout | null
 
