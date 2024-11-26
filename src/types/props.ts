@@ -20,6 +20,7 @@ export interface SharedProps {
 export interface AboutProps extends SharedProps {
   description: string
   video?: MediaFile
+  counter_info: string
   infoBlocks: AboutInfoBlock[]
 }
 

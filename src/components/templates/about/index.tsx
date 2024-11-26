@@ -26,6 +26,7 @@ export function About({
   banner,
   description,
   video,
+  counter_info,
   infoBlocks,
 }: Readonly<AboutProps>): React.ReactElement {
   return (
@@ -43,11 +44,7 @@ export function About({
       {video && <Video video={video} />}
 
       <div className={styles.statisticsWrapper}>
-        <p className={styles.statisticsTitle}>
-          EmbaKitchen brendi olaraq mebel məhsullarımızın istehsalında
-          uzunmüddətli keyfiyyətə zəmanət verən texnologiyalardan istifadəni
-          prioritet kimi müəyyənləşdiririk.
-        </p>
+        <p className={styles.statisticsTitle}>{counter_info}</p>
 
         <Statistics context='about' />
       </div>
