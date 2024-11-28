@@ -1,9 +1,11 @@
 // THIS FILE IS USED TO DECLARE REUSABLE PAGES' AND COMPONENTS' PROPS
 import type {
   AboutInfoBlock,
+  AboutPageResponse,
   BlogEntry,
   CampaignEntry,
   MediaFile,
+  ProductEntry,
   ProjectEntry,
 } from '~ek/types'
 
@@ -12,14 +14,16 @@ export interface BannerProps {
   image: MediaFile
 }
 
-export interface SharedProps {
-  banner: BannerProps
-}
+export interface SharedProps extends BannerProps {}
 
-export interface AboutProps extends SharedProps {
-  description: string
+type OmittedAboutPageResponse = Omit<
+  AboutPageResponse<string>,
+  'id' | 'image' | 'video'
+>
+export interface AboutProps extends OmittedAboutPageResponse {
+  image: MediaFile
   video?: MediaFile
-  infoBlocks: AboutInfoBlock[]
+  aboutInfoBlocks: AboutInfoBlock<string>[]
 }
 
 export interface ProjectsProps extends SharedProps {
@@ -35,3 +39,9 @@ export interface CampaignsProps extends SharedProps {
 }
 
 export interface CampaignDetailsProps extends SharedProps {}
+
+export interface ProductCategoryProps extends SharedProps {
+  products: ProductEntry[]
+}
+
+export interface ProductDetailsProps extends SharedProps {}

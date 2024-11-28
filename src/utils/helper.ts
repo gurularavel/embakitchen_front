@@ -63,7 +63,7 @@ export const updatePrimitiveState = <T extends boolean | number | string>(
   setter: (newState: T) => void,
 ): void => setter(newState)
 
-export const isMultilingualText = (obj: unknown): boolean => {
+const isMultilingualText = (obj: unknown): boolean => {
   const languageKeys = new Set(Object.values(Language))
 
   if (typeof obj === 'object' && obj !== null) {
@@ -76,7 +76,7 @@ export const isMultilingualText = (obj: unknown): boolean => {
   return false
 }
 
-export const isMediaFile = (value: unknown): boolean => {
+const isMediaFile = (value: unknown): boolean => {
   if (
     Array.isArray(value) &&
     typeof value[0] === 'object' &&
@@ -88,17 +88,33 @@ export const isMediaFile = (value: unknown): boolean => {
   return false
 }
 
-export const setUiData = (value: unknown, locale: Language) => {
+const isNestedObject = (value: unknown): value is Record<string, unknown> => {
+  return (
+    typeof value === 'object' && value !== null && !isMultilingualText(value)
+  )
+}
+
+export const setUiData = (value: unknown, locale: Language): unknown => {
   if (isMultilingualText(value)) {
     return (value as MultilingualText<Language>)[locale]
   } else if (isMediaFile(value)) {
     return (value as [MediaFile])[0]
+  } else if (isNestedObject(value)) {
+    if (Array.isArray(value)) {
+      return value.map((v: MultilingualText<Language>) => v[locale])
+    }
+
+    return transformToUiData(value, locale)
   }
 
   return value
 }
 
-export const transformToUiData = (data: object, locale: Language): unknown => {
+export const transformToUiData = (data: object, locale: Language): object => {
+  if (Array.isArray(data)) {
+    return data.map(d => setUiData(d, locale))
+  }
+
   return Object.entries(data).reduce(
     (result, [key, value]) => ({
       ...result,
@@ -106,4 +122,24 @@ export const transformToUiData = (data: object, locale: Language): unknown => {
     }),
     {},
   )
+}
+
+interface OmitParams<T> {
+  source: T
+  fields: (keyof T)[]
+}
+export const omit = <T>({
+  source,
+  fields,
+}: OmitParams<T>): Omit<T, keyof T> => {
+  if (!source || !fields || !Array.isArray(fields)) {
+    throw new Error(
+      'Invalid input: Source object and fields array are required.',
+    )
+  }
+
+  const sourceArrayWithOmittedKeys = Object.entries(source).filter(
+    ([key]) => !fields.includes(key as keyof T),
+  )
+  return Object.fromEntries(sourceArrayWithOmittedKeys) as Omit<T, keyof T>
 }

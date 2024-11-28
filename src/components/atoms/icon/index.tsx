@@ -19,10 +19,15 @@ import facebookDarkIcon from '/public/assets/icons/social/dark/facebook.svg'
 import instagramDarkIcon from '/public/assets/icons/social/dark/instagram.svg'
 import youtubeDarkIcon from '/public/assets/icons/social/dark/youtube.svg'
 import chevronRightOrange from '/public/assets/icons/chevron-right-orange.svg'
-import arrowRightIcon from '/public/assets/icons/arrow-right.svg'
+import arrowRightGrayIcon from '/public/assets/icons/arrow-right-gray.svg'
 import arrowLeftIcon from '/public/assets/icons/arrow-left.svg'
 import chevronRightIcon from '/public/assets/icons/chevron-right.svg'
-import playVideo from '/public/assets/icons/play-video.svg'
+import playVideoIcon from '/public/assets/icons/play-video.svg'
+import storePhoneIcon from '/public/assets/icons/store-phone.svg'
+import clockIcon from '/public/assets/icons/clock.svg'
+import locationIcon from '/public/assets/icons/location.svg'
+import emailIcon from '/public/assets/icons/email.svg'
+import arrowRightWhiteIcon from '/public/assets/icons/arrow-right-white.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -50,9 +55,14 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'youtube-dark': youtubeDarkIcon,
   'chevron-right-orange': chevronRightOrange,
   'arrow-left': arrowLeftIcon,
-  'arrow-right': arrowRightIcon,
+  'arrow-right-gray': arrowRightGrayIcon,
   'chevron-right': chevronRightIcon,
-  'play-video': playVideo,
+  'play-video': playVideoIcon,
+  'store-phone': storePhoneIcon,
+  clock: clockIcon,
+  location: locationIcon,
+  email: emailIcon,
+  'arrow-right-white': arrowRightWhiteIcon,
 }
 
 export function Icon({

@@ -59,6 +59,21 @@ export const LOCALIZED_PATHNAMES: Record<string, LocalizedPathname> = {
     ru: '/кампании/[slug]',
     en: '/campaigns/[slug]',
   },
+  '/products/[category]': {
+    az: '/mebellər/[category]',
+    ru: '/мебели/[category]',
+    en: '/furnitures/[category]',
+  },
+  '/products/[category]/[slug]': {
+    az: '/mebellər/[category]/[slug]',
+    ru: '/мебели/[category]/[slug]',
+    en: '/furnitures/[category]/[slug]',
+  },
+  '/stores': {
+    az: '/mağazalar',
+    ru: '/магазины',
+    en: '/stores',
+  },
 }
 
 export const PROJECTS_QUANTITY_ON_BREAKPOINTS: Readonly<

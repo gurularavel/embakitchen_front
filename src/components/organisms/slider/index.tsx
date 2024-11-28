@@ -3,14 +3,23 @@
 import * as React from 'react'
 import Image, { type StaticImageData } from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation, Pagination } from 'swiper/modules'
-import type { Swiper as SwiperType } from 'swiper'
+import {
+  Autoplay,
+  FreeMode,
+  Grid,
+  Navigation,
+  Pagination,
+  Thumbs,
+} from 'swiper/modules'
+import SwiperCore, { type Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
 import { Button, Icon, SocialContacts } from '~ek/components'
 import { useScreenSize, useStore } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
 import type { SliderVariant } from '~ek/types'
 import 'swiper/css'
+import 'swiper/css/grid'
+import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
 import mainSliderImg from '/public/assets/images/slider/main-slider-img.png'
 import galleryImg1 from '/public/assets/images/slider/gallery/gallery-img-1.png'
@@ -22,6 +31,8 @@ import partner3 from '/public/assets/images/slider/partners/partner-3.png'
 import partner4 from '/public/assets/images/slider/partners/partner-4.png'
 import partner5 from '/public/assets/images/slider/partners/partner-5.png'
 import partner6 from '/public/assets/images/slider/partners/partner-6.png'
+
+SwiperCore.use([Thumbs, Grid])
 
 interface SliderProps {
   variant: SliderVariant
@@ -36,6 +47,7 @@ const sliders: Readonly<Record<SliderVariant, React.ReactElement>> = {
   main: <Main />,
   gallery: <Gallery />,
   partners: <Partners />,
+  product: <Product />,
 }
 
 const sliderStyles: Readonly<TwClasses> = {
@@ -84,10 +96,15 @@ const sliderStyles: Readonly<TwClasses> = {
     swiper: 'h-12',
     slide: '!w-auto h-auto',
   },
+  product: {
+    main: 'h-[300px] laptop:h-[480px] mb-6',
+    thumb: 'h-[280px] mb-6',
+  },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
 const gallerySliderStyles = sliderStyles.gallery as Readonly<StyleRecord>
 const partnersSliderStyles = sliderStyles.partners as Readonly<StyleRecord>
+const productSliderStyles = sliderStyles.product as Readonly<StyleRecord>
 
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
@@ -208,7 +225,7 @@ function Gallery(): React.ReactElement {
           onClick={() => gallerySliderRef.current?.slideNext()}
         >
           <Icon
-            variant='arrow-right'
+            variant='arrow-right-gray'
             sizes='w-3 h-2.5'
           />
         </Button>
@@ -261,6 +278,64 @@ function Partners(): React.ReactElement {
         </Swiper>
       </div>
     </div>
+  )
+}
+
+function Product(): React.ReactElement {
+  const [thumbsSwiper, setThumbsSwiper] = React.useState<SwiperType | null>(
+    null,
+  )
+
+  return (
+    <>
+      <Swiper
+        loop={true}
+        spaceBetween={10}
+        navigation={true}
+        thumbs={{ swiper: thumbsSwiper }}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className={productSliderStyles.main}
+      >
+        {Array(10)
+          .fill(0)
+          .map((_, i: number) => (
+            <SwiperSlide key={i}>
+              <Image
+                src={`https://swiperjs.com/demos/images/nature-${i + 1}.jpg`}
+                alt='Sample product image'
+                fill
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+
+      <Swiper
+        onSwiper={setThumbsSwiper}
+        loop={true}
+        spaceBetween={24}
+        slidesPerView={2}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className={productSliderStyles.thumb}
+        grid={{
+          rows: 2,
+          fill: 'row',
+        }}
+      >
+        {Array(10)
+          .fill(0)
+          .map((_, i: number) => (
+            <SwiperSlide key={i}>
+              <Image
+                src={`https://swiperjs.com/demos/images/nature-${i + 1}.jpg`}
+                alt='Sample image for product slider'
+                fill
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+    </>
   )
 }
 

@@ -8,7 +8,7 @@ const bannerStyles: Readonly<TwClasses> = {
   titleWrapper:
     'flex items-center justify-center absolute top-0 right-0 bottom-0 left-0 bg-black/40 z-10',
   title:
-    'text-2xl laptop:text-[56px] laptop:leading-[68.26px] font-semibold text-white',
+    'text-2xl laptop:text-[56px] laptop:leading-[68.26px] font-semibold text-white capitalize',
   image: 'w-full h-full object-cover',
 }
 const styles = bannerStyles as Readonly<StyleRecord>

@@ -12,7 +12,14 @@ declare global {
     params: {
       locale: Language
       slug?: string
+      category?: string
     }
+  }
+
+  interface ApiQueryParams {
+    page: number
+    perPage: number
+    status: boolean
   }
 }
 

@@ -67,19 +67,19 @@
         "links": [
           {
             "label": "Legno",
-            "href": "/legno"
+            "href": "/furnitures/kitchen/legno"
           },
           {
             "label": "Adel Ral",
-            "href": "/adel-ral"
+            "href": "/furnitures/kitchen/adel-ral"
           },
           {
             "label": "Franchesco Cream",
-            "href": "/franchesco-cream"
+            "href": "/furnitures/kitchen/franchesco-cream"
           },
           {
             "label": "Aldo Ray Gray",
-            "href": "/aldo-ray-gray"
+            "href": "/furnitures/kitchen/aldo-ray-gray"
           }
         ]
       }

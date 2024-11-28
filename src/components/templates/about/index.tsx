@@ -23,46 +23,38 @@ const aboutStyles: Readonly<TwClasses> = {
 const styles = aboutStyles as Readonly<StyleRecord>
 
 export function About({
-  banner,
-  description,
+  title,
+  image,
+  content,
   video,
-  infoBlocks,
+  counter_info,
+  solutions,
+  aboutInfoBlocks,
 }: Readonly<AboutProps>): React.ReactElement {
   return (
     <>
       <Banner
-        title={banner?.title ?? ''}
-        image={banner?.image}
+        title={title ?? ''}
+        image={image}
       />
 
       <div
         className={styles.description}
-        dangerouslySetInnerHTML={{ __html: description }}
+        dangerouslySetInnerHTML={{ __html: content }}
       />
 
       {video && <Video video={video} />}
 
       <div className={styles.statisticsWrapper}>
-        <p className={styles.statisticsTitle}>
-          EmbaKitchen brendi olaraq mebel məhsullarımızın istehsalında
-          uzunmüddətli keyfiyyətə zəmanət verən texnologiyalardan istifadəni
-          prioritet kimi müəyyənləşdiririk.
-        </p>
+        <p className={styles.statisticsTitle}>{counter_info}</p>
 
         <Statistics context='about' />
       </div>
 
       <div className={styles.solutions}>
-        <h5 className={styles.solutionsTitle}>
-          Təqdim etdiyimiz mebel həlləri:
-        </h5>
+        <h5 className={styles.solutionsTitle}>{solutions.title}:</h5>
         <div className={styles.solutionsOptions}>
-          {[
-            'Özəl mətbəx mebeli',
-            'Qarderob',
-            'Dəhliz mebeli',
-            'Kupe dolab',
-          ].map((label: string) => (
+          {solutions.options.map((label: string) => (
             <Badge
               key={label}
               className={styles.solutionsBadge}
@@ -74,7 +66,7 @@ export function About({
       </div>
 
       <div className={styles.infoBlocksWrapper}>
-        {infoBlocks?.map((block: AboutInfoBlock) => (
+        {aboutInfoBlocks?.map((block: AboutInfoBlock<string>) => (
           <div
             key={block.id}
             className={styles.infoBlock}
