@@ -15,6 +15,12 @@ declare global {
       category?: string
     }
   }
+
+  interface ApiQueryParams {
+    page: number
+    perPage: number
+    status: boolean
+  }
 }
 
 export {}

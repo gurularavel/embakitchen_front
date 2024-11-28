@@ -1,6 +1,7 @@
 // THIS FILE IS USED TO DECLARE REUSABLE PAGES' AND COMPONENTS' PROPS
 import type {
   AboutInfoBlock,
+  AboutPageResponse,
   BlogEntry,
   CampaignEntry,
   MediaFile,
@@ -13,15 +14,16 @@ export interface BannerProps {
   image: MediaFile
 }
 
-export interface SharedProps {
-  banner: BannerProps
-}
+export interface SharedProps extends BannerProps {}
 
-export interface AboutProps extends SharedProps {
-  description: string
+type OmittedAboutPageResponse = Omit<
+  AboutPageResponse<string>,
+  'id' | 'image' | 'video'
+>
+export interface AboutProps extends OmittedAboutPageResponse {
+  image: MediaFile
   video?: MediaFile
-  counter_info: string
-  infoBlocks: AboutInfoBlock[]
+  aboutInfoBlocks: AboutInfoBlock<string>[]
 }
 
 export interface ProjectsProps extends SharedProps {

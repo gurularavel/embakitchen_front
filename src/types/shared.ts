@@ -61,8 +61,9 @@ export enum Language {
 
 export type StatisticsContext = 'home' | 'about'
 
-export type MultilingualText<T extends Language | string = string> =
-  T extends Language ? Record<Language, string> : T
+export type MultilingualText<T extends string = Language> = T extends Language
+  ? Record<Language, string>
+  : T
 
 export interface MediaFile {
   name: string
@@ -76,11 +77,10 @@ export interface MediaFile {
   size: number
 }
 
-export interface AboutInfoBlock<T extends string = string> {
+export interface AboutInfoBlock<T extends string = Language> {
   id: number
   title: MultilingualText<T>
   content: MultilingualText<T>
-  slug: MultilingualText<T>
   status: boolean
 }
 
