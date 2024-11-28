@@ -15,7 +15,7 @@ interface HttpClient {
 }
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'https://embakitchen.kvadrat.az/api',
+  baseURL: process.env.API_BASE_URL,
 })
 
 export const httpClient: HttpClient = {
