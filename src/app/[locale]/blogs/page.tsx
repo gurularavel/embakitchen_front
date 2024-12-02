@@ -1,20 +1,21 @@
 import { Blogs } from '~ek/components'
-import type { BannerProps, BlogEntry, BlogsProps } from '~ek/types'
-import { transformToUiData } from '~ek/utils'
+import { getBlogs, getBlogsPageContent } from '~ek/services'
+import type { BlogsProps, BlogsResponse } from '~ek/types'
+import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export default async function BlogsPage({
   params: { locale },
 }: PageProps): Promise<React.ReactElement> {
-  const [blogsPageResponse, blogsResponse] = await Promise.all([
-    fetch('https://embakitchen.kvadrat.az/api/blog'),
-    fetch('https://embakitchen.kvadrat.az/api/posts'),
-  ])
-  const blogPageData = await blogsPageResponse.json()
-  const { data: blogs } = await blogsResponse.json()
+  const blogsPageContent = await getBlogsPageContent()
+  const blogs = await getBlogs(defaultApiQueryParams)
 
+  const uiData = transformToUiData(
+    omit({ source: blogsPageContent, fields: ['id'] }),
+    locale,
+  )
   const blogsProps: BlogsProps = {
-    banner: transformToUiData(blogPageData, locale) as BannerProps,
-    blogs: blogs.map((blog: BlogEntry) => transformToUiData(blog, locale)),
+    ...(uiData as Omit<BlogsProps, 'blogs'>),
+    blogs: transformToUiData(blogs, locale) as BlogsResponse['data'],
   }
 
   return <Blogs {...blogsProps} />

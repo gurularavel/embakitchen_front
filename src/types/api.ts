@@ -1,5 +1,6 @@
 import type {
   AboutInfoBlock,
+  BlogEntry,
   Language,
   MediaFile,
   MultilingualText,
@@ -29,4 +30,16 @@ export interface AboutPageResponse<T extends string = Language> {
 
 export interface AboutInfoBlocksResponse extends PaginatedResponse {
   data: AboutInfoBlock[]
+}
+
+export interface BlogsPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  similar_article_title: MultilingualText<T>
+  image: [MediaFile]
+}
+
+export interface BlogsResponse<T extends string = Language>
+  extends PaginatedResponse {
+  data: Omit<BlogEntry<T>, 'content' | 'similar_posts'>[]
 }

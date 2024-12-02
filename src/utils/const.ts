@@ -86,3 +86,9 @@ export const PROJECTS_QUANTITY_ON_BREAKPOINTS: Readonly<
   desktop: 9,
   widescreen: 12,
 }
+
+export const defaultApiQueryParams: ApiQueryParams = {
+  page: 1,
+  perPage: 10,
+  status: true,
+}

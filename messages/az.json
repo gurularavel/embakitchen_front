@@ -66,20 +66,12 @@
         "title": "Məhsullar",
         "links": [
           {
-            "label": "Legno",
-            "href": "/mebellər/mətbəx/legno"
+            "label": "Mətbəx mebelləri",
+            "href": "/mebellər/mətbəx"
           },
           {
-            "label": "Adel Ral",
-            "href": "/mebellər/mətbəx/adel-ral"
-          },
-          {
-            "label": "Franchesco Cream",
-            "href": "/mebellər/mətbəx/franchesco-cream"
-          },
-          {
-            "label": "Aldo Ray Gray",
-            "href": "/mebellər/mətbəx/aldo-ray-gray"
+            "label": "Dəhliz mebelləri",
+            "href": "/mebellər/dəhliz"
           }
         ]
       }

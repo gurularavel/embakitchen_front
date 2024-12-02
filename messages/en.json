@@ -66,20 +66,12 @@
         "title": "Products",
         "links": [
           {
-            "label": "Legno",
-            "href": "/furnitures/kitchen/legno"
+            "label": "Kitchen furnitures",
+            "href": "/furnitures/kitchen"
           },
           {
-            "label": "Adel Ral",
-            "href": "/furnitures/kitchen/adel-ral"
-          },
-          {
-            "label": "Franchesco Cream",
-            "href": "/furnitures/kitchen/franchesco-cream"
-          },
-          {
-            "label": "Aldo Ray Gray",
-            "href": "/furnitures/kitchen/aldo-ray-gray"
+            "label": "Corridor furnitures",
+            "href": "/furnitures/corridor"
           }
         ]
       }

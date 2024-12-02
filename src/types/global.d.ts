@@ -21,6 +21,8 @@ declare global {
     perPage: number
     status: boolean
   }
+
+  type ArrayElement<T> = T extends (infer U)[] ? U : never
 }
 
 export {}

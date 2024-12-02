@@ -1,8 +1,10 @@
-// THIS FILE IS USED TO DECLARE REUSABLE PAGES' AND COMPONENTS' PROPS
+// THIS FILE IS USED TO DECLARE PAGES' AND COMPONENTS' REUSABLE PROPS
 import type {
   AboutInfoBlock,
   AboutPageResponse,
   BlogEntry,
+  BlogsPageResponse,
+  BlogsResponse,
   CampaignEntry,
   MediaFile,
   ProductEntry,
@@ -30,8 +32,19 @@ export interface ProjectsProps extends SharedProps {
   projects: Omit<ProjectEntry, 'content'>[]
 }
 
-export interface BlogsProps extends SharedProps {
-  blogs: BlogEntry[]
+type OmittedBlogsPageResponse = Omit<BlogsPageResponse<string>, 'id' | 'image'>
+export interface BlogsProps extends OmittedBlogsPageResponse {
+  image: MediaFile
+  blogs: BlogsResponse<string>['data']
+}
+
+type OmittedBlogDetailsResponse = Omit<
+  BlogEntry<string>,
+  'id' | 'image' | 'status' | 'similar_posts'
+>
+export interface BlogDetailsProps extends OmittedBlogDetailsResponse {
+  image: MediaFile
+  similar_posts: Omit<BlogDetailsProps, 'content'>[]
 }
 
 export interface CampaignsProps extends SharedProps {

@@ -1,19 +1,14 @@
 import { About } from '~ek/components'
-import { getAboutPageContent } from '~ek/services'
-import { getAboutInfoBlocksContent } from '~ek/services/about'
+import { getAboutInfoBlocksContent, getAboutPageContent } from '~ek/services'
 import type { AboutInfoBlock, AboutPageResponse, AboutProps } from '~ek/types'
-import { omit, transformToUiData } from '~ek/utils'
+import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export default async function AboutPage({
   params: { locale },
 }: Readonly<PageProps>): Promise<React.ReactElement> {
   const aboutPageContent: AboutPageResponse = await getAboutPageContent()
   const aboutInfoBlocksContent: AboutInfoBlock[] =
-    await getAboutInfoBlocksContent({
-      page: 1,
-      perPage: 10,
-      status: true,
-    })
+    await getAboutInfoBlocksContent(defaultApiQueryParams)
 
   const uiData = transformToUiData(
     omit({ source: aboutPageContent, fields: ['id'] }),
