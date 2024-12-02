@@ -101,7 +101,13 @@ export const setUiData = (value: unknown, locale: Language): unknown => {
     return (value as [MediaFile])[0]
   } else if (isNestedObject(value)) {
     if (Array.isArray(value)) {
-      return value.map((v: MultilingualText<Language>) => v[locale])
+      return value.map((v: MultilingualText<Language>) => {
+        if (v[locale]) {
+          return v[locale]
+        }
+
+        return transformToUiData(v, locale)
+      })
     }
 
     return transformToUiData(value, locale)

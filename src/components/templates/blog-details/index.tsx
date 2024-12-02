@@ -1,15 +1,6 @@
 import Image from 'next/image'
-import type { BlogEntry, MediaFile } from '~ek/types'
-
-const blogs = Array(4)
-  .fill({})
-  .map(() => ({
-    title: 'Not an expert? Not a problem. Here’s why.',
-    content:
-      'Worried about teaching or leading because you’re not an ‘expert’? Research says that’s an advantage. Learn how to leverage your inexperience for better products.',
-    image:
-      'https://cdn.media.amplience.net/i/shadesoflight/furniture_1?fmt=auto&w=575',
-  }))
+import { NavLink } from '~ek/components'
+import type { BlogDetailsProps, MediaFile } from '~ek/types'
 
 const blogDetailsStyles: Readonly<TwClasses> = {
   blog: 'mt-6 laptop:mt-10 mb-6 laptop:mb-15 widescreen:mb-10',
@@ -33,16 +24,17 @@ const blogDetailsStyles: Readonly<TwClasses> = {
   blogImageWrapper: 'w-full h-[290px] relative mb-8',
   blogImage: 'w-full h-full object-cover',
   blogTitle: 'text-xl leading-7 font-medium text-tertiary-1 mb-4',
-  blogContent: 'text-sm font-normal text-tertiary-5',
+  blogDescription: 'text-sm font-normal text-tertiary-5 line-clamp-3',
 }
 const styles = blogDetailsStyles as Readonly<StyleRecord>
 
 export function BlogDetails({
   image,
   title,
+  description,
   content,
-  content2,
-}: Readonly<BlogEntry>): React.ReactElement {
+  similar_posts,
+}: Readonly<BlogDetailsProps>): React.ReactElement {
   return (
     <>
       <div className={styles.blog}>
@@ -62,7 +54,7 @@ export function BlogDetails({
         </div>
 
         <div className={styles.contentWrapper}>
-          <p className={styles.content}>{content2}</p>
+          <p className={styles.content}>{description}</p>
 
           <div
             className={styles.content2}
@@ -71,31 +63,34 @@ export function BlogDetails({
         </div>
       </div>
 
-      <div className={styles.similarBlogs}>
-        <h4 className={styles.similarBlogsTitle}>Similar Blogs</h4>
+      {similar_posts?.length && (
+        <div className={styles.similarBlogs}>
+          <h4 className={styles.similarBlogsTitle}>Similar Blogs</h4>
 
-        <div className={styles.blogs}>
-          {blogs.map((blog, i: number) => (
-            <div
-              className=''
-              key={i}
-            >
-              <div className={styles.blogImageWrapper}>
-                <Image
-                  src={blog.image}
-                  alt={`Embakitchen - ${blog.title}`}
-                  className={styles.blogImage}
-                  fill
-                />
-              </div>
-              <div>
-                <h4 className={styles.blogTitle}>{blog.title}</h4>
-                <p className={styles.blogContent}>{blog.content}</p>
-              </div>
-            </div>
-          ))}
+          <div className={styles.blogs}>
+            {similar_posts?.map((blog, i: number) => (
+              <NavLink
+                className=''
+                key={i}
+                href={`/blog/${blog.slug}`}
+              >
+                <div className={styles.blogImageWrapper}>
+                  <Image
+                    src={blog.image.original_url}
+                    alt={`Embakitchen - ${blog.title}`}
+                    className={styles.blogImage}
+                    fill
+                  />
+                </div>
+                <div>
+                  <h4 className={styles.blogTitle}>{blog.title}</h4>
+                  <p className={styles.blogDescription}>{blog.description}</p>
+                </div>
+              </NavLink>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }
