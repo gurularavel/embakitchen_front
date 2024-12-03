@@ -131,3 +131,11 @@ export interface ProductEntry {
   title: string
   image: string
 }
+
+export interface MainSliderEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  excerpt: MultilingualText<T>
+  image: [MediaFile]
+  status: boolean
+}

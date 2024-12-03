@@ -2,6 +2,7 @@ import type {
   AboutInfoBlock,
   BlogEntry,
   Language,
+  MainSliderEntry,
   MediaFile,
   MultilingualText,
 } from '~ek/types'
@@ -42,4 +43,8 @@ export interface BlogsPageResponse<T extends string = Language> {
 export interface BlogsResponse<T extends string = Language>
   extends PaginatedResponse {
   data: Omit<BlogEntry<T>, 'content' | 'similar_posts'>[]
+}
+
+export interface MainSliderResponse extends PaginatedResponse {
+  data: MainSliderEntry[]
 }

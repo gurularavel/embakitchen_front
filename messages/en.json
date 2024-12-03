@@ -77,6 +77,10 @@
       }
     ]
   },
-  "aboutPage": {},
-  "projectsPage": {}
+  "buttons": {
+    "createCustomOrder": "Create custom order",
+    "viewProducts": "View products",
+    "customOrder": "Custom order",
+    "personalAccount": "Personal account"
+  }
 }

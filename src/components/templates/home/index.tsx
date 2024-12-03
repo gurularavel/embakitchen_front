@@ -5,8 +5,9 @@ import {
   SlogansSection,
   Statistics,
 } from '~ek/components'
+import type { HomeProps } from '~ek/types'
 
-export function Home(): React.ReactElement {
+export function Home({}: Readonly<HomeProps>): React.ReactElement {
   return (
     <>
       <Slider variant='main' />

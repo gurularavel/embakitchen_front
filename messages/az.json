@@ -77,6 +77,10 @@
       }
     ]
   },
-  "aboutPage": {},
-  "projectsPage": {}
+  "buttons": {
+    "createCustomOrder": "Özəl sifariş yarat",
+    "viewProducts": "Məhsullara bax",
+    "customOrder": "Özəl sifariş",
+    "personalAccount": "Şəxsi kabinet"
+  }
 }

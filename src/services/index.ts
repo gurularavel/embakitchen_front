@@ -7,3 +7,4 @@ export {
   getBlogs,
   getBlogDetails,
 } from '~ek/services/blog'
+export { getMainSliderContent } from '~ek/services/home'

@@ -13,15 +13,26 @@ import {
 } from 'swiper/modules'
 import SwiperCore, { type Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
+import { useLocale, useTranslations } from 'next-intl'
 import { Button, Icon, SocialContacts } from '~ek/components'
 import { useScreenSize, useStore } from '~ek/hooks'
-import { SCREENS } from '~ek/utils'
-import type { SliderVariant } from '~ek/types'
+import {
+  defaultApiQueryParams,
+  omit,
+  SCREENS,
+  transformToUiData,
+} from '~ek/utils'
+import type {
+  Language,
+  MainSliderEntry,
+  MediaFile,
+  SliderVariant,
+} from '~ek/types'
+import { getMainSliderContent } from '~ek/services'
 import 'swiper/css'
 import 'swiper/css/grid'
 import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
-import mainSliderImg from '/public/assets/images/slider/main-slider-img.png'
 import galleryImg1 from '/public/assets/images/slider/gallery/gallery-img-1.png'
 import galleryImg2 from '/public/assets/images/slider/gallery/gallery-img-2.png'
 import galleryImg3 from '/public/assets/images/slider/gallery/gallery-img-3.png'
@@ -38,9 +49,9 @@ interface SliderProps {
   variant: SliderVariant
 }
 
-interface MainSliderEntry {
-  img: StaticImageData
-  text: string
+type OmittedMainSliderEntry = Omit<MainSliderEntry<string>, 'status' | 'image'>
+interface ModifiedMainSliderEntry extends OmittedMainSliderEntry {
+  image: MediaFile
 }
 
 const sliders: Readonly<Record<SliderVariant, React.ReactElement>> = {
@@ -58,7 +69,7 @@ const sliderStyles: Readonly<TwClasses> = {
     img: 'w-auto widescreen:w-full h-full object-cover',
     surface: '',
     overlay:
-      'absolute top-0 left-0 right-0 bottom-0 px-[17px] tablet:px-[41px] laptop:px-15 widescreen:px-[100px] pt-18 tablet:pt-[111px] desktop:pt-[138px] pb-16 tablet:pb-[84px] laptop:pb-0 mb-0 tablet:mb-6 flex flex-col justify-between laptop:block',
+      'absolute top-0 left-0 right-0 bottom-0 px-[17px] tablet:px-[41px] laptop:px-15 widescreen:px-[100px] pt-18 tablet:pt-[111px] desktop:pt-[138px] pb-16 tablet:pb-[84px] laptop:pb-0 flex flex-col justify-between laptop:block bg-supplementary-2/60',
     text: 'flex flex-col items-start mb-0 mobile:mb-15 laptop:mb-10 text-white',
     textTop:
       'relative z-10 text-3xl tablet:text-4xl laptop:text-[56px] font-medium leading-12 tablet:leading-15 laptop:leading-[90px] whitespace-nowrap',
@@ -109,6 +120,32 @@ const productSliderStyles = sliderStyles.product as Readonly<StyleRecord>
 function Main(): React.ReactElement {
   const { width } = useScreenSize()
   const { isClientRendering } = useStore(state => state.clientSlice)
+  const locale = useLocale()
+  const [mainSliderContent, setMainSliderContent] = React.useState<
+    ModifiedMainSliderEntry[]
+  >([])
+  const t = useTranslations('buttons')
+
+  React.useEffect(() => {
+    async function initializeMainSliderContent() {
+      const content: MainSliderEntry[] = await getMainSliderContent(
+        defaultApiQueryParams,
+      )
+      const contentWithoutStatus = content.map(c =>
+        omit({
+          source: c,
+          fields: ['status'],
+        }),
+      )
+      const uiData = transformToUiData(
+        contentWithoutStatus,
+        locale as Language,
+      ) as ModifiedMainSliderEntry[]
+      setMainSliderContent(uiData)
+    }
+
+    initializeMainSliderContent()
+  }, [locale])
 
   return (
     <div className={`main-slider ${mainSliderStyles.slider}`}>
@@ -118,39 +155,39 @@ function Main(): React.ReactElement {
         pagination={{ clickable: true }}
         className={mainSliderStyles.swiper}
       >
-        {Array<MainSliderEntry>(3)
-          .fill({
-            img: mainSliderImg,
-            text: 'Embakitchen homepage slider mock image',
-          })
-          .map((item, i) => (
-            <SwiperSlide key={i}>
-              <Image
-                src={item.img}
-                alt={item.text}
-                className={mainSliderStyles.img}
-              />
-            </SwiperSlide>
-          ))}
+        {mainSliderContent.map((item: ModifiedMainSliderEntry) => (
+          <SwiperSlide key={item.id}>
+            <Image
+              src={item.image.original_url}
+              alt={item.title}
+              className={mainSliderStyles.img}
+              fill
+            />
+
+            <div className={mainSliderStyles.surface}>
+              <div className={mainSliderStyles.overlay}>
+                <h3 className={mainSliderStyles.text}>
+                  <span className={mainSliderStyles.textTop}>{item.title}</span>
+                  <span className={mainSliderStyles.textBottom}>
+                    {item.excerpt}
+                  </span>
+                </h3>
+
+                <div className={mainSliderStyles.buttons}>
+                  <Button classes={mainSliderStyles.specialOrder}>
+                    {t('createCustomOrder')}
+                  </Button>
+                  <Button classes={mainSliderStyles.showProducts}>
+                    {t('viewProducts')}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       <div className={mainSliderStyles.surface}>
-        <div className={mainSliderStyles.overlay}>
-          <h3 className={mainSliderStyles.text}>
-            <span className={mainSliderStyles.textTop}>Büdcənizə uyğun</span>
-            <span className={mainSliderStyles.textBottom}>Mətbəx mebeli</span>
-          </h3>
-
-          <div className={mainSliderStyles.buttons}>
-            <Button classes={mainSliderStyles.specialOrder}>
-              Özəl sifariş yarat
-            </Button>
-            <Button classes={mainSliderStyles.showProducts}>
-              Məhsullara bax
-            </Button>
-          </div>
-        </div>
-
         {isClientRendering && width >= SCREENS.laptop && (
           <div className={mainSliderStyles.socialContacts}>
             <SocialContacts

@@ -77,6 +77,10 @@
       }
     ]
   },
-  "aboutPage": {},
-  "projectsPage": {}
+  "buttons": {
+    "createCustomOrder": "Создать индивидуальный заказ",
+    "viewProducts": "Посмотреть товары",
+    "customOrder": "Индивидуальный заказ",
+    "personalAccount": "Личный кабинет"
+  }
 }

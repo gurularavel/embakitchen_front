@@ -58,3 +58,5 @@ export interface ProductCategoryProps extends SharedProps {
 }
 
 export interface ProductDetailsProps extends SharedProps {}
+
+export interface HomeProps {}
