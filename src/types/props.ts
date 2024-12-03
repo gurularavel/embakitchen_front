@@ -6,7 +6,9 @@ import type {
   BlogsPageResponse,
   BlogsResponse,
   CampaignEntry,
+  HomepageResponse,
   MediaFile,
+  // PartnersSliderEntry,
   ProductEntry,
   ProjectEntry,
 } from '~ek/types'
@@ -59,4 +61,12 @@ export interface ProductCategoryProps extends SharedProps {
 
 export interface ProductDetailsProps extends SharedProps {}
 
-export interface HomeProps {}
+type OmittedHomepageResponse = Omit<
+  HomepageResponse<string>,
+  'id' | 'createOrderImage' | 'styleImage' | 'video'
+>
+export interface HomeProps extends OmittedHomepageResponse {
+  createOrderImage: MediaFile
+  styleImage: MediaFile
+  video: MediaFile
+}

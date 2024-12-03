@@ -7,7 +7,12 @@ import {
 } from '~ek/components'
 import type { HomeProps } from '~ek/types'
 
-export function Home({}: Readonly<HomeProps>): React.ReactElement {
+export function Home({
+  styleArray,
+  createOrderSection,
+  createOrderImage,
+  // partners,
+}: Readonly<HomeProps>): React.ReactElement {
   return (
     <>
       <Slider variant='main' />
@@ -16,13 +21,11 @@ export function Home({}: Readonly<HomeProps>): React.ReactElement {
 
       <Statistics context='home' />
 
-      <OrderStages />
+      <OrderStages orderStages={styleArray} />
 
       <SlogansSection
-        slogans={[
-          'Siz arzulayın, biz reallaşdıraq',
-          'Xəyallarınızdakı mətbəxi bizə həvalə edin',
-        ]}
+        title={createOrderSection.title}
+        content={createOrderSection.content}
       />
 
       <Slider variant='partners' />

@@ -26,9 +26,10 @@ import type {
   Language,
   MainSliderEntry,
   MediaFile,
+  PartnersSliderEntry,
   SliderVariant,
 } from '~ek/types'
-import { getMainSliderContent } from '~ek/services'
+import { getMainSliderContent, getPartnersSliderContent } from '~ek/services'
 import 'swiper/css'
 import 'swiper/css/grid'
 import 'swiper/css/thumbs'
@@ -51,6 +52,14 @@ interface SliderProps {
 
 type OmittedMainSliderEntry = Omit<MainSliderEntry<string>, 'status' | 'image'>
 interface ModifiedMainSliderEntry extends OmittedMainSliderEntry {
+  image: MediaFile
+}
+
+type OmittedPartnersSliderEntry = Omit<
+  PartnersSliderEntry<string>,
+  'status' | 'image'
+>
+interface ModifiedPartnersSliderEntry extends OmittedPartnersSliderEntry {
   image: MediaFile
 }
 
@@ -106,6 +115,7 @@ const sliderStyles: Readonly<TwClasses> = {
     sliderWrapper: 'px-4 laptop:px-15 widescreen:px-25',
     swiper: 'h-12',
     slide: '!w-auto h-auto',
+    // image: 'w-full h-full',
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
@@ -272,9 +282,26 @@ function Gallery(): React.ReactElement {
 }
 
 function Partners(): React.ReactElement {
-  const partners: Array<StaticImageData> = Array(2)
-    .fill([partner1, partner2, partner3, partner4, partner5, partner6])
-    .flat()
+  const locale = useLocale()
+  const [partnersSliderContent, setPartnersSliderContent] = React.useState<
+    ModifiedPartnersSliderEntry[]
+  >([])
+
+  React.useEffect(() => {
+    async function initializePartnersSliderContent() {
+      const partnersSliderContent = await getPartnersSliderContent(
+        defaultApiQueryParams,
+      )
+
+      const uiData = transformToUiData(
+        partnersSliderContent,
+        locale as Language,
+      ) as ModifiedPartnersSliderEntry[]
+      setPartnersSliderContent(uiData)
+    }
+
+    initializePartnersSliderContent()
+  }, [locale])
 
   return (
     <div className={partnersSliderStyles.slider}>
@@ -301,15 +328,19 @@ function Partners(): React.ReactElement {
             },
           }}
         >
-          {partners.map((partner: StaticImageData, i: number) => (
+          {partnersSliderContent.map((content: ModifiedPartnersSliderEntry) => (
             <SwiperSlide
-              key={i}
+              key={content.id}
               className={partnersSliderStyles.slide}
             >
-              <Image
-                src={partner}
-                alt='Embakitchen partner'
-              />
+              <div className='relative'>
+                <Image
+                  src={content.image.original_url}
+                  alt='Embakitchen partner'
+                  // className={partnersSliderStyles.image}
+                  fill
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

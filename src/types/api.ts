@@ -5,6 +5,7 @@ import type {
   MainSliderEntry,
   MediaFile,
   MultilingualText,
+  PartnersSliderEntry,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -47,4 +48,32 @@ export interface BlogsResponse<T extends string = Language>
 
 export interface MainSliderResponse extends PaginatedResponse {
   data: MainSliderEntry[]
+}
+
+export interface HomepageResponse<T extends string = Language> {
+  id: number
+  videoSection: {
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+  }
+  infoArray: Array<{
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+    icon: string
+  }>
+  styleArray: Array<{
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+  }>
+  createOrderSection: {
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+  }
+  createOrderImage: [MediaFile]
+  styleImage: [MediaFile]
+  video: [MediaFile]
+}
+
+export interface PartnersSliderResponse extends PaginatedResponse {
+  data: PartnersSliderEntry[]
 }

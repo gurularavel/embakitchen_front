@@ -1,7 +1,9 @@
+import { useTranslations } from 'next-intl'
 import { Button } from '~ek/components'
 
 interface SlogansSectionProps {
-  slogans: [string, string]
+  title: string
+  content: string
 }
 
 const slogansSectionStyles: Readonly<TwClasses> = {
@@ -17,16 +19,19 @@ const slogansSectionStyles: Readonly<TwClasses> = {
 const styles = slogansSectionStyles as Readonly<StyleRecord>
 
 export function SlogansSection({
-  slogans: [s1, s2],
+  title,
+  content,
 }: Readonly<SlogansSectionProps>): React.ReactElement {
+  const t = useTranslations('buttons')
+
   return (
     <section className={styles.slogansSection}>
       <div className={styles.slogansContent}>
-        <h4 className={styles.s1}>{s1}</h4>
-        <h4 className={styles.s2}>{s2}</h4>
+        <h4 className={styles.s1}>{title}</h4>
+        <h4 className={styles.s2}>{content}</h4>
         <div className={styles.buttonWrapper}>
           <Button classes={styles.specialOrderButton}>
-            Özəl sifariş yarat
+            {t('createCustomOrder')}
           </Button>
         </div>
       </div>
