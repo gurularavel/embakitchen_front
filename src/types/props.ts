@@ -6,6 +6,7 @@ import type {
   BlogsPageResponse,
   BlogsResponse,
   CampaignEntry,
+  CampaignsResponse,
   HomepageResponse,
   MediaFile,
   // PartnersSliderEntry,
@@ -65,8 +66,13 @@ type OmittedHomepageResponse = Omit<
   HomepageResponse<string>,
   'id' | 'createOrderImage' | 'styleImage' | 'video'
 >
+type OmittedCampaignEntry = Omit<CampaignEntry<string>, 'image'>
+export interface ModifiedCampaignEntry extends OmittedCampaignEntry {
+  image: MediaFile
+}
 export interface HomeProps extends OmittedHomepageResponse {
   createOrderImage: MediaFile
   styleImage: MediaFile
   video: MediaFile
+  campaigns: ModifiedCampaignEntry[]
 }

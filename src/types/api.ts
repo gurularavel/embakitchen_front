@@ -1,6 +1,7 @@
 import type {
   AboutInfoBlock,
   BlogEntry,
+  CampaignEntry,
   Language,
   MainSliderEntry,
   MediaFile,
@@ -76,4 +77,8 @@ export interface HomepageResponse<T extends string = Language> {
 
 export interface PartnersSliderResponse extends PaginatedResponse {
   data: PartnersSliderEntry[]
+}
+
+export interface CampaignsResponse extends PaginatedResponse {
+  data: CampaignEntry[]
 }

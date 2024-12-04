@@ -37,12 +37,6 @@ import 'swiper/css/pagination'
 import galleryImg1 from '/public/assets/images/slider/gallery/gallery-img-1.png'
 import galleryImg2 from '/public/assets/images/slider/gallery/gallery-img-2.png'
 import galleryImg3 from '/public/assets/images/slider/gallery/gallery-img-3.png'
-import partner1 from '/public/assets/images/slider/partners/partner-1.png'
-import partner2 from '/public/assets/images/slider/partners/partner-2.png'
-import partner3 from '/public/assets/images/slider/partners/partner-3.png'
-import partner4 from '/public/assets/images/slider/partners/partner-4.png'
-import partner5 from '/public/assets/images/slider/partners/partner-5.png'
-import partner6 from '/public/assets/images/slider/partners/partner-6.png'
 
 SwiperCore.use([Thumbs, Grid])
 

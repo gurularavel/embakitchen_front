@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { az } from 'date-fns/locale'
 import { useLocale } from 'next-intl'
 import { Icon, Timer } from '~ek/components'
-import type { CampaignEntry } from '~ek/types'
+import type { CampaignEntry, ModifiedCampaignEntry } from '~ek/types'
 
 const campaignItemStyles: Readonly<TwClasses> = {
   container:
@@ -21,19 +21,22 @@ const campaignItemStyles: Readonly<TwClasses> = {
 const styles = campaignItemStyles as Readonly<StyleRecord>
 
 export function CampaignItem({
+  id,
   title,
-  img,
-  start,
-  end,
-}: Readonly<Omit<CampaignEntry, 'description'>>): React.ReactElement {
+  image,
+  startDate,
+  endDate,
+}: Readonly<ModifiedCampaignEntry>): React.ReactElement {
   const locale = useLocale()
+  const start = new Date() // startDate
+  const end = new Date() // endDate
 
   return (
     <div className={styles.container}>
       <div>
         <div className={styles.imgWrapper}>
           <Image
-            src={img}
+            src={image.original_url}
             alt={`Embakitchen campaign - ${title}`}
             className={styles.img}
           />

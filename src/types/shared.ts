@@ -93,14 +93,6 @@ export interface StatisticEntry<T extends string = string> {
 
 export type SliderVariant = 'main' | 'gallery' | 'partners' | 'product'
 
-export interface CampaignEntry {
-  title: string
-  description: string
-  img: StaticImageData
-  start: Date
-  end: Date
-}
-
 export interface ProjectEntry<T extends string = string> {
   id: number
   title: MultilingualText<T>
@@ -138,6 +130,17 @@ export interface MainSliderEntry<T extends string = Language> {
 export interface PartnersSliderEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
+  image: [MediaFile]
+  status: boolean
+}
+
+export interface CampaignEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  content: MultilingualText<T>
+  startDate: string
+  endDate: string
   image: [MediaFile]
   status: boolean
 }

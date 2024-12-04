@@ -11,6 +11,7 @@ export function Home({
   styleArray,
   createOrderSection,
   createOrderImage,
+  campaigns,
 }: Readonly<HomeProps>): React.ReactElement {
   return (
     <>
@@ -29,7 +30,7 @@ export function Home({
 
       <Slider variant='partners' />
 
-      <CurrentCampaigns />
+      <CurrentCampaigns campaigns={campaigns} />
     </>
   )
 }
