@@ -11,7 +11,6 @@ export function Home({
   styleArray,
   createOrderSection,
   createOrderImage,
-  // partners,
 }: Readonly<HomeProps>): React.ReactElement {
   return (
     <>

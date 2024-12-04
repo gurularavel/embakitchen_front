@@ -115,7 +115,8 @@ const sliderStyles: Readonly<TwClasses> = {
     sliderWrapper: 'px-4 laptop:px-15 widescreen:px-25',
     swiper: 'h-12',
     slide: '!w-auto h-auto',
-    // image: 'w-full h-full',
+    imageWrapper: 'relative',
+    image: 'w-full h-full',
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
@@ -328,21 +329,24 @@ function Partners(): React.ReactElement {
             },
           }}
         >
-          {partnersSliderContent.map((content: ModifiedPartnersSliderEntry) => (
-            <SwiperSlide
-              key={content.id}
-              className={partnersSliderStyles.slide}
-            >
-              <div className='relative'>
-                <Image
-                  src={content.image.original_url}
-                  alt='Embakitchen partner'
-                  // className={partnersSliderStyles.image}
-                  fill
-                />
-              </div>
-            </SwiperSlide>
-          ))}
+          {[...partnersSliderContent, ...partnersSliderContent].map(
+            (content: ModifiedPartnersSliderEntry, i: number) => (
+              <SwiperSlide
+                key={i}
+                className={partnersSliderStyles.slide}
+              >
+                <div className={partnersSliderStyles.imageWrapper}>
+                  <Image
+                    src={content.image.original_url}
+                    alt='Embakitchen partner'
+                    className={partnersSliderStyles.image}
+                    width={200}
+                    height={48}
+                  />
+                </div>
+              </SwiperSlide>
+            ),
+          )}
         </Swiper>
       </div>
     </div>
