@@ -43,3 +43,9 @@ export interface BlogsResponse<T extends string = Language>
   extends PaginatedResponse {
   data: Omit<BlogEntry<T>, 'content' | 'similar_posts'>[]
 }
+
+export interface CampaignsPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+}

@@ -3,6 +3,7 @@ import type { CampaignEntry, CampaignsProps } from '~ek/types'
 import campaign1 from '/public/assets/images/campaigns/campaign-1.png'
 import campaign2 from '/public/assets/images/campaigns/campaign-2.png'
 import campaign3 from '/public/assets/images/campaigns/campaign-3.png'
+import { getCampaignsPageContent } from '~ek/services'
 
 const today = new Date()
 const campaignImages = [campaign1, campaign2, campaign3, campaign1]
@@ -49,6 +50,8 @@ const campaignsProps: CampaignsProps = {
   campaigns,
 }
 
-export default function CampaignsPage(): React.ReactElement {
+export default async function CampaignsPage(): Promise<React.ReactElement> {
+  const campaignsPageContent = await getCampaignsPageContent()
+
   return <Campaigns {...campaignsProps} />
 }
