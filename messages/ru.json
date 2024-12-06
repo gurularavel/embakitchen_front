@@ -81,6 +81,11 @@
     "createCustomOrder": "Создать индивидуальный заказ",
     "viewProducts": "Посмотреть товары",
     "customOrder": "Индивидуальный заказ",
-    "personalAccount": "Личный кабинет"
+    "personalAccount": "Личный кабинет",
+    "inDetails": "Детально"
+  },
+  "titles": {
+    "currentCampaigns": "Текущие Кампании",
+    "partnersSlider": "Наши Партнеры"
   }
 }

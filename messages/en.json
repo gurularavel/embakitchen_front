@@ -81,6 +81,11 @@
     "createCustomOrder": "Create custom order",
     "viewProducts": "View products",
     "customOrder": "Custom order",
-    "personalAccount": "Personal account"
+    "personalAccount": "Personal account",
+    "inDetails": "In Details"
+  },
+  "titles": {
+    "currentCampaigns": "Current Campaigns",
+    "partnersSlider": "Our Partners"
   }
 }

@@ -81,6 +81,11 @@
     "createCustomOrder": "Özəl sifariş yarat",
     "viewProducts": "Məhsullara bax",
     "customOrder": "Özəl sifariş",
-    "personalAccount": "Şəxsi kabinet"
+    "personalAccount": "Şəxsi kabinet",
+    "inDetails": "Ətraflı"
+  },
+  "titles": {
+    "currentCampaigns": "Cari Kampaniyalar",
+    "partnersSlider": "Tərəfdaşlarımız"
   }
 }

@@ -277,6 +277,7 @@ function Gallery(): React.ReactElement {
 }
 
 function Partners(): React.ReactElement {
+  const t = useTranslations('titles')
   const locale = useLocale()
   const [partnersSliderContent, setPartnersSliderContent] = React.useState<
     ModifiedPartnersSliderEntry[]
@@ -300,7 +301,7 @@ function Partners(): React.ReactElement {
 
   return (
     <div className={partnersSliderStyles.slider}>
-      <h4 className={partnersSliderStyles.title}>Əməkdaşlarımız</h4>
+      <h4 className={partnersSliderStyles.title}>{t('partnersSlider')}</h4>
 
       <div className={partnersSliderStyles.sliderWrapper}>
         <Swiper
@@ -323,8 +324,10 @@ function Partners(): React.ReactElement {
             },
           }}
         >
-          {[...partnersSliderContent, ...partnersSliderContent].map(
-            (content: ModifiedPartnersSliderEntry, i: number) => (
+          {Array(3)
+            .fill(partnersSliderContent)
+            .flat()
+            .map((content: ModifiedPartnersSliderEntry, i: number) => (
               <SwiperSlide
                 key={i}
                 className={partnersSliderStyles.slide}
@@ -339,8 +342,7 @@ function Partners(): React.ReactElement {
                   />
                 </div>
               </SwiperSlide>
-            ),
-          )}
+            ))}
         </Swiper>
       </div>
     </div>
