@@ -1,9 +1,15 @@
 import { Campaigns } from '~ek/components'
-import type { CampaignEntry, CampaignsProps } from '~ek/types'
+import type {
+  BannerProps,
+  CampaignEntry,
+  CampaignsPageResponse,
+  CampaignsProps,
+} from '~ek/types'
 import campaign1 from '/public/assets/images/campaigns/campaign-1.png'
 import campaign2 from '/public/assets/images/campaigns/campaign-2.png'
 import campaign3 from '/public/assets/images/campaigns/campaign-3.png'
 import { getCampaignsPageContent } from '~ek/services'
+import { omit, transformToUiData } from '~ek/utils'
 
 const today = new Date()
 const campaignImages = [campaign1, campaign2, campaign3, campaign1]
@@ -32,26 +38,21 @@ const campaigns: CampaignEntry[] = Array(4)
     ),
   }))
 
-const campaignsProps: CampaignsProps = {
-  banner: {
-    title: 'Kampaniyalar',
-    image: {
-      name: '0L1A5736',
-      file_name: '0L1A5736.JPG',
-      uuid: '91929660-d21d-45f4-bf57-ba4843d608c8',
-      preview_url: '',
-      original_url: 'https://embakitchen.kvadrat.az/storage/156/0L1A5736.JPG',
-      order: 1,
-      custom_properties: [],
-      extension: 'JPG',
-      size: 7043050,
-    },
-  },
-  campaigns,
-}
-
-export default async function CampaignsPage(): Promise<React.ReactElement> {
+export default async function CampaignsPage({
+  params: { locale },
+}: PageProps): Promise<React.ReactElement> {
   const campaignsPageContent = await getCampaignsPageContent()
+  const campaignsPageContentWithoutId = omit({
+    source: campaignsPageContent as CampaignsPageResponse,
+    fields: ['id'],
+  }) as Omit<CampaignsPageResponse, 'id'>
+
+  const campaignsProps: CampaignsProps = {
+    ...(transformToUiData(
+      campaignsPageContentWithoutId,
+      locale,
+    ) as BannerProps),
+  }
 
   return <Campaigns {...campaignsProps} />
 }

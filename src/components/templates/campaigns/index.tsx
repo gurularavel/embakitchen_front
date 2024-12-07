@@ -8,17 +8,17 @@ const campaignsStyles: Readonly<TwClasses> = {
 const styles = campaignsStyles as Readonly<StyleRecord>
 
 export function Campaigns({
-  banner,
-  campaigns,
+  title,
+  image,
 }: Readonly<CampaignsProps>): React.ReactElement {
   return (
     <>
       <Banner
-        title={banner?.title ?? ''}
-        image={banner?.image ?? ''}
+        title={title ?? ''}
+        image={image ?? ''}
       />
 
-      <div className={styles.campaigns}>
+      {/* <div className={styles.campaigns}>
         {campaigns?.map((campaign: CampaignEntry, i: number) => {
           const { description, ...campaignItemProps } = campaign
 
@@ -29,7 +29,7 @@ export function Campaigns({
             />
           )
         })}
-      </div>
+      </div> */}
     </>
   )
 }

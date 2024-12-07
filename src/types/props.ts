@@ -48,7 +48,7 @@ export interface BlogDetailsProps extends OmittedBlogDetailsResponse {
 }
 
 export interface CampaignsProps extends SharedProps {
-  campaigns: CampaignEntry[]
+  // campaigns: CampaignEntry[]
 }
 
 export interface CampaignDetailsProps extends SharedProps {}
