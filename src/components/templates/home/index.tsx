@@ -1,5 +1,6 @@
 import {
   CurrentCampaigns,
+  Offers,
   OrderStages,
   Slider,
   SlogansSection,
@@ -12,6 +13,7 @@ export function Home({
   createOrderSection,
   createOrderImage,
   campaigns,
+  video,
 }: Readonly<HomeProps>): React.ReactElement {
   return (
     <>
@@ -20,6 +22,8 @@ export function Home({
       <Slider variant='gallery' />
 
       <Statistics context='home' />
+
+      <Offers video={video} />
 
       <OrderStages orderStages={styleArray} />
 
