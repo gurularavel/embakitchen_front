@@ -14,6 +14,8 @@ export function Home({
   createOrderImage,
   campaigns,
   video,
+  videoSection,
+  infoArray,
 }: Readonly<HomeProps>): React.ReactElement {
   return (
     <>
@@ -23,7 +25,11 @@ export function Home({
 
       <Statistics context='home' />
 
-      <Offers video={video} />
+      <Offers
+        video={video}
+        videoSection={videoSection}
+        infoArray={infoArray}
+      />
 
       <OrderStages orderStages={styleArray} />
 
