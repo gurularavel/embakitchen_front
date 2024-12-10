@@ -110,7 +110,7 @@ const sliderStyles: Readonly<TwClasses> = {
     swiper: 'h-12',
     slide: '!w-auto h-auto',
     imageWrapper: 'relative',
-    image: 'w-full h-full',
+    image: 'w-full h-12',
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
