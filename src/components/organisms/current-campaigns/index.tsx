@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { CampaignItem } from '~ek/components'
 import type { ModifiedCampaignEntry } from '~ek/types'
-import campaignsSectionBg from '/public/assets/images/campaigns/campaigns-section-bg.png'
+import sectionTitleBg from '/public/assets/images/section-title-bg.png'
 
 interface CurrentCampaignProps {
   campaigns: ModifiedCampaignEntry[]
@@ -34,7 +34,7 @@ export function CurrentCampaigns({
           <h4 className={styles.title}>{t('currentCampaigns')}</h4>
           <div className={styles.titleWrapperBg}>
             <Image
-              src={campaignsSectionBg}
+              src={sectionTitleBg}
               alt='Embakitchen campaigns section title background'
               className={styles.titleWrapperBgImg}
             />

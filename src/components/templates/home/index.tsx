@@ -2,6 +2,7 @@ import {
   CurrentCampaigns,
   Offers,
   OrderStages,
+  PopularBlogs,
   Slider,
   SlogansSection,
   Statistics,
@@ -37,6 +38,8 @@ export function Home({
         title={createOrderSection.title}
         content={createOrderSection.content}
       />
+
+      <PopularBlogs />
 
       <Slider variant='partners' />
 
