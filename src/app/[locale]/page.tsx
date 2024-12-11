@@ -1,6 +1,11 @@
 import type { Metadata } from 'next'
 import { Home } from '~ek/components'
-import { getCampaigns, getHomepageContent, getPopularBlogs } from '~ek/services'
+import {
+  getBlogs,
+  getCampaigns,
+  getHomepageContent,
+  getPopularBlogs,
+} from '~ek/services'
 import type {
   HomepageResponse,
   HomeProps,

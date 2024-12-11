@@ -20,7 +20,7 @@ const offersStyles: Readonly<TwClasses> = {
     'w-full laptop:w-auto px-0 laptop:px-10 h-14 bg-primary-2 flex items-center justify-center gap-x-2 rounded-md mb-6 text-base font-semibold text-tertiary-11',
   readAboutUsIcon: 'w-6 h-6',
   options: 'grid grid-cols-1 tablet:grid-cols-2 gap-16',
-  option: 'w-full tablet:w-[312px]',
+  option: 'w-full tablet:max-w-[312px]',
   optionTop: 'flex items-center gap-x-3 mb-5',
   iconWrapper: 'relative w-10 h-10',
   icon: 'w-full h-full',
