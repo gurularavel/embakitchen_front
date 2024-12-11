@@ -70,9 +70,18 @@ type OmittedCampaignEntry = Omit<CampaignEntry<string>, 'image'>
 export interface ModifiedCampaignEntry extends OmittedCampaignEntry {
   image: MediaFile
 }
+
+type OmittedBlogEntry = Omit<
+  BlogEntry<string>,
+  'content' | 'image' | 'similar_posts'
+>
+interface ModifiedBlogEntry extends OmittedBlogEntry {
+  image: MediaFile
+}
 export interface HomeProps extends OmittedHomepageResponse {
   createOrderImage: MediaFile
   styleImage: MediaFile
   video: MediaFile
   campaigns: ModifiedCampaignEntry[]
+  blogs: ModifiedBlogEntry[]
 }

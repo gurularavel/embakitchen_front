@@ -6,6 +6,7 @@ export {
   getBlogsPageContent,
   getBlogs,
   getBlogDetails,
+  getPopularBlogs,
 } from '~ek/services/blog'
 export {
   getMainSliderContent,

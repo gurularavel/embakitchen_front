@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Home } from '~ek/components'
-import { getCampaigns, getHomepageContent } from '~ek/services'
+import { getCampaigns, getHomepageContent, getPopularBlogs } from '~ek/services'
 import type {
   HomepageResponse,
   HomeProps,
@@ -17,6 +17,10 @@ export default async function HomePage({
 }: Readonly<PageProps>): Promise<React.ReactElement> {
   const homepageContent = await getHomepageContent()
   const currentCampaigns = await getCampaigns(defaultApiQueryParams)
+  const popularBlogs = await getPopularBlogs({
+    ...defaultApiQueryParams,
+    perPage: 3,
+  })
 
   const homepageContentWithoutId = omit({
     source: homepageContent as HomepageResponse,
@@ -31,6 +35,7 @@ export default async function HomePage({
       currentCampaigns,
       locale,
     ) as ModifiedCampaignEntry[],
+    blogs: transformToUiData(popularBlogs, locale) as HomeProps['blogs'],
   }
 
   return <Home {...homeProps} />
