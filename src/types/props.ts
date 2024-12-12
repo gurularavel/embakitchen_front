@@ -6,7 +6,10 @@ import type {
   BlogsPageResponse,
   BlogsResponse,
   CampaignEntry,
+  CampaignsResponse,
+  HomepageResponse,
   MediaFile,
+  // PartnersSliderEntry,
   ProductEntry,
   ProjectEntry,
 } from '~ek/types'
@@ -58,3 +61,28 @@ export interface ProductCategoryProps extends SharedProps {
 }
 
 export interface ProductDetailsProps extends SharedProps {}
+
+type OmittedHomepageResponse = Omit<
+  HomepageResponse<string>,
+  'id' | 'createOrderImage' | 'styleImage' | 'video'
+>
+type OmittedCampaignEntry = Omit<CampaignEntry<string>, 'image'>
+export interface ModifiedCampaignEntry extends OmittedCampaignEntry {
+  image: MediaFile
+}
+
+type OmittedBlogEntry = Omit<
+  BlogEntry<string>,
+  'content' | 'image' | 'similar_posts'
+>
+interface ModifiedBlogEntry extends OmittedBlogEntry {
+  image: MediaFile
+}
+export interface HomeProps extends OmittedHomepageResponse {
+  createOrderImage: MediaFile
+  styleImage: MediaFile
+  video: MediaFile
+  campaigns: ModifiedCampaignEntry[]
+  blogs: ModifiedBlogEntry[]
+  popularBlogs: ModifiedBlogEntry[]
+}

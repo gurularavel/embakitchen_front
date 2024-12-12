@@ -1,9 +1,12 @@
 import type {
   AboutInfoBlock,
   BlogEntry,
+  CampaignEntry,
   Language,
+  MainSliderEntry,
   MediaFile,
   MultilingualText,
+  PartnersSliderEntry,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -42,4 +45,40 @@ export interface BlogsPageResponse<T extends string = Language> {
 export interface BlogsResponse<T extends string = Language>
   extends PaginatedResponse {
   data: Omit<BlogEntry<T>, 'content' | 'similar_posts'>[]
+}
+
+export interface MainSliderResponse extends PaginatedResponse {
+  data: MainSliderEntry[]
+}
+
+export interface HomepageResponse<T extends string = Language> {
+  id: number
+  videoSection: {
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+  }
+  infoArray: Array<{
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+    icon: string
+  }>
+  styleArray: Array<{
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+  }>
+  createOrderSection: {
+    title: MultilingualText<T>
+    content: MultilingualText<T>
+  }
+  createOrderImage: [MediaFile]
+  styleImage: [MediaFile]
+  video: [MediaFile]
+}
+
+export interface PartnersSliderResponse extends PaginatedResponse {
+  data: PartnersSliderEntry[]
+}
+
+export interface CampaignsResponse extends PaginatedResponse {
+  data: CampaignEntry[]
 }

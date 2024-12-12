@@ -1,23 +1,13 @@
 import { OrderStageItem, type OrderStageItemProps } from '~ek/components'
-import type { OrderStageEntry } from '~ek/types'
 
-const orderStages: OrderStageEntry[] = [
-  {
-    title: 'Dizayn konsultasiya',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nibh elit, ultricies ut bibendum eget, efficitur et est.',
-  },
-  {
-    title: 'Öz stilini seç',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nibh elit, ultricies ut bibendum eget, efficitur et est.',
-  },
-  {
-    title: 'Mebelin qurulması',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nibh elit, ultricies ut bibendum eget, efficitur et est.',
-  },
-]
+interface OrderStageEntry {
+  title: string
+  content: string
+}
+
+interface OrderStagesProps {
+  orderStages: OrderStageEntry[]
+}
 
 const orderStagesStyles: Readonly<TwClasses> = {
   container:
@@ -29,7 +19,9 @@ const orderStagesStyles: Readonly<TwClasses> = {
 }
 const styles = orderStagesStyles as Readonly<StyleRecord>
 
-export function OrderStages(): React.ReactElement {
+export function OrderStages({
+  orderStages,
+}: Readonly<OrderStagesProps>): React.ReactElement {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

@@ -1,17 +1,18 @@
 'use client'
 
 import * as React from 'react'
+import { twMerge } from 'tailwind-merge'
 import { Button, Icon } from '~ek/components'
 import type { MediaFile } from '~ek/types'
 import { updatePrimitiveState } from '~ek/utils'
 
 interface VideoProps {
   video: MediaFile
+  className: string
 }
 
 const videoStyles: Readonly<TwClasses> = {
-  wrapper:
-    'w-full h-[193px] laptop:h-[759px] px-0 laptop:px-15 widescreen:px-0 mb-6 laptop:mb-10 relative',
+  wrapper: 'w-full mb-6 laptop:mb-10 relative',
   video: (shouldPlay: unknown) =>
     `w-full h-full object-cover ${(shouldPlay as boolean) ? 'cursor-pointer' : ''}`,
   icon: (shouldPlay: unknown) =>
@@ -21,7 +22,10 @@ const styles = videoStyles as Readonly<StyleRecord>
 const getVideoStyles = videoStyles.video as StyleGetter
 const getIconStyles = videoStyles.icon as StyleGetter
 
-export function Video({ video }: Readonly<VideoProps>): React.ReactElement {
+export function Video({
+  video,
+  className,
+}: Readonly<VideoProps>): React.ReactElement {
   const [shouldPlay, setShouldPlay] = React.useState<boolean>(false)
   const videoRef = React.useRef<HTMLVideoElement | null>(null)
 
@@ -36,7 +40,7 @@ export function Video({ video }: Readonly<VideoProps>): React.ReactElement {
   }, [shouldPlay])
 
   return (
-    <div className={styles.wrapper}>
+    <div className={twMerge(styles.wrapper, className ?? '')}>
       <video
         src={video.original_url}
         className={getVideoStyles(shouldPlay)}

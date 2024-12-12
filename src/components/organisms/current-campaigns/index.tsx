@@ -1,44 +1,11 @@
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { CampaignItem } from '~ek/components'
-import type { CampaignEntry } from '~ek/types'
-import campaign1 from '/public/assets/images/campaigns/campaign-1.png'
-import campaign2 from '/public/assets/images/campaigns/campaign-2.png'
-import campaign3 from '/public/assets/images/campaigns/campaign-3.png'
-import campaignsSectionBg from '/public/assets/images/campaigns/campaigns-section-bg.png'
+import type { ModifiedCampaignEntry } from '~ek/types'
+import sectionTitleBg from '/public/assets/images/section-title-bg.png'
 
-interface CurrentCampaignData {
-  title: string
-  campaigns: CampaignEntry[]
-}
-
-const today = new Date()
-const currentCampaignImages = [campaign1, campaign2, campaign3, campaign1]
-const currentCampaignsData: CurrentCampaignData = {
-  title: 'Cari Kampaniyalar',
-  campaigns: Array(4)
-    .fill(undefined)
-    .map((_, i: number) => ({
-      title: 'Kampaniyanın adı burada olacaq',
-      description:
-        'Kampaniya haqqında ətraflı məlumat. Kampaniya səhifəsinə keçid etdikdə görünəcək!',
-      img: currentCampaignImages[i],
-      start: new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() + (i - 1),
-        today.getHours(),
-        today.getMinutes(),
-        today.getSeconds(),
-      ),
-      end: new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() + (i + 5),
-        20,
-        30,
-        0,
-      ),
-    })),
+interface CurrentCampaignProps {
+  campaigns: ModifiedCampaignEntry[]
 }
 
 const currentCampaignsStyles: Readonly<TwClasses> = {
@@ -51,19 +18,23 @@ const currentCampaignsStyles: Readonly<TwClasses> = {
   titleWrapperBg:
     'hidden mobile:block absolute laptop:static -left-10 right-0 top-0',
   titleWrapperBgImg: 'h-[61px] w-full laptop:object-cover',
-  campaigns: 'flex flex-col laptop:flex-row justify-between gap-6',
+  campaigns: 'grid grid-cols-1 laptop:grid-cols-4 justify-between gap-6',
 }
 const styles = currentCampaignsStyles as Readonly<StyleRecord>
 
-export function CurrentCampaigns(): React.ReactElement {
+export function CurrentCampaigns({
+  campaigns,
+}: Readonly<CurrentCampaignProps>): React.ReactElement {
+  const t = useTranslations('titles')
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.titleWrapper}>
-          <h4 className={styles.title}>{currentCampaignsData?.title || ''}</h4>
+          <h4 className={styles.title}>{t('currentCampaigns')}</h4>
           <div className={styles.titleWrapperBg}>
             <Image
-              src={campaignsSectionBg}
+              src={sectionTitleBg}
               alt='Embakitchen campaigns section title background'
               className={styles.titleWrapperBgImg}
             />
@@ -71,18 +42,14 @@ export function CurrentCampaigns(): React.ReactElement {
         </div>
 
         <div className={styles.campaigns}>
-          {currentCampaignsData?.campaigns?.map(
-            (campaign: CampaignEntry, i: number) => {
-              const { description, ...campaignItemProps } = campaign
-
-              return (
-                <CampaignItem
-                  key={i}
-                  {...campaignItemProps}
-                />
-              )
-            },
-          )}
+          {campaigns?.map((campaign: ModifiedCampaignEntry) => {
+            return (
+              <CampaignItem
+                key={campaign.id}
+                {...campaign}
+              />
+            )
+          })}
         </div>
       </div>
     </div>

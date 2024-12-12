@@ -60,8 +60,8 @@ const renderNavLink = (link: NavLinkEntry, className?: string) => (
 
 function NavbarHeader(): React.ReactElement {
   const pathname = usePathname()
-  const t = useTranslations('links')
-  const commonNavLinks: NavLinkEntry[] = t.raw('header')
+  const t = useTranslations('buttons')
+  const commonNavLinks: NavLinkEntry[] = useTranslations('links').raw('header')
 
   return (
     <ul className={navbarHeaderStyles.nav}>
@@ -84,7 +84,7 @@ function NavbarHeader(): React.ReactElement {
       })}
       <li className={navbarHeaderStyles.navItem}>
         <Button classes={navbarHeaderStyles.specialOrderButton}>
-          Özəl sifariş
+          {t('customOrder')}
         </Button>
       </li>
     </ul>
