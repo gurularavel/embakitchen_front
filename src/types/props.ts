@@ -84,4 +84,5 @@ export interface HomeProps extends OmittedHomepageResponse {
   video: MediaFile
   campaigns: ModifiedCampaignEntry[]
   blogs: ModifiedBlogEntry[]
+  popularBlogs: ModifiedBlogEntry[]
 }

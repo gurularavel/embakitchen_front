@@ -22,9 +22,13 @@ export default async function HomePage({
 }: Readonly<PageProps>): Promise<React.ReactElement> {
   const homepageContent = await getHomepageContent()
   const currentCampaigns = await getCampaigns(defaultApiQueryParams)
-  const popularBlogs = await getPopularBlogs({
+  const blogs = await getBlogs({
     ...defaultApiQueryParams,
     perPage: 3,
+  })
+  const popularBlogs = await getPopularBlogs({
+    ...defaultApiQueryParams,
+    perPage: 4,
   })
 
   const homepageContentWithoutId = omit({
@@ -40,7 +44,11 @@ export default async function HomePage({
       currentCampaigns,
       locale,
     ) as ModifiedCampaignEntry[],
-    blogs: transformToUiData(popularBlogs, locale) as HomeProps['blogs'],
+    blogs: transformToUiData(blogs, locale) as HomeProps['blogs'],
+    popularBlogs: transformToUiData(
+      popularBlogs,
+      locale,
+    ) as HomeProps['popularBlogs'],
   }
 
   return <Home {...homeProps} />

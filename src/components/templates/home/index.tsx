@@ -18,6 +18,7 @@ export function Home({
   videoSection,
   infoArray,
   blogs,
+  popularBlogs,
 }: Readonly<HomeProps>): React.ReactElement {
   return (
     <>
@@ -40,7 +41,10 @@ export function Home({
         content={createOrderSection.content}
       />
 
-      <PopularBlogs blogs={blogs} />
+      <PopularBlogs
+        blogs={blogs}
+        popularBlogs={popularBlogs}
+      />
 
       <Slider variant='partners' />
 
