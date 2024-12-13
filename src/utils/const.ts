@@ -69,11 +69,6 @@ export const LOCALIZED_PATHNAMES: Record<string, LocalizedPathname> = {
     ru: '/мебели/[category]/[slug]',
     en: '/furnitures/[category]/[slug]',
   },
-  '/stores': {
-    az: '/mağazalar',
-    ru: '/магазины',
-    en: '/stores',
-  },
 }
 
 export const PROJECTS_QUANTITY_ON_BREAKPOINTS: Readonly<
