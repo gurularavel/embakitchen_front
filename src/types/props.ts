@@ -7,11 +7,13 @@ import type {
   BlogsResponse,
   CampaignEntry,
   CampaignsResponse,
+  CityEntry,
   HomepageResponse,
   MediaFile,
   // PartnersSliderEntry,
   ProductEntry,
   ProjectEntry,
+  StoreEntry,
 } from '~ek/types'
 
 export interface BannerProps {
@@ -85,4 +87,9 @@ export interface HomeProps extends OmittedHomepageResponse {
   campaigns: ModifiedCampaignEntry[]
   blogs: ModifiedBlogEntry[]
   popularBlogs: ModifiedBlogEntry[]
+}
+
+export interface StoresProps {
+  stores: StoreEntry<string>[]
+  cities: CityEntry<string>[]
 }

@@ -144,3 +144,27 @@ export interface CampaignEntry<T extends string = Language> {
   image: [MediaFile]
   status: boolean
 }
+
+export interface CityEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  status: boolean
+}
+
+export interface StoreEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  address: MultilingualText<T>
+  phone: string
+  schedule: {
+    open: string
+    close: string
+  }
+  coords: {
+    longitude: string
+    latitude: string
+  }
+  email: string
+  status: boolean
+  city: CityEntry<T>
+}

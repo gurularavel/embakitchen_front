@@ -2,11 +2,13 @@ import type {
   AboutInfoBlock,
   BlogEntry,
   CampaignEntry,
+  CityEntry,
   Language,
   MainSliderEntry,
   MediaFile,
   MultilingualText,
   PartnersSliderEntry,
+  StoreEntry,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -81,4 +83,12 @@ export interface PartnersSliderResponse extends PaginatedResponse {
 
 export interface CampaignsResponse extends PaginatedResponse {
   data: CampaignEntry[]
+}
+
+export interface StoresResponse extends PaginatedResponse {
+  data: StoreEntry[]
+}
+
+export interface CitiesWithStoresResponse extends PaginatedResponse {
+  data: CityEntry[]
 }
