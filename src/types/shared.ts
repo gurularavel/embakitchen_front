@@ -30,6 +30,10 @@ export type IconVariant =
   | 'chevron-right'
   | 'play-video'
   | 'arrow-right-white'
+  | 'store-phone'
+  | 'clock'
+  | 'location'
+  | 'email'
 
 export type TimeoutId = NodeJS.Timeout | null
 
