@@ -85,6 +85,12 @@ export interface CampaignsResponse extends PaginatedResponse {
   data: CampaignEntry[]
 }
 
+export interface CampaignsPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+}
+
 export interface StoresResponse extends PaginatedResponse {
   data: StoreEntry[]
 }
