@@ -50,11 +50,10 @@ export interface BlogDetailsProps extends OmittedBlogDetailsResponse {
   similar_posts: Omit<BlogDetailsProps, 'content'>[]
 }
 
-export interface CampaignsProps extends SharedProps {
-  // campaigns: CampaignEntry[]
+export interface CampaignDetailsProps
+  extends Omit<CampaignEntry<string>, 'image'> {
+  image: MediaFile
 }
-
-export interface CampaignDetailsProps extends SharedProps {}
 
 export interface ProductCategoryProps extends SharedProps {
   products: ProductEntry[]
@@ -85,4 +84,8 @@ export interface HomeProps extends OmittedHomepageResponse {
   campaigns: ModifiedCampaignEntry[]
   blogs: ModifiedBlogEntry[]
   popularBlogs: ModifiedBlogEntry[]
+}
+
+export interface CampaignsProps extends SharedProps {
+  campaigns: ModifiedCampaignEntry[]
 }

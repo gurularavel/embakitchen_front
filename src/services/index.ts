@@ -13,5 +13,8 @@ export {
   getHomepageContent,
   getPartnersSliderContent,
 } from '~ek/services/home'
-export { getCampaigns } from '~ek/services/campaigns'
-export { getCampaignsPageContent } from '~ek/services/campaign'
+export {
+  getCampaignsPageContent,
+  getCampaigns,
+  getCampaignDetails,
+} from '~ek/services/campaign'
