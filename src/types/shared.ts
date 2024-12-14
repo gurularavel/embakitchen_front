@@ -29,10 +29,6 @@ export type IconVariant =
   | 'arrow-left'
   | 'chevron-right'
   | 'play-video'
-  | 'store-phone'
-  | 'clock'
-  | 'location'
-  | 'email'
   | 'arrow-right-white'
 
 export type TimeoutId = NodeJS.Timeout | null
@@ -93,19 +89,6 @@ export interface StatisticEntry<T extends string = string> {
 
 export type SliderVariant = 'main' | 'gallery' | 'partners' | 'product'
 
-export interface OrderStageEntry {
-  title: string
-  description: string
-}
-
-export interface CampaignEntry {
-  title: string
-  description: string
-  img: StaticImageData
-  start: Date
-  end: Date
-}
-
 export interface ProjectEntry<T extends string = string> {
   id: number
   title: MultilingualText<T>
@@ -130,4 +113,30 @@ export interface BlogEntry<T extends string = Language> {
 export interface ProductEntry {
   title: string
   image: string
+}
+
+export interface MainSliderEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  excerpt: MultilingualText<T>
+  image: [MediaFile]
+  status: boolean
+}
+
+export interface PartnersSliderEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+  status: boolean
+}
+
+export interface CampaignEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  content: MultilingualText<T>
+  startDate: string
+  endDate: string
+  image: [MediaFile]
+  status: boolean
 }

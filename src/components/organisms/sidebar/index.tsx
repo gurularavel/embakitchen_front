@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useTranslations } from 'next-intl'
 import {
   ActionLink,
   Button,
@@ -33,6 +34,7 @@ const getSidebarContentStyles: StyleGetter =
 
 export function Sidebar(): React.ReactElement {
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
+  const t = useTranslations('buttons')
 
   React.useEffect(() => {
     document.body.style.overflow = isVisible ? 'hidden' : 'auto'
@@ -81,7 +83,7 @@ export function Sidebar(): React.ReactElement {
                 variant='profile'
                 sizes='w-6 h-6'
               />
-              <span>Şəxsi kabinet</span>
+              <span>{t('personalAccount')}</span>
             </Button>
 
             <LanguageSelector

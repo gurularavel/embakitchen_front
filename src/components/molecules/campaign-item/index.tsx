@@ -1,17 +1,16 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { format } from 'date-fns'
 import { az } from 'date-fns/locale'
-import { useLocale } from 'next-intl'
-import { Icon, Timer } from '~ek/components'
-import type { CampaignEntry } from '~ek/types'
+import { useTranslations } from 'next-intl'
+import { Icon, NavLink, Timer } from '~ek/components'
+import type { ModifiedCampaignEntry } from '~ek/types'
 
 const campaignItemStyles: Readonly<TwClasses> = {
-  container:
-    'w-full laptop:w-1/3 widescreen:w-1/4 last:hidden widescreen:last:block',
-  imgWrapper: 'h-60',
+  container: 'w-full last:hidden widescreen:last:block',
+  wrapper: 'h-full',
+  imgWrapper: 'h-60 relative',
   img: 'w-full h-full object-cover',
-  body: 'p-6 border border-solid border-gray-8 border-t-0',
+  body: 'h-[calc(100%-theme(height.60))] p-6 border border-solid border-gray-8 border-t-0',
   dates:
     'text-sm font-semibold leading-5 text-gray-4 inline-block mb-2.5 capitalize',
   title: 'text-xl font-semibold leading-5 text-gray-1 mb-[33px]',
@@ -22,20 +21,36 @@ const styles = campaignItemStyles as Readonly<StyleRecord>
 
 export function CampaignItem({
   title,
-  img,
-  start,
-  end,
-}: Readonly<Omit<CampaignEntry, 'description'>>): React.ReactElement {
-  const locale = useLocale()
+  image,
+  startDate,
+  endDate,
+  slug,
+}: Readonly<ModifiedCampaignEntry>): React.ReactElement {
+  const t = useTranslations('buttons')
+  const [start, end] = [startDate, endDate]
+    .map(d => {
+      return d
+        .split(' ')
+        .map((v: string, i: number) => {
+          if (i === 0) {
+            return v.split('.').reverse().join('-')
+          }
+
+          return v
+        })
+        .join('T')
+    })
+    .map((d: string) => new Date(d))
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.wrapper}>
         <div className={styles.imgWrapper}>
           <Image
-            src={img}
+            src={image.original_url}
             alt={`Embakitchen campaign - ${title}`}
             className={styles.img}
+            fill
           />
         </div>
 
@@ -51,16 +66,16 @@ export function CampaignItem({
           <div className={styles.info}>
             <Timer end={end} />
 
-            <Link
-              href={`/${locale}/campaigns/${title.toLowerCase().split(' ').join('-')}`}
+            <NavLink
+              href={`/campaigns/${slug}`}
               className={styles.link}
             >
-              <span>Ətraflı</span>
+              <span>{t('inDetails')}</span>
               <Icon
                 variant='chevron-right'
                 sizes='w-6 h-6'
               />
-            </Link>
+            </NavLink>
           </div>
         </div>
       </div>

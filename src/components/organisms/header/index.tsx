@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useTranslations } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
 import {
   ActionLink,
@@ -67,6 +68,8 @@ function CompactScreenHeader(): React.ReactElement {
 function WideScreenHeader({
   screenWidth,
 }: Readonly<WideScreenHeaderProps>): React.ReactElement {
+  const t = useTranslations('buttons')
+
   return (
     <div className={twMerge(styles.wrapper, wideHeaderStyles.wrapper)}>
       {screenWidth < SCREENS.desktop && <Sidebar />}
@@ -101,7 +104,7 @@ function WideScreenHeader({
               variant='profile'
               sizes='w-6 h-6'
             />
-            <span>Şəxsi kabinet</span>
+            <span>{t('personalAccount')}</span>
           </Button>
         </div>
       </div>

@@ -77,6 +77,18 @@
       }
     ]
   },
-  "aboutPage": {},
-  "projectsPage": {}
+  "buttons": {
+    "createCustomOrder": "Создать индивидуальный заказ",
+    "viewProducts": "Посмотреть товары",
+    "customOrder": "Индивидуальный заказ",
+    "personalAccount": "Личный кабинет",
+    "inDetails": "Детально",
+    "readAboutUs": "Читайте О Нас"
+  },
+  "titles": {
+    "currentCampaigns": "Текущие Кампании",
+    "partnersSlider": "Наши Партнеры",
+    "homepageBlogs": "Блог",
+    "popularBlogs": "Популярные Статьи"
+  }
 }

@@ -77,6 +77,18 @@
       }
     ]
   },
-  "aboutPage": {},
-  "projectsPage": {}
+  "buttons": {
+    "createCustomOrder": "Create custom order",
+    "viewProducts": "View products",
+    "customOrder": "Custom order",
+    "personalAccount": "Personal account",
+    "inDetails": "In Details",
+    "readAboutUs": "Read About Us"
+  },
+  "titles": {
+    "currentCampaigns": "Current Campaigns",
+    "partnersSlider": "Our Partners",
+    "homepageBlogs": "Blog",
+    "popularBlogs": "Popular Articles"
+  }
 }

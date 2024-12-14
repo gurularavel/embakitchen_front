@@ -2,6 +2,7 @@ import { Badge, Banner, Statistics, Video } from '~ek/components'
 import type { AboutInfoBlock, AboutProps } from '~ek/types'
 
 const aboutStyles: Readonly<TwClasses> = {
+  video: 'h-[193px] laptop:h-[759px] px-0 laptop:px-15 widescreen:px-0',
   description:
     'px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10 text-base laptop:text-xl font-normal laptop:leading-7 text-gray-3 flex flex-col justify-between gap-y-6',
   statisticsWrapper: 'bg-gray-1 px-4 py-[50px] mb-6 desktop:mb-10',
@@ -43,7 +44,12 @@ export function About({
         dangerouslySetInnerHTML={{ __html: content }}
       />
 
-      {video && <Video video={video} />}
+      {video && (
+        <Video
+          video={video}
+          className={styles.video}
+        />
+      )}
 
       <div className={styles.statisticsWrapper}>
         <p className={styles.statisticsTitle}>{counter_info}</p>

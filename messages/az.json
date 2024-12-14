@@ -77,6 +77,18 @@
       }
     ]
   },
-  "aboutPage": {},
-  "projectsPage": {}
+  "buttons": {
+    "createCustomOrder": "Özəl sifariş yarat",
+    "viewProducts": "Məhsullara bax",
+    "customOrder": "Özəl sifariş",
+    "personalAccount": "Şəxsi kabinet",
+    "inDetails": "Ətraflı",
+    "readAboutUs": "Haqqımızda oxuyun"
+  },
+  "titles": {
+    "currentCampaigns": "Cari Kampaniyalar",
+    "partnersSlider": "Tərəfdaşlarımız",
+    "homepageBlogs": "Bloq",
+    "popularBlogs": "Məşhur Məqalələr"
+  }
 }
