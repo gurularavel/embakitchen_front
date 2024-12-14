@@ -1,8 +1,18 @@
 import { httpClient } from '~ek/http-client'
 import type { CitiesWithStoresResponse, StoresResponse } from '~ek/types'
 
-export async function getStores(): Promise<StoresResponse['data']> {
-  const response = await httpClient.get<StoresResponse>('/stores')
+interface EnhancedApiQueryParams extends Partial<ApiQueryParams> {
+  cityId?: number
+  search?: string
+}
+
+export async function getStores(
+  apiQueryParams?: EnhancedApiQueryParams,
+): Promise<StoresResponse['data']> {
+  const response = await httpClient.get<StoresResponse>(
+    '/stores',
+    apiQueryParams ?? {},
+  )
 
   return response?.data as StoresResponse['data']
 }

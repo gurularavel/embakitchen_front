@@ -4,11 +4,13 @@ import * as React from 'react'
 import { type LatLngTuple } from 'leaflet'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { ActionLink, Icon } from '~ek/components'
-import type { StoresProps } from '~ek/types'
+import type { Language, StoresProps } from '~ek/types'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 import 'leaflet-defaulticon-compatibility'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { getStores } from '~ek/services'
+import { transformToUiData } from '~ek/utils'
 
 interface Position {
   title: string
@@ -18,7 +20,7 @@ interface Position {
 const storesStyles: Readonly<TwClasses> = {
   wrapper: 'relative mb-10 tablet:mb-15 laptop:mb-25 mt-6 laptop:mt-10',
   storesWrapper:
-    'p-6 bg-white flex flex-col gap-y-6 tablet:absolute tablet:z-10 tablet:top-6 tablet:bottom-6 tablet:left-15 widescreen:left-25 overflow-y-auto',
+    'h-[680px] w-full tablet:w-[424px] widescreen:w-[512px] p-6 bg-white flex flex-col gap-y-6 tablet:absolute tablet:z-10 tablet:top-6 tablet:bottom-6 tablet:left-15 widescreen:left-25 overflow-y-auto',
   title: 'text-2xl leading-9 text-gray-1 font-semibold',
   citiesWrapper: '',
   cities:
@@ -38,11 +40,12 @@ export function Stores({
   cities,
 }: Readonly<StoresProps>): React.ReactElement {
   const t = useTranslations('titles')
+  const locale = useLocale()
   const position: LatLngTuple = [40.38489374280334, 49.824969832271016]
   const positions: Position[] = Object.values(stores).map(
     (store: ArrayElement<StoresProps['stores']>) => ({
       title: store.title,
-      coords: [store.coords.longitude, store.coords.latitude].map(
+      coords: [store.coords.latitude, store.coords.longitude].map(
         Number.parseFloat,
       ) as LatLngTuple,
     }),
@@ -51,7 +54,13 @@ export function Stores({
     React.useState<StoresProps['stores']>(stores)
 
   async function handleCitySelection(e: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedCityId = e.target.value
+    const cityId = +e.target.value
+    const filteredStores = await getStores({ cityId })
+    const uiData = transformToUiData(
+      filteredStores,
+      locale as Language,
+    ) as StoresProps['stores']
+    setStoresToRender(uiData)
   }
 
   return (
