@@ -93,13 +93,15 @@ export interface StatisticEntry<T extends string = string> {
 
 export type SliderVariant = 'main' | 'gallery' | 'partners' | 'product'
 
-export interface ProjectEntry<T extends string = string> {
+export interface ProjectEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
   content: MultilingualText<T>
-  tags: T extends Language ? Record<Language, string[]> : T
-  images: [MediaFile]
+  // tags: T extends Language ? Record<Language, string[]> : T
+  // similar_projects: []
+  bannerImage: [MediaFile]
+  images: []
   status: boolean
 }
 
