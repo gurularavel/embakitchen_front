@@ -2,11 +2,14 @@ import type {
   AboutInfoBlock,
   BlogEntry,
   CampaignEntry,
+  CategoryEntry,
   Language,
   MainSliderEntry,
   MediaFile,
   MultilingualText,
   PartnersSliderEntry,
+  ProductEntry,
+  ProductMainInfo,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -88,3 +91,11 @@ export interface CampaignsPageResponse<T extends string = Language> {
   title: MultilingualText<T>
   image: [MediaFile]
 }
+
+export interface ProductsResponse extends PaginatedResponse {
+  data: ProductMainInfo[]
+}
+
+export interface CategoryResponse
+  extends PaginatedResponse,
+    CategoryEntry<string> {}

@@ -1,27 +1,18 @@
 import { ProductDetails } from '~ek/components'
+import { getProductDetails } from '~ek/services'
 import type { ProductDetailsProps } from '~ek/types'
+import { transformToUiData } from '~ek/utils'
 
-export default function ProductDetailsPage({
+export default async function ProductDetailsPage({
   params: { locale, category, slug },
-}: PageProps): React.ReactElement {
+}: PageProps): Promise<React.ReactElement> {
   const decodedSlug = decodeURIComponent(slug!)
+  const product = await getProductDetails(decodedSlug)
 
-  const productDetailsProps: ProductDetailsProps = {
-    banner: {
-      title: decodedSlug.split('-').join(' '),
-      image: {
-        name: '0L1A5736',
-        file_name: '0L1A5736.JPG',
-        uuid: '91929660-d21d-45f4-bf57-ba4843d608c8',
-        preview_url: '',
-        original_url: 'https://embakitchen.kvadrat.az/storage/156/0L1A5736.JPG',
-        order: 1,
-        custom_properties: [],
-        extension: 'JPG',
-        size: 7043050,
-      },
-    },
-  }
+  const productDetailsProps = transformToUiData(
+    product,
+    locale,
+  ) as ProductDetailsProps
 
   return <ProductDetails {...productDetailsProps} />
 }

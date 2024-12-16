@@ -18,3 +18,5 @@ export {
   getCampaigns,
   getCampaignDetails,
 } from '~ek/services/campaign'
+export { getProducts, getProductDetails } from '~ek/services/product'
+export { getCategoryDetails } from '~ek/services/category'

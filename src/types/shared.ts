@@ -110,11 +110,6 @@ export interface BlogEntry<T extends string = Language> {
   status: boolean
 }
 
-export interface ProductEntry {
-  title: string
-  image: string
-}
-
 export interface MainSliderEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
@@ -138,5 +133,76 @@ export interface CampaignEntry<T extends string = Language> {
   startDate: string
   endDate: string
   image: [MediaFile]
+  status: boolean
+}
+
+export interface Tag<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  status: boolean
+}
+
+export interface Color<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+  status: boolean
+}
+
+export interface ProductEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  content: MultilingualText<T>
+  style: MultilingualText<T>
+  material: MultilingualText<T>
+  facade: MultilingualText<T>
+  decor: MultilingualText<T>
+  design: MultilingualText<T>
+  status: boolean
+  images: MediaFile[]
+  bannerImage: [MediaFile]
+  category: {
+    id: number
+    title: MultilingualText<T>
+    slug: MultilingualText<T>
+    status: boolean
+    pagination: {
+      current_page: number
+      last_page: number
+      per_page: number
+      total: number
+    }
+  }
+  colors: Color[]
+  tags: Tag[]
+  similar_products: Array<{
+    id: number
+    title: MultilingualText<T>
+    slug: MultilingualText<T>
+    tags: Tag[]
+    images: MediaFile[]
+    bannerImage: [MediaFile]
+  }>
+  // comments: []
+}
+
+export type ProductMainInfo = Pick<
+  ProductEntry<string>,
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage'
+>
+
+export type CategoryProduct<T extends string = Language> = Pick<
+  ProductEntry<T>,
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage'
+>
+export interface CategoryEntry<
+  T extends string = Language,
+  K = CategoryProduct<T>,
+> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  products: K[]
   status: boolean
 }

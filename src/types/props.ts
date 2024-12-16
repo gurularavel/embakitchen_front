@@ -7,10 +7,13 @@ import type {
   BlogsResponse,
   CampaignEntry,
   CampaignsResponse,
+  CategoryEntry,
+  CategoryProduct,
   HomepageResponse,
   MediaFile,
   // PartnersSliderEntry,
   ProductEntry,
+  ProductMainInfo,
   ProjectEntry,
 } from '~ek/types'
 
@@ -55,11 +58,16 @@ export interface CampaignDetailsProps
   image: MediaFile
 }
 
-export interface ProductCategoryProps extends SharedProps {
-  products: ProductEntry[]
+type OmittedProductMainInfo = Omit<ProductMainInfo, 'images' | 'bannerImage'>
+interface ModifiedProductMainInfo extends OmittedProductMainInfo {
+  bannerImage: MediaFile
 }
 
-export interface ProductDetailsProps extends SharedProps {}
+export interface ProductDetailsProps
+  extends Omit<SharedProps, 'title'>,
+    Omit<ProductEntry<string>, 'bannerImage'> {
+  bannerImage: MediaFile
+}
 
 type OmittedHomepageResponse = Omit<
   HomepageResponse<string>,
@@ -89,3 +97,10 @@ export interface HomeProps extends OmittedHomepageResponse {
 export interface CampaignsProps extends SharedProps {
   campaigns: ModifiedCampaignEntry[]
 }
+
+type OmittedCategoryProduct = Omit<CategoryProduct<string>, 'bannerImage'>
+interface ModifiedCategoryProduct extends OmittedCategoryProduct {
+  bannerImage: MediaFile
+}
+export interface ProductCategoryProps
+  extends CategoryEntry<string, ModifiedCategoryProduct> {}

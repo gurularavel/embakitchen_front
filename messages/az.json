@@ -6,11 +6,11 @@
         "nestedLinks": [
           {
             "label": "Mətbəx mebelləri",
-            "href": "/mebellər/mətbəx"
+            "href": "/mebellər/mətbəx-mebelləri"
           },
           {
             "label": "Dəhliz mebelləri",
-            "href": "/mebellər/dəhliz"
+            "href": "/mebellər/qarderoblar"
           }
         ]
       },
@@ -67,11 +67,11 @@
         "links": [
           {
             "label": "Mətbəx mebelləri",
-            "href": "/mebellər/mətbəx"
+            "href": "/mebellər/mətbəx-mebelləri"
           },
           {
             "label": "Dəhliz mebelləri",
-            "href": "/mebellər/dəhliz"
+            "href": "/mebellər/qarderoblar"
           }
         ]
       }

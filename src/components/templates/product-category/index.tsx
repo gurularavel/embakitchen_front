@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { Banner, NavLink, Pagination } from '~ek/components'
-import type { ProductCategoryProps, ProductEntry } from '~ek/types'
+import type { CategoryEntry, ProductCategoryProps } from '~ek/types'
 
 const productCategoryStyles: Readonly<TwClasses> = {
   products:
@@ -17,7 +17,7 @@ const productCategoryStyles: Readonly<TwClasses> = {
 const styles = productCategoryStyles as Readonly<StyleRecord>
 
 export function ProductCategory({
-  banner,
+  title,
   products,
 }: Readonly<ProductCategoryProps>): React.ReactElement {
   const { category } = useParams()
@@ -25,35 +25,35 @@ export function ProductCategory({
 
   return (
     <>
-      <Banner
-        title={banner?.title ?? ''}
-        image={banner?.image ?? ''}
-      />
+      {/* <Banner
+        title={title ?? ''}
+        image={image ?? ''}
+      /> */}
 
       <div className={styles.products}>
-        {products?.map((product: ProductEntry, i: number) => (
-          <div key={i}>
-            <NavLink
-              href={`/products/${decodedCategory}/${product.title.toLowerCase().split(' ').join('-')}`}
-            >
-              <div className={styles.top}>
-                <Image
-                  src={product.image}
-                  alt={`Embakitchen - ${product.title}`}
-                  className={styles.img}
-                  fill
-                />
-                <span className={styles.tag}>Ən çox satılan</span>
-              </div>
-              <div className={styles.bottom}>
-                <h5 className={styles.title}>{product.title}</h5>
-              </div>
-            </NavLink>
-          </div>
-        ))}
+        {products?.map(
+          (product: ArrayElement<ProductCategoryProps['products']>) => (
+            <div key={product.id}>
+              <NavLink href={`/products/${decodedCategory}/${product.slug}`}>
+                <div className={styles.top}>
+                  <Image
+                    src={product.bannerImage.original_url}
+                    alt={`Embakitchen - ${product.title}`}
+                    className={styles.img}
+                    fill
+                  />
+                  <span className={styles.tag}>Ən çox satılan</span>
+                </div>
+                <div className={styles.bottom}>
+                  <h5 className={styles.title}>{product.title}</h5>
+                </div>
+              </NavLink>
+            </div>
+          ),
+        )}
       </div>
 
-      <Pagination totalPages={5} />
+      {/* <Pagination totalPages={5} />  */}
     </>
   )
 }

@@ -114,7 +114,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
-    thumb: 'h-[280px] mb-6',
+    thumb: 'h-[280px]',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
