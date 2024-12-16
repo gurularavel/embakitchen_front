@@ -18,3 +18,4 @@ export {
   getCampaigns,
   getCampaignDetails,
 } from '~ek/services/campaign'
+export { getStores, getCitiesWithStores } from '~ek/services/store'

@@ -30,6 +30,10 @@ export type IconVariant =
   | 'chevron-right'
   | 'play-video'
   | 'arrow-right-white'
+  | 'store-phone'
+  | 'clock'
+  | 'location'
+  | 'email'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -139,4 +143,28 @@ export interface CampaignEntry<T extends string = Language> {
   endDate: string
   image: [MediaFile]
   status: boolean
+}
+
+export interface CityEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  status: boolean
+}
+
+export interface StoreEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  address: MultilingualText<T>
+  phone: string
+  schedule: {
+    open: string
+    close: string
+  }
+  coords: {
+    longitude: string
+    latitude: string
+  }
+  email: string
+  status: boolean
+  city: CityEntry<T>
 }
