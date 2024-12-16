@@ -14,3 +14,4 @@ export {
   getPartnersSliderContent,
 } from '~ek/services/home'
 export { getCampaigns } from '~ek/services/campaigns'
+export { getStores, getCitiesWithStores } from '~ek/services/store'

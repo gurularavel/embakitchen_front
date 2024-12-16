@@ -24,6 +24,10 @@ import arrowLeftIcon from '/public/assets/icons/arrow-left.svg'
 import chevronRightIcon from '/public/assets/icons/chevron-right.svg'
 import playVideoIcon from '/public/assets/icons/play-video.svg'
 import arrowRightWhiteIcon from '/public/assets/icons/arrow-right-white.svg'
+import storePhoneIcon from '/public/assets/icons/store-phone.svg'
+import clockIcon from '/public/assets/icons/clock.svg'
+import locationIcon from '/public/assets/icons/location.svg'
+import emailIcon from '/public/assets/icons/email.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -55,6 +59,10 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'chevron-right': chevronRightIcon,
   'play-video': playVideoIcon,
   'arrow-right-white': arrowRightWhiteIcon,
+  'store-phone': storePhoneIcon,
+  clock: clockIcon,
+  location: locationIcon,
+  email: emailIcon,
 }
 
 export function Icon({
