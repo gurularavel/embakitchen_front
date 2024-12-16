@@ -7,6 +7,7 @@ import type {
   BlogsResponse,
   CampaignEntry,
   CampaignsResponse,
+  CityEntry,
   CategoryEntry,
   CategoryProduct,
   HomepageResponse,
@@ -15,6 +16,7 @@ import type {
   ProductEntry,
   ProductMainInfo,
   ProjectEntry,
+  StoreEntry,
 } from '~ek/types'
 
 export interface BannerProps {
@@ -92,6 +94,11 @@ export interface HomeProps extends OmittedHomepageResponse {
   campaigns: ModifiedCampaignEntry[]
   blogs: ModifiedBlogEntry[]
   popularBlogs: ModifiedBlogEntry[]
+}
+
+export interface StoresProps {
+  stores: StoreEntry<string>[]
+  cities: CityEntry<string>[]
 }
 
 export interface CampaignsProps extends SharedProps {
