@@ -18,7 +18,8 @@ const currentCampaignsStyles: Readonly<TwClasses> = {
   titleWrapperBg:
     'hidden mobile:block absolute laptop:static -left-10 right-0 top-0',
   titleWrapperBgImg: 'h-[61px] w-full laptop:object-cover',
-  campaigns: 'grid grid-cols-1 laptop:grid-cols-4 justify-between gap-6',
+  campaigns:
+    'grid grid-cols-1 laptop:grid-cols-3 widescreen:grid-cols-4 justify-between gap-6',
 }
 const styles = currentCampaignsStyles as Readonly<StyleRecord>
 

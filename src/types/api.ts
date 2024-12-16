@@ -92,3 +92,9 @@ export interface StoresResponse extends PaginatedResponse {
 export interface CitiesWithStoresResponse extends PaginatedResponse {
   data: CityEntry[]
 }
+
+export interface CampaignsPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+}
