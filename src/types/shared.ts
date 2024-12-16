@@ -177,6 +177,15 @@ export interface Color<T extends string = Language> {
   status: boolean
 }
 
+export interface Comment {
+  id: number
+  name: string
+  surname: string
+  email: string
+  rate: number
+  message: string
+}
+
 export interface ProductEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
@@ -202,8 +211,8 @@ export interface ProductEntry<T extends string = Language> {
       total: number
     }
   }
-  colors: Color[]
-  tags: Tag[]
+  colors: Color<T>[]
+  tags: Tag<T>[]
   similar_products: Array<{
     id: number
     title: MultilingualText<T>
@@ -212,7 +221,7 @@ export interface ProductEntry<T extends string = Language> {
     images: MediaFile[]
     bannerImage: [MediaFile]
   }>
-  // comments: []
+  comments: Comment[]
 }
 
 export type ProductMainInfo = Pick<

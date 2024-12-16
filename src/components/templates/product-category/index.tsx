@@ -6,6 +6,7 @@ import { Banner, NavLink, Pagination } from '~ek/components'
 import type { CategoryEntry, ProductCategoryProps } from '~ek/types'
 
 const productCategoryStyles: Readonly<TwClasses> = {
+  container: 'mb-6 laptop:mb-15',
   products:
     'flex flex-col tablet:grid tablet:grid-cols-2 laptop:grid-cols-3 widescreen:grid-cols-4 gap-y-6 tablet:gap-6 laptop:gap-y-10 px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10',
   top: 'relative h-60',
@@ -24,7 +25,7 @@ export function ProductCategory({
   const decodedCategory = decodeURIComponent(category as string)
 
   return (
-    <>
+    <div className={styles.container}>
       {/* <Banner
         title={title ?? ''}
         image={image ?? ''}
@@ -54,6 +55,6 @@ export function ProductCategory({
       </div>
 
       {/* <Pagination totalPages={5} />  */}
-    </>
+    </div>
   )
 }
