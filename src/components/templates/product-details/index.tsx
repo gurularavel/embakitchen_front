@@ -2,6 +2,8 @@
 
 import * as React from 'react'
 import Image from 'next/image'
+import { format } from 'date-fns'
+import { az } from 'date-fns/locale'
 import { Banner, Button, Icon, Slider } from '~ek/components'
 import type { Color, Comment, ProductDetailsProps } from '~ek/types'
 import birbank from '/public/assets/images/birbank.png'
@@ -45,7 +47,13 @@ const productDetailsStyles: Readonly<TwClasses> = {
   commentsWrapper: 'px-4 tablet:px-10 laptop:px-15 widescreen:px-25',
   commentsWrapperTitle:
     'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
-  comment: 'border border-solid border-red-600',
+  comments: 'h-[433px] overflow-y-auto',
+  comment: 'bg-tertiary-11 flex flex-col gap-y-4 px-10 py-6 mb-6 last:mb-0',
+  rateAndDate: 'flex flex-col',
+  rate: 'flex gap-x-2 mb-[9px]',
+  date: 'text-base font-normal text-gray-4',
+  message: 'text-base font-normal text-gray-1',
+  fullname: 'text-base font-medium text-gray-1',
 }
 const styles = productDetailsStyles as Readonly<StyleRecord>
 const getColorsWrapperStyles = productDetailsStyles.colorsWrapper as StyleGetter
@@ -191,12 +199,25 @@ export function ProductDetails({
             <div
               className={styles.comment}
               key={comment.id}
-              style={{ border: '2px solid red' }}
             >
-              <span>{comment.rate}</span>
-              <span>6 iyun 2023</span>
-              <span>{comment.message}</span>
-              <div>
+              <div className={styles.rateAndDate}>
+                <span className={styles.rate}>
+                  {Array(5)
+                    .fill(0)
+                    .map((_, i: number) => (
+                      <Icon
+                        key={i}
+                        variant={i < comment.rate ? 'star-yellow' : 'star-gray'}
+                        sizes='w-6 h-6'
+                      />
+                    ))}
+                </span>
+                <span className={styles.date}>
+                  {format(comment.created_at, 'd MMMM yyyy', { locale: az })}
+                </span>
+              </div>
+              <span className={styles.message}>{comment.message}</span>
+              <div className={styles.fullname}>
                 {comment.name} {comment.surname}
               </div>
             </div>

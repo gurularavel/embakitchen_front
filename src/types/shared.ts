@@ -34,6 +34,8 @@ export type IconVariant =
   | 'clock'
   | 'location'
   | 'email'
+  | 'star-gray'
+  | 'star-yellow'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -184,6 +186,7 @@ export interface Comment {
   email: string
   rate: number
   message: string
+  created_at: string
 }
 
 export interface ProductEntry<T extends string = Language> {
