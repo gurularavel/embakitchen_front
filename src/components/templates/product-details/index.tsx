@@ -5,7 +5,12 @@ import Image from 'next/image'
 import { format } from 'date-fns'
 import { az } from 'date-fns/locale'
 import { Banner, Button, Icon, Slider } from '~ek/components'
-import type { Color, Comment, ProductDetailsProps } from '~ek/types'
+import type {
+  Color,
+  Comment,
+  ProductDetailsProps,
+  SimilarProduct,
+} from '~ek/types'
 import birbank from '/public/assets/images/birbank.png'
 
 const productDetailsStyles: Readonly<TwClasses> = {
@@ -44,7 +49,8 @@ const productDetailsStyles: Readonly<TwClasses> = {
   productContentTitle:
     'mb-6 text-2xl laptop:text-3xl laptop:leading-12 font-semibold text-gray-1',
   productContentText: 'text-base leading-[28px] font-normal text-gray-3',
-  commentsWrapper: 'px-4 tablet:px-10 laptop:px-15 widescreen:px-25',
+  commentsWrapper:
+    'px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10',
   commentsWrapperTitle:
     'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
   comments: 'h-[433px] overflow-y-auto',
@@ -54,6 +60,15 @@ const productDetailsStyles: Readonly<TwClasses> = {
   date: 'text-base font-normal text-gray-4',
   message: 'text-base font-normal text-gray-1',
   fullname: 'text-base font-medium text-gray-1',
+  similarProductsWrapper: 'px-4 tablet:px-10 laptop:px-15 widescreen:px-25',
+  similarProductsTitle:
+    'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
+  similarProducts:
+    'grid grid-cols-1 laptop:grid-cols-3 widescreen:grid-cols-4 gap-6 mb-6 laptop:mb-15',
+  similarProduct: '',
+  productImageWrapper: 'w-full h-[290px] relative mb-8',
+  productImage: 'w-full h-full object-cover',
+  productTitle: 'text-xl leading-7 font-medium text-tertiary-1 mb-4',
 }
 const styles = productDetailsStyles as Readonly<StyleRecord>
 const getColorsWrapperStyles = productDetailsStyles.colorsWrapper as StyleGetter
@@ -69,6 +84,7 @@ export function ProductDetails({
   colors,
   content,
   comments,
+  similar_products,
 }: Readonly<ProductDetailsProps>): React.ReactElement {
   const [isColorSelectorVisible, setIsColorSelectorVisible] =
     React.useState<boolean>(false)
@@ -219,6 +235,31 @@ export function ProductDetails({
               <span className={styles.message}>{comment.message}</span>
               <div className={styles.fullname}>
                 {comment.name} {comment.surname}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.similarProductsWrapper}>
+        <h4 className={styles.similarProductsTitle}>Oxşar məhsullar</h4>
+
+        <div className={styles.similarProducts}>
+          {similar_products.map((similarProduct: SimilarProduct<string>) => (
+            <div
+              key={similarProduct.id}
+              className={styles.similarProduct}
+            >
+              <div className={styles.productImageWrapper}>
+                {/* <Image
+                  src={similarProduct.bannerImage.original_url}
+                  alt={`Embakitchen - ${similarProduct.title}`}
+                  className={styles.productImage}
+                  fill
+                /> */}
+              </div>
+              <div>
+                <h4 className={styles.projectTitle}>{similarProduct.title}</h4>
               </div>
             </div>
           ))}

@@ -189,6 +189,15 @@ export interface Comment {
   created_at: string
 }
 
+export interface SimilarProduct<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  tags: Tag<T>[]
+  images: MediaFile[]
+  bannerImage: [MediaFile]
+}
+
 export interface ProductEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
@@ -216,14 +225,7 @@ export interface ProductEntry<T extends string = Language> {
   }
   colors: Color<T>[]
   tags: Tag<T>[]
-  similar_products: Array<{
-    id: number
-    title: MultilingualText<T>
-    slug: MultilingualText<T>
-    tags: Tag[]
-    images: MediaFile[]
-    bannerImage: [MediaFile]
-  }>
+  similar_products: SimilarProduct<T>[]
   comments: Comment[]
 }
 
