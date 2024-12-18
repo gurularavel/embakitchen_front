@@ -245,6 +245,7 @@ export interface CategoryEntry<
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
+  bannerImage: [MediaFile]
   products: K[]
   status: boolean
 }

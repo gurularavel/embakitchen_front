@@ -8,6 +8,7 @@ import { Banner, Button, Icon, Slider } from '~ek/components'
 import type {
   Color,
   Comment,
+  MediaFile,
   ProductDetailsProps,
   SimilarProduct,
 } from '~ek/types'
@@ -60,6 +61,10 @@ const productDetailsStyles: Readonly<TwClasses> = {
   date: 'text-base font-normal text-gray-4',
   message: 'text-base font-normal text-gray-1',
   fullname: 'text-base font-medium text-gray-1',
+  newComment: '',
+  newCommentInput: 'w-full h-25 mt-2 border border-solid border-gray-8 rounded',
+  newCommentBtn:
+    'bg-primary-1 text-white flex w-full h-10 items-center justify-center',
   similarProductsWrapper: 'px-4 tablet:px-10 laptop:px-15 widescreen:px-25',
   similarProductsTitle:
     'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
@@ -91,6 +96,9 @@ export function ProductDetails({
   const [selectedColor, setSelectedColor] = React.useState<string>(
     colors[0].title,
   )
+  // const [newComment, setNewComment] = React.useState('')
+
+  // const addNewComment = (e) => {}
 
   return (
     <>
@@ -239,6 +247,17 @@ export function ProductDetails({
             </div>
           ))}
         </div>
+
+        <div className={styles.newComment}>
+          <textarea className={styles.newCommentInput}></textarea>
+
+          <Button
+            classes={styles.newCommentBtn}
+            // onClick={addNewComment}
+          >
+            Göndər
+          </Button>
+        </div>
       </div>
 
       <div className={styles.similarProductsWrapper}>
@@ -251,15 +270,18 @@ export function ProductDetails({
               className={styles.similarProduct}
             >
               <div className={styles.productImageWrapper}>
-                {/* <Image
-                  src={similarProduct.bannerImage.original_url}
+                <Image
+                  src={
+                    (similarProduct.bannerImage as unknown as MediaFile)
+                      .original_url
+                  }
                   alt={`Embakitchen - ${similarProduct.title}`}
                   className={styles.productImage}
                   fill
-                /> */}
+                />
               </div>
               <div>
-                <h4 className={styles.projectTitle}>{similarProduct.title}</h4>
+                <h4 className={styles.productTitle}>{similarProduct.title}</h4>
               </div>
             </div>
           ))}

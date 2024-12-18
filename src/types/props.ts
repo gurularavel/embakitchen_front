@@ -110,4 +110,6 @@ interface ModifiedCategoryProduct extends OmittedCategoryProduct {
   bannerImage: MediaFile
 }
 export interface ProductCategoryProps
-  extends CategoryEntry<string, ModifiedCategoryProduct> {}
+  extends Omit<CategoryEntry<string, ModifiedCategoryProduct>, 'bannerImage'> {
+  bannerImage: MediaFile
+}

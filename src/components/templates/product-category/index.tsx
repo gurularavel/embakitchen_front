@@ -19,6 +19,7 @@ const styles = productCategoryStyles as Readonly<StyleRecord>
 
 export function ProductCategory({
   title,
+  bannerImage,
   products,
 }: Readonly<ProductCategoryProps>): React.ReactElement {
   const { category } = useParams()
@@ -26,10 +27,10 @@ export function ProductCategory({
 
   return (
     <div className={styles.container}>
-      {/* <Banner
+      <Banner
         title={title ?? ''}
-        image={image ?? ''}
-      /> */}
+        image={bannerImage ?? ''}
+      />
 
       <div className={styles.products}>
         {products?.map(
