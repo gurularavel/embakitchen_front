@@ -2,7 +2,7 @@ import Image, { StaticImageData } from 'next/image'
 import { twMerge } from 'tailwind-merge'
 import type { IconVariant, ImgSize } from '~ek/types'
 import menuIcon from '/public/assets/icons/menu.svg'
-import closeIcon from '/public/assets/icons/close.svg'
+import closeLightIcon from '/public/assets/icons/close-light.svg'
 import dropdownCompactIcon from '/public/assets/icons/dropdown-compact.svg'
 import dropdownWideIcon from '/public/assets/icons/dropdown-wide.svg'
 import whatsappLightIcon from '/public/assets/icons/social/light/whatsapp.svg'
@@ -30,6 +30,7 @@ import locationIcon from '/public/assets/icons/location.svg'
 import emailIcon from '/public/assets/icons/email.svg'
 import starGray from '/public/assets/icons/star-gray.svg'
 import starYellow from '/public/assets/icons/star-yellow.svg'
+import closeDarkIcon from '/public/assets/icons/close-dark.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -39,7 +40,7 @@ interface IconProps {
 
 const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   menu: menuIcon,
-  close: closeIcon,
+  'close-light': closeLightIcon,
   'dropdown-compact': dropdownCompactIcon,
   'dropdown-wide': dropdownWideIcon,
   'whatsapp-light': whatsappLightIcon,
@@ -67,6 +68,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   email: emailIcon,
   'star-gray': starGray,
   'star-yellow': starYellow,
+  'close-dark': closeDarkIcon,
 }
 
 export function Icon({

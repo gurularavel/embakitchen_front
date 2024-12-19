@@ -8,7 +8,7 @@ export type ImgSize = string
 
 export type IconVariant =
   | 'menu'
-  | 'close'
+  | 'close-light'
   | 'dropdown-compact'
   | 'dropdown-wide'
   | 'whatsapp-light'
@@ -36,6 +36,7 @@ export type IconVariant =
   | 'email'
   | 'star-gray'
   | 'star-yellow'
+  | 'close-dark'
 
 export type TimeoutId = NodeJS.Timeout | null
 

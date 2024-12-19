@@ -53,7 +53,7 @@ export function Sidebar(): React.ReactElement {
         <div className={styles.closeSidebar}>
           <Button onClick={() => updatePrimitiveState(false, setIsVisible)}>
             <Icon
-              variant='close'
+              variant='close-light'
               sizes={styles.closeIcon}
             />
           </Button>

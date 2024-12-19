@@ -6,6 +6,7 @@ import { twMerge } from 'tailwind-merge'
 import {
   ActionLink,
   Button,
+  Drawer,
   Icon,
   LanguageSelector,
   Logo,
@@ -69,6 +70,7 @@ function WideScreenHeader({
   screenWidth,
 }: Readonly<WideScreenHeaderProps>): React.ReactElement {
   const t = useTranslations('buttons')
+  const { setIsDrawerVisible } = useStore(state => state.clientSlice)
 
   return (
     <div className={twMerge(styles.wrapper, wideHeaderStyles.wrapper)}>
@@ -99,7 +101,10 @@ function WideScreenHeader({
             dropdownClasses={wideHeaderStyles.languageSelectorDropdown}
           />
 
-          <Button classes={wideHeaderStyles.profileButton}>
+          <Button
+            classes={wideHeaderStyles.profileButton}
+            onClick={() => setIsDrawerVisible(true)}
+          >
             <Icon
               variant='profile'
               sizes='w-6 h-6'
@@ -128,6 +133,10 @@ export function Header(): React.ReactElement {
         ) : (
           <WideScreenHeader screenWidth={width} />
         ))}
+
+      <Drawer>
+        <p></p>
+      </Drawer>
     </header>
   )
 }

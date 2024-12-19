@@ -8,9 +8,15 @@ export const createClientSlice: StateCreator<
   ClientSlice
 > = set => ({
   isClientRendering: false,
+  isDrawerVisible: false,
   setClientRendering: (isClientRendering: boolean) =>
     set(state => ({
       ...state,
       clientSlice: { ...state.clientSlice, isClientRendering },
+    })),
+  setIsDrawerVisible: (isDrawerVisible: boolean) =>
+    set(state => ({
+      ...state,
+      clientSlice: { ...state.clientSlice, isDrawerVisible },
     })),
 })
