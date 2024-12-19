@@ -13,6 +13,7 @@ import type {
   SimilarProduct,
 } from '~ek/types'
 import birbank from '/public/assets/images/birbank.png'
+import { httpClient } from '~ek/http-client'
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -62,9 +63,10 @@ const productDetailsStyles: Readonly<TwClasses> = {
   message: 'text-base font-normal text-gray-1',
   fullname: 'text-base font-medium text-gray-1',
   newComment: '',
-  newCommentInput: 'w-full h-25 mt-2 border border-solid border-gray-8 rounded',
+  newCommentInput:
+    'w-full h-25 mt-2 border border-solid border-gray-8 rounded focus:outline-none px-4 py-3',
   newCommentBtn:
-    'bg-primary-1 text-white flex w-full h-10 items-center justify-center',
+    'bg-primary-1 text-white flex w-full h-10 items-center justify-center rounded',
   similarProductsWrapper: 'px-4 tablet:px-10 laptop:px-15 widescreen:px-25',
   similarProductsTitle:
     'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
@@ -79,6 +81,7 @@ const styles = productDetailsStyles as Readonly<StyleRecord>
 const getColorsWrapperStyles = productDetailsStyles.colorsWrapper as StyleGetter
 
 export function ProductDetails({
+  id,
   bannerImage,
   title,
   style,
@@ -96,9 +99,20 @@ export function ProductDetails({
   const [selectedColor, setSelectedColor] = React.useState<string>(
     colors[0].title,
   )
-  // const [newComment, setNewComment] = React.useState('')
+  const newCommentInput = React.useRef<HTMLTextAreaElement>(null)
 
-  // const addNewComment = (e) => {}
+  const addNewComment = async (): Promise<void> => {
+    const message = newCommentInput.current?.value
+    const body = {
+      name: 'Test',
+      surname: 'Test',
+      email: 'test@gmail.com',
+      product_id: id,
+      rate: 5,
+      message,
+    }
+    const response = await httpClient.post('/comments', body)
+  }
 
   return (
     <>
@@ -249,11 +263,14 @@ export function ProductDetails({
         </div>
 
         <div className={styles.newComment}>
-          <textarea className={styles.newCommentInput}></textarea>
+          <textarea
+            className={styles.newCommentInput}
+            ref={newCommentInput}
+          ></textarea>
 
           <Button
             classes={styles.newCommentBtn}
-            // onClick={addNewComment}
+            onClick={addNewComment}
           >
             Göndər
           </Button>
