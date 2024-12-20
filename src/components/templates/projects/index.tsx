@@ -12,7 +12,8 @@ const projectsStyles: Readonly<TwClasses> = {
 const styles = projectsStyles as Readonly<StyleRecord>
 
 export function Projects({
-  banner,
+  title,
+  image,
   projects,
 }: Readonly<ProjectsProps>): React.ReactElement {
   const { width } = useScreenSize()
@@ -23,8 +24,8 @@ export function Projects({
   return (
     <>
       <Banner
-        title={banner?.title ?? ''}
-        image={banner?.image ?? ''}
+        title={title ?? ''}
+        image={image ?? ''}
       />
 
       <div className={styles.projects}>
