@@ -13,13 +13,13 @@ export default async function ProjectsPage({
   const { data: projects } = await projectsResponse.json()
 
   const projectsProps: ProjectsProps = {
-    banner: transformToUiData(
+    ...(transformToUiData(
       {
         title: projectsPageData.title,
         image: projectsPageData.image,
       },
       locale,
-    ) as BannerProps,
+    ) as BannerProps),
     projects: projects.map((project: Omit<ProjectEntry, 'content'>) =>
       transformToUiData(project, locale),
     ),
