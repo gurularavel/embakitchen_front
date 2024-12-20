@@ -272,3 +272,8 @@ export interface UserEntry {
   role: UserRole
   status: boolean
 }
+
+export interface OrderStageEntry {
+  title: string
+  content: string
+}
