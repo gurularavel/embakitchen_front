@@ -1,5 +1,5 @@
 import { httpClient } from '~ek/http-client'
-import { CategoryEntry, CategoryResponse } from '~ek/types'
+import type { CategoryEntry, CategoryResponse } from '~ek/types'
 import { omit } from '~ek/utils'
 
 export async function getCategoryDetails(slug: string): Promise<CategoryEntry> {
