@@ -1,5 +1,5 @@
 import { httpClient } from '~ek/http-client'
-import { ProductEntry, ProductsResponse } from '~ek/types'
+import type { ProductEntry, ProductsResponse } from '~ek/types'
 
 export async function getProducts(
   apiQueryParams: ApiQueryParams,

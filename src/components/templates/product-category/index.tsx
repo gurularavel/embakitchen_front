@@ -54,8 +54,6 @@ export function ProductCategory({
           ),
         )}
       </div>
-
-      {/* <Pagination totalPages={5} />  */}
     </div>
   )
 }

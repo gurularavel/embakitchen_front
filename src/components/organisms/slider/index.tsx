@@ -408,10 +408,6 @@ function Product(): React.ReactElement {
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className={productSliderStyles.thumb}
-        // grid={{
-        //   rows: product.images?.length ? 2 : 1,
-        //   fill: 'row',
-        // }}
       >
         {product.images?.map((image: MediaFile) => (
           <SwiperSlide key={image.uuid}>
