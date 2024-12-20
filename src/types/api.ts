@@ -12,6 +12,7 @@ import type {
   StoreEntry,
   ProductEntry,
   ProductMainInfo,
+  UserEntry,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -109,3 +110,8 @@ export interface ProductsResponse extends PaginatedResponse {
 export interface CategoryResponse
   extends PaginatedResponse,
     CategoryEntry<string> {}
+
+export interface LoginResponse {
+  user: UserEntry
+  token: string
+}

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
 import {
   ActionLink,
+  AuthForm,
   Button,
   Drawer,
   Icon,
@@ -16,6 +17,7 @@ import {
 } from '~ek/components'
 import { useStore, useScreenSize } from '~ek/hooks'
 import { SCREENS } from '~ek/utils'
+import type { AuthFormVariant } from '~ek/types'
 
 interface WideScreenHeaderProps {
   screenWidth: number
@@ -24,6 +26,11 @@ interface WideScreenHeaderProps {
 const headerStyles: Readonly<TwClasses> = {
   header: 'h-10 laptop:h-19 bg-gray-1 px-5 laptop:px-15 widescreen:px-25',
   wrapper: 'h-full flex items-center justify-between relative',
+  tabHeader: 'flex gap-x-4 mb-8',
+  tabActive: 'bg-primary-10 border-primary-5 font-semibold text-primary-1',
+  tabContent: '',
+  tabSwitcher:
+    'w-1/2 h-12 flex items-center justify-center bg-white border border-solid border-tertiary-8 text-lg font-medium text-gray-4',
   compact: {
     options: 'w-6 mobile:w-[90px] h-full flex items-center gap-x-4',
     phone: 'w-[50px] h-full hidden mobile:flex gap-x-2 text-sm font-medium',
@@ -122,8 +129,17 @@ export function Header(): React.ReactElement {
   const { isClientRendering, setClientRendering } = useStore(
     state => state.clientSlice,
   )
+  const [selectedAuthForm, setSelectedAuthForm] =
+    React.useState<AuthFormVariant>('login')
 
-  React.useEffect(() => setClientRendering(true), [setClientRendering])
+  React.useEffect(() => {
+    setClientRendering(true)
+  }, [setClientRendering])
+
+  const switchActiveTab = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLButtonElement
+    setSelectedAuthForm(target.dataset.value as AuthFormVariant)
+  }
 
   return (
     <header className={styles.header}>
@@ -135,7 +151,32 @@ export function Header(): React.ReactElement {
         ))}
 
       <Drawer>
-        <p></p>
+        <div className={styles.tabHeader}>
+          <Button
+            classes={twMerge(
+              styles.tabSwitcher,
+              selectedAuthForm === 'login' ? styles.tabActive : '',
+            )}
+            data-value='login'
+            onClick={switchActiveTab}
+          >
+            Giriş
+          </Button>
+          <Button
+            classes={twMerge(
+              styles.tabSwitcher,
+              selectedAuthForm === 'registration' ? styles.tabActive : '',
+            )}
+            data-value='registration'
+            onClick={switchActiveTab}
+          >
+            Qeydiyyat
+          </Button>
+        </div>
+
+        <div className={styles.tabContent}>
+          <AuthForm variant={selectedAuthForm} />
+        </div>
       </Drawer>
     </header>
   )

@@ -24,6 +24,7 @@ const config: Config = {
           '6': '#F3B296',
           '7': '#F5C2AD',
           '9': '#FCEBE4',
+          '10': '#FDF5F1',
         },
         secondary: {
           '3': '#FFB029',
@@ -44,6 +45,7 @@ const config: Config = {
           '3': '#49525B',
           '4': '#5F6B77',
           '5': '#778592',
+          '6': '#949EA9',
           '7': '#B0B8BF',
           '8': '#CCD1D6',
           '9': '#E8EBED',

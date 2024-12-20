@@ -250,3 +250,25 @@ export interface CategoryEntry<
   products: K[]
   status: boolean
 }
+
+export type AuthFormVariant = 'login' | 'registration'
+
+export interface LoginFormValues {
+  email: string
+  password: string
+}
+
+export type UserRole = 'admin' | 'user'
+
+export interface UserEntry {
+  id: number
+  name: string
+  surname: string
+  email: string
+  phone: string
+  city: Omit<CityEntry, 'status'>
+  addresses: []
+  orders: []
+  role: UserRole
+  status: boolean
+}
