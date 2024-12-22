@@ -42,8 +42,9 @@ function LoginForm(): React.ReactElement {
     const data = await login({
       email,
       password,
-      role: 'admin',
     } as LoginFormValues)
+    localStorage.setItem('token', JSON.stringify(data.token))
+    localStorage.setItem('user', JSON.stringify(data.user))
   }
 
   return (

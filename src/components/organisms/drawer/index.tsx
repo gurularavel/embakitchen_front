@@ -15,7 +15,7 @@ const drawerStyles: Readonly<TwClasses> = {
   closeDrawer: 'h-6 flex justify-end mb-6',
   closeDrawerIcon: 'w-6 h-6',
   content: (isDrawerVisible: unknown) =>
-    `w-[484px] bg-white p-8 absolute top-0 right-0 bottom-0 transition-transform duration-300 ${(isDrawerVisible as boolean) ? 'translate-x-0' : 'translate-x-full'}`,
+    `w-[484px] h-screen bg-white p-8 absolute top-0 right-0 bottom-0 transition-transform duration-300 overflow-y-auto ${(isDrawerVisible as boolean) ? 'translate-x-0' : 'translate-x-full'}`,
 }
 const styles = drawerStyles as Readonly<StyleRecord>
 const getDrawerStyles = drawerStyles.drawer as StyleGetter
