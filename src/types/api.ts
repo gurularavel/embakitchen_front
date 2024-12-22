@@ -3,12 +3,15 @@ import type {
   BlogEntry,
   CampaignEntry,
   CityEntry,
+  CategoryEntry,
   Language,
   MainSliderEntry,
   MediaFile,
   MultilingualText,
   PartnersSliderEntry,
   StoreEntry,
+  ProductEntry,
+  ProductMainInfo,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -85,12 +88,6 @@ export interface CampaignsResponse extends PaginatedResponse {
   data: CampaignEntry[]
 }
 
-export interface CampaignsPageResponse<T extends string = Language> {
-  id: number
-  title: MultilingualText<T>
-  image: [MediaFile]
-}
-
 export interface StoresResponse extends PaginatedResponse {
   data: StoreEntry[]
 }
@@ -98,3 +95,17 @@ export interface StoresResponse extends PaginatedResponse {
 export interface CitiesWithStoresResponse extends PaginatedResponse {
   data: CityEntry[]
 }
+
+export interface CampaignsPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+}
+
+export interface ProductsResponse extends PaginatedResponse {
+  data: ProductMainInfo[]
+}
+
+export interface CategoryResponse
+  extends PaginatedResponse,
+    CategoryEntry<string> {}

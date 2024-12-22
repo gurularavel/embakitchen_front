@@ -6,11 +6,11 @@
         "nestedLinks": [
           {
             "label": "Kitchen furnitures",
-            "href": "/furnitures/kitchen"
+            "href": "/furnitures/kitchen-cabinets-1"
           },
           {
             "label": "Corridor furnitures",
-            "href": "/furnitures/corridor"
+            "href": "/furnitures/wardrobes"
           }
         ]
       },
@@ -67,11 +67,11 @@
         "links": [
           {
             "label": "Kitchen furnitures",
-            "href": "/furnitures/kitchen"
+            "href": "/furnitures/kitchen-cabinets-1"
           },
           {
             "label": "Corridor furnitures",
-            "href": "/furnitures/corridor"
+            "href": "/furnitures/wardrobes"
           }
         ]
       }

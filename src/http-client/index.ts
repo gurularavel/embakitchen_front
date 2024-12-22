@@ -12,6 +12,7 @@ interface Params {
 
 interface HttpClient {
   get: <T>(endpoint: string, params?: Params) => Promise<T | undefined>
+  post: <T, V>(endpoint: string, body: V) => Promise<T | undefined>
 }
 
 const axiosInstance: AxiosInstance = axios.create({
@@ -29,6 +30,20 @@ export const httpClient: HttpClient = {
     } catch (e: unknown) {
       if (e instanceof AxiosError) {
         // console.log(e.response?.data.message)
+      }
+    }
+  },
+
+  async post<T, V>(endpoint: string, body: V): Promise<T | undefined> {
+    try {
+      const response: AxiosResponse<T> = await axiosInstance.post(
+        endpoint,
+        body,
+      )
+
+      return response.data
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
       }
     }
   },
