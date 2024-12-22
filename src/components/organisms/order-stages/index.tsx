@@ -1,9 +1,5 @@
-import { OrderStageItem, type OrderStageItemProps } from '~ek/components'
-
-interface OrderStageEntry {
-  title: string
-  content: string
-}
+import { OrderStageItem } from '~ek/components'
+import type { OrderStageEntry } from '~ek/types'
 
 interface OrderStagesProps {
   orderStages: OrderStageEntry[]
@@ -27,15 +23,11 @@ export function OrderStages({
       <div className={styles.wrapper}>
         <div className={styles.stages}>
           {orderStages.map((stage: OrderStageEntry, i: number) => {
-            const orderStageItemProps: OrderStageItemProps = {
-              ...stage,
-              position: i + 1,
-            }
-
             return (
               <OrderStageItem
                 key={i}
-                {...orderStageItemProps}
+                position={i + 1}
+                {...stage}
               />
             )
           })}

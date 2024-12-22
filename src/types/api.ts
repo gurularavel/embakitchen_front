@@ -12,6 +12,7 @@ import type {
   StoreEntry,
   ProductEntry,
   ProductMainInfo,
+  ProjectEntry,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -109,3 +110,13 @@ export interface ProductsResponse extends PaginatedResponse {
 export interface CategoryResponse
   extends PaginatedResponse,
     CategoryEntry<string> {}
+
+export interface ProjectsResponse extends PaginatedResponse {
+  data: Omit<ProjectEntry, 'content' | 'tags'>
+}
+
+export interface ProjectsPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+}
