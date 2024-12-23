@@ -21,6 +21,7 @@ const projectDetailsStyles: Readonly<TwClasses> = {
   projects:
     'grid grid-cols-1 laptop:grid-cols-3 widescreen:grid-cols-4 gap-6 mb-6 laptop:mb-15',
   projectImageWrapper: 'w-full h-[290px] relative mb-8',
+  tag: 'absolute top-0 right-0 bg-primary-9 px-6 h-12 flex items-center justify-center text-base font-medium text-primary-1',
   projectImage: 'w-full h-full object-cover',
   projectTitle: 'text-xl leading-7 font-medium text-tertiary-1 mb-4',
   projectContent: 'text-sm font-normal text-tertiary-5',
@@ -61,7 +62,7 @@ export function ProjectDetails({
         </div>
       </div>
 
-      {similar_projects.length && (
+      {similar_projects?.length && (
         <div className={styles.similarProjects}>
           <h4 className={styles.similarProjectsTitle}>
             {t('similarProjects')}
@@ -83,6 +84,11 @@ export function ProjectDetails({
                       className={styles.projectImage}
                       fill
                     />
+                    {!!project.tags.length && (
+                      <span className={styles.tag}>
+                        {project.tags[0].title}
+                      </span>
+                    )}
                   </div>
                   <div>
                     <h4 className={styles.projectTitle}>{project.title}</h4>

@@ -32,7 +32,7 @@ export function ProjectItem({
             className={styles.img}
             fill
           />
-          {tags && <span className={styles.tag}>{tags[0].title}</span>}
+          {!!tags.length && <span className={styles.tag}>{tags[0].title}</span>}
         </div>
         <div className={styles.bottom}>
           <h5 className={styles.title}>{title}</h5>
