@@ -1,8 +1,8 @@
 'use client'
 
-import { Banner, Pagination, ProjectItem } from '~ek/components'
+import { Banner, ProjectItem } from '~ek/components'
 import { useScreenSize, useStore } from '~ek/hooks'
-import type { ProjectEntry, ProjectsProps } from '~ek/types'
+import type { ProjectsProps } from '~ek/types'
 import { getProjectsQuantity } from '~ek/utils'
 
 const projectsStyles: Readonly<TwClasses> = {
@@ -31,7 +31,7 @@ export function Projects({
       <div className={styles.projects}>
         {isClientRendering &&
           projectsToRender?.map(
-            (project: Omit<ProjectEntry, 'content'>, i: number) => (
+            (project: ArrayElement<ProjectsProps['projects']>, i: number) => (
               <ProjectItem
                 key={i}
                 {...project}
@@ -39,8 +39,6 @@ export function Projects({
             ),
           )}
       </div>
-
-      <Pagination totalPages={5} />
     </>
   )
 }

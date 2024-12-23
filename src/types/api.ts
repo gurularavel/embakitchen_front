@@ -12,6 +12,7 @@ import type {
   StoreEntry,
   ProductEntry,
   ProductMainInfo,
+  ProjectEntry,
   UserEntry,
 } from '~ek/types'
 
@@ -114,4 +115,14 @@ export interface CategoryResponse
 export interface LoginResponse {
   user: UserEntry
   token: string
+}
+
+export interface ProjectsResponse extends PaginatedResponse {
+  data: Omit<ProjectEntry, 'content' | 'tags'>
+}
+
+export interface ProjectsPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
 }

@@ -1,28 +1,20 @@
 import { Projects } from '~ek/components'
-import type { BannerProps, ProjectEntry, ProjectsProps } from '~ek/types'
-import { transformToUiData } from '~ek/utils'
+import { getProjects, getProjectsPageContent } from '~ek/services'
+import type { ProjectsProps } from '~ek/types'
+import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export default async function ProjectsPage({
   params: { locale },
 }: Readonly<PageProps>): Promise<React.ReactElement> {
-  const [projectsPageResponse, projectsResponse] = await Promise.all([
-    fetch('https://embakitchen.kvadrat.az/api/project'),
-    fetch('https://embakitchen.kvadrat.az/api/projects'),
-  ])
-  const projectsPageData = await projectsPageResponse.json()
-  const { data: projects } = await projectsResponse.json()
+  const projects = await getProjects(defaultApiQueryParams)
+  const projectsPageContent = await getProjectsPageContent()
 
   const projectsProps: ProjectsProps = {
     ...(transformToUiData(
-      {
-        title: projectsPageData.title,
-        image: projectsPageData.image,
-      },
+      omit({ source: projectsPageContent, fields: ['id'] }),
       locale,
-    ) as BannerProps),
-    projects: projects.map((project: Omit<ProjectEntry, 'content'>) =>
-      transformToUiData(project, locale),
-    ),
+    ) as Omit<ProjectsProps, 'projects'>),
+    projects: transformToUiData(projects, locale) as ProjectsProps['projects'],
   }
 
   return <Projects {...projectsProps} />

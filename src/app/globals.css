@@ -45,3 +45,7 @@
   -webkit-text-stroke: 1px #ffffff;
   color: transparent;
 }
+
+figure.image img {
+  width: 100%;
+}
