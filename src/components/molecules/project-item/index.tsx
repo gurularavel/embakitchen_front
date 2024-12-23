@@ -1,10 +1,9 @@
 import Image from 'next/image'
-import { useLocale } from 'next-intl'
-import type { Language, ProjectEntry } from '~ek/types'
+import type { ProjectsProps } from '~ek/types'
 import { NavLink } from '~ek/components/atoms'
 import { usePathname } from '~ek/i18n/routing'
 
-type ProjectItemProps = Omit<ProjectEntry, 'content'>
+type ProjectItemProps = ArrayElement<ProjectsProps['projects']>
 
 const projectItemStyles: Readonly<TwClasses> = {
   top: 'relative h-60',
@@ -16,25 +15,11 @@ const projectItemStyles: Readonly<TwClasses> = {
 const styles = projectItemStyles as Readonly<StyleRecord>
 
 export function ProjectItem({
-  images = [
-    {
-      name: '',
-      file_name: '',
-      uuid: '',
-      preview_url: '',
-      original_url:
-        'https://cdn.media.amplience.net/i/shadesoflight/furniture_1?fmt=auto&w=575',
-      order: 1,
-      custom_properties: [],
-      extension: '',
-      size: 200,
-    },
-  ],
+  bannerImage,
   title,
   tags,
   slug,
 }: Readonly<ProjectItemProps>): React.ReactElement {
-  const locale = useLocale()
   const pathname = usePathname()
 
   return (
@@ -42,20 +27,12 @@ export function ProjectItem({
       <NavLink href={`${pathname}/${slug}`}>
         <div className={styles.top}>
           <Image
-            src={images[0].original_url}
+            src={bannerImage.original_url}
             alt={`Embakitchen - ${title}`}
             className={styles.img}
             fill
           />
-          {tags && (
-            <span className={styles.tag}>
-              {
-                (tags as unknown as Record<Language, string[]>)[
-                  locale as Language
-                ][0]
-              }
-            </span>
-          )}
+          {!!tags.length && <span className={styles.tag}>{tags[0].title}</span>}
         </div>
         <div className={styles.bottom}>
           <h5 className={styles.title}>{title}</h5>

@@ -36,8 +36,12 @@ export interface AboutProps extends OmittedAboutPageResponse {
   aboutInfoBlocks: AboutInfoBlock<string>[]
 }
 
+type OmittedProjectEntry = Omit<ProjectEntry<string>, 'content' | 'bannerImage'>
+interface ModifiedProjectEntry extends OmittedProjectEntry {
+  bannerImage: MediaFile
+}
 export interface ProjectsProps extends SharedProps {
-  projects: Omit<ProjectEntry, 'content'>[]
+  projects: ModifiedProjectEntry[]
 }
 
 type OmittedBlogsPageResponse = Omit<BlogsPageResponse<string>, 'id' | 'image'>
@@ -112,4 +116,16 @@ interface ModifiedCategoryProduct extends OmittedCategoryProduct {
 export interface ProductCategoryProps
   extends Omit<CategoryEntry<string, ModifiedCategoryProduct>, 'bannerImage'> {
   bannerImage: MediaFile
+}
+
+type ProjectDetailsEntry = Omit<
+  ProjectEntry<string>,
+  'bannerImage' | 'similar_projects'
+>
+interface SimilarProject extends ProjectDetailsEntry {
+  bannerImage: MediaFile
+}
+export interface ProjectDetailsProps extends ProjectDetailsEntry {
+  bannerImage: MediaFile
+  similar_projects: SimilarProject[]
 }

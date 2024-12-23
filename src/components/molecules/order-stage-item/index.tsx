@@ -19,7 +19,7 @@ const styles = orderStageItemStyles as Readonly<StyleRecord>
 
 export function OrderStageItem({
   title,
-  description,
+  content,
   position,
 }: Readonly<OrderStageItemProps>): React.ReactElement {
   return (
@@ -29,7 +29,7 @@ export function OrderStageItem({
           0{position}
         </span>
         <h5 className={styles.title}>{title}</h5>
-        <p className={styles.description}>{description}</p>
+        <p className={styles.description}>{content}</p>
       </div>
     </div>
   )

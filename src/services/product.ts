@@ -13,7 +13,7 @@ export async function getProducts(
 }
 
 export async function getProductDetails(slug: string): Promise<ProductEntry> {
-  const response = await httpClient.get(`/products/${slug}`)
+  const response = await httpClient.get<ProductEntry>(`/products/${slug}`)
 
   return response as ProductEntry
 }

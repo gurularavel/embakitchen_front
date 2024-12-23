@@ -95,13 +95,21 @@ export interface StatisticEntry<T extends string = string> {
 
 export type SliderVariant = 'main' | 'gallery' | 'partners' | 'product'
 
-export interface ProjectEntry<T extends string = string> {
+export interface Tag<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  status: boolean
+}
+
+export interface ProjectEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
   content: MultilingualText<T>
-  tags: T extends Language ? Record<Language, string[]> : T
-  images: [MediaFile]
+  tags: Tag<T>[]
+  similar_projects: Omit<ProjectEntry, 'content' | 'similar_projects'>[]
+  bannerImage: [MediaFile]
+  images: MediaFile[]
   status: boolean
 }
 
@@ -164,12 +172,6 @@ export interface StoreEntry<T extends string = Language> {
   email: string
   status: boolean
   city: CityEntry<T>
-}
-
-export interface Tag<T extends string = Language> {
-  id: number
-  title: MultilingualText<T>
-  status: boolean
 }
 
 export interface Color<T extends string = Language> {
@@ -248,4 +250,9 @@ export interface CategoryEntry<
   bannerImage: [MediaFile]
   products: K[]
   status: boolean
+}
+
+export interface OrderStageEntry {
+  title: string
+  content: string
 }
