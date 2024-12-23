@@ -117,3 +117,15 @@ export interface ProductCategoryProps
   extends Omit<CategoryEntry<string, ModifiedCategoryProduct>, 'bannerImage'> {
   bannerImage: MediaFile
 }
+
+type ProjectDetailsEntry = Omit<
+  ProjectEntry<string>,
+  'bannerImage' | 'similar_projects'
+>
+interface SimilarProject extends ProjectDetailsEntry {
+  bannerImage: MediaFile
+}
+export interface ProjectDetailsProps extends ProjectDetailsEntry {
+  bannerImage: MediaFile
+  similar_projects: SimilarProject[]
+}

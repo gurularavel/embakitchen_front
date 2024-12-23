@@ -107,7 +107,7 @@ export interface ProjectEntry<T extends string = Language> {
   slug: MultilingualText<T>
   content: MultilingualText<T>
   tags: Tag<T>[]
-  // similar_projects: []
+  similar_projects: Omit<ProjectEntry, 'content' | 'similar_projects'>[]
   bannerImage: [MediaFile]
   images: MediaFile[]
   status: boolean

@@ -1,6 +1,5 @@
 import Image from 'next/image'
-import { useLocale } from 'next-intl'
-import type { Language, ProjectsProps } from '~ek/types'
+import type { ProjectsProps } from '~ek/types'
 import { NavLink } from '~ek/components/atoms'
 import { usePathname } from '~ek/i18n/routing'
 
@@ -21,7 +20,6 @@ export function ProjectItem({
   tags,
   slug,
 }: Readonly<ProjectItemProps>): React.ReactElement {
-  const locale = useLocale()
   const pathname = usePathname()
 
   return (
@@ -34,15 +32,7 @@ export function ProjectItem({
             className={styles.img}
             fill
           />
-          {tags && (
-            <span className={styles.tag}>
-              {
-                (tags as unknown as Record<Language, string[]>)[
-                  locale as Language
-                ][0]
-              }
-            </span>
-          )}
+          {tags && <span className={styles.tag}>{tags[0].title}</span>}
         </div>
         <div className={styles.bottom}>
           <h5 className={styles.title}>{title}</h5>

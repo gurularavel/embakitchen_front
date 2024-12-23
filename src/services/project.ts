@@ -1,5 +1,9 @@
 import { httpClient } from '~ek/http-client'
-import type { ProjectsPageResponse, ProjectsResponse } from '~ek/types'
+import type {
+  ProjectEntry,
+  ProjectsPageResponse,
+  ProjectsResponse,
+} from '~ek/types'
 
 export async function getProjectsPageContent(): Promise<ProjectsPageResponse> {
   const response = await httpClient.get<ProjectsPageResponse>('/projects-page')
@@ -16,4 +20,10 @@ export async function getProjects(
   )
 
   return response?.data as ProjectsResponse['data']
+}
+
+export async function getProjectDetails(slug: string): Promise<ProjectEntry> {
+  const response = await httpClient.get<ProjectEntry>(`/projects/${slug}`)
+
+  return response as ProjectEntry
 }
