@@ -34,6 +34,8 @@ export type IconVariant =
   | 'clock'
   | 'location'
   | 'email'
+  | 'star-gray'
+  | 'star-yellow'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -114,11 +116,6 @@ export interface BlogEntry<T extends string = Language> {
   status: boolean
 }
 
-export interface ProductEntry {
-  title: string
-  image: string
-}
-
 export interface MainSliderEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
@@ -167,4 +164,88 @@ export interface StoreEntry<T extends string = Language> {
   email: string
   status: boolean
   city: CityEntry<T>
+}
+
+export interface Tag<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  status: boolean
+}
+
+export interface Color<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+  status: boolean
+}
+
+export interface Comment {
+  id: number
+  name: string
+  surname: string
+  email: string
+  rate: number
+  message: string
+  created_at: string
+}
+
+export interface SimilarProduct<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  tags: Tag<T>[]
+  images: MediaFile[]
+  bannerImage: [MediaFile]
+}
+
+export interface ProductEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  content: MultilingualText<T>
+  style: MultilingualText<T>
+  material: MultilingualText<T>
+  facade: MultilingualText<T>
+  decor: MultilingualText<T>
+  design: MultilingualText<T>
+  status: boolean
+  images: MediaFile[]
+  bannerImage: [MediaFile]
+  category: {
+    id: number
+    title: MultilingualText<T>
+    slug: MultilingualText<T>
+    status: boolean
+    pagination: {
+      current_page: number
+      last_page: number
+      per_page: number
+      total: number
+    }
+  }
+  colors: Color<T>[]
+  tags: Tag<T>[]
+  similar_products: SimilarProduct<T>[]
+  comments: Comment[]
+}
+
+export type ProductMainInfo = Pick<
+  ProductEntry<string>,
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage'
+>
+
+export type CategoryProduct<T extends string = Language> = Pick<
+  ProductEntry<T>,
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage'
+>
+export interface CategoryEntry<
+  T extends string = Language,
+  K = CategoryProduct<T>,
+> {
+  id: number
+  title: MultilingualText<T>
+  slug: MultilingualText<T>
+  bannerImage: [MediaFile]
+  products: K[]
+  status: boolean
 }

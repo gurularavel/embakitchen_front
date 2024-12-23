@@ -28,6 +28,8 @@ import storePhoneIcon from '/public/assets/icons/store-phone.svg'
 import clockIcon from '/public/assets/icons/clock.svg'
 import locationIcon from '/public/assets/icons/location.svg'
 import emailIcon from '/public/assets/icons/email.svg'
+import starGray from '/public/assets/icons/star-gray.svg'
+import starYellow from '/public/assets/icons/star-yellow.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -63,6 +65,8 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   clock: clockIcon,
   location: locationIcon,
   email: emailIcon,
+  'star-gray': starGray,
+  'star-yellow': starYellow,
 }
 
 export function Icon({

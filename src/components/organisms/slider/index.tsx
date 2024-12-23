@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Image, { type StaticImageData } from 'next/image'
+import { useParams } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import {
   Autoplay,
@@ -27,9 +28,14 @@ import type {
   MainSliderEntry,
   MediaFile,
   PartnersSliderEntry,
+  ProductEntry,
   SliderVariant,
 } from '~ek/types'
-import { getMainSliderContent, getPartnersSliderContent } from '~ek/services'
+import {
+  getMainSliderContent,
+  getPartnersSliderContent,
+  getProductDetails,
+} from '~ek/services'
 import 'swiper/css'
 import 'swiper/css/grid'
 import 'swiper/css/thumbs'
@@ -114,7 +120,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
-    thumb: 'h-[280px] mb-6',
+    thumb: 'h-[280px]',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -353,6 +359,24 @@ function Product(): React.ReactElement {
   const [thumbsSwiper, setThumbsSwiper] = React.useState<SwiperType | null>(
     null,
   )
+  const { slug } = useParams() as { slug: string }
+  type SliderProduct = Pick<ProductEntry<string>, 'title' | 'images'>
+  const [product, setProduct] = React.useState<SliderProduct>(
+    {} as SliderProduct,
+  )
+  const locale = useLocale() as Language
+
+  React.useEffect(() => {
+    async function fetchProductImages(slug: string): Promise<void> {
+      const fetchedProduct: ProductEntry = await getProductDetails(slug)
+      setProduct({
+        title: fetchedProduct.title[locale],
+        images: fetchedProduct.images,
+      })
+    }
+
+    fetchProductImages(slug)
+  }, [slug, locale])
 
   return (
     <>
@@ -364,17 +388,15 @@ function Product(): React.ReactElement {
         modules={[FreeMode, Navigation, Thumbs]}
         className={productSliderStyles.main}
       >
-        {Array(10)
-          .fill(0)
-          .map((_, i: number) => (
-            <SwiperSlide key={i}>
-              <Image
-                src={`https://swiperjs.com/demos/images/nature-${i + 1}.jpg`}
-                alt='Sample product image'
-                fill
-              />
-            </SwiperSlide>
-          ))}
+        {product.images?.map((image: MediaFile) => (
+          <SwiperSlide key={image.uuid}>
+            <Image
+              src={image.original_url}
+              alt={product.title}
+              fill
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       <Swiper
@@ -386,22 +408,16 @@ function Product(): React.ReactElement {
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className={productSliderStyles.thumb}
-        grid={{
-          rows: 2,
-          fill: 'row',
-        }}
       >
-        {Array(10)
-          .fill(0)
-          .map((_, i: number) => (
-            <SwiperSlide key={i}>
-              <Image
-                src={`https://swiperjs.com/demos/images/nature-${i + 1}.jpg`}
-                alt='Sample image for product slider'
-                fill
-              />
-            </SwiperSlide>
-          ))}
+        {product.images?.map((image: MediaFile) => (
+          <SwiperSlide key={image.uuid}>
+            <Image
+              src={image.original_url}
+              alt={product.title}
+              fill
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   )
