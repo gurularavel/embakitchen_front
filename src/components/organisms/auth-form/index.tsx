@@ -61,7 +61,7 @@ function LoginForm(): React.ReactElement {
       onSubmit={handleLogin}
     >
       <div className={styles.inputGroup}>
-        <label htmlFor='email'>Email</label>
+        <label>Email</label>
         <input
           type='email'
           placeholder='Email'
@@ -71,7 +71,7 @@ function LoginForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
-        <label htmlFor='password'>Şifrə</label>
+        <label>Şifrə</label>
         <input
           type='password'
           placeholder='Şifrə'
@@ -93,9 +93,76 @@ function LoginForm(): React.ReactElement {
 }
 
 function RegistrationForm(): React.ReactElement {
+  const registrationFormRef = React.useRef<HTMLFormElement>(null)
+
+  const handleRegistration = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!registrationFormRef.current) return
+
+    const values = Array.from(registrationFormRef.current.elements)
+      .filter(
+        (element): element is HTMLInputElement => element.tagName === 'INPUT',
+      )
+      .reduce(
+        (result, element) => ({ ...result, [element.name]: element.value }),
+        {},
+      )
+  }
+
   return (
-    <form>
-      <div>Registration Form</div>
+    <form
+      className={styles.form}
+      onSubmit={handleRegistration}
+      ref={registrationFormRef}
+    >
+      <div className={styles.inputGroup}>
+        <label>Email</label>
+        <input
+          type='email'
+          name='email'
+          placeholder='Email'
+          className={styles.input}
+        />
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label>Mobil nömrə</label>
+        <input
+          type='tel'
+          name='phone'
+          placeholder='Mobil nömrə'
+          className={styles.input}
+        />
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label>Şifrə</label>
+        <input
+          type='password'
+          name='password'
+          placeholder='Şifrə'
+          className={styles.input}
+        />
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label>Şifrə (təkrar)</label>
+        <input
+          type='password'
+          name='password'
+          placeholder='Şifrə (təkrar)'
+          className={styles.input}
+        />
+      </div>
+
+      <div>
+        <Button
+          type='submit'
+          classes={styles.submitButton}
+        >
+          Giriş
+        </Button>
+      </div>
     </form>
   )
 }

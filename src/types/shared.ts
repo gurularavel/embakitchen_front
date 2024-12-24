@@ -255,12 +255,24 @@ export interface CategoryEntry<
 
 export type AuthFormVariant = 'login' | 'registration'
 
+export type UserRole = 'admin' | 'user'
+
 export interface LoginFormValues {
   email: string
   password: string
 }
 
-export type UserRole = 'admin' | 'user'
+export interface RegistrationFormValues {
+  name: string
+  surname: string
+  email: string
+  phone: string
+  city_id: number
+  password: string
+  password_confirmation: string
+  acceptTerms: boolean
+  role: UserRole
+}
 
 export interface UserEntry {
   id: number
