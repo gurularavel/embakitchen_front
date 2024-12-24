@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
 import {
   ActionLink,
@@ -12,12 +12,13 @@ import {
   LanguageSelector,
   Logo,
   Navbar,
+  NavLink,
   Search,
   Sidebar,
 } from '~ek/components'
 import { useStore, useScreenSize } from '~ek/hooks'
-import { SCREENS } from '~ek/utils'
-import type { AuthFormVariant } from '~ek/types'
+import { LOCALIZED_PATHNAMES, SCREENS } from '~ek/utils'
+import type { AuthFormVariant, Language } from '~ek/types'
 
 interface WideScreenHeaderProps {
   screenWidth: number
@@ -77,7 +78,11 @@ function WideScreenHeader({
   screenWidth,
 }: Readonly<WideScreenHeaderProps>): React.ReactElement {
   const t = useTranslations('buttons')
-  const { setIsDrawerVisible } = useStore(state => state.clientSlice)
+  const locale = useLocale()
+  const {
+    clientSlice: { setIsDrawerVisible },
+    authSlice: { user },
+  } = useStore(state => state)
 
   return (
     <div className={twMerge(styles.wrapper, wideHeaderStyles.wrapper)}>
@@ -108,16 +113,29 @@ function WideScreenHeader({
             dropdownClasses={wideHeaderStyles.languageSelectorDropdown}
           />
 
-          <Button
-            classes={wideHeaderStyles.profileButton}
-            onClick={() => setIsDrawerVisible(true)}
-          >
-            <Icon
-              variant='profile'
-              sizes='w-6 h-6'
-            />
-            <span>{t('personalAccount')}</span>
-          </Button>
+          {user ? (
+            <NavLink
+              className={wideHeaderStyles.profileButton}
+              href={LOCALIZED_PATHNAMES['/profile'][locale as Language]}
+            >
+              <Icon
+                variant='profile'
+                sizes='w-6 h-6'
+              />
+              <span>{t('personalAccount')}</span>
+            </NavLink>
+          ) : (
+            <Button
+              classes={wideHeaderStyles.profileButton}
+              onClick={() => setIsDrawerVisible(true)}
+            >
+              <Icon
+                variant='profile'
+                sizes='w-6 h-6'
+              />
+              <span>{t('personalAccount')}</span>
+            </Button>
+          )}
         </div>
       </div>
     </div>

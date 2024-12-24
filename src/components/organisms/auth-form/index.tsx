@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Button } from '~ek/components'
 import { login } from '~ek/services'
 import type { AuthFormVariant, LoginFormValues } from '~ek/types'
+import { useStore } from '~ek/hooks'
 
 interface AuthFormProps {
   variant: AuthFormVariant
@@ -32,6 +33,10 @@ const authForms: Record<AuthFormVariant, React.ReactElement> = {
 function LoginForm(): React.ReactElement {
   const emailRef = React.useRef<HTMLInputElement>(null)
   const passwordRef = React.useRef<HTMLInputElement>(null)
+  const {
+    clientSlice: { setIsDrawerVisible },
+    authSlice: { setAuthData },
+  } = useStore(state => state)
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -43,6 +48,9 @@ function LoginForm(): React.ReactElement {
       email,
       password,
     } as LoginFormValues)
+    setAuthData(data)
+    setIsDrawerVisible(false)
+    document.cookie = `token=${data.token}`
     localStorage.setItem('token', JSON.stringify(data.token))
     localStorage.setItem('user', JSON.stringify(data.user))
   }
