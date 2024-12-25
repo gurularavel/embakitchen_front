@@ -1,10 +1,13 @@
 'use client'
 
 import * as React from 'react'
+import { useRouter } from '~ek/i18n/routing'
+import { useLocale } from 'next-intl'
 import { Button } from '~ek/components'
 import { login } from '~ek/services'
-import type { AuthFormVariant, LoginFormValues } from '~ek/types'
+import type { AuthFormVariant, Language, LoginFormValues } from '~ek/types'
 import { useStore } from '~ek/hooks'
+import { LOCALIZED_PATHNAMES } from '~ek/utils'
 
 interface AuthFormProps {
   variant: AuthFormVariant
@@ -37,6 +40,8 @@ function LoginForm(): React.ReactElement {
     clientSlice: { setIsDrawerVisible },
     authSlice: { setAuthData },
   } = useStore(state => state)
+  const router = useRouter()
+  const locale = useLocale()
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -48,11 +53,15 @@ function LoginForm(): React.ReactElement {
       email,
       password,
     } as LoginFormValues)
+
+    if (!data) return
+
     setAuthData(data)
     setIsDrawerVisible(false)
     document.cookie = `token=${data.token}`
     localStorage.setItem('token', JSON.stringify(data.token))
     localStorage.setItem('user', JSON.stringify(data.user))
+    router.push(LOCALIZED_PATHNAMES['/profile'][locale as Language])
   }
 
   return (
