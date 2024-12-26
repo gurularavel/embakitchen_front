@@ -26,6 +26,10 @@ interface PaginatedResponse {
   }
 }
 
+export interface PlainApiResponse {
+  message: string
+}
+
 export interface AboutPageResponse<T extends string = Language> {
   id: number
   title: MultilingualText<T>
@@ -136,7 +140,6 @@ export interface RegistrationRequestBody extends RegistrationFormValues {
   role: UserRole
 }
 
-export interface RegistrationResponse {
-  message: string
+export interface RegistrationResponse extends PlainApiResponse {
   token: string
 }

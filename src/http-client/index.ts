@@ -35,10 +35,19 @@ export const httpClient: HttpClient = {
   },
 
   async post<T, V>(endpoint: string, body: V): Promise<T | undefined> {
+    const token = localStorage.getItem('token')
+      ? JSON.parse(localStorage.getItem('token') as string)
+      : ''
+
     try {
       const response: AxiosResponse<T> = await axiosInstance.post(
         endpoint,
         body,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       )
 
       return response.data

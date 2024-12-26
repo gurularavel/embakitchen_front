@@ -290,3 +290,8 @@ export interface OrderStageEntry {
   title: string
   content: string
 }
+
+export type ChangePasswordFormValues = Pick<
+  RegistrationFormValues,
+  'password' | 'password_confirmation'
+>

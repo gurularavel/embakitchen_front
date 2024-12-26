@@ -3,6 +3,8 @@
 import * as React from 'react'
 import { Button, Icon } from '~ek/components'
 import { useStore } from '~ek/hooks'
+import { changePassword } from '~ek/services'
+import type { ChangePasswordFormValues } from '~ek/types'
 
 interface TabHeader {
   label: string
@@ -146,11 +148,38 @@ function ProfileInformation(): React.ReactElement {
 }
 
 function ChangePassword(): React.ReactElement {
+  const changePasswordHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+
+    const values = Array.from(e.currentTarget.elements)
+      .filter(elem => !!elem.getAttribute('name'))
+      .map(elem => elem.getAttribute('name'))
+      .reduce(
+        (res, elem) => ({
+          ...res,
+          [elem as string]: formData.get(elem as string),
+        }),
+        {},
+      ) as ChangePasswordFormValues
+
+    const { password, password_confirmation } = values
+
+    if (password !== password_confirmation) {
+      return
+    }
+
+    await changePassword(values)
+  }
+
   return (
     <>
       <h4 className={styles.sectionTitle}>Hesab məlumatları</h4>
 
-      <form className={styles.form}>
+      <form
+        className={styles.form}
+        onSubmit={changePasswordHandler}
+      >
         <div className={styles.inputGroup}>
           <label className={styles.label}>Şifrə</label>
           <input

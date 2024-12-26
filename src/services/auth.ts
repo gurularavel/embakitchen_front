@@ -1,7 +1,9 @@
 import { httpClient } from '~ek/http-client'
 import type {
+  ChangePasswordFormValues,
   LoginFormValues,
   LoginResponse,
+  PlainApiResponse,
   RegistrationFormValues,
   RegistrationResponse,
 } from '~ek/types'
@@ -23,4 +25,15 @@ export async function register(
   >('/register', values)
 
   return response as RegistrationResponse
+}
+
+export async function changePassword(
+  values: ChangePasswordFormValues,
+): Promise<PlainApiResponse> {
+  const response = await httpClient.post<
+    PlainApiResponse,
+    ChangePasswordFormValues
+  >('/change-password', values)
+
+  return response as PlainApiResponse
 }
