@@ -4,10 +4,15 @@ import * as React from 'react'
 import { useRouter } from '~ek/i18n/routing'
 import { useLocale } from 'next-intl'
 import { Button } from '~ek/components'
-import { login } from '~ek/services'
-import type { AuthFormVariant, Language, LoginFormValues } from '~ek/types'
+import { getCities, login } from '~ek/services'
+import type {
+  AuthFormVariant,
+  CityEntry,
+  Language,
+  LoginFormValues,
+} from '~ek/types'
 import { useStore } from '~ek/hooks'
-import { LOCALIZED_PATHNAMES } from '~ek/utils'
+import { LOCALIZED_PATHNAMES, transformToUiData } from '~ek/utils'
 
 interface AuthFormProps {
   variant: AuthFormVariant
@@ -15,6 +20,7 @@ interface AuthFormProps {
 
 const authFormStyles: Readonly<TwClasses> = {
   form: 'flex flex-col gap-y-5',
+  double: 'flex gap-x-4 [&_div]:flex-1',
   inputGroup: 'flex flex-col gap-y-1',
   label: 'text-xs font-medium text-gray-1',
   input:
@@ -103,6 +109,21 @@ function LoginForm(): React.ReactElement {
 
 function RegistrationForm(): React.ReactElement {
   const registrationFormRef = React.useRef<HTMLFormElement>(null)
+  const locale = useLocale()
+  const [cities, setCities] = React.useState<CityEntry<string>[]>([])
+
+  React.useEffect(() => {
+    async function initializeCities() {
+      const fetchedCities = await getCities()
+      const citiesForUi = transformToUiData(
+        fetchedCities,
+        locale as Language,
+      ) as CityEntry<string>[]
+      setCities(citiesForUi)
+    }
+
+    initializeCities()
+  }, [locale])
 
   const handleRegistration = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -110,10 +131,16 @@ function RegistrationForm(): React.ReactElement {
 
     const values = Array.from(registrationFormRef.current.elements)
       .filter(
-        (element): element is HTMLInputElement => element.tagName === 'INPUT',
+        (element): element is HTMLInputElement | HTMLSelectElement =>
+          element.tagName === 'INPUT' || element.tagName === 'SELECT',
       )
       .reduce(
-        (result, element) => ({ ...result, [element.name]: element.value }),
+        (result, element) => ({
+          ...result,
+          [element.name]: isNaN(Number(element.value))
+            ? element.value
+            : Number(element.value),
+        }),
         {},
       )
   }
@@ -123,7 +150,30 @@ function RegistrationForm(): React.ReactElement {
       className={styles.form}
       onSubmit={handleRegistration}
       ref={registrationFormRef}
+      autoComplete='off'
     >
+      <div className={styles.double}>
+        <div className={styles.inputGroup}>
+          <label>Ad</label>
+          <input
+            type='text'
+            name='name'
+            placeholder='Ad'
+            className={styles.input}
+          />
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label>Soyad</label>
+          <input
+            type='text'
+            name='surname'
+            placeholder='Soyad'
+            className={styles.input}
+          />
+        </div>
+      </div>
+
       <div className={styles.inputGroup}>
         <label>Email</label>
         <input
@@ -145,6 +195,24 @@ function RegistrationForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
+        <label>Şəhər</label>
+        <select
+          name='city_id'
+          id='city'
+          className={styles.input}
+        >
+          {cities.map(city => (
+            <option
+              value={city.id}
+              key={city.id}
+            >
+              {city.title}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className={styles.inputGroup}>
         <label>Şifrə</label>
         <input
           type='password'
@@ -158,7 +226,7 @@ function RegistrationForm(): React.ReactElement {
         <label>Şifrə (təkrar)</label>
         <input
           type='password'
-          name='password'
+          name='password_confirmation'
           placeholder='Şifrə (təkrar)'
           className={styles.input}
         />

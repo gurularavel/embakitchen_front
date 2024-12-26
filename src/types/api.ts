@@ -126,3 +126,7 @@ export interface ProjectsPageResponse<T extends string = Language> {
   title: MultilingualText<T>
   image: [MediaFile]
 }
+
+export interface CitiesResponse extends PaginatedResponse {
+  data: CityEntry[]
+}
