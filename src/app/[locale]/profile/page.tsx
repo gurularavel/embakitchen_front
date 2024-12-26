@@ -1,7 +1,5 @@
+import { Profile } from '~ek/components'
+
 export default function ProfilePage(): React.ReactElement {
-  return (
-    <div>
-      <h1>Profile Page</h1>
-    </div>
-  )
+  return <Profile />
 }

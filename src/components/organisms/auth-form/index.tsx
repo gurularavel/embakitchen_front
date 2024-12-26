@@ -4,12 +4,14 @@ import * as React from 'react'
 import { useRouter } from '~ek/i18n/routing'
 import { useLocale } from 'next-intl'
 import { Button } from '~ek/components'
-import { getCities, login } from '~ek/services'
+import { getCities, login, register } from '~ek/services'
 import type {
   AuthFormVariant,
   CityEntry,
   Language,
   LoginFormValues,
+  RegistrationFormValues,
+  RegistrationRequestBody,
 } from '~ek/types'
 import { useStore } from '~ek/hooks'
 import { LOCALIZED_PATHNAMES, transformToUiData } from '~ek/utils'
@@ -76,7 +78,7 @@ function LoginForm(): React.ReactElement {
       onSubmit={handleLogin}
     >
       <div className={styles.inputGroup}>
-        <label>Email</label>
+        <label className={styles.label}>Email</label>
         <input
           type='email'
           placeholder='Email'
@@ -86,7 +88,7 @@ function LoginForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
-        <label>Şifrə</label>
+        <label className={styles.label}>Şifrə</label>
         <input
           type='password'
           placeholder='Şifrə'
@@ -125,7 +127,7 @@ function RegistrationForm(): React.ReactElement {
     initializeCities()
   }, [locale])
 
-  const handleRegistration = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!registrationFormRef.current) return
 
@@ -137,12 +139,16 @@ function RegistrationForm(): React.ReactElement {
       .reduce(
         (result, element) => ({
           ...result,
-          [element.name]: isNaN(Number(element.value))
-            ? element.value
-            : Number(element.value),
+          [element.name]:
+            element.name !== 'city_id' ? element.value : Number(element.value),
         }),
         {},
-      )
+      ) as RegistrationFormValues
+
+    await register({
+      ...values,
+      role: 'user',
+    } as RegistrationRequestBody)
   }
 
   return (
@@ -154,7 +160,7 @@ function RegistrationForm(): React.ReactElement {
     >
       <div className={styles.double}>
         <div className={styles.inputGroup}>
-          <label>Ad</label>
+          <label className={styles.label}>Ad</label>
           <input
             type='text'
             name='name'
@@ -164,7 +170,7 @@ function RegistrationForm(): React.ReactElement {
         </div>
 
         <div className={styles.inputGroup}>
-          <label>Soyad</label>
+          <label className={styles.label}>Soyad</label>
           <input
             type='text'
             name='surname'
@@ -175,7 +181,7 @@ function RegistrationForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
-        <label>Email</label>
+        <label className={styles.label}>Email</label>
         <input
           type='email'
           name='email'
@@ -185,7 +191,7 @@ function RegistrationForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
-        <label>Mobil nömrə</label>
+        <label className={styles.label}>Mobil nömrə</label>
         <input
           type='tel'
           name='phone'
@@ -195,7 +201,7 @@ function RegistrationForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
-        <label>Şəhər</label>
+        <label className={styles.label}>Şəhər</label>
         <select
           name='city_id'
           id='city'
@@ -213,7 +219,7 @@ function RegistrationForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
-        <label>Şifrə</label>
+        <label className={styles.label}>Şifrə</label>
         <input
           type='password'
           name='password'
@@ -223,7 +229,7 @@ function RegistrationForm(): React.ReactElement {
       </div>
 
       <div className={styles.inputGroup}>
-        <label>Şifrə (təkrar)</label>
+        <label className={styles.label}>Şifrə (təkrar)</label>
         <input
           type='password'
           name='password_confirmation'

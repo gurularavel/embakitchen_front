@@ -16,7 +16,7 @@ export type IconVariant =
   | 'instagram-light'
   | 'youtube-light'
   | 'phone'
-  | 'profile'
+  | 'profile-light'
   | 'chevron-down'
   | 'search-1'
   | 'search-2'
@@ -37,6 +37,7 @@ export type IconVariant =
   | 'star-gray'
   | 'star-yellow'
   | 'close-dark'
+  | 'profile-dark'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -270,8 +271,6 @@ export interface RegistrationFormValues {
   city_id: number
   password: string
   password_confirmation: string
-  acceptTerms: boolean
-  role: UserRole
 }
 
 export interface UserEntry {

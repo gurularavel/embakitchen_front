@@ -10,10 +10,11 @@ import type {
   MultilingualText,
   PartnersSliderEntry,
   StoreEntry,
-  ProductEntry,
   ProductMainInfo,
   ProjectEntry,
   UserEntry,
+  RegistrationFormValues,
+  UserRole,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -129,4 +130,13 @@ export interface ProjectsPageResponse<T extends string = Language> {
 
 export interface CitiesResponse extends PaginatedResponse {
   data: CityEntry[]
+}
+
+export interface RegistrationRequestBody extends RegistrationFormValues {
+  role: UserRole
+}
+
+export interface RegistrationResponse {
+  message: string
+  token: string
 }

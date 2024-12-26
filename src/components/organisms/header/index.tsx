@@ -119,7 +119,7 @@ function WideScreenHeader({
               href={LOCALIZED_PATHNAMES['/profile'][locale as Language]}
             >
               <Icon
-                variant='profile'
+                variant='profile-light'
                 sizes='w-6 h-6'
               />
               <span>{t('personalAccount')}</span>
@@ -130,7 +130,7 @@ function WideScreenHeader({
               onClick={() => setIsDrawerVisible(true)}
             >
               <Icon
-                variant='profile'
+                variant='profile-light'
                 sizes='w-6 h-6'
               />
               <span>{t('personalAccount')}</span>
@@ -144,11 +144,24 @@ function WideScreenHeader({
 
 export function Header(): React.ReactElement {
   const { width } = useScreenSize()
-  const { isClientRendering, setClientRendering } = useStore(
-    state => state.clientSlice,
-  )
+  const {
+    clientSlice: { isClientRendering, setClientRendering },
+    authSlice: { setAuthData },
+  } = useStore(state => state)
   const [selectedAuthForm, setSelectedAuthForm] =
     React.useState<AuthFormVariant>('login')
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token')
+    const user = localStorage.getItem('user')
+
+    if (token && user) {
+      setAuthData({
+        token: JSON.parse(token),
+        user: JSON.parse(user),
+      })
+    }
+  }, [setAuthData])
 
   React.useEffect(() => {
     setClientRendering(true)
