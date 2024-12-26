@@ -9,11 +9,15 @@ import type {
 } from '~ek/types'
 
 export async function login(values: LoginFormValues): Promise<LoginResponse> {
-  const response = await httpClient.post<LoginResponse, LoginFormValues>(
-    '/login',
-    values,
-  )
-  return response as LoginResponse
+  try {
+    const response = await httpClient.post<LoginResponse, LoginFormValues>(
+      '/login',
+      values,
+    )
+    return response as LoginResponse
+  } catch (e: unknown) {
+    throw new Error(e as string)
+  }
 }
 
 export async function register(

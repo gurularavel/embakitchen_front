@@ -1,8 +1,10 @@
 'use client'
 
 import * as React from 'react'
-import { useRouter } from '~ek/i18n/routing'
 import { useLocale } from 'next-intl'
+import type { FormProps } from 'antd'
+import { Form, Input, message } from 'antd'
+import { useRouter } from '~ek/i18n/routing'
 import { Button } from '~ek/components'
 import { getCities, login, register } from '~ek/services'
 import type {
@@ -42,8 +44,6 @@ const authForms: Record<AuthFormVariant, React.ReactElement> = {
 }
 
 function LoginForm(): React.ReactElement {
-  const emailRef = React.useRef<HTMLInputElement>(null)
-  const passwordRef = React.useRef<HTMLInputElement>(null)
   const {
     clientSlice: { setIsDrawerVisible },
     authSlice: { setAuthData },
@@ -51,61 +51,60 @@ function LoginForm(): React.ReactElement {
   const router = useRouter()
   const locale = useLocale()
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleLogin: FormProps<LoginFormValues>['onFinish'] = async values => {
+    try {
+      const { email, password } = values
+      const data = await login({
+        email,
+        password,
+      } as LoginFormValues)
 
-    const email = emailRef.current?.value
-    const password = passwordRef.current?.value
-
-    const data = await login({
-      email,
-      password,
-    } as LoginFormValues)
-
-    if (!data) return
-
-    setAuthData(data)
-    setIsDrawerVisible(false)
-    document.cookie = `token=${data.token}`
-    localStorage.setItem('token', JSON.stringify(data.token))
-    localStorage.setItem('user', JSON.stringify(data.user))
-    router.push(LOCALIZED_PATHNAMES['/profile'][locale as Language])
+      setAuthData(data)
+      setIsDrawerVisible(false)
+      document.cookie = `token=${data.token}`
+      localStorage.setItem('token', JSON.stringify(data.token))
+      localStorage.setItem('user', JSON.stringify(data.user))
+      router.push(LOCALIZED_PATHNAMES['/profile'][locale as Language])
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        message.error(e.message)
+      }
+    }
   }
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleLogin}
+    <Form
+      layout='vertical'
+      labelCol={{ span: 24 }}
+      wrapperCol={{ span: 24 }}
+      onFinish={handleLogin}
+      autoComplete='off'
     >
-      <div className={styles.inputGroup}>
-        <label className={styles.label}>Email</label>
-        <input
-          type='email'
-          placeholder='Email'
-          ref={emailRef}
-          className={styles.input}
-        />
-      </div>
+      <Form.Item<LoginFormValues>
+        label='Email'
+        name='email'
+        rules={[{ required: true, message: 'Zəhmət olmasa email daxil edin!' }]}
+      >
+        <Input className={styles.input} />
+      </Form.Item>
 
-      <div className={styles.inputGroup}>
-        <label className={styles.label}>Şifrə</label>
-        <input
-          type='password'
-          placeholder='Şifrə'
-          ref={passwordRef}
-          className={styles.input}
-        />
-      </div>
+      <Form.Item<LoginFormValues>
+        label='Şifrə'
+        name='password'
+        rules={[{ required: true, message: 'Zəhmət olmasa şifrə daxil edin!' }]}
+      >
+        <Input.Password className={styles.input} />
+      </Form.Item>
 
-      <div>
+      <Form.Item label={null}>
         <Button
           type='submit'
           classes={styles.submitButton}
         >
-          Giriş
+          Submit
         </Button>
-      </div>
-    </form>
+      </Form.Item>
+    </Form>
   )
 }
 
