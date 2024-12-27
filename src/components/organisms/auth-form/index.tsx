@@ -106,7 +106,7 @@ function LoginForm(): React.ReactElement {
           type='submit'
           classes={styles.submitButton}
         >
-          Submit
+          Giriş et
         </Button>
       </Form.Item>
     </Form>
@@ -272,7 +272,7 @@ function RegistrationForm({
           type='submit'
           classes={styles.submitButton}
         >
-          Submit
+          Qeydiyyatdan keç
         </Button>
       </Form.Item>
     </Form>

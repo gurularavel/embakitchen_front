@@ -1,15 +1,25 @@
 'use client'
 
 import * as React from 'react'
+import { Col, Form, Input, Row } from 'antd'
+import MaskedInput from 'antd-mask-input'
 import { Button, Icon } from '~ek/components'
 import { useStore } from '~ek/hooks'
 import { changePassword } from '~ek/services'
-import type { ChangePasswordFormValues } from '~ek/types'
+import type {
+  ChangePasswordFormValues,
+  RegistrationFormValues,
+} from '~ek/types'
 
 interface TabHeader {
   label: string
   component: React.ReactElement
 }
+
+type UpdateProfileFormValues = Pick<
+  RegistrationFormValues,
+  'name' | 'surname' | 'email' | 'phone'
+>
 
 const profileStyles: Readonly<TwClasses> = {
   container: 'px-4 py-6',
@@ -82,67 +92,106 @@ export function Profile(): React.ReactElement {
 
 function ProfileInformation(): React.ReactElement {
   const { user } = useStore(state => state.authSlice)
+  const [form] = Form.useForm()
+
+  React.useEffect(() => {
+    form.setFieldsValue({
+      name: user?.name,
+      surname: user?.surname,
+      email: user?.email,
+      phone: user?.phone,
+    })
+  }, [user, form])
+
+  const saveProfileInformation = async (values: UpdateProfileFormValues) => {}
 
   return (
     <>
       <h4 className={styles.sectionTitle}>Hesab məlumatları</h4>
 
-      <form className={styles.form}>
-        <div className={styles.double}>
-          <div className={styles.inputGroup}>
-            <label className={styles.label}>Ad</label>
-            <input
-              type='text'
+      <Form
+        layout='vertical'
+        labelCol={{ span: 24 }}
+        wrapperCol={{ span: 24 }}
+        onFinish={saveProfileInformation}
+        initialValues={{
+          name: user?.name,
+          surname: user?.surname,
+          email: user?.email,
+          phone: user?.phone,
+        }}
+        form={form}
+      >
+        <Row gutter={[16, 16]}>
+          <Col span={12}>
+            <Form.Item<UpdateProfileFormValues>
+              label='Ad'
               name='name'
-              placeholder='Ad'
-              className={styles.input}
-              value={user?.name}
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label className={styles.label}>Soyad</label>
-            <input
-              type='text'
+              rules={[
+                {
+                  required: true,
+                  message: 'Zəhmət olmasa adınızı daxil edin!',
+                },
+              ]}
+            >
+              <Input className={styles.input} />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item<UpdateProfileFormValues>
+              label='Soyad'
               name='surname'
-              placeholder='Soyad'
-              className={styles.input}
-              value={user?.surname}
-            />
-          </div>
-        </div>
+              rules={[
+                {
+                  required: true,
+                  message: 'Zəhmət olmasa soyadınızı daxil edin!',
+                },
+              ]}
+            >
+              <Input className={styles.input} />
+            </Form.Item>
+          </Col>
+        </Row>
 
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Email</label>
-          <input
-            type='email'
-            name='email'
-            placeholder='Email'
+        <Form.Item<UpdateProfileFormValues>
+          label='Email'
+          name='email'
+          rules={[
+            { required: true, message: 'Zəhmət olmasa email daxil edin!' },
+          ]}
+        >
+          <Input className={styles.input} />
+        </Form.Item>
+
+        <Form.Item<UpdateProfileFormValues>
+          label='Mobil nömrə'
+          name='phone'
+          rules={[
+            {
+              required: true,
+              message: 'Zəhmət olmasa mobil nömrə daxil edin!',
+            },
+            {
+              pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
+              message: 'Zəhmət olmasa düzgün formatda mobil nömrə daxil edin.',
+            },
+          ]}
+        >
+          <MaskedInput
+            mask={'+994 00 000 00 00'}
             className={styles.input}
-            value={user?.email}
           />
-        </div>
+        </Form.Item>
 
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Mobil nömrə</label>
-          <input
-            type='tel'
-            name='phone'
-            placeholder='Mobil nömrə'
-            className={styles.input}
-            value={user?.phone}
-          />
-        </div>
-
-        <div>
+        <Form.Item<UpdateProfileFormValues> label={null}>
           <Button
             type='submit'
             classes={styles.submitButton}
           >
-            Giriş
+            Yadda saxla
           </Button>
-        </div>
-      </form>
+        </Form.Item>
+      </Form>
     </>
   )
 }
