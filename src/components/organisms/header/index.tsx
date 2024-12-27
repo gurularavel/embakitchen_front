@@ -206,7 +206,10 @@ export function Header(): React.ReactElement {
         </div>
 
         <div className={styles.tabContent}>
-          <AuthForm variant={selectedAuthForm} />
+          <AuthForm
+            variant={selectedAuthForm}
+            setSelectedAuthForm={setSelectedAuthForm}
+          />
         </div>
       </Drawer>
     </header>
