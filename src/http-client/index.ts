@@ -53,7 +53,11 @@ export const httpClient: HttpClient = {
       return response.data
     } catch (e: unknown) {
       if (e instanceof AxiosError) {
-        throw new Error(e.response?.data.error)
+        if (typeof e.response?.data.error === 'string') {
+          throw new Error(e.response?.data.error)
+        } else {
+          throw new Error(Object.values(e.response?.data.error).join('\n'))
+        }
       }
     }
   },

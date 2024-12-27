@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import { httpClient } from '~ek/http-client'
 import type {
   ChangePasswordFormValues,
@@ -8,7 +9,9 @@ import type {
   RegistrationResponse,
 } from '~ek/types'
 
-export async function login(values: LoginFormValues): Promise<LoginResponse> {
+export async function login(
+  values: LoginFormValues,
+): Promise<LoginResponse | undefined> {
   try {
     const response = await httpClient.post<LoginResponse, LoginFormValues>(
       '/login',
@@ -16,19 +19,27 @@ export async function login(values: LoginFormValues): Promise<LoginResponse> {
     )
     return response as LoginResponse
   } catch (e: unknown) {
-    throw new Error(e as string)
+    if (e instanceof Error) {
+      message.error(e.message)
+    }
   }
 }
 
 export async function register(
   values: RegistrationFormValues,
-): Promise<RegistrationResponse> {
-  const response = await httpClient.post<
-    RegistrationResponse,
-    RegistrationFormValues
-  >('/register', values)
+): Promise<RegistrationResponse | undefined> {
+  try {
+    const response = await httpClient.post<
+      RegistrationResponse,
+      RegistrationFormValues
+    >('/register', values)
 
-  return response as RegistrationResponse
+    return response as RegistrationResponse
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      message.error(e.message)
+    }
+  }
 }
 
 export async function changePassword(
