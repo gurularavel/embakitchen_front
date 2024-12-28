@@ -146,22 +146,37 @@ export function Header(): React.ReactElement {
   const { width } = useScreenSize()
   const {
     clientSlice: { isClientRendering, setClientRendering },
-    authSlice: { setAuthData },
+    authSlice: { setAuthData, removeAuthData },
   } = useStore(state => state)
   const [selectedAuthForm, setSelectedAuthForm] =
     React.useState<AuthFormVariant>('login')
 
   React.useEffect(() => {
     const token = localStorage.getItem('token')
+      ? JSON.parse(localStorage.getItem('token')!)
+      : null
     const user = localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user')!)
+      : null
+    const cookies = document.cookie.split('; ').reduce(
+      (result, cookie) => {
+        const [key, value] = cookie.split('=')
+        return { ...result, [key]: value }
+      },
+      {} as Record<string, string>,
+    )
 
-    if (token && user) {
+    if (token && user && cookies['token'] === token) {
       setAuthData({
-        token: JSON.parse(token),
-        user: JSON.parse(user),
+        token,
+        user,
       })
+    } else {
+      removeAuthData()
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     }
-  }, [setAuthData])
+  }, [setAuthData, removeAuthData])
 
   React.useEffect(() => {
     setClientRendering(true)

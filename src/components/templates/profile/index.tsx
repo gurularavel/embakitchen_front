@@ -1,25 +1,22 @@
 'use client'
 
 import * as React from 'react'
-import { Col, Form, Input, Row } from 'antd'
+import { useRouter } from 'next/navigation'
+import { Col, Form, Input, message, Row } from 'antd'
 import MaskedInput from 'antd-mask-input'
 import { Button, Icon } from '~ek/components'
 import { useStore } from '~ek/hooks'
-import { changePassword } from '~ek/services'
+import { changePassword, updateProfileInformation } from '~ek/services'
 import type {
   ChangePasswordFormValues,
-  RegistrationFormValues,
+  UpdateProfileFormValues,
 } from '~ek/types'
+import { logout } from '~ek/utils'
 
 interface TabHeader {
   label: string
   component: React.ReactElement
 }
-
-type UpdateProfileFormValues = Pick<
-  RegistrationFormValues,
-  'name' | 'surname' | 'email' | 'phone'
->
 
 const profileStyles: Readonly<TwClasses> = {
   container: 'px-4 py-6',
@@ -31,9 +28,9 @@ const profileStyles: Readonly<TwClasses> = {
   tabHeader: 'p-6',
   tabHeaderItem: (isActive: unknown) =>
     `h-14 flex items-center mb-5 last:mb-0 cursor-pointer text-base font-medium px-6 py-4 ${(isActive as boolean) ? 'bg-primary-9 text-primary-1' : 'bg-white text-tertiary-3'}`,
-  tabContent: '',
+  tabContent: 'w-[520px]',
   sectionTitle: 'text-2xl leading-9 text-primary-1 font-semibold mb-6',
-  form: 'w-[520px] flex flex-col gap-y-5',
+  form: 'w-full flex flex-col gap-y-5',
   double: 'flex gap-x-4 [&_div]:flex-1',
   inputGroup: 'flex flex-col gap-y-1',
   label: 'text-xs font-medium text-gray-1',
@@ -103,7 +100,21 @@ function ProfileInformation(): React.ReactElement {
     })
   }, [user, form])
 
-  const saveProfileInformation = async (values: UpdateProfileFormValues) => {}
+  const saveProfileInformation = async (values: UpdateProfileFormValues) => {
+    const areValuesChanged = Object.keys(values).some(
+      key =>
+        values[key as keyof UpdateProfileFormValues] !==
+        user![key as keyof UpdateProfileFormValues],
+    )
+
+    if (areValuesChanged) {
+      const response = await updateProfileInformation(values)
+
+      if (!response) return
+
+      message.success(response.message)
+    }
+  }
 
   return (
     <>
@@ -197,67 +208,76 @@ function ProfileInformation(): React.ReactElement {
 }
 
 function ChangePassword(): React.ReactElement {
-  const changePasswordHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
+  const router = useRouter()
+  const {
+    authSlice: { removeAuthData },
+    clientSlice: { setIsDrawerVisible },
+  } = useStore(state => state)
 
-    const values = Array.from(e.currentTarget.elements)
-      .filter(elem => !!elem.getAttribute('name'))
-      .map(elem => elem.getAttribute('name'))
-      .reduce(
-        (res, elem) => ({
-          ...res,
-          [elem as string]: formData.get(elem as string),
-        }),
-        {},
-      ) as ChangePasswordFormValues
+  const handlePasswordChange = async (values: ChangePasswordFormValues) => {
+    const response = await changePassword(values)
 
-    const { password, password_confirmation } = values
-
-    if (password !== password_confirmation) {
-      return
+    if (response) {
+      message.success(response.message)
+      logout()
+      router.refresh()
+      removeAuthData()
+      setIsDrawerVisible(true)
     }
-
-    await changePassword(values)
   }
 
   return (
     <>
-      <h4 className={styles.sectionTitle}>Hesab məlumatları</h4>
+      <h4 className={styles.sectionTitle}>Şifrəni dəyiş</h4>
 
-      <form
-        className={styles.form}
-        onSubmit={changePasswordHandler}
+      <Form
+        layout='vertical'
+        labelCol={{ span: 24 }}
+        wrapperCol={{ span: 24 }}
+        onFinish={handlePasswordChange}
+        autoComplete='off'
       >
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Şifrə</label>
-          <input
-            type='password'
-            name='password'
-            placeholder='Şifrə'
-            className={styles.input}
-          />
-        </div>
+        <Form.Item<ChangePasswordFormValues>
+          label='Şifrə'
+          name='password'
+          rules={[
+            { required: true, message: 'Zəhmət olmasa şifrə daxil edin!' },
+          ]}
+        >
+          <Input.Password className={styles.input} />
+        </Form.Item>
 
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Şifrə (təkrar)</label>
-          <input
-            type='password'
-            name='password_confirmation'
-            placeholder='Şifrə (təkrar)'
-            className={styles.input}
-          />
-        </div>
+        <Form.Item<ChangePasswordFormValues>
+          label='Şifrə (təkrar)'
+          name='password_confirmation'
+          rules={[
+            { required: true, message: 'Zəhmət olmasa şifrənin təkrar edin!' },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject(
+                  new Error(
+                    'Zəhmət olmasa şifrənizin təkrarını düzgün daxil edin!',
+                  ),
+                )
+              },
+            }),
+          ]}
+        >
+          <Input.Password className={styles.input} />
+        </Form.Item>
 
-        <div>
+        <Form.Item<ChangePasswordFormValues> label={null}>
           <Button
             type='submit'
             classes={styles.submitButton}
           >
-            Giriş
+            Yadda saxla
           </Button>
-        </div>
-      </form>
+        </Form.Item>
+      </Form>
     </>
   )
 }

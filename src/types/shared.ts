@@ -291,6 +291,11 @@ export interface OrderStageEntry {
   content: string
 }
 
+export type UpdateProfileFormValues = Pick<
+  RegistrationFormValues,
+  'name' | 'surname' | 'email' | 'phone'
+>
+
 export type ChangePasswordFormValues = Pick<
   RegistrationFormValues,
   'password' | 'password_confirmation'

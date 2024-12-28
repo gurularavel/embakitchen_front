@@ -7,6 +7,7 @@ import type {
   PlainApiResponse,
   RegistrationFormValues,
   RegistrationResponse,
+  UpdateProfileFormValues,
 } from '~ek/types'
 
 export async function login(
@@ -42,13 +43,36 @@ export async function register(
   }
 }
 
+export async function updateProfileInformation(
+  values: UpdateProfileFormValues,
+): Promise<PlainApiResponse | undefined> {
+  try {
+    const response = await httpClient.post<
+      PlainApiResponse,
+      UpdateProfileFormValues
+    >('/update-user', values)
+
+    return response as PlainApiResponse
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      message.error(e.message)
+    }
+  }
+}
+
 export async function changePassword(
   values: ChangePasswordFormValues,
-): Promise<PlainApiResponse> {
-  const response = await httpClient.post<
-    PlainApiResponse,
-    ChangePasswordFormValues
-  >('/change-password', values)
+): Promise<PlainApiResponse | undefined> {
+  try {
+    const response = await httpClient.post<
+      PlainApiResponse,
+      ChangePasswordFormValues
+    >('/change-password', values)
 
-  return response as PlainApiResponse
+    return response as PlainApiResponse
+  } catch (e) {
+    if (e instanceof Error) {
+      message.error(e.message)
+    }
+  }
 }
