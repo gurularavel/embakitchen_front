@@ -80,7 +80,7 @@ export function Sidebar(): React.ReactElement {
           <div className={styles.options}>
             <Button classes={styles.profileButton}>
               <Icon
-                variant='profile'
+                variant='profile-light'
                 sizes='w-6 h-6'
               />
               <span>{t('personalAccount')}</span>

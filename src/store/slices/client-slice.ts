@@ -8,15 +8,21 @@ export const createClientSlice: StateCreator<
   ClientSlice
 > = set => ({
   isClientRendering: false,
-  isDrawerVisible: false,
+  isAuthFormDrawerVisible: false,
+  isOrderFormDrawerVisible: false,
   setClientRendering: (isClientRendering: boolean) =>
     set(state => ({
       ...state,
       clientSlice: { ...state.clientSlice, isClientRendering },
     })),
-  setIsDrawerVisible: (isDrawerVisible: boolean) =>
+  setIsAuthFormDrawerVisible: (isAuthFormDrawerVisible: boolean) =>
     set(state => ({
       ...state,
-      clientSlice: { ...state.clientSlice, isDrawerVisible },
+      clientSlice: { ...state.clientSlice, isAuthFormDrawerVisible },
+    })),
+  setIsOrderFormDrawerVisible: (isOrderFormDrawerVisible: boolean) =>
+    set(state => ({
+      ...state,
+      clientSlice: { ...state.clientSlice, isOrderFormDrawerVisible },
     })),
 })

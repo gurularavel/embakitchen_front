@@ -143,3 +143,5 @@ export interface RegistrationRequestBody extends RegistrationFormValues {
 export interface RegistrationResponse extends PlainApiResponse {
   token: string
 }
+
+// export interface RuralsResponse extends PaginatedResponse {}

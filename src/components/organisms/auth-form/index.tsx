@@ -54,7 +54,7 @@ const authForms = (
 
 function LoginForm(): React.ReactElement {
   const {
-    clientSlice: { setIsDrawerVisible },
+    clientSlice: { setIsAuthFormDrawerVisible },
     authSlice: { setAuthData },
   } = useStore(state => state)
   const router = useRouter()
@@ -70,7 +70,7 @@ function LoginForm(): React.ReactElement {
     if (!data) return
 
     setAuthData(data)
-    setIsDrawerVisible(false)
+    setIsAuthFormDrawerVisible(false)
     document.cookie = `token=${data.token}`
     localStorage.setItem('token', JSON.stringify(data.token))
     localStorage.setItem('user', JSON.stringify(data.user))

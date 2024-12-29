@@ -300,3 +300,25 @@ export type ChangePasswordFormValues = Pick<
   RegistrationFormValues,
   'password' | 'password_confirmation'
 >
+
+export interface OrderProductInfo {
+  id: number
+  width: number
+  height: number
+}
+
+export interface OrderFormValues {
+  products: OrderProductInfo[]
+  city_id: number
+  district_id: number
+  rural_id: number
+  message: string
+}
+
+// interface RuralEntry<T extends string = Language> {
+//   id: number
+//   title: MultilingualText<T>
+//   city: CityEntry<T>
+//   district: null
+//   status: true
+// }

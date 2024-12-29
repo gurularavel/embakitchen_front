@@ -211,7 +211,7 @@ function ChangePassword(): React.ReactElement {
   const router = useRouter()
   const {
     authSlice: { removeAuthData },
-    clientSlice: { setIsDrawerVisible },
+    clientSlice: { setIsAuthFormDrawerVisible },
   } = useStore(state => state)
 
   const handlePasswordChange = async (values: ChangePasswordFormValues) => {
@@ -222,7 +222,7 @@ function ChangePassword(): React.ReactElement {
       logout()
       router.refresh()
       removeAuthData()
-      setIsDrawerVisible(true)
+      setIsAuthFormDrawerVisible(true)
     }
   }
 

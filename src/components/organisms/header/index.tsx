@@ -13,6 +13,7 @@ import {
   Logo,
   Navbar,
   NavLink,
+  OrderForm,
   Search,
   Sidebar,
 } from '~ek/components'
@@ -80,7 +81,7 @@ function WideScreenHeader({
   const t = useTranslations('buttons')
   const locale = useLocale()
   const {
-    clientSlice: { setIsDrawerVisible },
+    clientSlice: { setIsAuthFormDrawerVisible },
     authSlice: { user },
   } = useStore(state => state)
 
@@ -127,7 +128,7 @@ function WideScreenHeader({
           ) : (
             <Button
               classes={wideHeaderStyles.profileButton}
-              onClick={() => setIsDrawerVisible(true)}
+              onClick={() => setIsAuthFormDrawerVisible(true)}
             >
               <Icon
                 variant='profile-light'
@@ -145,7 +146,14 @@ function WideScreenHeader({
 export function Header(): React.ReactElement {
   const { width } = useScreenSize()
   const {
-    clientSlice: { isClientRendering, setClientRendering },
+    clientSlice: {
+      isClientRendering,
+      setClientRendering,
+      isAuthFormDrawerVisible,
+      setIsAuthFormDrawerVisible,
+      isOrderFormDrawerVisible,
+      setIsOrderFormDrawerVisible,
+    },
     authSlice: { setAuthData, removeAuthData },
   } = useStore(state => state)
   const [selectedAuthForm, setSelectedAuthForm] =
@@ -196,7 +204,10 @@ export function Header(): React.ReactElement {
           <WideScreenHeader screenWidth={width} />
         ))}
 
-      <Drawer>
+      <Drawer
+        isDrawerVisible={isAuthFormDrawerVisible}
+        setIsDrawerVisible={setIsAuthFormDrawerVisible}
+      >
         <div className={styles.tabHeader}>
           <Button
             classes={twMerge(
@@ -226,6 +237,13 @@ export function Header(): React.ReactElement {
             setSelectedAuthForm={setSelectedAuthForm}
           />
         </div>
+      </Drawer>
+
+      <Drawer
+        isDrawerVisible={isOrderFormDrawerVisible}
+        setIsDrawerVisible={setIsOrderFormDrawerVisible}
+      >
+        <OrderForm />
       </Drawer>
     </header>
   )

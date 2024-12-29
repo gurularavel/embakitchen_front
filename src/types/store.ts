@@ -3,9 +3,11 @@ import type { UserEntry } from '~ek/types'
 
 export interface ClientSlice {
   isClientRendering: boolean
-  isDrawerVisible: boolean
+  isAuthFormDrawerVisible: boolean
+  isOrderFormDrawerVisible: boolean
   setClientRendering: (isClientRendering: boolean) => void
-  setIsDrawerVisible: (isDrawerVisible: boolean) => void
+  setIsAuthFormDrawerVisible: (isAuthFormDrawerVisible: boolean) => void
+  setIsOrderFormDrawerVisible: (isOrderFormDrawerVisible: boolean) => void
 }
 
 export interface AuthSliceLoginParams {
