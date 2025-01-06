@@ -1,17 +1,26 @@
 'use client'
 
 import * as React from 'react'
-import { Form, Input, Select } from 'antd'
-import { CityEntry, Language, OrderFormValues } from '~ek/types'
-import { useStore } from '~ek/hooks'
-import { getCities } from '~ek/services'
-import { transformToUiData } from '~ek/utils'
+import { Col, Form, Input, InputNumber, Row, Select } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import { useLocale } from 'next-intl'
+import { CityEntry, Language, OrderFormValues, ProductEntry } from '~ek/types'
+import { useStore } from '~ek/hooks'
+import { getCities, getProducts } from '~ek/services'
+import { transformToUiData } from '~ek/utils'
 import { Button } from '~ek/components/atoms'
+
+const { TextArea } = Input
+
+type OrderProductEntry = Pick<ProductEntry<string>, 'id' | 'title'>
 
 const orderFormStyles: Readonly<TwClasses> = {
   form: 'w-full',
   select: '!h-14 text-gray-6 rounded',
+  input:
+    'inline-block !w-full h-14 px-4 text-gray-6 rounded border border-solid border-gray-8',
+  removeIcon: '!h-8',
+  orderedProduct: 'p-4 bg-[rgba(224,218,218,0.2)] rounded-md',
   submitButton: 'w-full h-14 bg-primary-1 text-white rounded-md',
 }
 const styles = orderFormStyles as Readonly<StyleRecord>
@@ -20,31 +29,46 @@ export function OrderForm(): React.ReactElement {
   const locale = useLocale()
   const [form] = Form.useForm()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
+  const [products, setProducts] = React.useState<OrderProductEntry[]>([])
   const {
     authSlice: { user },
   } = useStore(state => state)
 
   React.useEffect(() => {
-    async function initializeCities() {
-      const fetchedCities = await getCities()
-      const citiesForUi = transformToUiData(
-        fetchedCities,
-        locale as Language,
-      ) as CityEntry<string>[]
-      setCities(citiesForUi)
+    async function initializeFormValues() {
+      const initialCities = await getCities()
+      const initialProducts = await getProducts()
+      const uiData = {
+        products: transformToUiData(
+          initialProducts.map(p => ({ id: p.id, title: p.title })),
+          locale as Language,
+        ) as OrderProductEntry[],
+        cities: transformToUiData(
+          initialCities,
+          locale as Language,
+        ) as CityEntry<string>[],
+      }
+      setCities(uiData.cities)
+      setProducts(uiData.products)
     }
 
-    initializeCities()
+    initializeFormValues()
   }, [locale])
 
-  const onCitySelect = (city_id: number) => form.setFieldsValue({ city_id })
+  const onRegionSelect = (field: keyof OrderFormValues, value: number) =>
+    form.setFieldsValue({ [field]: value })
 
   const sendOrderHandler = (values: OrderFormValues) => {
-    const userDataForOrder = {
+    const orderedUser = {
       user_id: user?.id,
       name: user?.name,
       surname: user?.surname,
       phone: user?.phone,
+    }
+
+    const body = {
+      ...orderedUser,
+      ...values,
     }
   }
 
@@ -56,6 +80,111 @@ export function OrderForm(): React.ReactElement {
       autoComplete='off'
       form={form}
     >
+      <Form.List
+        name='products'
+        initialValue={[{}]}
+      >
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({ key, name, ...restField }) => (
+              <Row
+                key={key}
+                gutter={[16, 0]}
+                style={{ margin: '0 0 0.75rem 0' }}
+                className={styles.orderedProduct}
+              >
+                <Col span={24}>
+                  <Form.Item<OrderFormValues['products']>
+                    {...restField}
+                    name={[name, 'id']}
+                    label='Məhsul'
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Zəhmət olmasa məhsul seçin!',
+                      },
+                    ]}
+                  >
+                    <Select
+                      placeholder='Məhsul seçin'
+                      allowClear
+                      className={styles.select}
+                      showSearch
+                      optionFilterProp='label'
+                      filterSort={(optionA, optionB) =>
+                        ((optionA?.label as string) ?? '')
+                          .toLowerCase()
+                          .localeCompare(
+                            ((optionB?.label as string) ?? '').toLowerCase(),
+                          )
+                      }
+                      options={products.map(product => ({
+                        value: product.id,
+                        label: product.title,
+                      }))}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item<OrderFormValues['products']>
+                    {...restField}
+                    label='En'
+                    name={[name, 'width']}
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Zəhmət olmasa məhsulun enini daxil edin!',
+                      },
+                    ]}
+                  >
+                    <InputNumber
+                      placeholder='En'
+                      className={styles.input}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item<OrderFormValues['products']>
+                    {...restField}
+                    name={[name, 'height']}
+                    label='Hündürlük'
+                    rules={[
+                      {
+                        required: true,
+                        message:
+                          'Zəhmət olmasa məhsulun hündürlüyünü daxil edin!',
+                      },
+                    ]}
+                  >
+                    <InputNumber
+                      placeholder='Hündürlük'
+                      className={styles.input}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={24}>
+                  <Button
+                    onClick={() => remove(name)}
+                    classes={styles.submitButton}
+                  >
+                    Silin
+                  </Button>
+                </Col>
+              </Row>
+            ))}
+            <Form.Item>
+              <Button
+                onClick={() => add()}
+                classes={styles.submitButton}
+              >
+                <PlusOutlined />
+                <span>Məhsul əlavə edin</span>
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
+
       <Form.Item<OrderFormValues>
         name='city_id'
         label='Şəhər'
@@ -68,7 +197,7 @@ export function OrderForm(): React.ReactElement {
       >
         <Select
           placeholder='Şəhər seçin'
-          onChange={onCitySelect}
+          onChange={(value: number) => onRegionSelect('city_id', value)}
           allowClear
           className={styles.select}
           showSearch
@@ -82,6 +211,74 @@ export function OrderForm(): React.ReactElement {
             value: city.id,
             label: city.title,
           }))}
+        />
+      </Form.Item>
+
+      <Form.Item<OrderFormValues>
+        name='district_id'
+        label='Rayon'
+        rules={[
+          {
+            required: true,
+            message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
+          },
+        ]}
+      >
+        <Select
+          placeholder='Rayon seçin'
+          onChange={(value: number) => onRegionSelect('district_id', value)}
+          allowClear
+          className={styles.select}
+          showSearch
+          optionFilterProp='label'
+          filterSort={(optionA, optionB) =>
+            ((optionA?.label as string) ?? '')
+              .toLowerCase()
+              .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
+          }
+          options={cities.map(city => ({
+            value: city.id,
+            label: city.title,
+          }))}
+        />
+      </Form.Item>
+
+      <Form.Item<OrderFormValues>
+        name='rural_id'
+        label='Kənd'
+        rules={[
+          {
+            required: true,
+            message: 'Zəhmət olmasa yaşadığınız kəndi seçin!',
+          },
+        ]}
+      >
+        <Select
+          placeholder='Kənd seçin'
+          onChange={(value: number) => onRegionSelect('rural_id', value)}
+          allowClear
+          className={styles.select}
+          showSearch
+          optionFilterProp='label'
+          filterSort={(optionA, optionB) =>
+            ((optionA?.label as string) ?? '')
+              .toLowerCase()
+              .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
+          }
+          options={cities.map(city => ({
+            value: city.id,
+            label: city.title,
+          }))}
+        />
+      </Form.Item>
+
+      <Form.Item<OrderFormValues>
+        name='message'
+        label='Qeyd'
+      >
+        <TextArea
+          placeholder='Qeyd'
+          rows={4}
         />
       </Form.Item>
 
