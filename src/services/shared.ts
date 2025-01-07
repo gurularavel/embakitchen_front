@@ -12,6 +12,11 @@ export async function getCities(
   return response?.data as CitiesResponse['data']
 }
 
+export async function getOrders(apiQueryParams?: ApiQueryParams) {
+  const response = await httpClient.get('/orders', apiQueryParams)
+  return response
+}
+
 // export async function getRurals(
 //   apiQueryParams?: ApiQueryParams,
 // ): Promise<['data']> {

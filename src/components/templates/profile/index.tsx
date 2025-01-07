@@ -6,7 +6,11 @@ import { Col, Form, Input, message, Row } from 'antd'
 import MaskedInput from 'antd-mask-input'
 import { Button, Icon } from '~ek/components'
 import { useStore } from '~ek/hooks'
-import { changePassword, updateProfileInformation } from '~ek/services'
+import {
+  changePassword,
+  updateProfileInformation,
+  getOrders,
+} from '~ek/services'
 import type {
   ChangePasswordFormValues,
   UpdateProfileFormValues,
@@ -287,6 +291,17 @@ function Addresses(): React.ReactElement {
 }
 
 function OrderHistory(): React.ReactElement {
+  const [orders, setOrders] = React.useState([])
+
+  React.useEffect(() => {
+    async function initializeOrders() {
+      const response = await getOrders()
+      // console.log(response)
+    }
+
+    initializeOrders()
+  }, [])
+
   return <div>OrderHistory</div>
 }
 
