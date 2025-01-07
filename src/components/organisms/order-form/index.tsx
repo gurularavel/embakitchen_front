@@ -4,9 +4,15 @@ import * as React from 'react'
 import { Col, Form, Input, InputNumber, Row, Select } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useLocale } from 'next-intl'
-import { CityEntry, Language, OrderFormValues, ProductEntry } from '~ek/types'
+import {
+  CityEntry,
+  DistrictEntry,
+  Language,
+  OrderFormValues,
+  ProductEntry,
+} from '~ek/types'
 import { useStore } from '~ek/hooks'
-import { getCities, getProducts } from '~ek/services'
+import { getCities, getDistricts, getProducts } from '~ek/services'
 import { transformToUiData } from '~ek/utils'
 import { Button } from '~ek/components/atoms'
 
@@ -30,6 +36,8 @@ export function OrderForm(): React.ReactElement {
   const [form] = Form.useForm()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [products, setProducts] = React.useState<OrderProductEntry[]>([])
+  const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
+  const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
   const {
     authSlice: { user },
   } = useStore(state => state)
@@ -55,8 +63,28 @@ export function OrderForm(): React.ReactElement {
     initializeFormValues()
   }, [locale])
 
-  const onRegionSelect = (field: keyof OrderFormValues, value: number) =>
+  React.useEffect(() => {
+    async function fetchDistricts(cityId: number) {
+      const fetchedDistricts = await getDistricts({ cityId })
+      const uiData = transformToUiData(
+        fetchedDistricts,
+        locale as Language,
+      ) as DistrictEntry<string>[]
+      setDistricts(uiData)
+    }
+
+    if (selectedCity?.hasDistricts) {
+      fetchDistricts(selectedCity.id)
+    }
+  }, [selectedCity, locale])
+
+  const onRegionSelect = (field: keyof OrderFormValues, value: number) => {
     form.setFieldsValue({ [field]: value })
+    if (field === 'city_id') {
+      const city = cities.find(c => c.id === value)
+      setSelectedCity(city)
+    }
+  }
 
   const sendOrderHandler = (values: OrderFormValues) => {
     const orderedUser = {
@@ -214,61 +242,50 @@ export function OrderForm(): React.ReactElement {
         />
       </Form.Item>
 
-      <Form.Item<OrderFormValues>
-        name='district_id'
-        label='Rayon'
-        rules={[
-          {
-            required: true,
-            message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
-          },
-        ]}
-      >
-        <Select
-          placeholder='Rayon seçin'
-          onChange={(value: number) => onRegionSelect('district_id', value)}
-          allowClear
-          className={styles.select}
-          showSearch
-          optionFilterProp='label'
-          filterSort={(optionA, optionB) =>
-            ((optionA?.label as string) ?? '')
-              .toLowerCase()
-              .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
-          }
-          options={cities.map(city => ({
-            value: city.id,
-            label: city.title,
-          }))}
-        />
-      </Form.Item>
+      {selectedCity?.hasDistricts && (
+        <Form.Item<OrderFormValues>
+          name='district_id'
+          label='Rayon'
+          rules={[
+            {
+              required: true,
+              message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
+            },
+          ]}
+        >
+          <Select
+            placeholder='Rayon seçin'
+            onChange={(value: number) => onRegionSelect('district_id', value)}
+            allowClear
+            className={styles.select}
+            showSearch
+            optionFilterProp='label'
+            filterSort={(optionA, optionB) =>
+              ((optionA?.label as string) ?? '')
+                .toLowerCase()
+                .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
+            }
+            options={cities.map(city => ({
+              value: city.id,
+              label: city.title,
+            }))}
+          />
+        </Form.Item>
+      )}
 
       <Form.Item<OrderFormValues>
-        name='rural_id'
-        label='Kənd'
+        name='address'
+        label='Ünvan'
         rules={[
           {
             required: true,
-            message: 'Zəhmət olmasa yaşadığınız kəndi seçin!',
+            message: 'Zəhmət olmasa yaşadığınız ünvanı daxil edin!',
           },
         ]}
       >
-        <Select
-          placeholder='Kənd seçin'
-          onChange={(value: number) => onRegionSelect('rural_id', value)}
-          allowClear
-          className={styles.select}
-          showSearch
-          optionFilterProp='label'
-          filterSort={(optionA, optionB) =>
-            ((optionA?.label as string) ?? '')
-              .toLowerCase()
-              .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
-          }
-          options={cities.map(city => ({
-            value: city.id,
-            label: city.title,
-          }))}
+        <Input
+          placeholder='Ünvan'
+          className={styles.input}
         />
       </Form.Item>
 

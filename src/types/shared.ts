@@ -155,6 +155,7 @@ export interface CampaignEntry<T extends string = Language> {
 export interface CityEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
+  hasDistricts: boolean
   status: boolean
 }
 
@@ -311,7 +312,7 @@ export interface OrderFormValues {
   products: OrderProductInfo[]
   city_id: number
   district_id: number
-  rural_id: number
+  address: string
   message: string
 }
 
