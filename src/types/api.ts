@@ -15,6 +15,7 @@ import type {
   UserEntry,
   RegistrationFormValues,
   UserRole,
+  OrderEntry,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -144,4 +145,6 @@ export interface RegistrationResponse extends PlainApiResponse {
   token: string
 }
 
-// export interface RuralsResponse extends PaginatedResponse {}
+export interface OrdersResponse extends PaginatedResponse {
+  data: OrderEntry[]
+}

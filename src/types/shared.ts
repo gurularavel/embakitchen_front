@@ -1,4 +1,4 @@
-import type { StaticImageData } from 'next/image'
+import type { AxiosHeaders } from 'axios'
 
 /**
  * @description Represents responsive image sizes as tailwind classes
@@ -315,10 +315,36 @@ export interface OrderFormValues {
   message: string
 }
 
-// interface RuralEntry<T extends string = Language> {
-//   id: number
-//   title: MultilingualText<T>
-//   city: CityEntry<T>
-//   district: null
-//   status: true
-// }
+export interface Headers extends Partial<AxiosHeaders> {
+  Authorization: string
+}
+
+export interface DistrictEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  city: CityEntry<T>
+  status: boolean
+}
+
+type OrderProduct<T extends string = Language> = Pick<
+  ProductEntry<T>,
+  'id' | 'bannerImage' | 'title' | 'slug' | 'images' | 'tags'
+>
+interface EnhancedOrderProduct<T extends string = Language>
+  extends OrderProduct<T> {
+  width: number
+  height: number
+}
+
+export interface OrderEntry<T extends string = Language> {
+  id: number
+  created_at: string
+  message: string
+  name: string
+  surname: string
+  phone: string
+  city: CityEntry<T>
+  district: DistrictEntry<T>
+  products: EnhancedOrderProduct<T>[]
+  status: boolean
+}

@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { Col, Form, Input, message, Row } from 'antd'
+import { EyeOutlined } from '@ant-design/icons'
 import MaskedInput from 'antd-mask-input'
 import { Button, Icon } from '~ek/components'
 import { useStore } from '~ek/hooks'
@@ -13,9 +14,12 @@ import {
 } from '~ek/services'
 import type {
   ChangePasswordFormValues,
+  Language,
+  OrderEntry,
   UpdateProfileFormValues,
 } from '~ek/types'
-import { logout } from '~ek/utils'
+import { logout, transformToUiData } from '~ek/utils'
+import { useLocale } from 'next-intl'
 
 interface TabHeader {
   label: string
@@ -23,27 +27,39 @@ interface TabHeader {
 }
 
 const profileStyles: Readonly<TwClasses> = {
-  container: 'px-4 py-6',
+  container: 'px-4 laptop:px-15 widescreen:px-25 py-6',
   wrapper: 'flex flex-col laptop:flex-row gap-y-6 gap-x-10',
-  aside: 'border border-solid border-gray-9',
+  aside: 'w-full laptop:w-[312px] border border-solid border-gray-9',
   asideHeader:
     'flex items-center gap-x-2 p-6 capitalize border-b border-solid border-gray-9',
   profileIcon: 'w-8 h-8',
   tabHeader: 'p-6',
   tabHeaderItem: (isActive: unknown) =>
     `h-14 flex items-center mb-5 last:mb-0 cursor-pointer text-base font-medium px-6 py-4 ${(isActive as boolean) ? 'bg-primary-9 text-primary-1' : 'bg-white text-tertiary-3'}`,
-  tabContent: 'w-[520px]',
+  tabContent: 'w-full',
   sectionTitle: 'text-2xl leading-9 text-primary-1 font-semibold mb-6',
-  form: 'w-full flex flex-col gap-y-5',
+  form: 'w-[520px] flex flex-col gap-y-5',
   double: 'flex gap-x-4 [&_div]:flex-1',
   inputGroup: 'flex flex-col gap-y-1',
   label: 'text-xs font-medium text-gray-1',
   input:
     'inline-block w-full h-14 px-4 text-gray-6 rounded border border-solid border-gray-8',
   submitButton: 'w-full h-14 bg-primary-1 text-white rounded-md',
+  orders: {
+    wrapper: '',
+    order:
+      'flex flex-col laptop:flex-row justify-between gap-x-[30px] gap-y-4 border border-solid border-gray-9 p-6',
+    orderInfoWrapper: 'flex flex-col gap-y-2',
+    orderInfoLabel: 'text-sm leading-[18px] text-gray-4 font-normal',
+    product: 'text-lg font-semibold text-[#EB804E]',
+    orderInfoText: 'text-base font-medium text-[#4B494A]',
+    trackOrder:
+      'px-4 py-2.5 border border-solid border-gray-6 flex items-center gap-x-2.5 text-base font-medium text-gray-2',
+  },
 }
 const styles = profileStyles as Readonly<StyleRecord>
 const getTabHeaderItemStyles = profileStyles.tabHeaderItem as StyleGetter
+const orderHistoryStyles = profileStyles.orders as Readonly<StyleRecord>
 
 const tabHeaders: TabHeader[] = [
   { label: 'Hesab məlumatları', component: <ProfileInformation /> },
@@ -136,6 +152,7 @@ function ProfileInformation(): React.ReactElement {
           phone: user?.phone,
         }}
         form={form}
+        className={styles.form}
       >
         <Row gutter={[16, 16]}>
           <Col span={12}>
@@ -240,6 +257,7 @@ function ChangePassword(): React.ReactElement {
         wrapperCol={{ span: 24 }}
         onFinish={handlePasswordChange}
         autoComplete='off'
+        className={styles.form}
       >
         <Form.Item<ChangePasswordFormValues>
           label='Şifrə'
@@ -291,18 +309,76 @@ function Addresses(): React.ReactElement {
 }
 
 function OrderHistory(): React.ReactElement {
-  const [orders, setOrders] = React.useState([])
+  const [orders, setOrders] = React.useState<OrderEntry<string>[]>([])
+  const locale = useLocale()
 
   React.useEffect(() => {
+    const token = localStorage.getItem('token')
+      ? JSON.parse(localStorage.getItem('token') as string)
+      : ''
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
+
     async function initializeOrders() {
-      const response = await getOrders()
-      // console.log(response)
+      const fetchedOrders = await getOrders({ headers })
+      const uiOrders = transformToUiData(
+        fetchedOrders,
+        locale as Language,
+      ) as OrderEntry<string>[]
+      setOrders(uiOrders)
     }
 
     initializeOrders()
-  }, [])
+  }, [locale])
 
-  return <div>OrderHistory</div>
+  return (
+    <div className={orderHistoryStyles.wrapper}>
+      {orders
+        .map(order => order.products)
+        .flat()
+        .map((product: ArrayElement<OrderEntry<string>['products']>) => (
+          <div
+            className={orderHistoryStyles.order}
+            key={product.id}
+          >
+            <div className={orderHistoryStyles.orderInfoWrapper}>
+              <span className={orderHistoryStyles.orderInfoLabel}>Məhsul</span>
+              <span className={orderHistoryStyles.product}>
+                {product.title}
+              </span>
+            </div>
+
+            <div className={orderHistoryStyles.orderInfoWrapper}>
+              <span className={orderHistoryStyles.orderInfoLabel}>Rəng</span>
+              <span className={orderHistoryStyles.orderInfoText}>Boz</span>
+            </div>
+
+            <div className={orderHistoryStyles.orderInfoWrapper}>
+              <span className={orderHistoryStyles.orderInfoLabel}>Ölçü</span>
+              <span className={orderHistoryStyles.orderInfoText}>
+                {product.width}x{product.height}
+              </span>
+            </div>
+
+            <div className={orderHistoryStyles.orderInfoWrapper}>
+              <span className={orderHistoryStyles.orderInfoLabel}>Ünvan</span>
+              <span className={orderHistoryStyles.orderInfoText}>
+                Bakı şəh. Nərimanov r., Ə.Rəcəbli küç 11/A
+              </span>
+            </div>
+
+            <div className={orderHistoryStyles.orderInfoWrapper}>
+              <Button classes={orderHistoryStyles.trackOrder}>
+                <EyeOutlined />
+                <span>Sifarişi izlə</span>
+              </Button>
+            </div>
+          </div>
+        ))}
+    </div>
+  )
 }
 
 function CreditPayment(): React.ReactElement {

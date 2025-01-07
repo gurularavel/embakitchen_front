@@ -1,5 +1,5 @@
 import { httpClient } from '~ek/http-client'
-import type { CitiesResponse } from '~ek/types'
+import type { CitiesResponse, OrdersResponse } from '~ek/types'
 
 export async function getCities(
   apiQueryParams?: ApiQueryParams,
@@ -12,18 +12,9 @@ export async function getCities(
   return response?.data as CitiesResponse['data']
 }
 
-export async function getOrders(apiQueryParams?: ApiQueryParams) {
-  const response = await httpClient.get('/orders', apiQueryParams)
-  return response
+export async function getOrders(
+  params?: AuthenticatedApiParams,
+): Promise<OrdersResponse['data']> {
+  const response = await httpClient.get<OrdersResponse>('/orders', params)
+  return response?.data as OrdersResponse['data']
 }
-
-// export async function getRurals(
-//   apiQueryParams?: ApiQueryParams,
-// ): Promise<['data']> {
-//   const response = await httpClient.get<>(
-//     '/districts',
-//     apiQueryParams ?? {},
-//   )
-
-//   return response?.data as CitiesResponse['data']
-// }

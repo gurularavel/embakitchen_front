@@ -2,13 +2,10 @@ import axios, {
   AxiosError,
   type AxiosResponse,
   type AxiosInstance,
+  AxiosHeaders,
 } from 'axios'
 
-interface Params {
-  status?: boolean
-  page?: number
-  perPage?: number
-}
+type Params = AuthenticatedApiParams | Partial<AuthenticatedApiParams>
 
 interface HttpClient {
   get: <T>(endpoint: string, params?: Params) => Promise<T | undefined>
@@ -21,16 +18,10 @@ const axiosInstance: AxiosInstance = axios.create({
 
 export const httpClient: HttpClient = {
   async get<T>(endpoint: string, params?: Params): Promise<T | undefined> {
-    const token = localStorage.getItem('token')
-      ? JSON.parse(localStorage.getItem('token') as string)
-      : ''
-
     try {
       const response: AxiosResponse<T> = await axiosInstance.get(endpoint, {
-        params,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        params: params?.query,
+        headers: params?.headers as AxiosHeaders,
       })
 
       return response.data
