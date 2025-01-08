@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { Col, Form, Input, message, Row } from 'antd'
-import { EyeOutlined } from '@ant-design/icons'
 import MaskedInput from 'antd-mask-input'
 import { Button, Icon } from '~ek/components'
 import { useStore } from '~ek/hooks'
@@ -49,12 +48,10 @@ const profileStyles: Readonly<TwClasses> = {
     wrapper: '',
     order:
       'flex flex-col laptop:flex-row justify-between gap-x-[30px] gap-y-4 border border-solid border-gray-9 p-6',
-    orderInfoWrapper: 'flex flex-col gap-y-2',
+    orderInfoWrapper: 'flex flex-1 flex-col gap-y-2',
     orderInfoLabel: 'text-sm leading-[18px] text-gray-4 font-normal',
     product: 'text-lg font-semibold text-[#EB804E]',
     orderInfoText: 'text-base font-medium text-[#4B494A]',
-    trackOrder:
-      'px-4 py-2.5 border border-solid border-gray-6 flex items-center gap-x-2.5 text-base font-medium text-gray-2',
   },
 }
 const styles = profileStyles as Readonly<StyleRecord>
@@ -241,7 +238,7 @@ function ChangePassword(): React.ReactElement {
     if (response) {
       message.success(response.message)
       logout()
-      router.refresh()
+      router.push('/')
       removeAuthData()
       setIsAuthFormDrawerVisible(true)
     }
@@ -367,13 +364,6 @@ function OrderHistory(): React.ReactElement {
               <span className={orderHistoryStyles.orderInfoText}>
                 Bakı şəh. Nərimanov r., Ə.Rəcəbli küç 11/A
               </span>
-            </div>
-
-            <div className={orderHistoryStyles.orderInfoWrapper}>
-              <Button classes={orderHistoryStyles.trackOrder}>
-                <EyeOutlined />
-                <span>Sifarişi izlə</span>
-              </Button>
             </div>
           </div>
         ))}
