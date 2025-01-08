@@ -9,10 +9,9 @@ interface EnhancedApiQueryParams extends Partial<ApiQueryParams> {
 export async function getStores(
   apiQueryParams?: EnhancedApiQueryParams,
 ): Promise<StoresResponse['data']> {
-  const response = await httpClient.get<StoresResponse>(
-    '/stores',
-    apiQueryParams ?? {},
-  )
+  const response = await httpClient.get<StoresResponse>('/stores', {
+    query: apiQueryParams ?? {},
+  })
 
   return response?.data as StoresResponse['data']
 }

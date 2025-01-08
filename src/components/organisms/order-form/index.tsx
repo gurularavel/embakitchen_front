@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Col, Form, Input, InputNumber, Row, Select } from 'antd'
+import { Col, Form, Input, InputNumber, message, Row, Select } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useLocale } from 'next-intl'
 import {
@@ -9,10 +9,11 @@ import {
   DistrictEntry,
   Language,
   OrderFormValues,
+  OrderResquestBody,
   ProductEntry,
 } from '~ek/types'
 import { useStore } from '~ek/hooks'
-import { getCities, getDistricts, getProducts } from '~ek/services'
+import { createOrder, getCities, getDistricts, getProducts } from '~ek/services'
 import { transformToUiData } from '~ek/utils'
 import { Button } from '~ek/components/atoms'
 
@@ -40,6 +41,7 @@ export function OrderForm(): React.ReactElement {
   const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
   const {
     authSlice: { user },
+    clientSlice: { setIsOrderFormDrawerVisible },
   } = useStore(state => state)
 
   React.useEffect(() => {
@@ -86,7 +88,7 @@ export function OrderForm(): React.ReactElement {
     }
   }
 
-  const sendOrderHandler = (values: OrderFormValues) => {
+  const sendOrderHandler = async (values: OrderFormValues) => {
     const orderedUser = {
       user_id: user?.id,
       name: user?.name,
@@ -97,7 +99,12 @@ export function OrderForm(): React.ReactElement {
     const body = {
       ...orderedUser,
       ...values,
-    }
+    } as OrderResquestBody
+
+    await createOrder(body)
+    setIsOrderFormDrawerVisible(false)
+    form.resetFields()
+    message.success('Sifarişiniz uğurla tamamlandı.')
   }
 
   return (
@@ -265,9 +272,9 @@ export function OrderForm(): React.ReactElement {
                 .toLowerCase()
                 .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
             }
-            options={cities.map(city => ({
-              value: city.id,
-              label: city.title,
+            options={districts.map(district => ({
+              value: district.id,
+              label: district.title,
             }))}
           />
         </Form.Item>

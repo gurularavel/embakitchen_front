@@ -1,7 +1,9 @@
 import { httpClient } from '~ek/http-client'
 import type {
   CitiesResponse,
+  CreateOrderResponse,
   DistrictsResponse,
+  OrderResquestBody,
   OrdersResponse,
 } from '~ek/types'
 
@@ -30,6 +32,19 @@ export async function getOrders(
 export async function getDistricts(
   params?: FilteredApiParams,
 ): Promise<DistrictsResponse['data']> {
-  const response = await httpClient.get<DistrictsResponse>('/districts', params)
+  const response = await httpClient.get<DistrictsResponse>('/districts', {
+    query: params,
+  })
   return response?.data as DistrictsResponse['data']
+}
+
+export async function createOrder(
+  values: OrderResquestBody,
+): Promise<CreateOrderResponse> {
+  const response = await httpClient.post<
+    CreateOrderResponse,
+    OrderResquestBody
+  >('/orders', values)
+
+  return response as CreateOrderResponse
 }

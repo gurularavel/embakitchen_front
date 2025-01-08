@@ -17,6 +17,7 @@ import type {
   UserRole,
   OrderEntry,
   DistrictEntry,
+  OrderFormValues,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -152,4 +153,17 @@ export interface OrdersResponse extends PaginatedResponse {
 
 export interface DistrictsResponse extends PaginatedResponse {
   data: DistrictEntry[]
+}
+
+export interface OrderResquestBody extends OrderFormValues {
+  user_id: number
+  name: string
+  surname: string
+  phone: string
+}
+
+export interface CreateOrderResponse extends OrderResquestBody {
+  id: number
+  created_at: string
+  updated_at: string
 }

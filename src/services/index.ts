@@ -32,4 +32,9 @@ export {
   changePassword,
   updateProfileInformation,
 } from '~ek/services/auth'
-export { getCities, getOrders, getDistricts } from '~ek/services/shared'
+export {
+  getCities,
+  getOrders,
+  getDistricts,
+  createOrder,
+} from '~ek/services/shared'
