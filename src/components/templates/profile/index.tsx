@@ -1,11 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import { useRouter } from 'next/navigation'
 import { Col, Form, Input, message, Row } from 'antd'
 import MaskedInput from 'antd-mask-input'
+import { LogoutOutlined } from '@ant-design/icons'
+import { useLocale } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import { Button, Icon } from '~ek/components'
-import { useStore } from '~ek/hooks'
+import { useAuth, useStore } from '~ek/hooks'
 import {
   changePassword,
   updateProfileInformation,
@@ -17,8 +19,7 @@ import type {
   OrderEntry,
   UpdateProfileFormValues,
 } from '~ek/types'
-import { logout, transformToUiData } from '~ek/utils'
-import { useLocale } from 'next-intl'
+import { transformToUiData } from '~ek/utils'
 
 interface TabHeader {
   label: string
@@ -44,6 +45,9 @@ const profileStyles: Readonly<TwClasses> = {
   input:
     'inline-block w-full h-14 px-4 text-gray-6 rounded border border-solid border-gray-8',
   submitButton: 'w-full h-14 bg-primary-1 text-white rounded-md',
+  logout: 'h-14 mb-5 last:mb-0',
+  logoutButton:
+    'w-full h-full flex items-center justify-center gap-x-2 bg-primary-1 text-white text-base font-medium rounded-md',
   orders: {
     wrapper: '',
     order:
@@ -63,13 +67,19 @@ const tabHeaders: TabHeader[] = [
   { label: 'Şifrəni dəyiş', component: <ChangePassword /> },
   { label: 'Ünvanlar', component: <Addresses /> },
   { label: 'Sifariş tarixçəsi', component: <OrderHistory /> },
-  { label: 'Kredit ödənişi', component: <CreditPayment /> },
-  { label: 'Öz dizaynını yarat', component: <CreateYourDesign /> },
 ]
 
 export function Profile(): React.ReactElement {
   const [activeTav, setActiveTab] = React.useState<number>(0)
   const { user } = useStore(state => state.authSlice)
+  const { logout } = useAuth()
+  const router = useRouter()
+
+  React.useEffect(() => {
+    if (!user) {
+      router.push('/')
+    }
+  }, [user, router])
 
   return (
     <div className={styles.container}>
@@ -93,6 +103,16 @@ export function Profile(): React.ReactElement {
                 {header.label}
               </li>
             ))}
+
+            <li className={styles.logout}>
+              <button
+                onClick={() => logout(false)}
+                className={styles.logoutButton}
+              >
+                <LogoutOutlined />
+                <span>Çıxış</span>
+              </button>
+            </li>
           </ul>
         </aside>
 
@@ -226,21 +246,14 @@ function ProfileInformation(): React.ReactElement {
 }
 
 function ChangePassword(): React.ReactElement {
-  const router = useRouter()
-  const {
-    authSlice: { removeAuthData },
-    clientSlice: { setIsAuthFormDrawerVisible },
-  } = useStore(state => state)
+  const { logout } = useAuth()
 
   const handlePasswordChange = async (values: ChangePasswordFormValues) => {
     const response = await changePassword(values)
 
     if (response) {
       message.success(response.message)
-      logout()
-      router.push('/')
-      removeAuthData()
-      setIsAuthFormDrawerVisible(true)
+      logout(true)
     }
   }
 

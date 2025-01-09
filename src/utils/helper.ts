@@ -150,8 +150,12 @@ export const omit = <T>({
   return Object.fromEntries(sourceArrayWithOmittedKeys) as Omit<T, keyof T>
 }
 
-export const logout = (): void => {
+export const removeBrowserAuthData = (): void => {
   localStorage.removeItem('token')
   localStorage.removeItem('user')
-  document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+  const paths = ['/', '/az', '/ru', '/en']
+  paths.forEach(
+    path =>
+      (document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`),
+  )
 }
