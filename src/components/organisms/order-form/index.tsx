@@ -32,6 +32,19 @@ const orderFormStyles: Readonly<TwClasses> = {
 }
 const styles = orderFormStyles as Readonly<StyleRecord>
 
+async function fetchDistricts(
+  cityId: number,
+  locale: Language,
+  setDistricts: React.Dispatch<React.SetStateAction<DistrictEntry<string>[]>>,
+) {
+  const fetchedDistricts = await getDistricts({ cityId })
+  const uiData = transformToUiData(
+    fetchedDistricts,
+    locale as Language,
+  ) as DistrictEntry<string>[]
+  setDistricts(uiData)
+}
+
 export function OrderForm(): React.ReactElement {
   const locale = useLocale()
   const [form] = Form.useForm()
@@ -43,6 +56,23 @@ export function OrderForm(): React.ReactElement {
     authSlice: { user },
     clientSlice: { setIsOrderFormDrawerVisible },
   } = useStore(state => state)
+
+  React.useEffect(() => {
+    if (user) {
+      if (user.city.hasDistricts) {
+        fetchDistricts(user.city.id, locale as Language, setDistricts)
+      }
+
+      form.setFieldsValue({
+        city_id: user.city.id,
+        district_id: {
+          id: user.district.id,
+          label: user.district.title[locale as Language],
+        },
+        address: user.address,
+      })
+    }
+  }, [user, form, locale])
 
   React.useEffect(() => {
     async function initializeFormValues() {
@@ -66,17 +96,8 @@ export function OrderForm(): React.ReactElement {
   }, [locale])
 
   React.useEffect(() => {
-    async function fetchDistricts(cityId: number) {
-      const fetchedDistricts = await getDistricts({ cityId })
-      const uiData = transformToUiData(
-        fetchedDistricts,
-        locale as Language,
-      ) as DistrictEntry<string>[]
-      setDistricts(uiData)
-    }
-
     if (selectedCity?.hasDistricts) {
-      fetchDistricts(selectedCity.id)
+      fetchDistricts(selectedCity.id, locale as Language, setDistricts)
     }
   }, [selectedCity, locale])
 
@@ -249,7 +270,7 @@ export function OrderForm(): React.ReactElement {
         />
       </Form.Item>
 
-      {selectedCity?.hasDistricts && (
+      {(user?.district?.id || selectedCity?.hasDistricts) && (
         <Form.Item<OrderFormValues>
           name='district_id'
           label='Rayon'

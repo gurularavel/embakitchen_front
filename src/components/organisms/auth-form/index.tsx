@@ -7,10 +7,11 @@ import { Col, Form, Input, message, Row, Select } from 'antd'
 import { MaskedInput } from 'antd-mask-input'
 import { useRouter } from '~ek/i18n/routing'
 import { Button } from '~ek/components'
-import { getCities, login, register } from '~ek/services'
+import { getCities, getDistricts, login, register } from '~ek/services'
 import type {
   AuthFormVariant,
   CityEntry,
+  DistrictEntry,
   Language,
   LoginFormValues,
   RegistrationFormValues,
@@ -20,6 +21,7 @@ import { useStore } from '~ek/hooks'
 import { LOCALIZED_PATHNAMES, transformToUiData } from '~ek/utils'
 
 const { Option } = Select
+const { TextArea } = Input
 
 interface AuthFormProps {
   variant: AuthFormVariant
@@ -119,6 +121,8 @@ function RegistrationForm({
   const locale = useLocale()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [form] = Form.useForm()
+  const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
+  const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
 
   React.useEffect(() => {
     async function initializeCities() {
@@ -133,6 +137,21 @@ function RegistrationForm({
     initializeCities()
   }, [locale])
 
+  React.useEffect(() => {
+    async function fetchDistricts(cityId: number) {
+      const fetchedDistricts = await getDistricts({ cityId })
+      const uiData = transformToUiData(
+        fetchedDistricts,
+        locale as Language,
+      ) as DistrictEntry<string>[]
+      setDistricts(uiData)
+    }
+
+    if (selectedCity?.hasDistricts) {
+      fetchDistricts(selectedCity.id)
+    }
+  }, [selectedCity, locale])
+
   const handleRegistration: FormProps<RegistrationFormValues>['onFinish'] =
     async values => {
       const data = await register({
@@ -146,7 +165,16 @@ function RegistrationForm({
       setSelectedAuthForm('login')
     }
 
-  const onCitySelect = (city_id: number) => form.setFieldsValue({ city_id })
+  const onRegionSelect = (
+    field: keyof RegistrationFormValues,
+    value: number,
+  ) => {
+    form.setFieldsValue({ [field]: value })
+    if (field === 'city_id') {
+      const city = cities.find(c => c.id === value)
+      setSelectedCity(city)
+    }
+  }
 
   return (
     <Form
@@ -222,7 +250,7 @@ function RegistrationForm({
       >
         <Select
           placeholder='Şəhər seçin'
-          onChange={onCitySelect}
+          onChange={(value: number) => onRegionSelect('city_id', value)}
           allowClear
           className={styles.select}
         >
@@ -235,6 +263,54 @@ function RegistrationForm({
             </Option>
           ))}
         </Select>
+      </Form.Item>
+
+      {selectedCity?.hasDistricts && (
+        <Form.Item<RegistrationFormValues>
+          name='district_id'
+          label='Rayon'
+          rules={[
+            {
+              required: true,
+              message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
+            },
+          ]}
+        >
+          <Select
+            placeholder='Rayon seçin'
+            onChange={(value: number) => onRegionSelect('district_id', value)}
+            allowClear
+            className={styles.select}
+            showSearch
+            optionFilterProp='label'
+            filterSort={(optionA, optionB) =>
+              ((optionA?.label as string) ?? '')
+                .toLowerCase()
+                .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
+            }
+            options={districts.map(district => ({
+              value: district.id,
+              label: district.title,
+            }))}
+          />
+        </Form.Item>
+      )}
+
+      <Form.Item<RegistrationFormValues>
+        name='address'
+        label='Ünvan'
+        rules={[
+          {
+            required: true,
+            message: 'Zəhmət olmasa yaşadığınız ünvanı daxil edin!',
+          },
+        ]}
+      >
+        <TextArea
+          placeholder='Ünvan'
+          className={styles.input}
+          rows={3}
+        />
       </Form.Item>
 
       <Form.Item<RegistrationFormValues>

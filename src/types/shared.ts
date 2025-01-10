@@ -270,8 +270,10 @@ export interface RegistrationFormValues {
   email: string
   phone: string
   city_id: number
+  district_id: number
   password: string
   password_confirmation: string
+  address: string
 }
 
 export interface UserEntry {
@@ -281,7 +283,8 @@ export interface UserEntry {
   email: string
   phone: string
   city: Omit<CityEntry, 'status'>
-  addresses: []
+  district: DistrictEntry
+  address: string
   orders: []
   role: UserRole
   status: boolean
