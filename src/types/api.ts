@@ -10,9 +10,14 @@ import type {
   MultilingualText,
   PartnersSliderEntry,
   StoreEntry,
-  ProductEntry,
   ProductMainInfo,
   ProjectEntry,
+  UserEntry,
+  RegistrationFormValues,
+  UserRole,
+  OrderEntry,
+  DistrictEntry,
+  OrderFormValues,
 } from '~ek/types'
 
 interface PaginatedResponse {
@@ -22,6 +27,10 @@ interface PaginatedResponse {
     per_page: number
     total: number
   }
+}
+
+export interface PlainApiResponse {
+  message: string
 }
 
 export interface AboutPageResponse<T extends string = Language> {
@@ -111,6 +120,11 @@ export interface CategoryResponse
   extends PaginatedResponse,
     CategoryEntry<string> {}
 
+export interface LoginResponse {
+  user: UserEntry
+  token: string
+}
+
 export interface ProjectsResponse extends PaginatedResponse {
   data: Omit<ProjectEntry, 'content' | 'tags'>
 }
@@ -119,4 +133,37 @@ export interface ProjectsPageResponse<T extends string = Language> {
   id: number
   title: MultilingualText<T>
   image: [MediaFile]
+}
+
+export interface CitiesResponse extends PaginatedResponse {
+  data: CityEntry[]
+}
+
+export interface RegistrationRequestBody extends RegistrationFormValues {
+  role: UserRole
+}
+
+export interface RegistrationResponse extends PlainApiResponse {
+  token: string
+}
+
+export interface OrdersResponse extends PaginatedResponse {
+  data: OrderEntry[]
+}
+
+export interface DistrictsResponse extends PaginatedResponse {
+  data: DistrictEntry[]
+}
+
+export interface OrderResquestBody extends OrderFormValues {
+  user_id: number
+  name: string
+  surname: string
+  phone: string
+}
+
+export interface CreateOrderResponse extends OrderResquestBody {
+  id: number
+  created_at: string
+  updated_at: string
 }

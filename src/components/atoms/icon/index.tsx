@@ -2,7 +2,7 @@ import Image, { StaticImageData } from 'next/image'
 import { twMerge } from 'tailwind-merge'
 import type { IconVariant, ImgSize } from '~ek/types'
 import menuIcon from '/public/assets/icons/menu.svg'
-import closeIcon from '/public/assets/icons/close.svg'
+import closeLightIcon from '/public/assets/icons/close-light.svg'
 import dropdownCompactIcon from '/public/assets/icons/dropdown-compact.svg'
 import dropdownWideIcon from '/public/assets/icons/dropdown-wide.svg'
 import whatsappLightIcon from '/public/assets/icons/social/light/whatsapp.svg'
@@ -10,7 +10,7 @@ import facebookLightIcon from '/public/assets/icons/social/light/facebook.svg'
 import instagramLightIcon from '/public/assets/icons/social/light/instagram.svg'
 import youtubeLightIcon from '/public/assets/icons/social/light/youtube.svg'
 import phoneIcon from '/public/assets/icons/phone.svg'
-import profileIcon from '/public/assets/icons/profile.svg'
+import profileLightIcon from '/public/assets/icons/profile-light.svg'
 import chevronDownIcon from '/public/assets/icons/chevron-down.svg'
 import searchIcon1 from '/public/assets/icons/search-1.svg'
 import searchIcon2 from '/public/assets/icons/search-2.svg'
@@ -30,6 +30,8 @@ import locationIcon from '/public/assets/icons/location.svg'
 import emailIcon from '/public/assets/icons/email.svg'
 import starGray from '/public/assets/icons/star-gray.svg'
 import starYellow from '/public/assets/icons/star-yellow.svg'
+import closeDarkIcon from '/public/assets/icons/close-dark.svg'
+import profileDarkIcon from '/public/assets/icons/profile-dark.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -39,7 +41,7 @@ interface IconProps {
 
 const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   menu: menuIcon,
-  close: closeIcon,
+  'close-light': closeLightIcon,
   'dropdown-compact': dropdownCompactIcon,
   'dropdown-wide': dropdownWideIcon,
   'whatsapp-light': whatsappLightIcon,
@@ -47,7 +49,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'instagram-light': instagramLightIcon,
   'youtube-light': youtubeLightIcon,
   phone: phoneIcon,
-  profile: profileIcon,
+  'profile-light': profileLightIcon,
   'chevron-down': chevronDownIcon,
   'search-1': searchIcon1,
   'search-2': searchIcon2,
@@ -67,6 +69,8 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   email: emailIcon,
   'star-gray': starGray,
   'star-yellow': starYellow,
+  'close-dark': closeDarkIcon,
+  'profile-dark': profileDarkIcon,
 }
 
 export function Icon({

@@ -55,7 +55,7 @@ const productDetailsStyles: Readonly<TwClasses> = {
     'px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10',
   commentsWrapperTitle:
     'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
-  comments: 'h-[433px] overflow-y-auto',
+  comments: 'max-h-[433px] overflow-y-auto',
   comment: 'bg-tertiary-11 flex flex-col gap-y-4 px-10 py-6 mb-6 last:mb-0',
   rateAndDate: 'flex flex-col',
   rate: 'flex gap-x-2 mb-[9px]',
@@ -233,7 +233,7 @@ export function ProductDetails({
         <h5 className={styles.commentsWrapperTitle}>Sifarişçi rəyi</h5>
 
         <div className={styles.comments}>
-          {comments.map((comment: Comment) => (
+          {comments?.map((comment: Comment) => (
             <div
               className={styles.comment}
               key={comment.id}

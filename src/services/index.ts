@@ -26,3 +26,15 @@ export {
   getProjectsPageContent,
   getProjectDetails,
 } from '~ek/services/project'
+export {
+  login,
+  register,
+  changePassword,
+  updateProfileInformation,
+} from '~ek/services/auth'
+export {
+  getCities,
+  getOrders,
+  getDistricts,
+  createOrder,
+} from '~ek/services/shared'

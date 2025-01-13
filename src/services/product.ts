@@ -2,11 +2,11 @@ import { httpClient } from '~ek/http-client'
 import type { ProductEntry, ProductsResponse } from '~ek/types'
 
 export async function getProducts(
-  apiQueryParams: ApiQueryParams,
+  apiQueryParams?: ApiQueryParams,
 ): Promise<ProductsResponse['data']> {
   const response = await httpClient.get<ProductsResponse>(
     '/products',
-    apiQueryParams,
+    apiQueryParams ?? {},
   )
 
   return response?.data as ProductsResponse['data']

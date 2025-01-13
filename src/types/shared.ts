@@ -1,4 +1,4 @@
-import type { StaticImageData } from 'next/image'
+import type { AxiosHeaders } from 'axios'
 
 /**
  * @description Represents responsive image sizes as tailwind classes
@@ -8,7 +8,7 @@ export type ImgSize = string
 
 export type IconVariant =
   | 'menu'
-  | 'close'
+  | 'close-light'
   | 'dropdown-compact'
   | 'dropdown-wide'
   | 'whatsapp-light'
@@ -16,7 +16,7 @@ export type IconVariant =
   | 'instagram-light'
   | 'youtube-light'
   | 'phone'
-  | 'profile'
+  | 'profile-light'
   | 'chevron-down'
   | 'search-1'
   | 'search-2'
@@ -36,6 +36,8 @@ export type IconVariant =
   | 'email'
   | 'star-gray'
   | 'star-yellow'
+  | 'close-dark'
+  | 'profile-dark'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -153,6 +155,7 @@ export interface CampaignEntry<T extends string = Language> {
 export interface CityEntry<T extends string = Language> {
   id: number
   title: MultilingualText<T>
+  hasDistricts: boolean
   status: boolean
 }
 
@@ -252,7 +255,100 @@ export interface CategoryEntry<
   status: boolean
 }
 
+export type AuthFormVariant = 'login' | 'registration'
+
+export type UserRole = 'admin' | 'user'
+
+export interface LoginFormValues {
+  email: string
+  password: string
+}
+
+export interface RegistrationFormValues {
+  name: string
+  surname: string
+  email: string
+  phone: string
+  city_id: number
+  district_id: number
+  password: string
+  password_confirmation: string
+  address: string
+}
+
+export interface UserEntry {
+  id: number
+  name: string
+  surname: string
+  email: string
+  phone: string
+  city: Omit<CityEntry, 'status'>
+  district: DistrictEntry
+  address: string
+  orders: []
+  role: UserRole
+  status: boolean
+}
+
 export interface OrderStageEntry {
   title: string
   content: string
+}
+
+export type UpdateProfileFormValues = Pick<
+  RegistrationFormValues,
+  'name' | 'surname' | 'email' | 'phone'
+>
+
+export type ChangePasswordFormValues = Pick<
+  RegistrationFormValues,
+  'password' | 'password_confirmation'
+>
+
+export interface OrderProductInfo {
+  id: number
+  width: number
+  height: number
+}
+
+export interface OrderFormValues {
+  products: OrderProductInfo[]
+  city_id: number
+  district_id: number
+  address: string
+  message: string
+}
+
+export interface Headers extends Partial<AxiosHeaders> {
+  Authorization: string
+}
+
+export interface DistrictEntry<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  city: CityEntry<T>
+  status: boolean
+}
+
+type OrderProduct<T extends string = Language> = Pick<
+  ProductEntry<T>,
+  'id' | 'bannerImage' | 'title' | 'slug' | 'images' | 'tags'
+>
+interface EnhancedOrderProduct<T extends string = Language>
+  extends OrderProduct<T> {
+  width: number
+  height: number
+}
+
+export interface OrderEntry<T extends string = Language> {
+  id: number
+  created_at: string
+  message: string
+  name: string
+  surname: string
+  phone: string
+  city: CityEntry<T>
+  district: DistrictEntry<T>
+  products: EnhancedOrderProduct<T>[]
+  status: boolean
 }

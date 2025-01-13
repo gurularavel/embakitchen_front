@@ -2,6 +2,7 @@ import { Montserrat } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
 import { type AbstractIntlMessages, NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
 import { Footer, Header } from '~ek/components'
 import type { Language } from '~ek/types'
 import { StoreProvider } from '~ek/providers'
@@ -36,9 +37,11 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
-            <Header />
-            {children}
-            <Footer />
+            <AntdRegistry>
+              <Header />
+              {children}
+              <Footer />
+            </AntdRegistry>
           </StoreProvider>
         </NextIntlClientProvider>
       </body>

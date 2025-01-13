@@ -1,4 +1,4 @@
-import type { Language } from '~ek/types'
+import type { Language, Headers } from '~ek/types'
 
 declare global {
   type StyleRecord = Record<string, string>
@@ -17,9 +17,14 @@ declare global {
   }
 
   interface ApiQueryParams {
-    page: number
-    perPage: number
-    status: boolean
+    page?: number
+    perPage?: number
+    status?: boolean
+  }
+
+  interface AuthenticatedApiParams extends ApiQueryParams {
+    query?: ApiQueryParams
+    headers: Headers
   }
 
   type ArrayElement<T> = T extends (infer U)[] ? U : never
