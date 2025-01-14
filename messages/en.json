@@ -1,0 +1,96 @@
+{
+  "links": {
+    "header": [
+      {
+        "label": "Furnitures",
+        "nestedLinks": [
+          {
+            "label": "Kitchen furnitures",
+            "href": "/furnitures/kitchen-cabinets-1"
+          },
+          {
+            "label": "Corridor furnitures",
+            "href": "/furnitures/wardrobes"
+          }
+        ]
+      },
+      {
+        "label": "Stores",
+        "href": "/stores"
+      },
+      {
+        "label": "About",
+        "nestedLinks": [
+          {
+            "label": "About company",
+            "href": "/about-us"
+          },
+          {
+            "label": "Projects",
+            "href": "/projects"
+          }
+        ]
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "Campaigns",
+        "href": "/campaigns"
+      }
+    ],
+    "footer": [
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "About Us",
+            "href": "/about-us"
+          },
+          {
+            "label": "Stores",
+            "href": "/stores"
+          },
+          {
+            "label": "Campaigns",
+            "href": "/campaigns"
+          },
+          {
+            "label": "Blog",
+            "href": "/blog"
+          }
+        ]
+      },
+      {
+        "title": "Products",
+        "links": [
+          {
+            "label": "Kitchen furnitures",
+            "href": "/furnitures/kitchen-cabinets-1"
+          },
+          {
+            "label": "Corridor furnitures",
+            "href": "/furnitures/wardrobes"
+          }
+        ]
+      }
+    ]
+  },
+  "buttons": {
+    "createCustomOrder": "Create custom order",
+    "viewProducts": "View products",
+    "customOrder": "Custom order",
+    "personalAccount": "Personal account",
+    "inDetails": "In Details",
+    "readAboutUs": "Read About Us"
+  },
+  "titles": {
+    "currentCampaigns": "Current Campaigns",
+    "partnersSlider": "Our Partners",
+    "homepageBlogs": "Blog",
+    "popularBlogs": "Popular Articles",
+    "stores": "Stores",
+    "similarProjects": "Similar Projects"
+  }
+}

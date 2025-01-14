@@ -2,32 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+.main-slider .swiper-pagination.swiper-pagination-bullets {
+  bottom: 212px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  @media (min-width: 768px) {
+    bottom: 30px;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.main-slider .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  margin: 0 10px !important;
+  opacity: 1;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.main-slider .swiper-pagination-bullet-active {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.main-slider .swiper-pagination-bullet-active::after {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.gallery-slider .swiper-wrapper {
+  align-items: center;
+}
+
+.order-stage-position {
+  -webkit-text-stroke: 1px #ffffff;
+  color: transparent;
+}
+
+figure.image img {
+  width: 100%;
+}
+
+.ant-form-item label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: theme('colors.gray.1') !important;
+}
+
+.ant-input-number .ant-input-number-input-wrap,
+.ant-input-number .ant-input-number-input-wrap .ant-input-number-input {
+  height: 100%;
 }

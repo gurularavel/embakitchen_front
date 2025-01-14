@@ -1,0 +1,96 @@
+{
+  "links": {
+    "header": [
+      {
+        "label": "Mebellər",
+        "nestedLinks": [
+          {
+            "label": "Mətbəx mebelləri",
+            "href": "/mebellər/mətbəx-mebelləri"
+          },
+          {
+            "label": "Dəhliz mebelləri",
+            "href": "/mebellər/qarderoblar"
+          }
+        ]
+      },
+      {
+        "label": "Mağazalar",
+        "href": "/mağazalar"
+      },
+      {
+        "label": "Haqqımızda",
+        "nestedLinks": [
+          {
+            "label": "Şirkət haqqında",
+            "href": "/haqqımızda"
+          },
+          {
+            "label": "Layihələrimiz",
+            "href": "/layihələr"
+          }
+        ]
+      },
+      {
+        "label": "Bloq",
+        "href": "/bloq"
+      },
+      {
+        "label": "Kampaniyalar",
+        "href": "/kampaniyalar"
+      }
+    ],
+    "footer": [
+      {
+        "title": "Şirkət",
+        "links": [
+          {
+            "label": "Haqqımızda",
+            "href": "/haqqımızda"
+          },
+          {
+            "label": "Mağazalar",
+            "href": "/mağazalar"
+          },
+          {
+            "label": "Kampaniyalar",
+            "href": "/kampaniyalar"
+          },
+          {
+            "label": "Bloq",
+            "href": "/bloq"
+          }
+        ]
+      },
+      {
+        "title": "Məhsullar",
+        "links": [
+          {
+            "label": "Mətbəx mebelləri",
+            "href": "/mebellər/mətbəx-mebelləri"
+          },
+          {
+            "label": "Dəhliz mebelləri",
+            "href": "/mebellər/qarderoblar"
+          }
+        ]
+      }
+    ]
+  },
+  "buttons": {
+    "createCustomOrder": "Özəl sifariş yarat",
+    "viewProducts": "Məhsullara bax",
+    "customOrder": "Özəl sifariş",
+    "personalAccount": "Şəxsi kabinet",
+    "inDetails": "Ətraflı",
+    "readAboutUs": "Haqqımızda oxuyun"
+  },
+  "titles": {
+    "currentCampaigns": "Cari Kampaniyalar",
+    "partnersSlider": "Tərəfdaşlarımız",
+    "homepageBlogs": "Bloq",
+    "popularBlogs": "Məşhur Məqalələr",
+    "stores": "Mağazalar",
+    "similarProjects": "Oxşar Layihələr"
+  }
+}

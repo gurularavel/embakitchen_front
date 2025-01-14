@@ -1,0 +1,12 @@
+{
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    ".*Styles.*"
+  ],
+  "editor.wordWrap": "on",
+  "css.lint.unknownAtRules": "ignore"
+}
