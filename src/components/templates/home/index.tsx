@@ -48,7 +48,7 @@ export function Home({
 
       <Slider variant='partners' />
 
-      <CurrentCampaigns campaigns={campaigns} />
+      {!!campaigns?.length && <CurrentCampaigns campaigns={campaigns} />}
     </>
   )
 }
