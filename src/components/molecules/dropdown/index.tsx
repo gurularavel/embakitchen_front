@@ -27,10 +27,8 @@ const dropdownStyles: Readonly<TwClasses> = {
     'desktop:w-full desktop:h-full desktop:flex items-center desktop:px-6 text-base font-normal text-white desktop:text-nowrap',
 }
 const styles = dropdownStyles as Readonly<StyleRecord>
-const getDropdownIconStyles: StyleGetter =
-  dropdownStyles.dropdownIcon as StyleGetter
-const getDropdownContentStyles: StyleGetter =
-  dropdownStyles.dropdownContent as StyleGetter
+const getDropdownIconStyles = dropdownStyles.dropdownIcon as StyleGetter
+const getDropdownContentStyles = dropdownStyles.dropdownContent as StyleGetter
 
 export function Dropdown({
   label,
