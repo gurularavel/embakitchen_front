@@ -14,6 +14,7 @@ import profileLightIcon from '/public/assets/icons/profile-light.svg'
 import chevronDownIcon from '/public/assets/icons/chevron-down.svg'
 import searchIcon1 from '/public/assets/icons/search-1.svg'
 import searchIcon2 from '/public/assets/icons/search-2.svg'
+import searchDark from '/public/assets/icons/search-dark.svg'
 import whatsappDarkIcon from '/public/assets/icons/social/dark/whatsapp.svg'
 import facebookDarkIcon from '/public/assets/icons/social/dark/facebook.svg'
 import instagramDarkIcon from '/public/assets/icons/social/dark/instagram.svg'
@@ -53,6 +54,7 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'chevron-down': chevronDownIcon,
   'search-1': searchIcon1,
   'search-2': searchIcon2,
+  'search-dark': searchDark,
   'whatsapp-dark': whatsappDarkIcon,
   'facebook-dark': facebookDarkIcon,
   'instagram-dark': instagramDarkIcon,

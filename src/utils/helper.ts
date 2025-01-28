@@ -66,7 +66,7 @@ export const updatePrimitiveState = <T extends boolean | number | string>(
 const isMultilingualText = (obj: unknown): boolean => {
   const languageKeys = new Set(Object.values(Language))
 
-  if (typeof obj === 'object' && obj !== null) {
+  if (!Array.isArray(obj) && typeof obj === 'object' && obj !== null) {
     return Object.entries(obj).every(
       ([key, value]) =>
         languageKeys.has(key as Language) && typeof value === 'string',
@@ -124,7 +124,10 @@ export const transformToUiData = (data: object, locale: Language): object => {
   return Object.entries(data).reduce(
     (result, [key, value]) => ({
       ...result,
-      [key]: setUiData(value, locale),
+      [key]:
+        Array.isArray(value) && !value.length
+          ? value
+          : setUiData(value, locale),
     }),
     {},
   )

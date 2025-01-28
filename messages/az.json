@@ -92,5 +92,11 @@
     "popularBlogs": "Məşhur Məqalələr",
     "stores": "Mağazalar",
     "similarProjects": "Oxşar Layihələr"
+  },
+  "search": {
+    "notFound": "Axtardığınız məhsul tapılmadı.",
+    "allProductsLink": "Bütün məhsullar",
+    "total": "Ümumi məhsul",
+    "searchLink": "Bütün nəticələr"
   }
 }

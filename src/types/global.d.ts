@@ -13,6 +13,7 @@ declare global {
       locale: Language
       slug?: string
       category?: string
+      search?: string
     }
   }
 

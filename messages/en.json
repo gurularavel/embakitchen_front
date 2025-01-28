@@ -92,5 +92,11 @@
     "popularBlogs": "Popular Articles",
     "stores": "Stores",
     "similarProjects": "Similar Projects"
+  },
+  "search": {
+    "notFound": "No products were found matching your search criteria.",
+    "allProductsLink": "All products",
+    "total": "Total",
+    "searchLink" : "All results"
   }
 }

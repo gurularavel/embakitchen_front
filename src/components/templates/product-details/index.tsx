@@ -278,10 +278,12 @@ export function ProductDetails({
       </div>
 
       <div className={styles.similarProductsWrapper}>
-        <h4 className={styles.similarProductsTitle}>Oxşar məhsullar</h4>
+        {similar_products && (
+          <h4 className={styles.similarProductsTitle}>Oxşar məhsullar</h4>
+        )}
 
         <div className={styles.similarProducts}>
-          {similar_products.map((similarProduct: SimilarProduct<string>) => (
+          {similar_products?.map((similarProduct: SimilarProduct<string>) => (
             <div
               key={similarProduct.id}
               className={styles.similarProduct}

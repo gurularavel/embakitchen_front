@@ -5,6 +5,7 @@ import type {
   DistrictsResponse,
   OrderResquestBody,
   OrdersResponse,
+  ProductsResponse,
 } from '~ek/types'
 
 interface FilteredApiParams extends ApiQueryParams {
@@ -47,4 +48,17 @@ export async function createOrder(
   >('/orders', values)
 
   return response as CreateOrderResponse
+}
+
+export interface SearchApiParams extends ApiQueryParams {
+  search: string
+}
+export async function getSearchResult(
+  params: SearchApiParams,
+): Promise<ProductsResponse> {
+  const response = await httpClient.get<ProductsResponse>(
+    `/search?search=${params.search}&page=1&perPage=5`,
+  )
+
+  return response as ProductsResponse
 }

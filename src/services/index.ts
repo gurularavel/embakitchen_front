@@ -37,4 +37,5 @@ export {
   getOrders,
   getDistricts,
   createOrder,
+  getSearchResult,
 } from '~ek/services/shared'

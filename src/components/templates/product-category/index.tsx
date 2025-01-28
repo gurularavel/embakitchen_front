@@ -44,7 +44,15 @@ export function ProductCategory({
                     className={styles.img}
                     fill
                   />
-                  <span className={styles.tag}>Ən çox satılan</span>
+                  {product?.tags?.length &&
+                    product?.tags?.map(tag => (
+                      <span
+                        key={tag.id}
+                        className={styles.tag}
+                      >
+                        {tag.title}
+                      </span>
+                    ))}
                 </div>
                 <div className={styles.bottom}>
                   <h5 className={styles.title}>{product.title}</h5>
