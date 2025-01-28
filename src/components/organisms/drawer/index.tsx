@@ -28,9 +28,7 @@ export function Drawer({
   children,
 }: Readonly<DrawerProps>): React.ReactElement {
   React.useEffect(() => {
-    if (isDrawerVisible) {
-      document.body.style.overflowY = 'hidden'
-    }
+    document.body.style.overflowY = isDrawerVisible ? 'hidden' : 'visible'
   }, [isDrawerVisible])
 
   return (
