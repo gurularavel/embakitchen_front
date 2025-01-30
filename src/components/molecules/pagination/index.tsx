@@ -1,42 +1,73 @@
 'use client'
 
 import * as React from 'react'
-import { updatePrimitiveState } from '~ek/utils'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { Pagination as AntPagination } from 'antd'
+import { twMerge } from 'tailwind-merge'
+import { useLocale } from 'next-intl'
+import { usePathname } from '~ek/i18n/routing'
 
 interface PaginationProps {
-  totalPages: number
+  total: number
+  hidePaginationNav?: boolean
 }
 
 const paginationStyles: Readonly<TwClasses> = {
   wrapper: 'py-4 flex justify-center items-center mb-6 laptop:mb-15',
-  pagination: 'flex gap-x-6',
-  page: (isActive: unknown) =>
-    `w-[26px] h-[26px] flex items-center justify-center rounded-full text-sm leading-[22px] font-medium ${(isActive as boolean) ? 'bg-gray-1 text-white' : 'text-gray-5'}`,
+  pagination: 'flex items-center',
+  paginationNav:
+    '[&_.ant-pagination-prev]:!hidden [&_.ant-pagination-next]:!hidden',
+  paginationItem:
+    '[&_.ant-pagination-item]:!min-w-[26px] [&_.ant-pagination-item]:!w-[26px] [&_.ant-pagination-item]:!h-[26px] [&_.ant-pagination-item]:!text-sm [&_.ant-pagination-item]:[&]:text-gray-5 [&_.ant-pagination-item]:!leading-[22px] [&_.ant-pagination-item]:!font-medium [&_.ant-pagination-item]:!rounded-full [&_.ant-pagination-item-active]:!bg-gray-1 [&_.ant-pagination-item-active]:!border-0',
+  paginationLink:
+    '[&_.ant-pagination-item>a]:!w-full [&_.ant-pagination-item>a]:!h-full [&_.ant-pagination-item>a]:!text-inherit [&_.ant-pagination-item>a]:!flex [&_.ant-pagination-item>a]:!items-center [&_.ant-pagination-item>a]:!justify-center',
+  paginationLinkActive: '[&_.ant-pagination-item-active]:[&&]:text-white',
 }
 const styles = paginationStyles as Readonly<StyleRecord>
-const getPageStyles = paginationStyles.page as StyleGetter
 
 export function Pagination({
-  totalPages,
+  total,
+  hidePaginationNav = true,
 }: Readonly<PaginationProps>): React.ReactElement {
-  const [activePage, setActivePage] = React.useState<number>(1)
+  const pathname = usePathname()
+  const locale = useLocale()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const currentPage = React.useMemo(
+    () => +(searchParams.get('page') ?? 1),
+    [searchParams],
+  )
+
+  const handlePageChange = React.useCallback(
+    (page: number) => {
+      if (page === currentPage) return
+
+      const params = new URLSearchParams(searchParams.toString())
+      params.set('page', page.toString())
+
+      router.push(`/${locale}${pathname}?${params.toString()}`)
+    },
+    [locale, pathname, router, currentPage, searchParams],
+  )
 
   return (
     <div className={styles.wrapper}>
-      <ul className={styles.pagination}>
-        {Array(totalPages)
-          .fill(0)
-          .map((_, i: number) => i + 1)
-          .map(page => (
-            <li
-              key={page}
-              className={getPageStyles(page === activePage)}
-              onClick={() => updatePrimitiveState(page, setActivePage)}
-            >
-              {page}
-            </li>
-          ))}
-      </ul>
+      <AntPagination
+        total={total}
+        pageSize={10}
+        defaultCurrent={currentPage}
+        showSizeChanger={false}
+        hideOnSinglePage={true}
+        className={twMerge(
+          styles.pagination,
+          hidePaginationNav ? styles.paginationNav : '',
+          styles.paginationItem,
+          styles.paginationLink,
+          styles.paginationLinkActive,
+        )}
+        onChange={handlePageChange}
+      />
     </div>
   )
 }
