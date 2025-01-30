@@ -1,9 +1,8 @@
 'use client'
 
-import { useLocale } from 'next-intl'
-import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import * as React from 'react'
+import { useLocale, useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { Button, Icon, Input, NavLink } from '~ek/components'
 import { useInputFocus } from '~ek/hooks'
 import { getSearchResult } from '~ek/services'
@@ -65,23 +64,16 @@ export function Search(): React.ReactElement {
     setSearchResult({} as ProductsResponse)
   }
 
-  const handleOutsideClick = (event: MouseEvent) => {
-    const target = event.target as HTMLElement
-    if (!target.closest('.search-box')) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (!(event.target as HTMLElement).closest('.search-box')) {
       closeSearch()
     }
   }
 
   React.useEffect(() => {
-    if (isVisible) {
-      document.addEventListener('click', handleOutsideClick)
-    } else {
-      document.removeEventListener('click', handleOutsideClick)
-    }
-
-    return () => {
-      document.removeEventListener('click', handleOutsideClick)
-    }
+    if (!isVisible) return
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
   }, [isVisible])
 
   return (
@@ -113,9 +105,7 @@ export function Search(): React.ReactElement {
           ref={searchInputRef}
         />
       </div>
-      <div
-        className={getResultBoxStyles(isVisible && searchResult?.data?.length)}
-      >
+      <div className={getResultBoxStyles(isVisible && searchResult?.data)}>
         {searchResult?.data?.length > 0 ? (
           <div className={styles.searchResult}>
             {searchResult.data?.map(product => {

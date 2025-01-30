@@ -17,6 +17,7 @@ import type {
   ProductMainInfo,
   ProjectEntry,
   StoreEntry,
+  ProductsResponse,
 } from '~ek/types'
 
 export interface BannerProps {
@@ -129,3 +130,7 @@ export interface ProjectDetailsProps extends ProjectDetailsEntry {
   bannerImage: MediaFile
   similar_projects: SimilarProject[]
 }
+
+export interface SearchProps
+  extends BannerProps,
+    Omit<ProductsResponse, 'pagination'> {}

@@ -1,12 +1,13 @@
-import { ProductCategory } from '~ek/components'
-import { getSearchResult } from '~ek/services'
+import { ProductSearch } from '~ek/components'
+import { getBlogsPageContent, getSearchResult } from '~ek/services'
 import { SearchApiParams } from '~ek/services/shared'
 import type {
   ProductsResponse,
-  ProductCategoryProps,
   Language,
+  SearchProps,
+  BlogsProps,
 } from '~ek/types'
-import { transformToUiData } from '~ek/utils'
+import { omit, transformToUiData } from '~ek/utils'
 
 export default async function SearchPage({
   params: { locale },
@@ -18,11 +19,17 @@ export default async function SearchPage({
   const searchData: ProductsResponse = await getSearchResult(
     searchParams as SearchApiParams,
   )
+  const blogsPageContent = await getBlogsPageContent()
 
-  const productCategoryProps = transformToUiData(
-    searchData,
+  const uiData = transformToUiData(
+    omit({ source: blogsPageContent, fields: ['id'] }),
     locale,
-  ) as ProductCategoryProps
+  )
 
-  return <ProductCategory {...productCategoryProps} />
+  const productSearchProps: SearchProps = {
+    ...(uiData as Omit<BlogsProps, 'blogs'>),
+    ...(transformToUiData(searchData, locale) as ProductsResponse),
+  }
+
+  return <ProductSearch {...productSearchProps} />
 }
