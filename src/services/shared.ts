@@ -7,6 +7,7 @@ import type {
   OrdersResponse,
   ProductsResponse,
 } from '~ek/types'
+import { PER_PAGE } from '~ek/utils'
 
 interface FilteredApiParams extends ApiQueryParams {
   cityId: number
@@ -59,7 +60,7 @@ export async function getSearchResult({
   page = 1,
 }: SearchApiParams): Promise<ProductsResponse> {
   const response = await httpClient.get<ProductsResponse>(
-    `/search?search=${search}&page=${page}&perPage=6`,
+    `/search?search=${search}&page=${page}&perPage=${PER_PAGE}`,
   )
 
   return response as ProductsResponse

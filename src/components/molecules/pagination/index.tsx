@@ -6,6 +6,7 @@ import { Pagination as AntPagination } from 'antd'
 import { twMerge } from 'tailwind-merge'
 import { useLocale } from 'next-intl'
 import { usePathname } from '~ek/i18n/routing'
+import { PER_PAGE } from '~ek/utils'
 
 interface PaginationProps {
   total: number
@@ -55,7 +56,7 @@ export function Pagination({
     <div className={styles.wrapper}>
       <AntPagination
         total={total}
-        pageSize={3}
+        pageSize={PER_PAGE}
         defaultCurrent={currentPage}
         showSizeChanger={false}
         hideOnSinglePage={true}
