@@ -20,7 +20,7 @@ import type {
   OrderFormValues,
 } from '~ek/types'
 
-interface PaginatedResponse {
+export interface PaginatedResponse {
   pagination: {
     current_page: number
     last_page: number

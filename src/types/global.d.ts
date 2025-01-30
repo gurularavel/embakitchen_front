@@ -21,6 +21,7 @@ declare global {
     page?: number
     perPage?: number
     status?: boolean
+    search?: string
   }
 
   interface AuthenticatedApiParams extends ApiQueryParams {

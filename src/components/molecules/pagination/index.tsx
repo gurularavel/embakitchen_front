@@ -1,11 +1,10 @@
 'use client'
 
 import * as React from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Pagination as AntPagination } from 'antd'
 import { twMerge } from 'tailwind-merge'
-import { useLocale } from 'next-intl'
-import { usePathname } from '~ek/i18n/routing'
+import { usePathname, useRouter } from '~ek/i18n/routing'
 import { PER_PAGE } from '~ek/utils'
 
 interface PaginationProps {
@@ -31,8 +30,7 @@ export function Pagination({
   hidePaginationNav = true,
 }: Readonly<PaginationProps>): React.ReactElement {
   const pathname = usePathname()
-  const locale = useLocale()
-  const router = useRouter()
+  const { push } = useRouter()
   const searchParams = useSearchParams()
 
   const currentPage = React.useMemo(
@@ -47,9 +45,9 @@ export function Pagination({
       const params = new URLSearchParams(searchParams.toString())
       params.set('page', page.toString())
 
-      router.push(`/${locale}${pathname}?${params.toString()}`)
+      push(`/${pathname}?${params.toString()}`)
     },
-    [locale, pathname, router, currentPage, searchParams],
+    [pathname, push, currentPage, searchParams],
   )
 
   return (
@@ -58,6 +56,7 @@ export function Pagination({
         total={total}
         pageSize={PER_PAGE}
         defaultCurrent={currentPage}
+        current={currentPage}
         showSizeChanger={false}
         hideOnSinglePage={true}
         className={twMerge(

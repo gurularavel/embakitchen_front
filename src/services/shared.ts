@@ -59,9 +59,13 @@ export async function getSearchResult({
   search,
   page = 1,
 }: SearchApiParams): Promise<ProductsResponse> {
-  const response = await httpClient.get<ProductsResponse>(
-    `/search?search=${search}&page=${page}&perPage=${PER_PAGE}`,
-  )
+  const response = await httpClient.get<ProductsResponse>('/search', {
+    query: {
+      search,
+      page,
+      perPage: PER_PAGE,
+    },
+  })
 
   return response as ProductsResponse
 }

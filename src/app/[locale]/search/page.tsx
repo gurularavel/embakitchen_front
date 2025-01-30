@@ -6,6 +6,7 @@ import type {
   Language,
   SearchProps,
   BlogsProps,
+  SearchResultEntry,
 } from '~ek/types'
 import { omit, transformToUiData } from '~ek/utils'
 
@@ -28,7 +29,7 @@ export default async function SearchPage({
 
   const productSearchProps: SearchProps = {
     ...(uiData as Omit<BlogsProps, 'blogs'>),
-    ...(transformToUiData(searchData, locale) as ProductsResponse),
+    ...(transformToUiData(searchData, locale) as SearchResultEntry),
   }
 
   return <ProductSearch {...productSearchProps} />
