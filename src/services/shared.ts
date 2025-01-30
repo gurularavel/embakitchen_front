@@ -52,12 +52,14 @@ export async function createOrder(
 
 export interface SearchApiParams extends ApiQueryParams {
   search: string
+  page?: number
 }
-export async function getSearchResult(
-  params: SearchApiParams,
-): Promise<ProductsResponse> {
+export async function getSearchResult({
+  search,
+  page = 1,
+}: SearchApiParams): Promise<ProductsResponse> {
   const response = await httpClient.get<ProductsResponse>(
-    `/search?search=${params.search}&page=1&perPage=5`,
+    `/search?search=${search}&page=${page}&perPage=6`,
   )
 
   return response as ProductsResponse

@@ -20,6 +20,7 @@ export function ProductSearch({
   title,
   image,
   data,
+  pagination,
 }: Readonly<SearchProps>): React.ReactElement {
   return (
     <div className={styles.container}>
@@ -62,6 +63,7 @@ export function ProductSearch({
           </div>
         ))}
       </div>
+      <Pagination total={pagination.total} />
     </div>
   )
 }

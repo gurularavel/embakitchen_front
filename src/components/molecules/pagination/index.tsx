@@ -55,7 +55,7 @@ export function Pagination({
     <div className={styles.wrapper}>
       <AntPagination
         total={total}
-        pageSize={10}
+        pageSize={3}
         defaultCurrent={currentPage}
         showSizeChanger={false}
         hideOnSinglePage={true}

@@ -131,6 +131,4 @@ export interface ProjectDetailsProps extends ProjectDetailsEntry {
   similar_projects: SimilarProject[]
 }
 
-export interface SearchProps
-  extends BannerProps,
-    Omit<ProductsResponse, 'pagination'> {}
+export interface SearchProps extends BannerProps, ProductsResponse {}
