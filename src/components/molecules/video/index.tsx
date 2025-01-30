@@ -15,12 +15,13 @@ const videoStyles: Readonly<TwClasses> = {
   wrapper: 'w-full mb-6 laptop:mb-10 relative',
   video: (shouldPlay: unknown) =>
     `w-full h-full object-cover ${(shouldPlay as boolean) ? 'cursor-pointer' : ''}`,
-  icon: (shouldPlay: unknown) =>
+  button: (shouldPlay: unknown) =>
     `w-[76px] h-20 tablet:w-20 laptop:w-[140px] laptop:h-[140px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${(shouldPlay as boolean) ? 'hidden' : 'block'}`,
+  icon: 'w-[76px] h-20 tablet:w-20 laptop:w-[140px] laptop:h-[140px]',
 }
 const styles = videoStyles as Readonly<StyleRecord>
 const getVideoStyles = videoStyles.video as StyleGetter
-const getIconStyles = videoStyles.icon as StyleGetter
+const getButtonStyles = videoStyles.button as StyleGetter
 
 export function Video({
   video,
@@ -49,10 +50,13 @@ export function Video({
         onEnded={() => updatePrimitiveState(false, setShouldPlay)}
       ></video>
 
-      <Button onClick={() => updatePrimitiveState(true, setShouldPlay)}>
+      <Button
+        classes={getButtonStyles(shouldPlay)}
+        onClick={() => updatePrimitiveState(true, setShouldPlay)}
+      >
         <Icon
           variant='play-video'
-          sizes={getIconStyles(shouldPlay)}
+          sizes={styles.icon}
         />
       </Button>
     </div>

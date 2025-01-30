@@ -12,16 +12,6 @@ const nextConfig = {
         port: '',
         pathname: '/storage/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'cdn.media.amplience.net',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'swiperjs.com',
-        port: '',
-      },
     ],
   },
 }

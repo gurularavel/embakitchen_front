@@ -14,7 +14,7 @@ const slogansSectionStyles: Readonly<TwClasses> = {
   s2: 'text-2xl laptop:text-4xl leading-8 laptop:leading-14 font-semibold text-white text-center mb-10',
   buttonWrapper: 'flex justify-center',
   specialOrderButton:
-    'w-full mobile:w-72 laptop:w-[215px] h-14 bg-primary-2 rounded-md text-base leading-6 font-semibold text-tertiary-11',
+    'w-full mobile:w-72 laptop:w-auto laptop:px-10 h-14 bg-primary-2 rounded-md text-base leading-6 font-semibold text-tertiary-11',
 }
 const styles = slogansSectionStyles as Readonly<StyleRecord>
 
