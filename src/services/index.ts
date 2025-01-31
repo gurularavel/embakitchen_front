@@ -38,4 +38,5 @@ export {
   getDistricts,
   createOrder,
   getSearchResult,
+  getSearchPageContent,
 } from '~ek/services/shared'

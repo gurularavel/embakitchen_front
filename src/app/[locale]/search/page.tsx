@@ -1,12 +1,11 @@
 import { ProductSearch } from '~ek/components'
-import { getBlogsPageContent, getSearchResult } from '~ek/services'
-import { SearchApiParams } from '~ek/services/shared'
+import { getSearchResult, getSearchPageContent } from '~ek/services'
 import type {
   ProductsResponse,
   Language,
   SearchProps,
-  BlogsProps,
   SearchResultEntry,
+  SearchApiParams,
 } from '~ek/types'
 import { omit, transformToUiData } from '~ek/utils'
 
@@ -20,15 +19,15 @@ export default async function SearchPage({
   const searchData: ProductsResponse = await getSearchResult(
     searchParams as SearchApiParams,
   )
-  const blogsPageContent = await getBlogsPageContent()
+  const searchPageContent = await getSearchPageContent()
 
   const uiData = transformToUiData(
-    omit({ source: blogsPageContent, fields: ['id'] }),
+    omit({ source: searchPageContent, fields: ['id'] }),
     locale,
   )
 
   const productSearchProps: SearchProps = {
-    ...(uiData as Omit<BlogsProps, 'blogs'>),
+    ...(uiData as Omit<SearchProps, 'data' | 'pagination'>),
     ...(transformToUiData(searchData, locale) as SearchResultEntry),
   }
 

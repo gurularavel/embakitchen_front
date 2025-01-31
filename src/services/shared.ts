@@ -6,6 +6,8 @@ import type {
   OrderResquestBody,
   OrdersResponse,
   ProductsResponse,
+  SearchApiParams,
+  SearchPageResponse,
 } from '~ek/types'
 import { PER_PAGE } from '~ek/utils'
 
@@ -51,10 +53,6 @@ export async function createOrder(
   return response as CreateOrderResponse
 }
 
-export interface SearchApiParams extends ApiQueryParams {
-  search: string
-  page?: number
-}
 export async function getSearchResult({
   search,
   page = 1,
@@ -68,4 +66,9 @@ export async function getSearchResult({
   })
 
   return response as ProductsResponse
+}
+
+export async function getSearchPageContent(): Promise<SearchPageResponse> {
+  const response = await httpClient.get<SearchPageResponse>('/search-page')
+  return response as SearchPageResponse
 }

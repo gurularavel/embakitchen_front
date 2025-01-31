@@ -167,3 +167,14 @@ export interface CreateOrderResponse extends OrderResquestBody {
   created_at: string
   updated_at: string
 }
+
+export interface SearchApiParams extends ApiQueryParams {
+  search: string
+  page?: number
+}
+
+export interface SearchPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
+}
