@@ -168,11 +168,6 @@ export interface CreateOrderResponse extends OrderResquestBody {
   updated_at: string
 }
 
-export interface SearchApiParams extends ApiQueryParams {
-  search: string
-  page?: number
-}
-
 export interface SearchPageResponse<T extends string = Language> {
   id: number
   title: MultilingualText<T>

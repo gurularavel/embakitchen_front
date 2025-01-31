@@ -124,10 +124,7 @@ export const transformToUiData = (data: object, locale: Language): object => {
   return Object.entries(data).reduce(
     (result, [key, value]) => ({
       ...result,
-      [key]:
-        Array.isArray(value) && !value.length
-          ? value
-          : setUiData(value, locale),
+      [key]: setUiData(value, locale),
     }),
     {},
   )

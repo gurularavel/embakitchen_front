@@ -1,12 +1,12 @@
 'use client'
 
 import * as React from 'react'
-import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { useLocale, useTranslations } from 'next-intl'
 import { Button, Icon, Input, NavLink } from '~ek/components'
 import { useInputFocus } from '~ek/hooks'
 import { getSearchResult } from '~ek/services'
-import type { Language, ProductsResponse } from '~ek/types'
+import type { Language, SearchResultEntry } from '~ek/types'
 import { transformToUiData, updatePrimitiveState } from '~ek/utils'
 
 const searchStyles: Readonly<TwClasses> = {
@@ -30,16 +30,15 @@ const searchStyles: Readonly<TwClasses> = {
   searchLink: 'text-primary-1 font-medium',
 }
 const styles = searchStyles as Readonly<StyleRecord>
-const getSearchContainerStyles: StyleGetter =
-  searchStyles.searchContainer as StyleGetter
-const getResultBoxStyles: StyleGetter = searchStyles.resultBox as StyleGetter
+const getSearchContainerStyles = searchStyles.searchContainer as StyleGetter
+const getResultBoxStyles = searchStyles.resultBox as StyleGetter
 
 export function Search(): React.ReactElement {
   const locale = useLocale()
   const t = useTranslations('search')
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
-  const [searchResult, setSearchResult] = React.useState<ProductsResponse>(
-    {} as ProductsResponse,
+  const [searchResult, setSearchResult] = React.useState<SearchResultEntry>(
+    {} as SearchResultEntry,
   )
   const [inputValue, setInputValue] = React.useState<string>('')
   const searchInputRef = useInputFocus({
@@ -55,13 +54,13 @@ export function Search(): React.ReactElement {
     const uiData = transformToUiData(
       searchResult,
       locale as Language,
-    ) as ProductsResponse
+    ) as SearchResultEntry
     setSearchResult(uiData)
   }
 
   const closeSearch = () => {
     setIsVisible(false)
-    setSearchResult({} as ProductsResponse)
+    setSearchResult({} as SearchResultEntry)
   }
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -106,9 +105,9 @@ export function Search(): React.ReactElement {
         />
       </div>
       <div className={getResultBoxStyles(isVisible && searchResult?.data)}>
-        {searchResult?.data?.length > 0 ? (
+        {!!searchResult?.data?.length ? (
           <div className={styles.searchResult}>
-            {searchResult.data?.map(product => {
+            {searchResult.data.map(product => {
               return (
                 <div
                   key={product.id}
@@ -119,13 +118,7 @@ export function Search(): React.ReactElement {
                   >
                     <div className={styles.resultProductWrapper}>
                       <Image
-                        src={
-                          (
-                            product.bannerImage as unknown as {
-                              original_url: string
-                            }
-                          ).original_url
-                        }
+                        src={product.bannerImage.original_url}
                         className={styles.searchImage}
                         alt={product.title}
                         width={60}

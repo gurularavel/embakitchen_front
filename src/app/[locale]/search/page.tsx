@@ -2,23 +2,20 @@ import { ProductSearch } from '~ek/components'
 import { getSearchResult, getSearchPageContent } from '~ek/services'
 import type {
   ProductsResponse,
-  Language,
   SearchProps,
   SearchResultEntry,
-  SearchApiParams,
 } from '~ek/types'
-import { omit, transformToUiData } from '~ek/utils'
+import { omit, PER_PAGE, transformToUiData } from '~ek/utils'
 
 export default async function SearchPage({
   params: { locale },
   searchParams,
-}: {
-  params: { locale: Language }
-  searchParams: SearchApiParams
-}): Promise<React.ReactElement> {
-  const searchData: ProductsResponse = await getSearchResult(
-    searchParams as SearchApiParams,
-  )
+}: Readonly<PageProps>): Promise<React.ReactElement> {
+  const searchData: ProductsResponse = await getSearchResult({
+    page: searchParams?.page || 1,
+    perPage: searchParams?.perPage || PER_PAGE,
+    ...searchParams,
+  } as ApiQueryParams)
   const searchPageContent = await getSearchPageContent()
 
   const uiData = transformToUiData(

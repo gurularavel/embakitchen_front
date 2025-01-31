@@ -15,6 +15,7 @@ declare global {
       category?: string
       search?: string
     }
+    searchParams?: ApiQueryParams
   }
 
   interface ApiQueryParams {
