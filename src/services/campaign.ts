@@ -14,10 +14,9 @@ export async function getCampaignsPageContent(): Promise<CampaignsPageResponse> 
 export async function getCampaigns(
   apiQueryParams: ApiQueryParams,
 ): Promise<CampaignsResponse['data']> {
-  const response = await httpClient.get<CampaignsResponse>(
-    '/campaigns',
-    apiQueryParams,
-  )
+  const response = await httpClient.get<CampaignsResponse>('/campaigns', {
+    query: apiQueryParams,
+  })
 
   return response?.data as CampaignsResponse['data']
 }

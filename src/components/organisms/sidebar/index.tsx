@@ -1,16 +1,19 @@
 'use client'
 
 import * as React from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import {
   ActionLink,
   Button,
   Icon,
   LanguageSelector,
   Navbar,
+  NavLink,
   SocialContacts,
 } from '~ek/components'
-import { updatePrimitiveState } from '~ek/utils'
+import { LOCALIZED_PATHNAMES, updatePrimitiveState } from '~ek/utils'
+import { useStore } from '~ek/hooks'
+import type { Language } from '~ek/types'
 
 const sidebarStyles: Readonly<TwClasses> = {
   sidebar:
@@ -35,6 +38,11 @@ const getSidebarContentStyles: StyleGetter =
 export function Sidebar(): React.ReactElement {
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
   const t = useTranslations('buttons')
+  const locale = useLocale()
+  const {
+    clientSlice: { setIsAuthFormDrawerVisible },
+    authSlice: { user },
+  } = useStore(state => state)
 
   React.useEffect(() => {
     document.body.style.overflow = isVisible ? 'hidden' : 'auto'
@@ -78,13 +86,29 @@ export function Sidebar(): React.ReactElement {
           />
 
           <div className={styles.options}>
-            <Button classes={styles.profileButton}>
-              <Icon
-                variant='profile-light'
-                sizes='w-6 h-6'
-              />
-              <span>{t('personalAccount')}</span>
-            </Button>
+            {user ? (
+              <NavLink
+                className={styles.profileButton}
+                href={LOCALIZED_PATHNAMES['/profile'][locale as Language]}
+              >
+                <Icon
+                  variant='profile-light'
+                  sizes='w-6 h-6'
+                />
+                <span>{t('personalAccount')}</span>
+              </NavLink>
+            ) : (
+              <Button
+                classes={styles.profileButton}
+                onClick={() => setIsAuthFormDrawerVisible(true)}
+              >
+                <Icon
+                  variant='profile-light'
+                  sizes='w-6 h-6'
+                />
+                <span>{t('personalAccount')}</span>
+              </Button>
+            )}
 
             <LanguageSelector
               context='sidebar'

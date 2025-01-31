@@ -4,7 +4,7 @@ import * as React from 'react'
 import Image from 'next/image'
 import { format } from 'date-fns'
 import { az } from 'date-fns/locale'
-import { Banner, Button, Icon, Slider } from '~ek/components'
+import { Banner, Button, Icon, NavLink, Slider } from '~ek/components'
 import type {
   Color,
   Comment,
@@ -14,6 +14,7 @@ import type {
 } from '~ek/types'
 import birbank from '/public/assets/images/birbank.png'
 import { httpClient } from '~ek/http-client'
+import { usePathname } from '~ek/i18n/routing'
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -100,6 +101,8 @@ export function ProductDetails({
     colors[0].title,
   )
   const newCommentInput = React.useRef<HTMLTextAreaElement>(null)
+  const pathname = usePathname()
+  const pathnameWithoutLastSlug = pathname.split('/').slice(0, -1).join('/')
 
   const addNewComment = async (): Promise<void> => {
     const message = newCommentInput.current?.value
@@ -277,33 +280,38 @@ export function ProductDetails({
         </div>
       </div>
 
-      <div className={styles.similarProductsWrapper}>
-        <h4 className={styles.similarProductsTitle}>Oxşar məhsullar</h4>
+      {similar_products?.length && (
+        <div className={styles.similarProductsWrapper}>
+          <h4 className={styles.similarProductsTitle}>Oxşar məhsullar</h4>
 
-        <div className={styles.similarProducts}>
-          {similar_products.map((similarProduct: SimilarProduct<string>) => (
-            <div
-              key={similarProduct.id}
-              className={styles.similarProduct}
-            >
-              <div className={styles.productImageWrapper}>
-                <Image
-                  src={
-                    (similarProduct.bannerImage as unknown as MediaFile)
-                      .original_url
-                  }
-                  alt={`Embakitchen - ${similarProduct.title}`}
-                  className={styles.productImage}
-                  fill
-                />
-              </div>
-              <div>
-                <h4 className={styles.productTitle}>{similarProduct.title}</h4>
-              </div>
-            </div>
-          ))}
+          <div className={styles.similarProducts}>
+            {similar_products?.map((similarProduct: SimilarProduct<string>) => (
+              <NavLink
+                key={similarProduct.id}
+                href={`${pathnameWithoutLastSlug}/${similarProduct.slug}`}
+                className={styles.similarProduct}
+              >
+                <div className={styles.productImageWrapper}>
+                  <Image
+                    src={
+                      (similarProduct.bannerImage as unknown as MediaFile)
+                        .original_url
+                    }
+                    alt={`Embakitchen - ${similarProduct.title}`}
+                    className={styles.productImage}
+                    fill
+                  />
+                </div>
+                <div>
+                  <h4 className={styles.productTitle}>
+                    {similarProduct.title}
+                  </h4>
+                </div>
+              </NavLink>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

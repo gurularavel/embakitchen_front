@@ -32,7 +32,7 @@ const navbarStyles: Readonly<Record<NavbarContext, TwClasses>> = {
       'desktop:h-full desktop:flex desktop:items-center text-base desktop:text-sm font-normal desktop:font-medium text-white desktop:text-nowrap',
     navLinkActive: 'text-secondary-4',
     specialOrderButton:
-      'w-[135px] h-11 border border-solid border-gray-4 rounded-lg text-base font-medium text-secondary-4',
+      'h-11 px-6 border border-solid border-gray-4 rounded-lg text-base font-medium text-secondary-4',
   },
   footer: {
     nav: 'w-full laptop:w-[200px]',

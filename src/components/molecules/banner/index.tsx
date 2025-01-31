@@ -29,7 +29,7 @@ export function Banner({
         </div>
         <Image
           src={image.original_url}
-          alt='Embakitchen about company page'
+          alt={title}
           className={styles.image}
           fill={true}
         />

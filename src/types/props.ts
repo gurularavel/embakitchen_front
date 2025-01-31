@@ -12,11 +12,12 @@ import type {
   CategoryProduct,
   HomepageResponse,
   MediaFile,
-  // PartnersSliderEntry,
   ProductEntry,
   ProductMainInfo,
   ProjectEntry,
   StoreEntry,
+  ProductsResponse,
+  PaginatedResponse,
 } from '~ek/types'
 
 export interface BannerProps {
@@ -129,3 +130,9 @@ export interface ProjectDetailsProps extends ProjectDetailsEntry {
   bannerImage: MediaFile
   similar_projects: SimilarProject[]
 }
+
+export interface SearchResultEntry {
+  data: ModifiedProductMainInfo[]
+  pagination: PaginatedResponse['pagination']
+}
+export interface SearchProps extends BannerProps, SearchResultEntry {}

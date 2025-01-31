@@ -119,11 +119,13 @@ export function Stores({
                 <span className={styles.storeInfo}>{store.address}</span>
               </div>
               <div className={styles.storeInfoWrapper}>
-                <Icon
-                  variant='email'
-                  sizes={styles.storeIcon}
+                <ActionLink
+                  href={`mailto:${store.email}`}
+                  label={store.email}
+                  actionLinkIcon={{ variant: 'email', sizes: styles.storeIcon }}
+                  classes={styles.storeInfo}
+                  gap={8}
                 />
-                <span className={styles.storeInfo}>{store.email}</span>
               </div>
             </div>
           ))}
