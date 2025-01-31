@@ -5,15 +5,14 @@ import type {
   SearchProps,
   SearchResultEntry,
 } from '~ek/types'
-import { omit, PER_PAGE, transformToUiData } from '~ek/utils'
+import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export default async function SearchPage({
   params: { locale },
   searchParams,
 }: Readonly<PageProps>): Promise<React.ReactElement> {
   const searchData: ProductsResponse = await getSearchResult({
-    page: searchParams?.page || 1,
-    perPage: searchParams?.perPage || PER_PAGE,
+    ...defaultApiQueryParams,
     ...searchParams,
   } as ApiQueryParams)
   const searchPageContent = await getSearchPageContent()
