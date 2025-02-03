@@ -98,5 +98,8 @@
     "allProductsLink": "Bütün məhsullar",
     "total": "Ümumi məhsul",
     "searchLink": "Bütün nəticələr"
+  },
+  "texts": {
+    "campaignFinished": "Bitib"
   }
 }

@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import type { Duration } from 'date-fns'
+import { useTranslations } from 'next-intl'
 import { useStore, useTimer } from '~ek/hooks'
 
 const printDays = (days: number | undefined): string =>
@@ -29,20 +30,31 @@ interface TimerProps {
 
 const timerStyles: Readonly<TwClasses> = {
   container:
-    'h-14 w-full mobile:w-1/2 laptop:w-full desktop:w-1/2 flex items-center border border-solid border-gray-9 px-6',
+    'h-14 w-full mobile:w-1/2 laptop:w-full desktop:w-1/2 flex justify-center items-center border border-solid border-gray-9',
   content:
     'text-base font-semibold leading-6 text-primary-1 whitespace-nowrap tabular-nums',
 }
 const styles = timerStyles as Readonly<StyleRecord>
 
-export function Timer({ end }: Readonly<TimerProps>): React.ReactElement {
+export function Timer({
+  end,
+}: Readonly<TimerProps>): React.ReactElement | null {
   const duration = useTimer({ end })
+  const isCampaignFinished = Boolean(
+    Object.values(duration).filter(value => value > 0).length,
+  )
   const { isClientRendering } = useStore(state => state.clientSlice)
+  const t = useTranslations('texts')
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        {isClientRendering && printDuration(duration)}
+        {isClientRendering &&
+          (isCampaignFinished ? (
+            printDuration(duration)
+          ) : (
+            <span>{t('campaignFinished')}</span>
+          ))}
       </div>
     </div>
   )
