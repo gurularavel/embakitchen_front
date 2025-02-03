@@ -7,7 +7,11 @@ import { Button, Icon, Input, NavLink } from '~ek/components'
 import { useInputFocus } from '~ek/hooks'
 import { getSearchResult } from '~ek/services'
 import type { Language, SearchResultEntry } from '~ek/types'
-import { transformToUiData, updatePrimitiveState } from '~ek/utils'
+import {
+  handleClickOutside,
+  transformToUiData,
+  updatePrimitiveState,
+} from '~ek/utils'
 
 const searchStyles: Readonly<TwClasses> = {
   search: 'w-auto h-full',
@@ -63,16 +67,14 @@ export function Search(): React.ReactElement {
     setSearchResult({} as SearchResultEntry)
   }
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (!(event.target as HTMLElement).closest('.search-box')) {
-      closeSearch()
-    }
-  }
-
   React.useEffect(() => {
-    if (!isVisible) return
-    document.addEventListener('click', handleClickOutside)
-    return () => document.removeEventListener('click', handleClickOutside)
+    const onClickOutside = (event: MouseEvent) => {
+      handleClickOutside(event, '.search-box', closeSearch)
+    }
+    if (isVisible) {
+      document.addEventListener('click', onClickOutside)
+    }
+    return () => document.removeEventListener('click', onClickOutside)
   }, [isVisible])
 
   return (
