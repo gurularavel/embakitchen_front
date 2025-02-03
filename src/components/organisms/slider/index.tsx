@@ -15,7 +15,7 @@ import {
 import SwiperCore, { type Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
 import { useLocale, useTranslations } from 'next-intl'
-import { Button, Icon, SocialContacts } from '~ek/components'
+import { Button, Icon, NavLink, SocialContacts } from '~ek/components'
 import { useScreenSize, useStore } from '~ek/hooks'
 import {
   defaultApiQueryParams,
@@ -220,12 +220,12 @@ function Gallery(): React.ReactElement {
 
   React.useEffect(() => {
     async function initializeBestSellingProductsContent() {
-      const partnersSliderContent = await getBestSellingProducts(
+      const bestSellingProductContent = await getBestSellingProducts(
         defaultApiQueryParams,
       )
 
       const uiData = transformToUiData(
-        partnersSliderContent,
+        bestSellingProductContent,
         locale as Language,
       ) as ModifiedCategoryProduct[]
       setBestSellingProductContent(uiData)
@@ -261,25 +261,29 @@ function Gallery(): React.ReactElement {
                 key={i}
                 className={gallerySliderStyles.slide}
               >
-                <Image
-                  src={product.bannerImage.original_url}
-                  alt={product.title}
-                  className={gallerySliderStyles.img}
-                  fill
-                />
+                <NavLink href={`/products/${product.category}/${product.slug}`}>
+                  <Image
+                    src={product.bannerImage.original_url}
+                    alt={product.title}
+                    className={gallerySliderStyles.img}
+                    fill
+                  />
 
-                <div className={gallerySliderStyles.surface}>
-                  {product?.tags?.length &&
-                    product?.tags?.map(tag => (
-                      <span
-                        key={tag.id}
-                        className={gallerySliderStyles.tag}
-                      >
-                        {tag.title}
-                      </span>
-                    ))}
-                  <h6 className={gallerySliderStyles.title}>{product.title}</h6>
-                </div>
+                  <div className={gallerySliderStyles.surface}>
+                    {product?.tags?.length &&
+                      product?.tags?.map(tag => (
+                        <span
+                          key={tag.id}
+                          className={gallerySliderStyles.tag}
+                        >
+                          {tag.title}
+                        </span>
+                      ))}
+                    <h6 className={gallerySliderStyles.title}>
+                      {product.title}
+                    </h6>
+                  </div>
+                </NavLink>
               </SwiperSlide>
             ),
           )}
