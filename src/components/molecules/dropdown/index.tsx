@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Button, Icon, NavLink } from '~ek/components'
-import { useScreenSize } from '~ek/hooks'
+import { useClickOutside, useScreenSize } from '~ek/hooks'
 import type { NavLinkEntry } from '~ek/types'
 import { SCREENS, updatePrimitiveState } from '~ek/utils'
 
@@ -41,23 +41,13 @@ export function Dropdown({
   const [dropdownHeight, setDropdownHeight] = React.useState<number>(0)
   const dropdownRef = React.useRef<HTMLUListElement>(null)
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setIsVisible(false)
-    }
-  }
+  const closeDropdown = () => setIsVisible(false)
+  useClickOutside('.dropdown-menu', closeDropdown, isVisible)
 
   React.useEffect(() => {
-    if (isVisible) {
-      document.addEventListener('click', handleClickOutside)
-    }
     if (dropdownRef.current) {
       setDropdownHeight(dropdownRef.current.scrollHeight)
     }
-    return () => document.removeEventListener('click', handleClickOutside)
   }, [isVisible])
 
   return (

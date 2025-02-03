@@ -159,15 +159,3 @@ export const removeBrowserAuthData = (): void => {
       (document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`),
   )
 }
-
-export const handleClickOutside = (
-  event: MouseEvent,
-  selector: string,
-  closeFunction: () => void,
-) => {
-  const isInside = (event.target as HTMLElement).closest(selector)
-
-  if (!isInside) {
-    closeFunction()
-  }
-}

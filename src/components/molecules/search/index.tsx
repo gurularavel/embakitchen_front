@@ -4,14 +4,10 @@ import * as React from 'react'
 import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
 import { Button, Icon, Input, NavLink } from '~ek/components'
-import { useInputFocus } from '~ek/hooks'
+import { useClickOutside, useInputFocus } from '~ek/hooks'
 import { getSearchResult } from '~ek/services'
 import type { Language, SearchResultEntry } from '~ek/types'
-import {
-  handleClickOutside,
-  transformToUiData,
-  updatePrimitiveState,
-} from '~ek/utils'
+import { transformToUiData, updatePrimitiveState } from '~ek/utils'
 
 const searchStyles: Readonly<TwClasses> = {
   search: 'w-auto h-full',
@@ -66,16 +62,7 @@ export function Search(): React.ReactElement {
     setIsVisible(false)
     setSearchResult({} as SearchResultEntry)
   }
-
-  React.useEffect(() => {
-    const onClickOutside = (event: MouseEvent) => {
-      handleClickOutside(event, '.search-box', closeSearch)
-    }
-    if (isVisible) {
-      document.addEventListener('click', onClickOutside)
-    }
-    return () => document.removeEventListener('click', onClickOutside)
-  }, [isVisible])
+  useClickOutside('.search-box', closeSearch, isVisible)
 
   return (
     <div className={styles.search}>

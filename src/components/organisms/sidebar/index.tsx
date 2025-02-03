@@ -11,12 +11,8 @@ import {
   NavLink,
   SocialContacts,
 } from '~ek/components'
-import {
-  handleClickOutside,
-  LOCALIZED_PATHNAMES,
-  updatePrimitiveState,
-} from '~ek/utils'
-import { useStore } from '~ek/hooks'
+import { LOCALIZED_PATHNAMES, updatePrimitiveState } from '~ek/utils'
+import { useClickOutside, useStore } from '~ek/hooks'
 import type { Language } from '~ek/types'
 
 const sidebarStyles: Readonly<TwClasses> = {
@@ -51,17 +47,7 @@ export function Sidebar(): React.ReactElement {
   const closeMenu = () => {
     setIsVisible(false)
   }
-
-  React.useEffect(() => {
-    document.body.style.overflow = isVisible ? 'hidden' : 'auto'
-    const onClickOutside = (event: MouseEvent) => {
-      handleClickOutside(event, '.sidebar-wrapper', closeMenu)
-    }
-    if (isVisible) {
-      document.addEventListener('click', onClickOutside)
-    }
-    return () => document.removeEventListener('click', onClickOutside)
-  }, [isVisible])
+  useClickOutside('.sidebar-wrapper', closeMenu, isVisible)
 
   return (
     <aside className={styles.sidebar}>

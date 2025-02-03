@@ -21,12 +21,8 @@ export function NavLink({
   const hrefGuard = typeof href === 'string' ? href : ''
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (onClick) {
-      onClick(event)
-    }
-    if (closeMenu) {
-      closeMenu()
-    }
+    onClick?.(event)
+    closeMenu?.()
   }
 
   return (

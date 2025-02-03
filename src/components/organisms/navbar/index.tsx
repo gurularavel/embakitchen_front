@@ -20,11 +20,6 @@ interface FooterNav {
   links: NavLinkEntry['nestedLinks']
 }
 
-// const navbars: Readonly<Record<NavbarContext, React.ReactElement>> = {
-//   header: <NavbarHeader />,
-//   footer: <NavbarFooter />,
-// }
-
 const navbarStyles: Readonly<Record<NavbarContext, TwClasses>> = {
   header: {
     nav: 'h-auto desktop:h-full mb-6 desktop:mb-0 flex flex-col gap-y-6 desktop:flex-row desktop:gap-x-4',

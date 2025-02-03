@@ -6,7 +6,8 @@ import { useLocale } from 'next-intl'
 import { Link, usePathname } from '~ek/i18n/routing'
 import { Button, Icon } from '~ek/components'
 import { Language } from '~ek/types'
-import { handleClickOutside, updatePrimitiveState } from '~ek/utils'
+import { updatePrimitiveState } from '~ek/utils'
+import { useClickOutside } from '~ek/hooks'
 
 type LanguageSelectorContext = 'sidebar' | 'header'
 
@@ -47,19 +48,8 @@ export function LanguageSelector({
   const pathname: string = usePathname()
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
 
-  const closeMenu = () => {
-    setIsVisible(false)
-  }
-
-  React.useEffect(() => {
-    const onClickOutside = (event: MouseEvent) => {
-      handleClickOutside(event, '.language-selector', closeMenu)
-    }
-    if (isVisible) {
-      document.addEventListener('click', onClickOutside)
-    }
-    return () => document.removeEventListener('click', onClickOutside)
-  }, [isVisible])
+  const closeMenu = () => setIsVisible(false)
+  useClickOutside('.language-selector', closeMenu, isVisible)
 
   return (
     <div className={getLanguageSelectorStyles(context)}>
