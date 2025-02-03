@@ -111,7 +111,7 @@ export interface CampaignsProps extends SharedProps {
 }
 
 type OmittedCategoryProduct = Omit<CategoryProduct<string>, 'bannerImage'>
-interface ModifiedCategoryProduct extends OmittedCategoryProduct {
+export interface ModifiedCategoryProduct extends OmittedCategoryProduct {
   bannerImage: MediaFile
 }
 export interface ProductCategoryProps

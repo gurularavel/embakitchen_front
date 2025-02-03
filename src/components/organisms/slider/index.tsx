@@ -27,11 +27,13 @@ import type {
   Language,
   MainSliderEntry,
   MediaFile,
+  ModifiedCategoryProduct,
   PartnersSliderEntry,
   ProductEntry,
   SliderVariant,
 } from '~ek/types'
 import {
+  getBestSellingProducts,
   getMainSliderContent,
   getPartnersSliderContent,
   getProductDetails,
@@ -40,9 +42,6 @@ import 'swiper/css'
 import 'swiper/css/grid'
 import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
-import galleryImg1 from '/public/assets/images/slider/gallery/gallery-img-1.png'
-import galleryImg2 from '/public/assets/images/slider/gallery/gallery-img-2.png'
-import galleryImg3 from '/public/assets/images/slider/gallery/gallery-img-3.png'
 
 SwiperCore.use([Thumbs, Grid])
 
@@ -215,9 +214,25 @@ function Main(): React.ReactElement {
 
 function Gallery(): React.ReactElement {
   const gallerySliderRef = React.useRef<SwiperType>()
-  const gallerySliderImages: StaticImageData[] = Array(2)
-    .fill([galleryImg1, galleryImg2, galleryImg3])
-    .flat()
+  const locale = useLocale()
+  const [bestSellingProductContent, setBestSellingProductContent] =
+    React.useState<ModifiedCategoryProduct[]>([])
+
+  React.useEffect(() => {
+    async function initializeBestSellingProductsContent() {
+      const partnersSliderContent = await getBestSellingProducts(
+        defaultApiQueryParams,
+      )
+
+      const uiData = transformToUiData(
+        partnersSliderContent,
+        locale as Language,
+      ) as ModifiedCategoryProduct[]
+      setBestSellingProductContent(uiData)
+    }
+
+    initializeBestSellingProductsContent()
+  }, [locale])
 
   return (
     <div className={gallerySliderStyles.slider}>
@@ -240,23 +255,34 @@ function Gallery(): React.ReactElement {
           modules={[Navigation]}
           touchEventsTarget='container'
         >
-          {gallerySliderImages.map((img: StaticImageData, i: number) => (
-            <SwiperSlide
-              key={i}
-              className={gallerySliderStyles.slide}
-            >
-              <Image
-                src={img}
-                alt='Embakitchen product'
-                className={gallerySliderStyles.img}
-              />
+          {bestSellingProductContent.map(
+            (product: ModifiedCategoryProduct, i: number) => (
+              <SwiperSlide
+                key={i}
+                className={gallerySliderStyles.slide}
+              >
+                <Image
+                  src={product.bannerImage.original_url}
+                  alt={product.title}
+                  className={gallerySliderStyles.img}
+                  fill
+                />
 
-              <div className={gallerySliderStyles.surface}>
-                <span className={gallerySliderStyles.tag}>Ən çox satılan</span>
-                <h6 className={gallerySliderStyles.title}>Adel Ral</h6>
-              </div>
-            </SwiperSlide>
-          ))}
+                <div className={gallerySliderStyles.surface}>
+                  {product?.tags?.length &&
+                    product?.tags?.map(tag => (
+                      <span
+                        key={tag.id}
+                        className={gallerySliderStyles.tag}
+                      >
+                        {tag.title}
+                      </span>
+                    ))}
+                  <h6 className={gallerySliderStyles.title}>{product.title}</h6>
+                </div>
+              </SwiperSlide>
+            ),
+          )}
         </Swiper>
 
         <Button
