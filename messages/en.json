@@ -98,5 +98,8 @@
     "allProductsLink": "All products",
     "total": "Total",
     "searchLink" : "All results"
+  },
+  "texts": {
+    "campaignFinished": "Has been finished"
   }
 }

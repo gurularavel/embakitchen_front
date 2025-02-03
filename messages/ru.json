@@ -98,5 +98,8 @@
     "allProductsLink": "Все продукты",
     "total": "Oбщий продукт",
     "searchLink": "Все результаты"
+  },
+  "texts": {
+    "campaignFinished": "Закончено"
   }
 }
