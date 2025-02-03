@@ -242,7 +242,7 @@ export type ProductMainInfo = Pick<
 
 export type CategoryProduct<T extends string = Language> = Pick<
   ProductEntry<T>,
-  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage'
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
 >
 export interface CategoryEntry<
   T extends string = Language,

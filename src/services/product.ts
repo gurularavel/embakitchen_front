@@ -12,6 +12,17 @@ export async function getProducts(
   return response?.data as ProductsResponse['data']
 }
 
+export async function getBestSellingProducts(
+  apiQueryParams?: ApiQueryParams,
+): Promise<ProductsResponse['data']> {
+  const response = await httpClient.get<ProductsResponse>(
+    '/best-selling-products',
+    apiQueryParams ?? {},
+  )
+
+  return response?.data as ProductsResponse['data']
+}
+
 export async function getProductDetails(slug: string): Promise<ProductEntry> {
   const response = await httpClient.get<ProductEntry>(`/products/${slug}`)
 
