@@ -32,7 +32,7 @@ const popularBlogsStyles: Readonly<TwClasses> = {
   popularBlogsWrapper: 'w-full laptop:w-[480px] laptop:min-w-[480px]',
   popularBlogs: 'px-4 tablet:px-10 laptop:pl-0 flex flex-col gap-y-2',
   popularBlogsTitle:
-    'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
+    'relative mb-10 pb-6 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
   popularBlog:
     'flex justify-between items-center gap-x-4 border-b border-solid border-[#F2F3F8] pb-2',
   popularBlogTitle: 'max-w-[312px] text-base font-medium text-tertiary-1',

@@ -9,7 +9,9 @@ export async function getBlogsPageContent(): Promise<BlogsPageResponse> {
 export async function getBlogs(
   apiQueryParams: ApiQueryParams,
 ): Promise<BlogsResponse['data']> {
-  const response = await httpClient.get<BlogsResponse>('/posts', apiQueryParams)
+  const response = await httpClient.get<BlogsResponse>('/posts', {
+    query: apiQueryParams,
+  })
 
   return response?.data as BlogsResponse['data']
 }
@@ -22,10 +24,9 @@ export async function getBlogDetails(slug: string): Promise<BlogEntry> {
 export async function getPopularBlogs(
   apiQueryParams: ApiQueryParams,
 ): Promise<BlogsResponse['data']> {
-  const response = await httpClient.get<BlogsResponse>(
-    '/popular-posts',
-    apiQueryParams,
-  )
+  const response = await httpClient.get<BlogsResponse>('/popular-posts', {
+    query: apiQueryParams,
+  })
 
   return response?.data as BlogsResponse['data']
 }
