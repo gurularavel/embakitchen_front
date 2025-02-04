@@ -2,13 +2,14 @@
 
 import * as React from 'react'
 import { Button, Icon, NavLink } from '~ek/components'
-import { useScreenSize } from '~ek/hooks'
+import { useClickOutside, useScreenSize } from '~ek/hooks'
 import type { NavLinkEntry } from '~ek/types'
 import { SCREENS, updatePrimitiveState } from '~ek/utils'
 
 interface DropdownProps {
   label: string
   nestedLinks: NavLinkEntry['nestedLinks']
+  closeMenu?: () => void
 }
 
 const dropdownStyles: Readonly<TwClasses> = {
@@ -33,11 +34,15 @@ const getDropdownContentStyles = dropdownStyles.dropdownContent as StyleGetter
 export function Dropdown({
   label,
   nestedLinks,
+  closeMenu,
 }: Readonly<DropdownProps>): React.ReactElement {
   const { width } = useScreenSize()
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
   const [dropdownHeight, setDropdownHeight] = React.useState<number>(0)
   const dropdownRef = React.useRef<HTMLUListElement>(null)
+
+  const closeDropdown = () => setIsVisible(false)
+  useClickOutside('.dropdown-menu', closeDropdown, isVisible)
 
   React.useEffect(() => {
     if (dropdownRef.current) {
@@ -81,6 +86,7 @@ export function Dropdown({
             <NavLink
               href={link.href}
               className={styles.nestedLink}
+              closeMenu={closeMenu}
             >
               {link.label}
             </NavLink>
