@@ -29,8 +29,8 @@ const footerStyles: Readonly<TwClasses> = {
 const styles = footerStyles as Readonly<StyleRecord>
 
 export function Footer(): React.ReactElement {
-  const t = useTranslations('buttons')
-  const ft = useTranslations('texts')
+  const t = useTranslations()
+
   return (
     <footer className={styles.footer}>
       <ul className={styles.footerContent}>
@@ -63,7 +63,9 @@ export function Footer(): React.ReactElement {
         <li className={styles.footerItem}>
           <ul className={styles.contactUs}>
             <li className={styles.contactUsItem}>
-              <span className={styles.contactUsLabel}>{ft('contact')}</span>
+              <span className={styles.contactUsLabel}>
+                {t('texts.contact')}
+              </span>
               <ActionLink
                 href='tel:+994552207212'
                 label='+994552207212'
@@ -82,7 +84,7 @@ export function Footer(): React.ReactElement {
 
             <li className={styles.contactUsItem}>
               <Button classes={styles.specialOrderButton}>
-                <span>{t('createCustomOrder')}</span>
+                <span>{t('buttons.createCustomOrder')}</span>
                 <Icon
                   variant='chevron-right-orange'
                   sizes='w-6 h-6'
