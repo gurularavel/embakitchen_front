@@ -11,7 +11,6 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'section-bg-1': 'url("../../public/assets/images/section-bg-1.png")',
         'order-stages-section':
           'url("../../public/assets/images/order-stages-section-bg.png")',
       },
