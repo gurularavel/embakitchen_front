@@ -4,10 +4,9 @@ import type { ProductEntry, ProductsResponse } from '~ek/types'
 export async function getProducts(
   apiQueryParams?: ApiQueryParams,
 ): Promise<ProductsResponse['data']> {
-  const response = await httpClient.get<ProductsResponse>(
-    '/products',
-    apiQueryParams ?? {},
-  )
+  const response = await httpClient.get<ProductsResponse>('/products', {
+    query: apiQueryParams ?? {},
+  })
 
   return response?.data as ProductsResponse['data']
 }
@@ -17,7 +16,9 @@ export async function getBestSellingProducts(
 ): Promise<ProductsResponse['data']> {
   const response = await httpClient.get<ProductsResponse>(
     '/best-selling-products',
-    apiQueryParams ?? {},
+    {
+      query: apiQueryParams ?? {},
+    },
   )
 
   return response?.data as ProductsResponse['data']

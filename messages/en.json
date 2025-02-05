@@ -100,6 +100,7 @@
     "searchLink" : "All results"
   },
   "texts": {
-    "campaignFinished": "Has been finished"
+    "campaignFinished": "Has been finished",
+    "contact" : "Contact"
   }
 }
