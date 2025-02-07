@@ -15,7 +15,7 @@ export async function getAboutInfoBlocksContent(
 ): Promise<AboutInfoBlock[]> {
   const response = await httpClient.get<AboutInfoBlocksResponse>(
     '/about-info-blocks',
-    apiQueryParams,
+    { query: apiQueryParams },
   )
 
   return response?.data as AboutInfoBlock[]
