@@ -38,6 +38,7 @@ export type IconVariant =
   | 'star-yellow'
   | 'close-dark'
   | 'profile-dark'
+  | 'search-dark'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -236,12 +237,12 @@ export interface ProductEntry<T extends string = Language> {
 
 export type ProductMainInfo = Pick<
   ProductEntry<string>,
-  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage'
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
 >
 
 export type CategoryProduct<T extends string = Language> = Pick<
   ProductEntry<T>,
-  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage'
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
 >
 export interface CategoryEntry<
   T extends string = Language,

@@ -5,6 +5,8 @@ import type {
   DistrictsResponse,
   OrderResquestBody,
   OrdersResponse,
+  ProductsResponse,
+  SearchPageResponse,
 } from '~ek/types'
 
 interface FilteredApiParams extends ApiQueryParams {
@@ -14,10 +16,9 @@ interface FilteredApiParams extends ApiQueryParams {
 export async function getCities(
   apiQueryParams?: ApiQueryParams,
 ): Promise<CitiesResponse['data']> {
-  const response = await httpClient.get<CitiesResponse>(
-    '/cities',
-    apiQueryParams ?? {},
-  )
+  const response = await httpClient.get<CitiesResponse>('/cities', {
+    query: apiQueryParams ?? {},
+  })
 
   return response?.data as CitiesResponse['data']
 }
@@ -47,4 +48,19 @@ export async function createOrder(
   >('/orders', values)
 
   return response as CreateOrderResponse
+}
+
+export async function getSearchResult(
+  apiQueryParams: ApiQueryParams,
+): Promise<ProductsResponse> {
+  const response = await httpClient.get<ProductsResponse>('/search', {
+    query: apiQueryParams,
+  })
+
+  return response as ProductsResponse
+}
+
+export async function getSearchPageContent(): Promise<SearchPageResponse> {
+  const response = await httpClient.get<SearchPageResponse>('/search-page')
+  return response as SearchPageResponse
 }

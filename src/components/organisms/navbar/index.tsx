@@ -12,16 +12,12 @@ type NavbarContext = 'header' | 'footer'
 interface NavbarProps {
   context: NavbarContext
   classes?: string
+  closeMenu?: () => void
 }
 
 interface FooterNav {
   title: string
   links: NavLinkEntry['nestedLinks']
-}
-
-const navbars: Readonly<Record<NavbarContext, React.ReactElement>> = {
-  header: <NavbarHeader />,
-  footer: <NavbarFooter />,
 }
 
 const navbarStyles: Readonly<Record<NavbarContext, TwClasses>> = {
@@ -32,7 +28,7 @@ const navbarStyles: Readonly<Record<NavbarContext, TwClasses>> = {
       'desktop:h-full desktop:flex desktop:items-center text-base desktop:text-sm font-normal desktop:font-medium text-white desktop:text-nowrap',
     navLinkActive: 'text-secondary-4',
     specialOrderButton:
-      'w-[135px] h-11 border border-solid border-gray-4 rounded-lg text-base font-medium text-secondary-4',
+      'h-11 px-6 border border-solid border-gray-4 rounded-lg text-base font-medium text-secondary-4',
   },
   footer: {
     nav: 'w-full laptop:w-[200px]',
@@ -43,23 +39,33 @@ const navbarStyles: Readonly<Record<NavbarContext, TwClasses>> = {
 const navbarHeaderStyles = navbarStyles.header as Readonly<StyleRecord>
 const navbarFooterStyles = navbarStyles.footer as Readonly<StyleRecord>
 
-const renderDropdown = (link: NavLinkEntry) => (
+const renderDropdown = (link: NavLinkEntry, closeMenu?: () => void) => (
   <Dropdown
     label={link.label}
     nestedLinks={link.nestedLinks}
+    closeMenu={closeMenu}
   />
 )
 
-const renderNavLink = (link: NavLinkEntry, className?: string) => (
+const renderNavLink = (
+  link: NavLinkEntry,
+  className?: string,
+  closeMenu?: () => void,
+) => (
   <NavLink
     href={link.href!}
     className={className}
+    onClick={closeMenu}
   >
     {link.label}
   </NavLink>
 )
 
-function NavbarHeader(): React.ReactElement {
+function NavbarHeader({
+  closeMenu,
+}: {
+  closeMenu?: () => void
+}): React.ReactElement {
   const pathname = usePathname()
   const t = useTranslations('buttons')
   const commonNavLinks: NavLinkEntry[] = useTranslations('links').raw('header')
@@ -90,8 +96,8 @@ function NavbarHeader(): React.ReactElement {
             className={navbarHeaderStyles.navItem}
           >
             {!link.nestedLinks
-              ? renderNavLink(link, navLinkClass)
-              : renderDropdown(link)}
+              ? renderNavLink(link, navLinkClass, closeMenu)
+              : renderDropdown(link, closeMenu)}
           </li>
         )
       })}
@@ -138,6 +144,15 @@ function NavbarFooter(): React.ReactElement {
 export function Navbar({
   context,
   classes,
+  closeMenu,
 }: Readonly<NavbarProps>): React.ReactElement {
-  return <nav className={classes ?? ''}>{navbars[context]}</nav>
+  return (
+    <nav className={classes ?? ''}>
+      {context === 'header' ? (
+        <NavbarHeader closeMenu={closeMenu} />
+      ) : (
+        <NavbarFooter />
+      )}
+    </nav>
+  )
 }

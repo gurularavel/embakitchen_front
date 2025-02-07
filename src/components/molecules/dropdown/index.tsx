@@ -2,13 +2,14 @@
 
 import * as React from 'react'
 import { Button, Icon, NavLink } from '~ek/components'
-import { useScreenSize } from '~ek/hooks'
+import { useClickOutside, useScreenSize } from '~ek/hooks'
 import type { NavLinkEntry } from '~ek/types'
 import { SCREENS, updatePrimitiveState } from '~ek/utils'
 
 interface DropdownProps {
   label: string
   nestedLinks: NavLinkEntry['nestedLinks']
+  closeMenu?: () => void
 }
 
 const dropdownStyles: Readonly<TwClasses> = {
@@ -20,26 +21,28 @@ const dropdownStyles: Readonly<TwClasses> = {
   dropdownCompactIcon: 'w-6 h-6',
   dropdownWideIcon: 'w-5 h-5',
   dropdownContent: (isVisible: unknown) =>
-    `bg-gray-1 desktop:absolute desktop:z-20 desktop:top-full desktop:right-0 transition-all duration-300 origin-top ${(isVisible as boolean) ? 'opacity-100 max-h-[1000px] mt-2 desktop:mt-0' : 'opacity-0 max-h-0'}`,
+    `bg-gray-1 desktop:absolute desktop:z-20 desktop:top-full desktop:right-0 transition-all duration-300 origin-top ${(isVisible as boolean) ? 'opacity-100 max-h-[1000px] mt-2 desktop:mt-0 overflow-y-visible' : 'opacity-0 max-h-0 overflow-y-hidden'}`,
   nestedItem:
     'h-12 desktop:h-18 mb-0 px-6 desktop:px-0 flex items-center bg-gray-1 desktop:hover:bg-gray-2',
   nestedLink:
     'desktop:w-full desktop:h-full desktop:flex items-center desktop:px-6 text-base font-normal text-white desktop:text-nowrap',
 }
 const styles = dropdownStyles as Readonly<StyleRecord>
-const getDropdownIconStyles: StyleGetter =
-  dropdownStyles.dropdownIcon as StyleGetter
-const getDropdownContentStyles: StyleGetter =
-  dropdownStyles.dropdownContent as StyleGetter
+const getDropdownIconStyles = dropdownStyles.dropdownIcon as StyleGetter
+const getDropdownContentStyles = dropdownStyles.dropdownContent as StyleGetter
 
 export function Dropdown({
   label,
   nestedLinks,
+  closeMenu,
 }: Readonly<DropdownProps>): React.ReactElement {
   const { width } = useScreenSize()
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
   const [dropdownHeight, setDropdownHeight] = React.useState<number>(0)
   const dropdownRef = React.useRef<HTMLUListElement>(null)
+
+  const closeDropdown = () => setIsVisible(false)
+  useClickOutside('.dropdown-menu', closeDropdown, isVisible)
 
   React.useEffect(() => {
     if (dropdownRef.current) {
@@ -83,6 +86,7 @@ export function Dropdown({
             <NavLink
               href={link.href}
               className={styles.nestedLink}
+              closeMenu={closeMenu}
             >
               {link.label}
             </NavLink>

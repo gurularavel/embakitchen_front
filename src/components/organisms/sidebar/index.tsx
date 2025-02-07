@@ -1,23 +1,26 @@
 'use client'
 
 import * as React from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import {
   ActionLink,
   Button,
   Icon,
   LanguageSelector,
   Navbar,
+  NavLink,
   SocialContacts,
 } from '~ek/components'
-import { updatePrimitiveState } from '~ek/utils'
+import { LOCALIZED_PATHNAMES, updatePrimitiveState } from '~ek/utils'
+import { useClickOutside, useStore } from '~ek/hooks'
+import type { Language } from '~ek/types'
 
 const sidebarStyles: Readonly<TwClasses> = {
   sidebar:
     'w-auto mobile:w-[90px] laptop:w-[269px] h-full flex items-center relative z-20',
   menuIcon: 'w-6 h-6',
   sidebarContent: (isVisible: unknown) =>
-    `bg-gray-1 p-10 overflow-y-auto fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`,
+    `sidebar-wrapper bg-gray-1 p-10 overflow-y-auto fixed top-0 right-0 bottom-0 left-0 transition-all duration-300 ease-in ${(isVisible as boolean) ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`,
   closeSidebar: 'h-6 mb-6 flex justify-end',
   closeIcon: 'w-4 h-4',
   sidebarBody: '',
@@ -35,10 +38,16 @@ const getSidebarContentStyles: StyleGetter =
 export function Sidebar(): React.ReactElement {
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
   const t = useTranslations('buttons')
+  const locale = useLocale()
+  const {
+    clientSlice: { setIsAuthFormDrawerVisible },
+    authSlice: { user },
+  } = useStore(state => state)
 
-  React.useEffect(() => {
-    document.body.style.overflow = isVisible ? 'hidden' : 'auto'
-  }, [isVisible])
+  const closeMenu = () => {
+    setIsVisible(false)
+  }
+  useClickOutside('.sidebar-wrapper', closeMenu, isVisible)
 
   return (
     <aside className={styles.sidebar}>
@@ -60,7 +69,10 @@ export function Sidebar(): React.ReactElement {
         </div>
 
         <div className={styles.sidebarBody}>
-          <Navbar context='header' />
+          <Navbar
+            context='header'
+            closeMenu={closeMenu}
+          />
 
           <SocialContacts
             layout='horizontal'
@@ -78,13 +90,30 @@ export function Sidebar(): React.ReactElement {
           />
 
           <div className={styles.options}>
-            <Button classes={styles.profileButton}>
-              <Icon
-                variant='profile-light'
-                sizes='w-6 h-6'
-              />
-              <span>{t('personalAccount')}</span>
-            </Button>
+            {user ? (
+              <NavLink
+                className={styles.profileButton}
+                href={LOCALIZED_PATHNAMES['/profile'][locale as Language]}
+                onClick={closeMenu}
+              >
+                <Icon
+                  variant='profile-light'
+                  sizes='w-6 h-6'
+                />
+                <span>{t('personalAccount')}</span>
+              </NavLink>
+            ) : (
+              <Button
+                classes={styles.profileButton}
+                onClick={() => setIsAuthFormDrawerVisible(true)}
+              >
+                <Icon
+                  variant='profile-light'
+                  sizes='w-6 h-6'
+                />
+                <span>{t('personalAccount')}</span>
+              </Button>
+            )}
 
             <LanguageSelector
               context='sidebar'

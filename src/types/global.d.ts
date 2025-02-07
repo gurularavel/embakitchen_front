@@ -13,13 +13,16 @@ declare global {
       locale: Language
       slug?: string
       category?: string
+      search?: string
     }
+    searchParams?: ApiQueryParams
   }
 
   interface ApiQueryParams {
     page?: number
     perPage?: number
     status?: boolean
+    search?: string
   }
 
   interface AuthenticatedApiParams extends ApiQueryParams {

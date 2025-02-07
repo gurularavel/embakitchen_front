@@ -20,7 +20,7 @@ import type {
   OrderFormValues,
 } from '~ek/types'
 
-interface PaginatedResponse {
+export interface PaginatedResponse {
   pagination: {
     current_page: number
     last_page: number
@@ -166,4 +166,10 @@ export interface CreateOrderResponse extends OrderResquestBody {
   id: number
   created_at: string
   updated_at: string
+}
+
+export interface SearchPageResponse<T extends string = Language> {
+  id: number
+  title: MultilingualText<T>
+  image: [MediaFile]
 }

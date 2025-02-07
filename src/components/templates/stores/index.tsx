@@ -1,21 +1,11 @@
 'use client'
 
 import * as React from 'react'
-import { type LatLngTuple } from 'leaflet'
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import { ActionLink, Icon } from '~ek/components'
-import type { Language, StoresProps } from '~ek/types'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
-import 'leaflet-defaulticon-compatibility'
+import { ActionLink, Icon, Map } from '~ek/components'
 import { useLocale, useTranslations } from 'next-intl'
+import type { Language, StoresProps } from '~ek/types'
 import { getStores } from '~ek/services'
 import { transformToUiData } from '~ek/utils'
-
-interface Position {
-  title: string
-  coords: LatLngTuple
-}
 
 const storesStyles: Readonly<TwClasses> = {
   wrapper: 'relative mb-10 tablet:mb-15 laptop:mb-25 mt-6 laptop:mt-10',
@@ -31,7 +21,6 @@ const storesStyles: Readonly<TwClasses> = {
   storeInfoWrapper: 'flex items-center gap-x-2 mb-6 last:mb-0',
   storeIcon: 'w-6 h-6',
   storeInfo: 'text-sm text-gray-1 font-normal break-all',
-  map: 'h-[728px] z-0',
 }
 const styles = storesStyles as Readonly<StyleRecord>
 
@@ -41,15 +30,6 @@ export function Stores({
 }: Readonly<StoresProps>): React.ReactElement {
   const t = useTranslations('titles')
   const locale = useLocale()
-  const position: LatLngTuple = [40.38489374280334, 49.824969832271016]
-  const positions: Position[] = Object.values(stores).map(
-    (store: ArrayElement<StoresProps['stores']>) => ({
-      title: store.title,
-      coords: [store.coords.latitude, store.coords.longitude].map(
-        Number.parseFloat,
-      ) as LatLngTuple,
-    }),
-  )
   const [storesToRender, setStoresToRender] =
     React.useState<StoresProps['stores']>(stores)
 
@@ -119,37 +99,20 @@ export function Stores({
                 <span className={styles.storeInfo}>{store.address}</span>
               </div>
               <div className={styles.storeInfoWrapper}>
-                <Icon
-                  variant='email'
-                  sizes={styles.storeIcon}
+                <ActionLink
+                  href={`mailto:${store.email}`}
+                  label={store.email}
+                  actionLinkIcon={{ variant: 'email', sizes: styles.storeIcon }}
+                  classes={styles.storeInfo}
+                  gap={8}
                 />
-                <span className={styles.storeInfo}>{store.email}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <MapContainer
-        center={position}
-        zoom={25}
-        scrollWheelZoom={false}
-        className={styles.map}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-        />
-        {positions.map(
-          ({ title, coords }: { title: string; coords: LatLngTuple }) => (
-            <Marker
-              position={coords}
-              key={title}
-            >
-              <Popup>{title}</Popup>
-            </Marker>
-          ),
-        )}
-      </MapContainer>
+
+      <Map stores={stores} />
     </div>
   )
 }

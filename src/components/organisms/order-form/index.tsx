@@ -66,8 +66,8 @@ export function OrderForm(): React.ReactElement {
       form.setFieldsValue({
         city_id: user.city.id,
         district_id: {
-          id: user.district.id,
-          label: user.district.title[locale as Language],
+          id: user.district?.id,
+          label: user.district?.title[locale as Language],
         },
         address: user.address,
       })

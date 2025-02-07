@@ -39,6 +39,7 @@ export function Home({
       <SlogansSection
         title={createOrderSection.title}
         content={createOrderSection.content}
+        backgroundImg={createOrderImage}
       />
 
       <PopularBlogs
@@ -48,7 +49,7 @@ export function Home({
 
       <Slider variant='partners' />
 
-      <CurrentCampaigns campaigns={campaigns} />
+      {!!campaigns?.length && <CurrentCampaigns campaigns={campaigns} />}
     </>
   )
 }
