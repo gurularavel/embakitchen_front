@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Banner, NavLink, Pagination } from '~ek/components'
+import { Banner, NavLink } from '~ek/components'
 import { usePathname } from '~ek/i18n/routing'
 import type { BlogsProps, MediaFile } from '~ek/types'
 
@@ -50,8 +50,6 @@ export function Blogs({
           </div>
         ))}
       </div>
-
-      <Pagination totalPages={5} />
     </>
   )
 }
