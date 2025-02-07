@@ -1,3 +1,4 @@
+import { Modal } from 'antd'
 import {
   Language,
   type MediaFile,
@@ -10,6 +11,7 @@ import {
   SCREENS,
   STATISTICS_SECTION_INTERVAL_LIMIT,
 } from '~ek/utils'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 export const getGapProperty = (
   layout: LayoutOption,
@@ -158,4 +160,38 @@ export const removeBrowserAuthData = (): void => {
     path =>
       (document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`),
   )
+}
+
+type ConfirmModalOptions = {
+  title: string
+  onOk: () => void
+  onCancel?: () => void
+  okText?: string
+  cancelText?: string
+}
+export function confirmModal({
+  title,
+  onOk,
+  onCancel,
+  okText,
+  cancelText,
+}: ConfirmModalOptions): void {
+  Modal.confirm({
+    title,
+    okText,
+    cancelText,
+    onOk,
+    onCancel,
+    okButtonProps: {
+      style: {
+        backgroundColor: '#E55E25',
+      },
+    },
+    cancelButtonProps: {
+      style: {
+        borderColor: '#E55E25',
+        color: '#49525B',
+      },
+    },
+  })
 }

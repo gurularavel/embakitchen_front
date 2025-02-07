@@ -100,6 +100,20 @@
     "searchLink": "Bütün nəticələr"
   },
   "texts": {
-    "campaignFinished": "Bitib"
+    "campaignFinished": "Bitib",
+    "contact": "Əlaqə"
+  },
+  "profile": {
+    "accountInfo": "Hesab məlumatları",
+    "addresses": "Ünvanlar",
+    "changePassword": "Şifrəni dəyiş",
+    "orderHistory": "Sifariş tarixçəsi",
+    "addAdress": "Ünvan əlavə et",
+    "logout": "Çıxış"
+  },
+  "modal" : {
+    "cancelText": "Xeyr",
+    "okText": "Bəli",
+    "deleteTitle": "Silmək istədiyinizdən əminsiniz?"
   }
 }

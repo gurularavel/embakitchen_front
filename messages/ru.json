@@ -100,6 +100,20 @@
     "searchLink": "Все результаты"
   },
   "texts": {
-    "campaignFinished": "Закончено"
+    "campaignFinished": "Закончено",
+    "contact": "Контакт"
+  },
+  "profile": {
+    "accountInfo": "Информация об учетной записи",
+    "addresses": "Адреса",
+    "changePassword": "Изменить пароль",
+    "orderHistory": "История заказов",
+    "addAdress": "Добавить адрес",
+    "logout": "Выход"
+  },
+  "modal" : {
+    "cancelText": "Oтмена",
+    "okText": "Да",
+    "deleteTitle": "Вы уверены, что хотите удалить?"
   }
 }

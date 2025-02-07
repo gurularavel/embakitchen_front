@@ -1,10 +1,10 @@
 'use client'
 
 import * as React from 'react'
-import { Col, Form, Input, message, Row } from 'antd'
+import { Col, Flex, Form, Input, message, Row, Spin } from 'antd'
 import MaskedInput from 'antd-mask-input'
 import { LogoutOutlined } from '@ant-design/icons'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { Button, Icon } from '~ek/components'
 import { useAuth, useStore } from '~ek/hooks'
@@ -12,14 +12,19 @@ import {
   changePassword,
   updateProfileInformation,
   getOrders,
+  deleteAddress,
+  getAddresses,
 } from '~ek/services'
 import type {
+  AddressEntry,
   ChangePasswordFormValues,
   Language,
   OrderEntry,
   UpdateProfileFormValues,
 } from '~ek/types'
-import { transformToUiData } from '~ek/utils'
+import { confirmModal, transformToUiData } from '~ek/utils'
+import AddAddressModal from '~ek/components/organisms/addressModal/addAddressModal'
+import EditAddressModal from '~ek/components/organisms/addressModal/editAddressModal'
 
 interface TabHeader {
   label: string
@@ -52,28 +57,42 @@ const profileStyles: Readonly<TwClasses> = {
     wrapper: '',
     order:
       'flex flex-col laptop:flex-row justify-between gap-x-[30px] gap-y-4 border border-solid border-gray-9 p-6',
-    orderInfoWrapper: 'flex flex-1 flex-col gap-y-2',
+    orderInfoWrapper: 'flex flex-1 flex-col gap-y-2 mb-2',
     orderInfoLabel: 'text-sm leading-[18px] text-gray-4 font-normal',
     product: 'text-lg font-semibold text-[#EB804E]',
     orderInfoText: 'text-base font-medium text-[#4B494A]',
+  },
+  addresses: {
+    wrapper:
+      'flex flex-col tablet:grid tablet:grid-cols-1 laptop:grid-cols-2 widescreen:grid-cols-3 gap-y-6 tablet:gap-6 laptop:gap-y-10 mb-6 laptop:mb-10',
+    addressInfoWrapper: 'border border-solid border-gray-9 gap-3 pb-6',
+    addressInfoHeader: 'bg-gray-10 p-4 flex justify-between',
+    headerTitle: 'text-gray-3 font-semibold text-lg',
+    actionButtons: 'flex gap-x-6 justify-between',
+    addressContent: 'flex flex-col mt-3 gap-y-3',
+    addressTitle: 'px-3 py-4',
+    buttonWrapper: '',
+    loading: 'flex justify-center py-4',
   },
 }
 const styles = profileStyles as Readonly<StyleRecord>
 const getTabHeaderItemStyles = profileStyles.tabHeaderItem as StyleGetter
 const orderHistoryStyles = profileStyles.orders as Readonly<StyleRecord>
-
-const tabHeaders: TabHeader[] = [
-  { label: 'Hesab məlumatları', component: <ProfileInformation /> },
-  { label: 'Şifrəni dəyiş', component: <ChangePassword /> },
-  { label: 'Ünvanlar', component: <Addresses /> },
-  { label: 'Sifariş tarixçəsi', component: <OrderHistory /> },
-]
+const addressesStyles = profileStyles.addresses as Readonly<StyleRecord>
 
 export function Profile(): React.ReactElement {
+  const t = useTranslations('profile')
   const [activeTav, setActiveTab] = React.useState<number>(0)
   const { user } = useStore(state => state.authSlice)
   const { logout } = useAuth()
   const router = useRouter()
+
+  const tabHeaders: TabHeader[] = [
+    { label: t('accountInfo'), component: <ProfileInformation /> },
+    { label: t('changePassword'), component: <ChangePassword /> },
+    { label: t('addresses'), component: <Addresses /> },
+    { label: t('orderHistory'), component: <OrderHistory /> },
+  ]
 
   React.useEffect(() => {
     if (!user) {
@@ -110,7 +129,7 @@ export function Profile(): React.ReactElement {
                 className={styles.logoutButton}
               >
                 <LogoutOutlined />
-                <span>Çıxış</span>
+                <span>{t('logout')}</span>
               </button>
             </li>
           </ul>
@@ -125,6 +144,7 @@ export function Profile(): React.ReactElement {
 }
 
 function ProfileInformation(): React.ReactElement {
+  const t = useTranslations('profile')
   const { user } = useStore(state => state.authSlice)
   const [form] = Form.useForm()
 
@@ -155,7 +175,7 @@ function ProfileInformation(): React.ReactElement {
 
   return (
     <>
-      <h4 className={styles.sectionTitle}>Hesab məlumatları</h4>
+      <h4 className={styles.sectionTitle}>{t('accountInfo')}</h4>
 
       <Form
         layout='vertical'
@@ -246,6 +266,7 @@ function ProfileInformation(): React.ReactElement {
 }
 
 function ChangePassword(): React.ReactElement {
+  const t = useTranslations('profile')
   const { logout } = useAuth()
 
   const handlePasswordChange = async (values: ChangePasswordFormValues) => {
@@ -259,7 +280,7 @@ function ChangePassword(): React.ReactElement {
 
   return (
     <>
-      <h4 className={styles.sectionTitle}>Şifrəni dəyiş</h4>
+      <h4 className={styles.sectionTitle}>{t('changePassword')}</h4>
 
       <Form
         layout='vertical'
@@ -315,7 +336,137 @@ function ChangePassword(): React.ReactElement {
 }
 
 function Addresses(): React.ReactElement {
-  return <div>Addresses</div>
+  const t = useTranslations()
+  const locale = useLocale()
+  const [addresses, setAddresses] = React.useState<AddressEntry<string>[]>([])
+  const [selectedAddress, setSelectedAddress] =
+    React.useState<AddressEntry<string> | null>(null)
+  const [isAddOpen, setIsAddOpen] = React.useState(false)
+  const [isEditOpen, setIsEditOpen] = React.useState(false)
+  const [loading, setLoading] = React.useState<boolean>(false)
+  const token = localStorage.getItem('token')
+    ? JSON.parse(localStorage.getItem('token') as string)
+    : ''
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  }
+  async function initializeAddresses() {
+    setLoading(true)
+    try {
+      const fetchedAddresses = await getAddresses({ headers })
+      const uiAddress = transformToUiData(
+        fetchedAddresses,
+        locale as Language,
+      ) as AddressEntry<string>[]
+      setAddresses(uiAddress)
+    } catch (error) {
+      console.error('Error fetching addresses:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  React.useEffect(() => {
+    initializeAddresses()
+  }, [locale])
+
+  const handleEditAddress = (address: AddressEntry<string>) => {
+    setSelectedAddress(address)
+    setIsEditOpen(true)
+  }
+
+  return (
+    <div>
+      <h4 className={styles.sectionTitle}>{t('profile.addresses')}</h4>
+      {loading && (
+        <div className={addressesStyles.loading}>
+          <Icon
+            variant='loading'
+            sizes='w-8 h-8'
+            classes='animate-spin'
+          />
+        </div>
+      )}
+      <div className={addressesStyles.wrapper}>
+        {addresses?.map((address, index) => (
+          <div
+            key={address.id}
+            className={addressesStyles.addressInfoWrapper}
+          >
+            <div className={addressesStyles.addressInfoHeader}>
+              <span className={addressesStyles.headerTitle}>
+                Ünvan {++index}
+              </span>
+              <div className={addressesStyles.actionButtons}>
+                <span onClick={() => handleEditAddress(address)}>
+                  <Icon
+                    variant='edit'
+                    sizes='w-6 h-6'
+                    classes='cursor-pointer'
+                  />
+                </span>
+                <span
+                  onClick={() =>
+                    confirmModal({
+                      okText: t('modal.okText'),
+                      cancelText: t('modal.cancelText'),
+                      title: t('modal.deleteTitle'),
+                      onOk: async () => {
+                        await deleteAddress(address.id)
+                        setAddresses(prev =>
+                          prev.filter(a => a.id !== address.id),
+                        )
+                      },
+                    })
+                  }
+                >
+                  <Icon
+                    variant='trash'
+                    sizes='w-6 h-6'
+                    classes='cursor-pointer'
+                  />
+                </span>
+              </div>
+            </div>
+            <div className={addressesStyles.addressContent}>
+              <div className={addressesStyles.addressTitle}>
+                {address.city.title} şəhəri{' '}
+                {address.district && `, ${address.district.title} rayonu`}
+              </div>
+              <div className={addressesStyles.addressTitle}>
+                {address.address}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={addressesStyles.wrapper}>
+        <div className={addressesStyles.buttonWrapper}>
+          <Button
+            onClick={() => setIsAddOpen(true)}
+            type='button'
+            classes={styles.submitButton}
+          >
+            {t('profile.addAdress')}
+          </Button>
+        </div>
+      </div>
+      <AddAddressModal
+        open={isAddOpen}
+        onClose={() => setIsAddOpen(false)}
+        responseAddresses={initializeAddresses}
+      />
+      {selectedAddress && (
+        <EditAddressModal
+          open={isEditOpen}
+          onClose={() => setIsEditOpen(false)}
+          address={selectedAddress}
+          responseAddresses={initializeAddresses}
+        />
+      )}
+    </div>
+  )
 }
 
 function OrderHistory(): React.ReactElement {
@@ -345,41 +496,39 @@ function OrderHistory(): React.ReactElement {
 
   return (
     <div className={orderHistoryStyles.wrapper}>
-      {orders
-        .map(order => order.products)
-        .flat()
-        .map((product: ArrayElement<OrderEntry<string>['products']>) => (
-          <div
-            className={orderHistoryStyles.order}
-            key={product.id}
-          >
-            <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Məhsul</span>
-              <span className={orderHistoryStyles.product}>
-                {product.title}
-              </span>
-            </div>
+      {orders.map(order => (
+        <div
+          className={orderHistoryStyles.order}
+          key={order.id}
+        >
+          {order.products.flat().map(product => (
+            <>
+              <div className={orderHistoryStyles.orderInfoWrapper}>
+                <span className={orderHistoryStyles.orderInfoLabel}>
+                  Məhsul
+                </span>
+                <span className={orderHistoryStyles.product}>
+                  {product.title}
+                </span>
+              </div>
 
-            <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Rəng</span>
-              <span className={orderHistoryStyles.orderInfoText}>Boz</span>
-            </div>
+              <div className={orderHistoryStyles.orderInfoWrapper}>
+                <span className={orderHistoryStyles.orderInfoLabel}>Ölçü</span>
+                <span className={orderHistoryStyles.orderInfoText}>
+                  {product.width}x{product.height}
+                </span>
+              </div>
+            </>
+          ))}
 
-            <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Ölçü</span>
-              <span className={orderHistoryStyles.orderInfoText}>
-                {product.width}x{product.height}
-              </span>
-            </div>
-
-            <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Ünvan</span>
-              <span className={orderHistoryStyles.orderInfoText}>
-                Bakı şəh. Nərimanov r., Ə.Rəcəbli küç 11/A
-              </span>
-            </div>
+          <div className={orderHistoryStyles.orderInfoWrapper}>
+            <span className={orderHistoryStyles.orderInfoLabel}>Ünvan</span>
+            <span className={orderHistoryStyles.orderInfoText}>
+              {order.address}
+            </span>
           </div>
-        ))}
+        </div>
+      ))}
     </div>
   )
 }

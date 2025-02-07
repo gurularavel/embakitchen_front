@@ -39,6 +39,9 @@ export type IconVariant =
   | 'close-dark'
   | 'profile-dark'
   | 'search-dark'
+  | 'edit'
+  | 'trash'
+  | 'loading'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -352,4 +355,19 @@ export interface OrderEntry<T extends string = Language> {
   district: DistrictEntry<T>
   products: EnhancedOrderProduct<T>[]
   status: boolean
+  address: string
+}
+
+export interface AddressFormValues {
+  user_id: number
+  city_id: number
+  district_id: number
+  address: string
+}
+
+export interface AddressEntry<T extends string = Language> {
+  id: number
+  city: CityEntry<T>
+  district: DistrictEntry<T>
+  address: string
 }

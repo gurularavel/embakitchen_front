@@ -100,6 +100,21 @@
     "searchLink" : "All results"
   },
   "texts": {
-    "campaignFinished": "Has been finished"
+    "campaignFinished": "Has been finished",
+    "contact" : "Contact"
+  },
+  "profile": {
+    "accountInfo": "Account information",
+    "addresses": "Addresses",
+    "changePassword": "Change password",
+    "orderHistory": "Order history",
+    "addAdress": "Add address",
+    "logout": "Logout",
+    "save": "Save"
+  },
+  "modal" : {
+    "cancelText": "Cancel",
+    "okText": "Ok",
+    "deleteTitle": "Are you sure you want to delete?"
   }
 }
