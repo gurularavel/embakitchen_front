@@ -2,8 +2,7 @@
 import * as React from 'react'
 import { useLocale } from 'next-intl'
 import { Form, FormProps, message, Input, Select } from 'antd'
-import { Button } from '~ek/components'
-import { Modal } from '~ek/components'
+import { Button, Modal } from '~ek/components'
 import type {
   CityEntry,
   DistrictEntry,
