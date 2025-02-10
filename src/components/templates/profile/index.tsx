@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Col, Form, Input, message, Row } from 'antd'
 import MaskedInput from 'antd-mask-input'
 import { LogoutOutlined } from '@ant-design/icons'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { Button, Icon } from '~ek/components'
 import { useAuth, useStore } from '~ek/hooks'
@@ -74,6 +74,7 @@ export function Profile(): React.ReactElement {
   const { user } = useStore(state => state.authSlice)
   const { logout } = useAuth()
   const router = useRouter()
+  const t = useTranslations('texts')
 
   React.useEffect(() => {
     if (!user) {
@@ -110,7 +111,7 @@ export function Profile(): React.ReactElement {
                 className={styles.logoutButton}
               >
                 <LogoutOutlined />
-                <span>Çıxış</span>
+                <span>{t('exit')}</span>
               </button>
             </li>
           </ul>
@@ -127,6 +128,7 @@ export function Profile(): React.ReactElement {
 function ProfileInformation(): React.ReactElement {
   const { user } = useStore(state => state.authSlice)
   const [form] = Form.useForm()
+  const t = useTranslations()
 
   React.useEffect(() => {
     form.setFieldsValue({
@@ -155,7 +157,7 @@ function ProfileInformation(): React.ReactElement {
 
   return (
     <>
-      <h4 className={styles.sectionTitle}>Hesab məlumatları</h4>
+      <h4 className={styles.sectionTitle}>{t('texts.accountInformation')}</h4>
 
       <Form
         layout='vertical'
@@ -237,7 +239,7 @@ function ProfileInformation(): React.ReactElement {
             type='submit'
             classes={styles.submitButton}
           >
-            Yadda saxla
+            {t('button.remember')}
           </Button>
         </Form.Item>
       </Form>
@@ -247,6 +249,7 @@ function ProfileInformation(): React.ReactElement {
 
 function ChangePassword(): React.ReactElement {
   const { logout } = useAuth()
+  const t = useTranslations()
 
   const handlePasswordChange = async (values: ChangePasswordFormValues) => {
     const response = await changePassword(values)
@@ -259,7 +262,7 @@ function ChangePassword(): React.ReactElement {
 
   return (
     <>
-      <h4 className={styles.sectionTitle}>Şifrəni dəyiş</h4>
+      <h4 className={styles.sectionTitle}>{t('texts.changePassword')}</h4>
 
       <Form
         layout='vertical'
@@ -306,7 +309,7 @@ function ChangePassword(): React.ReactElement {
             type='submit'
             classes={styles.submitButton}
           >
-            Yadda saxla
+            {t('buttons.remember')}
           </Button>
         </Form.Item>
       </Form>
@@ -315,12 +318,14 @@ function ChangePassword(): React.ReactElement {
 }
 
 function Addresses(): React.ReactElement {
-  return <div>Addresses</div>
+  const t = useTranslations('titles')
+  return <div>{t('addresses')}</div>
 }
 
 function OrderHistory(): React.ReactElement {
   const [orders, setOrders] = React.useState<OrderEntry<string>[]>([])
   const locale = useLocale()
+  const t = useTranslations('texts')
 
   React.useEffect(() => {
     const token = localStorage.getItem('token')
@@ -354,26 +359,34 @@ function OrderHistory(): React.ReactElement {
             key={product.id}
           >
             <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Məhsul</span>
+              <span className={orderHistoryStyles.orderInfoLabel}>
+                {t('product')}
+              </span>
               <span className={orderHistoryStyles.product}>
                 {product.title}
               </span>
             </div>
 
             <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Rəng</span>
+              <span className={orderHistoryStyles.orderInfoLabel}>
+                {t('color')}
+              </span>
               <span className={orderHistoryStyles.orderInfoText}>Boz</span>
             </div>
 
             <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Ölçü</span>
+              <span className={orderHistoryStyles.orderInfoLabel}>
+                {t('size')}
+              </span>
               <span className={orderHistoryStyles.orderInfoText}>
                 {product.width}x{product.height}
               </span>
             </div>
 
             <div className={orderHistoryStyles.orderInfoWrapper}>
-              <span className={orderHistoryStyles.orderInfoLabel}>Ünvan</span>
+              <span className={orderHistoryStyles.orderInfoLabel}>
+                {t('address')}
+              </span>
               <span className={orderHistoryStyles.orderInfoText}>
                 Bakı şəh. Nərimanov r., Ə.Rəcəbli küç 11/A
               </span>

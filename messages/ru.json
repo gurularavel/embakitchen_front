@@ -83,7 +83,15 @@
     "customOrder": "Индивидуальный заказ",
     "personalAccount": "Личный кабинет",
     "inDetails": "Детально",
-    "readAboutUs": "Читайте О Нас"
+    "readAboutUs": "Читайте О Нас",
+    "register": "Зарегистрироваться",
+    "login": "Авторизоваться",
+    "delete": "Удалить",
+    "addProduct": "Добавить продукт",
+    "sendOrder": "Отправить заказ",
+    "remember": "Помнить",
+    "placeOrder": "Оформить заказ",
+    "send": "Отправлять"
   },
   "titles": {
     "currentCampaigns": "Текущие Кампании",
@@ -91,7 +99,12 @@
     "homepageBlogs": "Блог",
     "popularBlogs": "Популярные Статьи",
     "stores": "Магазины",
-    "similarProjects": "Похожие Проекты"
+    "similarProjects": "Похожие Проекты",
+    "similarBlogs": "Похожие блоги",
+    "addresses": "Адреса",
+    "aboutProduct": "О продукте",
+    "customerFeedback": "Отзывы клиентов",
+    "similarProducts": "Похожие продукты"
   },
   "search": {
     "notFound": "Товаров, соответствующих вашему запросу, не обнаружено.",
@@ -101,6 +114,20 @@
   },
   "texts": {
     "campaignFinished": "Закончено",
-    "contact": "Контакт"
+    "contact": "Контакт",
+    "accountInformation": "Информация об аккаунте",
+    "exit": "Выход",
+    "changePassword": "Изменить пароль",
+    "product": "Продукт",
+    "color": "Цвет",
+    "size": "Размер",
+    "address": "Адрес",
+    "brandDescription": "Embakitchen - Это бренд компании Embawood, специализирующейся на кухонной мебели.",
+    "installmentInfo": "Оплачивайте картой Birbank на 18 месяцев без процентов.",
+    "style": "Стиль",
+    "material": "Материал",
+    "facades": "Фасады",
+    "decor": "Декор",
+    "design": "Дизайн"
   }
 }

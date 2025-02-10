@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Col, Form, Input, InputNumber, message, Row, Select } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import {
   CityEntry,
   DistrictEntry,
@@ -48,6 +48,7 @@ async function fetchDistricts(
 export function OrderForm(): React.ReactElement {
   const locale = useLocale()
   const [form] = Form.useForm()
+  const t = useTranslations('buttons')
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [products, setProducts] = React.useState<OrderProductEntry[]>([])
   const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
@@ -223,7 +224,7 @@ export function OrderForm(): React.ReactElement {
                     onClick={() => remove(name)}
                     classes={styles.submitButton}
                   >
-                    Silin
+                    {t('delete')}
                   </Button>
                 </Col>
               </Row>
@@ -234,7 +235,7 @@ export function OrderForm(): React.ReactElement {
                 classes={styles.submitButton}
               >
                 <PlusOutlined />
-                <span>Məhsul əlavə edin</span>
+                <span>{t('addProduct')}</span>
               </Button>
             </Form.Item>
           </>
@@ -332,7 +333,7 @@ export function OrderForm(): React.ReactElement {
           type='submit'
           classes={styles.submitButton}
         >
-          Sifariş göndər
+          {t('sendOrder')}
         </Button>
       </Form.Item>
     </Form>

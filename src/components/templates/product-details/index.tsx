@@ -15,6 +15,7 @@ import type {
 import birbank from '/public/assets/images/birbank.png'
 import { httpClient } from '~ek/http-client'
 import { usePathname } from '~ek/i18n/routing'
+import { useTranslations } from 'next-intl'
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -102,6 +103,7 @@ export function ProductDetails({
   )
   const newCommentInput = React.useRef<HTMLTextAreaElement>(null)
   const pathname = usePathname()
+  const t = useTranslations()
   const pathnameWithoutLastSlug = pathname.split('/').slice(0, -1).join('/')
 
   const addNewComment = async (): Promise<void> => {
@@ -144,7 +146,7 @@ export function ProductDetails({
                   50 AZN x 18 ay
                 </strong>
                 <p className={styles.paymentInfoText}>
-                  Birbank kartı ilə 18 aya faizsiz ödə
+                  {t('texts.installmentInfo')}
                 </p>
               </div>
             </div>
@@ -152,29 +154,39 @@ export function ProductDetails({
             <div className={styles.productCharacteristics}>
               <ul className={styles.characteristicsList}>
                 <li className={styles.characteristicsItem}>
-                  <span className={styles.characteristicsLabel}>Stil</span>
+                  <span className={styles.characteristicsLabel}>
+                    {t('texts.style')}
+                  </span>
                   <span className={styles.characteristicsValue}>{style}</span>
                 </li>
 
                 <li className={styles.characteristicsItem}>
-                  <span className={styles.characteristicsLabel}>Material</span>
+                  <span className={styles.characteristicsLabel}>
+                    {t('texts.material')}
+                  </span>
                   <span className={styles.characteristicsValue}>
                     {material}
                   </span>
                 </li>
 
                 <li className={styles.characteristicsItem}>
-                  <span className={styles.characteristicsLabel}>Fasadlar</span>
+                  <span className={styles.characteristicsLabel}>
+                    {t('texts.facades')}
+                  </span>
                   <span className={styles.characteristicsValue}>{facade}</span>
                 </li>
 
                 <li className={styles.characteristicsItem}>
-                  <span className={styles.characteristicsLabel}>Dekor</span>
+                  <span className={styles.characteristicsLabel}>
+                    {t('texts.decor')}
+                  </span>
                   <span className={styles.characteristicsValue}>{decor}</span>
                 </li>
 
                 <li className={styles.characteristicsItem}>
-                  <span className={styles.characteristicsLabel}>Dizayn</span>
+                  <span className={styles.characteristicsLabel}>
+                    {t('texts.design')}
+                  </span>
                   <span className={styles.characteristicsValue}>{design}</span>
                 </li>
               </ul>
@@ -184,7 +196,9 @@ export function ProductDetails({
               className={styles.productColors}
               onClick={() => setIsColorSelectorVisible(!isColorSelectorVisible)}
             >
-              <span className={styles.productColorLabel}>Rəng</span>
+              <span className={styles.productColorLabel}>
+                {t('texts.color')}
+              </span>
               <div className={styles.productColorSelector}>
                 <div className={styles.selectedColor}>{selectedColor}</div>
                 <div className={getColorsWrapperStyles(isColorSelectorVisible)}>
@@ -212,7 +226,7 @@ export function ProductDetails({
 
             <div className={styles.order}>
               <Button classes={styles.orderButton}>
-                <span>Sifariş ver</span>
+                <span>{t('buttons.placeOrder')}</span>
                 <Icon
                   variant='arrow-right-white'
                   sizes={styles.orderButtonIcon}
@@ -224,7 +238,9 @@ export function ProductDetails({
       </div>
 
       <div className={styles.productContent}>
-        <h5 className={styles.productContentTitle}>Məhsul haqqında</h5>
+        <h5 className={styles.productContentTitle}>
+          {t('titles.aboutProduct')}
+        </h5>
 
         <div
           className={styles.productContentText}
@@ -233,7 +249,9 @@ export function ProductDetails({
       </div>
 
       <div className={styles.commentsWrapper}>
-        <h5 className={styles.commentsWrapperTitle}>Sifarişçi rəyi</h5>
+        <h5 className={styles.commentsWrapperTitle}>
+          {t('titles.customerFeedback')}
+        </h5>
 
         <div className={styles.comments}>
           {comments?.map((comment: Comment) => (
@@ -275,14 +293,16 @@ export function ProductDetails({
             classes={styles.newCommentBtn}
             onClick={addNewComment}
           >
-            Göndər
+            {t('buttons.send')}
           </Button>
         </div>
       </div>
 
       {similar_products?.length && (
         <div className={styles.similarProductsWrapper}>
-          <h4 className={styles.similarProductsTitle}>Oxşar məhsullar</h4>
+          <h4 className={styles.similarProductsTitle}>
+            {t('titles.similarProducts')}
+          </h4>
 
           <div className={styles.similarProducts}>
             {similar_products?.map((similarProduct: SimilarProduct<string>) => (
