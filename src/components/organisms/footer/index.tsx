@@ -40,10 +40,7 @@ export function Footer(): React.ReactElement {
             sizes='w-[132px] h-[21px]'
           />
 
-          <h5 className={styles.description}>
-            Embakitchen - Embawood şirkətinin mətbəx mebeli üzrə ixtisaslaşmış
-            brendidir.
-          </h5>
+          <h5 className={styles.description}>{t('texts.brandDescription')}</h5>
 
           <SocialContacts
             layout='horizontal'

@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Col, Flex, Form, Input, message, Row, Spin } from 'antd'
+import { Col, Flex, Form, Input, message, Row } from 'antd'
 import MaskedInput from 'antd-mask-input'
 import { LogoutOutlined } from '@ant-design/icons'
 import { useLocale, useTranslations } from 'next-intl'
@@ -52,10 +52,10 @@ const profileStyles: Readonly<TwClasses> = {
   logoutButton:
     'w-full h-full flex items-center justify-center gap-x-2 bg-primary-1 text-white text-base font-medium rounded-md',
   orders: {
-    wrapper: '',
+    orderWrapper: 'border border-gray-9 my-4 p-4',
     order:
-      'flex flex-col laptop:flex-row justify-between gap-x-[30px] gap-y-4 border border-solid border-gray-9 p-6',
-    orderInfoWrapper: 'flex flex-1 flex-col gap-y-2 mb-2',
+      'flex flex-wrap items-center justify-between border-b last:border-b-0 py-3',
+    orderInfoWrapper: 'flex flex-1 flex-col gap-y-2 mb-2 max-width-[200px]',
     orderInfoLabel: 'text-sm leading-[18px] text-gray-4 font-normal',
     product: 'text-lg font-semibold text-[#EB804E]',
     orderInfoText: 'text-base font-medium text-[#4B494A]',
@@ -85,12 +85,15 @@ export function Profile(): React.ReactElement {
   const { logout } = useAuth()
   const router = useRouter()
 
-  const tabHeaders: TabHeader[] = [
-    { label: t('accountInfo'), component: <ProfileInformation /> },
-    { label: t('changePassword'), component: <ChangePassword /> },
-    { label: t('addresses'), component: <Addresses /> },
-    { label: t('orderHistory'), component: <OrderHistory /> },
-  ]
+  const tabHeaders = React.useMemo(
+    () => [
+      { label: t('accountInfo'), component: <ProfileInformation /> },
+      { label: t('changePassword'), component: <ChangePassword /> },
+      { label: t('addresses'), component: <Addresses /> },
+      { label: t('orderHistory'), component: <OrderHistory /> },
+    ],
+    [t],
+  )
 
   React.useEffect(() => {
     if (!user) {
@@ -142,9 +145,9 @@ export function Profile(): React.ReactElement {
 }
 
 function ProfileInformation(): React.ReactElement {
-  const t = useTranslations('profile')
   const { user } = useStore(state => state.authSlice)
   const [form] = Form.useForm()
+  const t = useTranslations()
 
   React.useEffect(() => {
     form.setFieldsValue({
@@ -173,7 +176,7 @@ function ProfileInformation(): React.ReactElement {
 
   return (
     <>
-      <h4 className={styles.sectionTitle}>{t('accountInfo')}</h4>
+      <h4 className={styles.sectionTitle}>{t('texts.accountInformation')}</h4>
 
       <Form
         layout='vertical'
@@ -255,7 +258,7 @@ function ProfileInformation(): React.ReactElement {
             type='submit'
             classes={styles.submitButton}
           >
-            Yadda saxla
+            {t('button.remember')}
           </Button>
         </Form.Item>
       </Form>
@@ -264,8 +267,8 @@ function ProfileInformation(): React.ReactElement {
 }
 
 function ChangePassword(): React.ReactElement {
-  const t = useTranslations('profile')
   const { logout } = useAuth()
+  const t = useTranslations()
 
   const handlePasswordChange = async (values: ChangePasswordFormValues) => {
     const response = await changePassword(values)
@@ -278,7 +281,7 @@ function ChangePassword(): React.ReactElement {
 
   return (
     <>
-      <h4 className={styles.sectionTitle}>{t('changePassword')}</h4>
+      <h4 className={styles.sectionTitle}>{t('texts.changePassword')}</h4>
 
       <Form
         layout='vertical'
@@ -325,7 +328,7 @@ function ChangePassword(): React.ReactElement {
             type='submit'
             classes={styles.submitButton}
           >
-            Yadda saxla
+            {t('buttons.remember')}
           </Button>
         </Form.Item>
       </Form>
@@ -470,6 +473,7 @@ function Addresses(): React.ReactElement {
 function OrderHistory(): React.ReactElement {
   const [orders, setOrders] = React.useState<OrderEntry<string>[]>([])
   const locale = useLocale()
+  const t = useTranslations()
 
   React.useEffect(() => {
     const token = localStorage.getItem('token')
@@ -492,17 +496,24 @@ function OrderHistory(): React.ReactElement {
   }, [locale])
 
   return (
-    <div className={orderHistoryStyles.wrapper}>
+    <>
+      <h2 className='text-xl font-semibold text-primary-1 pb-2'>
+        {t('profile.orderHistory')}
+      </h2>
+
       {orders.map(order => (
         <div
-          className={orderHistoryStyles.order}
           key={order.id}
+          className={orderHistoryStyles.orderWrapper}
         >
           {order.products.flat().map(product => (
-            <>
+            <div
+              key={product.id}
+              className={orderHistoryStyles.order}
+            >
               <div className={orderHistoryStyles.orderInfoWrapper}>
                 <span className={orderHistoryStyles.orderInfoLabel}>
-                  Məhsul
+                  {t('texts.product')}
                 </span>
                 <span className={orderHistoryStyles.product}>
                   {product.title}
@@ -510,23 +521,27 @@ function OrderHistory(): React.ReactElement {
               </div>
 
               <div className={orderHistoryStyles.orderInfoWrapper}>
-                <span className={orderHistoryStyles.orderInfoLabel}>Ölçü</span>
+                <span className={orderHistoryStyles.orderInfoLabel}>
+                  {t('texts.size')}
+                </span>
                 <span className={orderHistoryStyles.orderInfoText}>
                   {product.width}x{product.height}
                 </span>
               </div>
-            </>
-          ))}
 
-          <div className={orderHistoryStyles.orderInfoWrapper}>
-            <span className={orderHistoryStyles.orderInfoLabel}>Ünvan</span>
-            <span className={orderHistoryStyles.orderInfoText}>
-              {order.address}
-            </span>
-          </div>
+              <div className={orderHistoryStyles.orderInfoWrapper}>
+                <span className={orderHistoryStyles.orderInfoLabel}>
+                  {t('texts.address')}
+                </span>
+                <span className={orderHistoryStyles.orderInfoText}>
+                  {order.address}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       ))}
-    </div>
+    </>
   )
 }
 

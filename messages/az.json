@@ -83,7 +83,15 @@
     "customOrder": "Özəl sifariş",
     "personalAccount": "Şəxsi kabinet",
     "inDetails": "Ətraflı",
-    "readAboutUs": "Haqqımızda oxuyun"
+    "readAboutUs": "Haqqımızda oxuyun",
+    "register": "Qeydiyyatdan keç",
+    "login": "Giriş et",
+    "delete": "Silin",
+    "addProduct": "Məhsul əlavə edin",
+    "sendOrder": "Sifariş göndər",
+    "remember": "Yadda saxla",
+    "placeOrder": "Sifariş ver",
+    "send": "Göndər"
   },
   "titles": {
     "currentCampaigns": "Cari Kampaniyalar",
@@ -91,7 +99,12 @@
     "homepageBlogs": "Bloq",
     "popularBlogs": "Məşhur Məqalələr",
     "stores": "Mağazalar",
-    "similarProjects": "Oxşar Layihələr"
+    "similarProjects": "Oxşar Layihələr",
+    "similarBlogs": "Oxşar Bloqlar",
+    "addresses": "Ünvanlar",
+    "aboutProduct": "Məhsul haqqında",
+    "customerFeedback": "Sifarişçi rəyi",
+    "similarProducts": "Oxşar məhsullar"
   },
   "search": {
     "notFound": "Axtardığınız məhsul tapılmadı.",
@@ -101,7 +114,21 @@
   },
   "texts": {
     "campaignFinished": "Bitib",
-    "contact": "Əlaqə"
+    "contact": "Əlaqə",
+    "accountInformation": "Hesab məlumatları",
+    "exit": "Çıxış",
+    "changePassword": "Şifrəni dəyiş",
+    "product": "Məhsul",
+    "color": "Rəng",
+    "size": "Ölçü",
+    "address": "Ünvan",
+    "brandDescription": "Embakitchen - Embawood şirkətinin mətbəx mebeli üzrə ixtisaslaşmış brendidir.",
+    "installmentInfo": "Birbank kartı ilə 18 aya faizsiz ödə",
+    "style": "Stil",
+    "material": "Material",
+    "facades": "Fasadlar",
+    "decor": "Dekor",
+    "design": "Dizayn"
   },
   "profile": {
     "accountInfo": "Hesab məlumatları",
