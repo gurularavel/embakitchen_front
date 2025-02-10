@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import type { FormProps } from 'antd'
 import { Col, Form, Input, message, Row, Select } from 'antd'
 import { MaskedInput } from 'antd-mask-input'
@@ -61,6 +61,7 @@ function LoginForm(): React.ReactElement {
   } = useStore(state => state)
   const router = useRouter()
   const locale = useLocale()
+  const t = useTranslations('buttons')
 
   const handleLogin: FormProps<LoginFormValues>['onFinish'] = async values => {
     const { email, password } = values
@@ -108,7 +109,7 @@ function LoginForm(): React.ReactElement {
           type='submit'
           classes={styles.submitButton}
         >
-          Giriş et
+          {t('login')}
         </Button>
       </Form.Item>
     </Form>
@@ -118,6 +119,7 @@ function LoginForm(): React.ReactElement {
 function RegistrationForm({
   setSelectedAuthForm,
 }: Pick<AuthFormProps, 'setSelectedAuthForm'>): React.ReactElement {
+  const t = useTranslations('buttons')
   const locale = useLocale()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [form] = Form.useForm()
@@ -348,7 +350,7 @@ function RegistrationForm({
           type='submit'
           classes={styles.submitButton}
         >
-          Qeydiyyatdan keç
+          {t('register')}
         </Button>
       </Form.Item>
     </Form>

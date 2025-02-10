@@ -145,6 +145,7 @@ function WideScreenHeader({
 
 export function Header(): React.ReactElement {
   const { width } = useScreenSize()
+  const t = useTranslations('buttons')
   const {
     clientSlice: {
       isClientRendering,
@@ -217,7 +218,7 @@ export function Header(): React.ReactElement {
             data-value='login'
             onClick={switchActiveTab}
           >
-            Giriş
+            {t('login')}
           </Button>
           <Button
             classes={twMerge(
@@ -227,7 +228,7 @@ export function Header(): React.ReactElement {
             data-value='registration'
             onClick={switchActiveTab}
           >
-            Qeydiyyat
+            {t('register')}
           </Button>
         </div>
 
