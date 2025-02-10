@@ -39,6 +39,7 @@ export function Home({
       <SlogansSection
         title={createOrderSection.title}
         content={createOrderSection.content}
+        backgroundImg={createOrderImage}
       />
 
       <PopularBlogs

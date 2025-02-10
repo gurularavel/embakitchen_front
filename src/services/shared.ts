@@ -8,7 +8,6 @@ import type {
   ProductsResponse,
   SearchPageResponse,
 } from '~ek/types'
-import { PER_PAGE } from '~ek/utils'
 
 interface FilteredApiParams extends ApiQueryParams {
   cityId: number
@@ -17,10 +16,9 @@ interface FilteredApiParams extends ApiQueryParams {
 export async function getCities(
   apiQueryParams?: ApiQueryParams,
 ): Promise<CitiesResponse['data']> {
-  const response = await httpClient.get<CitiesResponse>(
-    '/cities',
-    apiQueryParams ?? {},
-  )
+  const response = await httpClient.get<CitiesResponse>('/cities', {
+    query: apiQueryParams ?? {},
+  })
 
   return response?.data as CitiesResponse['data']
 }

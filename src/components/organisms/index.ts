@@ -12,6 +12,7 @@ export { PopularBlogs } from '~ek/components/organisms/popular-blogs'
 export { Drawer } from '~ek/components/organisms/drawer'
 export { AuthForm } from '~ek/components/organisms/auth-form'
 export { OrderForm } from '~ek/components/organisms/order-form'
+export { default as Map } from '~ek/components/organisms/map'
 export {
   AddAddressModal,
   EditAddressModal,
