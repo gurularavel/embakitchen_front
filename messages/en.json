@@ -83,7 +83,15 @@
     "customOrder": "Custom order",
     "personalAccount": "Personal account",
     "inDetails": "In Details",
-    "readAboutUs": "Read About Us"
+    "readAboutUs": "Read About Us",
+    "register": "Register",
+    "login": "Login",
+    "delete": "Delete",
+    "addProduct": "Add product",
+    "sendOrder": "Send order",
+    "remember": "Remember",
+    "placeOrder": "Place order",
+    "send": "Send"
   },
   "titles": {
     "currentCampaigns": "Current Campaigns",
@@ -91,16 +99,35 @@
     "homepageBlogs": "Blog",
     "popularBlogs": "Popular Articles",
     "stores": "Stores",
-    "similarProjects": "Similar Projects"
+    "similarProjects": "Similar Projects",
+    "similarBlogs": "Similar Blogs",
+    "addresses": "Addresses",
+    "aboutProduct": "About the product",
+    "customerFeedback": "Customer feedback",
+    "similarProducts": "Similar products"
   },
   "search": {
     "notFound": "No products were found matching your search criteria.",
     "allProductsLink": "All products",
     "total": "Total",
-    "searchLink" : "All results"
+    "searchLink": "All results"
   },
   "texts": {
     "campaignFinished": "Has been finished",
-    "contact" : "Contact"
+    "contact": "Contact",
+    "accountInformation": "Account information",
+    "exit": "Exit",
+    "changePassword": "Change password",
+    "product": "Product",
+    "color": "Color",
+    "size": "Size",
+    "address": "Address",
+    "brandDescription": "Embakitchen - Embawood is a brand specializing in kitchen furniture.",
+    "installmentInfo": "Pay interest-free for 18 months with a Birbank card",
+    "style": "Style",
+    "material": "Material",
+    "facades": "Facades",
+    "decor": "Dekor",
+    "design": "Design"
   }
 }
