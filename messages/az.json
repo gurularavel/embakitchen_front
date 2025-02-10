@@ -129,5 +129,18 @@
     "facades": "Fasadlar",
     "decor": "Dekor",
     "design": "Dizayn"
+  },
+  "profile": {
+    "accountInfo": "Hesab məlumatları",
+    "addresses": "Ünvanlar",
+    "changePassword": "Şifrəni dəyiş",
+    "orderHistory": "Sifariş tarixçəsi",
+    "addAddress": "Ünvan əlavə et",
+    "logout": "Çıxış"
+  },
+  "modal" : {
+    "cancelText": "Xeyr",
+    "okText": "Bəli",
+    "deleteTitle": "Silmək istədiyinizdən əminsiniz?"
   }
 }

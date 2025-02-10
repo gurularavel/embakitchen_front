@@ -53,6 +53,7 @@ export function OrderForm(): React.ReactElement {
   const [products, setProducts] = React.useState<OrderProductEntry[]>([])
   const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
   const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
+  const [cityChanged, setCityChanged] = React.useState<boolean>(false)
   const {
     authSlice: { user },
     clientSlice: { setIsOrderFormDrawerVisible },
@@ -60,16 +61,13 @@ export function OrderForm(): React.ReactElement {
 
   React.useEffect(() => {
     if (user) {
-      if (user.city.hasDistricts) {
+      if (user.city?.hasDistricts) {
         fetchDistricts(user.city.id, locale as Language, setDistricts)
       }
 
       form.setFieldsValue({
-        city_id: user.city.id,
-        district_id: {
-          id: user.district?.id,
-          label: user.district?.title[locale as Language],
-        },
+        city_id: user.city?.id,
+        district_id: user.district?.id,
         address: user.address,
       })
     }
@@ -105,6 +103,7 @@ export function OrderForm(): React.ReactElement {
   const onRegionSelect = (field: keyof OrderFormValues, value: number) => {
     form.setFieldsValue({ [field]: value })
     if (field === 'city_id') {
+      setCityChanged(true)
       const city = cities.find(c => c.id === value)
       setSelectedCity(city)
     }
@@ -117,7 +116,6 @@ export function OrderForm(): React.ReactElement {
       surname: user?.surname,
       phone: user?.phone,
     }
-
     const body = {
       ...orderedUser,
       ...values,
@@ -271,7 +269,7 @@ export function OrderForm(): React.ReactElement {
         />
       </Form.Item>
 
-      {(user?.district?.id || selectedCity?.hasDistricts) && (
+      {((user?.district?.id && !cityChanged) || selectedCity?.hasDistricts) && (
         <Form.Item<OrderFormValues>
           name='district_id'
           label='Rayon'

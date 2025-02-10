@@ -2,8 +2,8 @@ import * as React from 'react'
 
 interface UseInputFocusOptions {
   clearValue?: boolean
-  onFocus?: () => void
-  onBlur?: () => void
+  onFocus?: VoidFunction
+  onBlur?: VoidFunction
 }
 
 interface UseInputFocusParams {

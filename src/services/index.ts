@@ -35,6 +35,10 @@ export {
   register,
   changePassword,
   updateProfileInformation,
+  createAddress,
+  getAddresses,
+  deleteAddress,
+  editAddress,
 } from '~ek/services/auth'
 export {
   getCities,

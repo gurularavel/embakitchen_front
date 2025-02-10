@@ -129,5 +129,18 @@
     "facades": "Фасады",
     "decor": "Декор",
     "design": "Дизайн"
+  },
+  "profile": {
+    "accountInfo": "Информация об учетной записи",
+    "addresses": "Адреса",
+    "changePassword": "Изменить пароль",
+    "orderHistory": "История заказов",
+    "addAddress": "Добавить адрес",
+    "logout": "Выход"
+  },
+  "modal" : {
+    "cancelText": "Oтмена",
+    "okText": "Да",
+    "deleteTitle": "Вы уверены, что хотите удалить?"
   }
 }

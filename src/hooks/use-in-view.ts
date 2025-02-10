@@ -3,7 +3,7 @@ import { DEFAULT_INTERSECTION_OBSERVER_OPTIONS } from '~ek/utils'
 
 interface UseInViewParams {
   ref: React.RefObject<HTMLElement>
-  cb: () => void
+  cb: VoidFunction
   options?: IntersectionObserverInit
   shouldUnobserve?: boolean
 }

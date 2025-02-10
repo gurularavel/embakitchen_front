@@ -129,5 +129,19 @@
     "facades": "Facades",
     "decor": "Dekor",
     "design": "Design"
+  },
+  "profile": {
+    "accountInfo": "Account information",
+    "addresses": "Addresses",
+    "changePassword": "Change password",
+    "orderHistory": "Order history",
+    "addAddress": "Add address",
+    "logout": "Logout",
+    "save": "Save"
+  },
+  "modal" : {
+    "cancelText": "Cancel",
+    "okText": "Ok",
+    "deleteTitle": "Are you sure you want to delete?"
   }
 }
