@@ -35,7 +35,7 @@ export {
   register,
   changePassword,
   updateProfileInformation,
-  postAddress,
+  createAddress,
   getAddresses,
   deleteAddress,
   editAddress,

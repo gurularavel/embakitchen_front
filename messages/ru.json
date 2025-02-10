@@ -108,7 +108,7 @@
     "addresses": "Адреса",
     "changePassword": "Изменить пароль",
     "orderHistory": "История заказов",
-    "addAdress": "Добавить адрес",
+    "addAddress": "Добавить адрес",
     "logout": "Выход"
   },
   "modal" : {

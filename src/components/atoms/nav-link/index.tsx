@@ -4,7 +4,7 @@ import { Link } from '~ek/i18n/routing'
 import type { Language } from '~ek/types'
 
 interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  closeMenu?: () => void
+  closeMenu?: VoidFunction
 }
 
 export function NavLink({

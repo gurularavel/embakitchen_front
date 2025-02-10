@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Modal } from 'antd'
+import { Modal as AntModal } from 'antd'
 
-interface CustomModalProps {
+interface ModalProps {
   title: string
   open: boolean
-  onCancel: () => void
-  onOk?: () => void
+  onCancel: VoidFunction
+  onOk?: VoidFunction
   children: React.ReactNode
   footer?: React.ReactNode | null
   width?: number | string
@@ -19,7 +19,7 @@ const modalStyles: Readonly<TwClasses> = {
 }
 const styles = modalStyles as Readonly<StyleRecord>
 
-export const CustomModal = ({
+export const Modal = ({
   title,
   open,
   onCancel,
@@ -27,9 +27,9 @@ export const CustomModal = ({
   children,
   footer = null,
   width = 600,
-}: CustomModalProps) => {
+}: ModalProps) => {
   return (
-    <Modal
+    <AntModal
       title={<h2 className={styles.modalTitle}>{title}</h2>}
       open={open}
       onCancel={onCancel}
@@ -40,6 +40,6 @@ export const CustomModal = ({
       className={twMerge(styles.modalContent)}
     >
       <div className='p-4'>{children}</div>
-    </Modal>
+    </AntModal>
   )
 }

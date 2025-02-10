@@ -371,3 +371,9 @@ export interface AddressEntry<T extends string = Language> {
   district: DistrictEntry<T>
   address: string
 }
+
+export interface CreateAddressResponse extends AddressFormValues {
+  id: number
+  created_at: string
+  updated_at: string
+}

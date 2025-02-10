@@ -11,7 +11,6 @@ import {
   SCREENS,
   STATISTICS_SECTION_INTERVAL_LIMIT,
 } from '~ek/utils'
-import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 export const getGapProperty = (
   layout: LayoutOption,
@@ -164,8 +163,8 @@ export const removeBrowserAuthData = (): void => {
 
 type ConfirmModalOptions = {
   title: string
-  onOk: () => void
-  onCancel?: () => void
+  onOk: VoidFunction
+  onCancel?: VoidFunction
   okText?: string
   cancelText?: string
 }

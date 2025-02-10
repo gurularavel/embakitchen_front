@@ -34,10 +34,6 @@ export interface PlainApiResponse {
   message: string
 }
 
-export interface SuccessBodyResponse<T> {
-  success: T
-}
-
 export interface AboutPageResponse<T extends string = Language> {
   id: number
   title: MultilingualText<T>

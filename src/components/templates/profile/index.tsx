@@ -6,7 +6,7 @@ import MaskedInput from 'antd-mask-input'
 import { LogoutOutlined } from '@ant-design/icons'
 import { useLocale, useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { Button, Icon } from '~ek/components'
+import { Button, Icon, AddAddressModal, EditAddressModal } from '~ek/components'
 import { useAuth, useStore } from '~ek/hooks'
 import {
   changePassword,
@@ -23,8 +23,6 @@ import type {
   UpdateProfileFormValues,
 } from '~ek/types'
 import { confirmModal, transformToUiData } from '~ek/utils'
-import AddAddressModal from '~ek/components/organisms/addressModal/addAddressModal'
-import EditAddressModal from '~ek/components/organisms/addressModal/editAddressModal'
 
 interface TabHeader {
   label: string
@@ -348,11 +346,11 @@ function Addresses(): React.ReactElement {
     ? JSON.parse(localStorage.getItem('token') as string)
     : ''
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  }
   async function initializeAddresses() {
     setLoading(true)
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
     try {
       const fetchedAddresses = await getAddresses({ headers })
       const uiAddress = transformToUiData(
@@ -448,7 +446,7 @@ function Addresses(): React.ReactElement {
             type='button'
             classes={styles.submitButton}
           >
-            {t('profile.addAdress')}
+            {t('profile.addAddress')}
           </Button>
         </div>
       </div>
@@ -478,11 +476,10 @@ function OrderHistory(): React.ReactElement {
       ? JSON.parse(localStorage.getItem('token') as string)
       : ''
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    }
-
     async function initializeOrders() {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      }
       const fetchedOrders = await getOrders({ headers })
       const uiOrders = transformToUiData(
         fetchedOrders,

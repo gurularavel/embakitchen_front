@@ -4,12 +4,12 @@ import type {
   AddressFormValues,
   AddressResponse,
   ChangePasswordFormValues,
+  CreateAddressResponse,
   LoginFormValues,
   LoginResponse,
   PlainApiResponse,
   RegistrationFormValues,
   RegistrationResponse,
-  SuccessBodyResponse,
   UpdateProfileFormValues,
 } from '~ek/types'
 
@@ -80,16 +80,16 @@ export async function changePassword(
   }
 }
 
-export async function postAddress(
+export async function createAddress(
   values: AddressFormValues,
-): Promise<SuccessBodyResponse<AddressFormValues> | undefined> {
+): Promise<CreateAddressResponse | undefined> {
   try {
     const response = await httpClient.post<
-      SuccessBodyResponse<AddressFormValues>,
+      CreateAddressResponse,
       AddressFormValues
     >('/addresses', values)
 
-    return response as SuccessBodyResponse<AddressFormValues>
+    return response as CreateAddressResponse
   } catch (e) {
     if (e instanceof Error) {
       message.error(e.message)
@@ -107,22 +107,18 @@ export async function getAddresses(
   return response?.data as AddressResponse['data']
 }
 
-export async function deleteAddress(
-  id: number,
-): Promise<SuccessBodyResponse<string>> {
-  const response = await httpClient.delete<SuccessBodyResponse<string>>(
-    `/addresses/${id}`,
-  )
-  return response as SuccessBodyResponse<string>
+export async function deleteAddress(id: number): Promise<PlainApiResponse> {
+  const response = await httpClient.delete<PlainApiResponse>(`/addresses/${id}`)
+  return response as PlainApiResponse
 }
 
 export async function editAddress(
   data: AddressFormValues,
   id: number,
-): Promise<SuccessBodyResponse<string>> {
-  const response = await httpClient.put<
-    SuccessBodyResponse<string>,
-    AddressFormValues
-  >(`/addresses/${id}`, data)
-  return response as SuccessBodyResponse<string>
+): Promise<PlainApiResponse> {
+  const response = await httpClient.put<PlainApiResponse, AddressFormValues>(
+    `/addresses/${id}`,
+    data,
+  )
+  return response as PlainApiResponse
 }
