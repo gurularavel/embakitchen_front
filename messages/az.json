@@ -161,7 +161,7 @@
     "password": "Şifrə",
     "repeatPassword": "Şifrə (təkrar)"
   },
-  "validation": {
+  "validations": {
     "selectProduct": "Zəhmət olmasa məhsul seçin!",
     "enterWidth": "Zəhmət olmasa məhsulun enini daxil edin",
     "enterHeight": "Zəhmət olmasa məhsulun hündürlüyünü daxil edin!",
