@@ -113,11 +113,11 @@
   "search": {
     "notFound": "No products were found matching your search criteria.",
     "allProductsLink": "All products",
-    "total": "Total",
+    "total": "Total product",
     "searchLink": "All results"
   },
   "texts": {
-    "campaignFinished": "Has been finished",
+    "campaignFinished": "Finished",
     "contact": "Contact",
     "accountInformation": "Account information",
     "exit": "Exit",
@@ -139,8 +139,7 @@
     "addresses": "Addresses",
     "changePassword": "Change password",
     "orderHistory": "Order history",
-    "logout": "Logout",
-    "save": "Save"
+    "logout": "Logout"
   },
   "modal": {
     "cancelText": "Cancel",

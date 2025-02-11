@@ -124,7 +124,7 @@ export function AddAddressModal({
           rules={[
             {
               required: true,
-              message: t('validation.selectCity'),
+              message: t('validations.selectCity'),
             },
           ]}
         >
@@ -152,7 +152,7 @@ export function AddAddressModal({
             rules={[
               {
                 required: true,
-                message: t('validation.selectDistrict'),
+                message: t('validations.selectDistrict'),
               },
             ]}
           >
@@ -184,7 +184,7 @@ export function AddAddressModal({
           rules={[
             {
               required: true,
-              message: t('validation.enterAddress'),
+              message: t('validations.enterAddress'),
             },
           ]}
         >
@@ -338,7 +338,7 @@ export function EditAddressModal({
           rules={[
             {
               required: true,
-              message: t('validation.selectCity'),
+              message: t('validations.selectCity'),
             },
           ]}
         >
@@ -367,7 +367,7 @@ export function EditAddressModal({
             rules={[
               {
                 required: true,
-                message: t('validation.selectDistrict'),
+                message: t('validations.selectDistrict'),
               },
             ]}
           >
@@ -399,7 +399,7 @@ export function EditAddressModal({
           rules={[
             {
               required: true,
-              message: t('validation.enterAddress'),
+              message: t('validations.enterAddress'),
             },
           ]}
         >
