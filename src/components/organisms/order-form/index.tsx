@@ -5,6 +5,7 @@ import { Col, Form, Input, InputNumber, message, Row, Select } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useLocale, useTranslations } from 'next-intl'
 import {
+  AddressEntry,
   CityEntry,
   DistrictEntry,
   Language,
@@ -13,7 +14,13 @@ import {
   ProductEntry,
 } from '~ek/types'
 import { useStore } from '~ek/hooks'
-import { createOrder, getCities, getDistricts, getProducts } from '~ek/services'
+import {
+  createOrder,
+  getAddresses,
+  getCities,
+  getDistricts,
+  getProducts,
+} from '~ek/services'
 import { transformToUiData } from '~ek/utils'
 import { Button } from '~ek/components/atoms'
 
@@ -51,6 +58,7 @@ export function OrderForm(): React.ReactElement {
   const t = useTranslations()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [products, setProducts] = React.useState<OrderProductEntry[]>([])
+  const [addresses, setAddresses] = React.useState<AddressEntry[]>([])
   const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
   const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
   const [cityChanged, setCityChanged] = React.useState<boolean>(false)
@@ -77,6 +85,7 @@ export function OrderForm(): React.ReactElement {
     async function initializeFormValues() {
       const initialCities = await getCities()
       const initialProducts = await getProducts()
+      const initialAddresses = await getAddresses()
       const uiData = {
         products: transformToUiData(
           initialProducts.map(p => ({ id: p.id, title: p.title })),
@@ -86,6 +95,10 @@ export function OrderForm(): React.ReactElement {
           initialCities,
           locale as Language,
         ) as CityEntry<string>[],
+        addresses: transformToUiData(
+          initialAddresses,
+          locale as Language,
+        ) as AddressEntry<string>[],
       }
       setCities(uiData.cities)
       setProducts(uiData.products)
