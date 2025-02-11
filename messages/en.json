@@ -91,7 +91,9 @@
     "sendOrder": "Send order",
     "remember": "Remember",
     "placeOrder": "Place order",
-    "send": "Send"
+    "send": "Send",
+    "addAddress": "Add address",
+    "makeChange": "Make a change"
   },
   "titles": {
     "currentCampaigns": "Current Campaigns",
@@ -104,7 +106,9 @@
     "addresses": "Addresses",
     "aboutProduct": "About the product",
     "customerFeedback": "Customer feedback",
-    "similarProducts": "Similar products"
+    "similarProducts": "Similar products",
+    "addAddress": "Add address",
+    "updateInfo": "Update information"
   },
   "search": {
     "notFound": "No products were found matching your search criteria.",
@@ -135,13 +139,59 @@
     "addresses": "Addresses",
     "changePassword": "Change password",
     "orderHistory": "Order history",
-    "addAddress": "Add address",
     "logout": "Logout",
     "save": "Save"
   },
-  "modal" : {
+  "modal": {
     "cancelText": "Cancel",
     "okText": "Ok",
     "deleteTitle": "Are you sure you want to delete?"
+  },
+  "labels": {
+    "product": "Product",
+    "width": "Width",
+    "height": "Height",
+    "city": "City",
+    "district": "District",
+    "address": "Address",
+    "note": "Note",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "mobileNumber": "Mobil number",
+    "password": "Password",
+    "repeatPassword": "Password (repeat)"
+  },
+  "validations": {
+    "selectProduct": "Please select a product!",
+    "enterWidth": "Please enter the product width.",
+    "enterHeight": "Please enter the product height.",
+    "selectCity": "Please select the city you live in!",
+    "selectDistrict": "Please select the region you live in!",
+    "enterAddress": "Please enter your residential address!",
+    "enterName": "Please enter your name!",
+    "enterSurname": "Please enter your surname!",
+    "enterEmail": "Please enter your email!",
+    "enterMobileNumber": "Please enter a mobile number!",
+    "invalidMobileNumber": "Please enter a mobile number in the correct format.",
+    "enterPassword": "Please enter password!",
+    "enterRepeatPassword": "Please try again enter password!",
+    "reEnterRepeatPassword": "Please re-enter your password correctly!"
+  },
+  "message": {
+    "addressUpdated": "Address information has been changed!",
+    "registrationSuccess": "You have successfully registered!",
+    "orderSuccess": "Your order has been successfully completed.",
+    "newAddressAdded": "New address added!"
+  },
+  "placeholder": {
+    "selectProduct": "Select product",
+    "width": "Width",
+    "height": "Height",
+    "selectCity": "Select city",
+    "selectDistrict": "Select region",
+    "address": "Address",
+    "note": "Note",
+    "search": "Search"
   }
 }

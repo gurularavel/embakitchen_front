@@ -35,7 +35,7 @@ const getResultBoxStyles = searchStyles.resultBox as StyleGetter
 
 export function Search(): React.ReactElement {
   const locale = useLocale()
-  const t = useTranslations('search')
+  const t = useTranslations()
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
   const [searchResult, setSearchResult] = React.useState<SearchResultEntry>(
     {} as SearchResultEntry,
@@ -85,7 +85,7 @@ export function Search(): React.ReactElement {
 
         <Input
           type='search'
-          placeholder='Axtar'
+          placeholder={t('placeholder.search')}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             onInputChange(e.target.value)
           }
@@ -124,19 +124,19 @@ export function Search(): React.ReactElement {
             {searchResult?.pagination.total && (
               <div className={styles.resultFooter}>
                 <div className={styles.total}>
-                  {t('total')} {searchResult?.pagination.total}
+                  {t('search.total')} {searchResult?.pagination.total}
                 </div>
                 <NavLink
                   className={styles.searchLink}
                   href={`/search?search=${inputValue}`}
                 >
-                  {t('searchLink')}
+                  {t('search.searchLink')}
                 </NavLink>
               </div>
             )}
           </div>
         ) : (
-          <div className={styles.notFound}>{t('notFound')}</div>
+          <div className={styles.notFound}>{t('search.notFound')}</div>
         )}
       </div>
     </div>

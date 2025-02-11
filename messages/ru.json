@@ -91,7 +91,8 @@
     "sendOrder": "Отправить заказ",
     "remember": "Помнить",
     "placeOrder": "Оформить заказ",
-    "send": "Отправлять"
+    "send": "Отправлять",
+    "addAddress": "Добавить адрес"
   },
   "titles": {
     "currentCampaigns": "Текущие Кампании",
@@ -104,7 +105,10 @@
     "addresses": "Адреса",
     "aboutProduct": "О продукте",
     "customerFeedback": "Отзывы клиентов",
-    "similarProducts": "Похожие продукты"
+    "similarProducts": "Похожие продукты",
+    "addAddress": "Добавить адрес",
+    "updateInfo": "Обновить информацию",
+    "makeChange": "Внесите изменения"
   },
   "search": {
     "notFound": "Товаров, соответствующих вашему запросу, не обнаружено.",
@@ -135,12 +139,58 @@
     "addresses": "Адреса",
     "changePassword": "Изменить пароль",
     "orderHistory": "История заказов",
-    "addAddress": "Добавить адрес",
     "logout": "Выход"
   },
-  "modal" : {
+  "modal": {
     "cancelText": "Oтмена",
     "okText": "Да",
     "deleteTitle": "Вы уверены, что хотите удалить?"
+  },
+  "labels": {
+    "product": "Продукт",
+    "width": "Ширина",
+    "height": "Высота",
+    "city": "Город",
+    "district": "Округ",
+    "address": "Адрес",
+    "note": "Примечание",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "email": "Почта",
+    "mobileNumber": "Номер мобильного телефона",
+    "password": "Пароль",
+    "repeatPassword": "Пароль (повторить)"
+  },
+  "validation": {
+    "selectProduct": "Пожалуйста, выберите товар!",
+    "enterWidth": "Пожалуйста, введите ширину продукта",
+    "enterHeight": "Пожалуйста, введите высоту изделия!",
+    "selectCity": "Пожалуйста, выберите город, в котором вы живете!",
+    "selectDistrict": "Пожалуйста, выберите регион, в котором вы живете!",
+    "enterAddress": "Пожалуйста, укажите адрес вашего проживания!",
+    "enterName": "Пожалуйста, введите свое имя!",
+    "enterSurname": "Пожалуйста, введите свою фамилию!",
+    "enterEmail": "Пожалуйста, введите свой адрес электронной почты!",
+    "enterMobileNumber": "Пожалуйста, введите номер мобильного телефона!",
+    "invalidMobileNumber": "Пожалуйста, введите номер мобильного телефона в правильном формате.",
+    "enterPassword": "Пожалуйста, введите пароль!",
+    "enterRepeatPassword": "Попробуйте ввести пароль еще раз!",
+    "reEnterRepeatPassword": "Пожалуйста, введите пароль правильно!"
+  },
+  "message": {
+    "addressUpdated": "Информация об адресе изменена!",
+    "registrationSuccess": "Вы успешно зарегистрировались!",
+    "orderSuccess": "Ваш заказ успешно выполнен.",
+    "newAddressAdded": "Добавлен новый адрес!"
+  },
+  "placeholder": {
+    "selectProduct": "Выберите продукт",
+    "width": "Ширина",
+    "height": "Высота",
+    "selectCity": "Выберите город",
+    "selectDistrict": "Выберите регион",
+    "address": "Адрес",
+    "note": "Примечание",
+    "search": "Поиск"
   }
 }
