@@ -320,7 +320,7 @@ export function OrderForm(): React.ReactElement {
         label={t('labels.note')}
       >
         <TextArea
-          placeholder={t('placeholder.mote')}
+          placeholder={t('placeholder.note')}
           rows={4}
         />
       </Form.Item>
