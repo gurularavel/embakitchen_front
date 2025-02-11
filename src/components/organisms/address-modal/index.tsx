@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Form, FormProps, message, Input, Select } from 'antd'
 import { Button, Modal } from '~ek/components'
 import type {
@@ -45,6 +45,7 @@ export function AddAddressModal({
   responseAddresses,
 }: Readonly<AddAddressModalProps>): React.ReactElement {
   const locale = useLocale()
+  const t = useTranslations()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [form] = Form.useForm()
   const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
@@ -89,7 +90,7 @@ export function AddAddressModal({
 
     if (!data) return
 
-    message.success('Yeni ünvan əlavə edildi!')
+    message.success(t('messages.newAddressAdded'))
     responseAddresses()
     form.resetFields()
     onClose()
@@ -105,7 +106,7 @@ export function AddAddressModal({
 
   return (
     <Modal
-      title='Ünvan əlavə et'
+      title={t('titles.addAddress')}
       open={open}
       onCancel={onClose}
     >
@@ -119,16 +120,16 @@ export function AddAddressModal({
       >
         <Form.Item<AddressFormValues>
           name='city_id'
-          label='Şəhər'
+          label={t('labels.city')}
           rules={[
             {
               required: true,
-              message: 'Zəhmət olmasa yaşadığınız şəhəri seçin!',
+              message: t('validation.selectCity'),
             },
           ]}
         >
           <Select
-            placeholder='Şəhər seçin'
+            placeholder={t('placeholder.selectCity')}
             onChange={(value: number) => onRegionSelect('city_id', value)}
             allowClear
             className={styles.select}
@@ -147,16 +148,16 @@ export function AddAddressModal({
         {selectedCity?.hasDistricts && (
           <Form.Item<AddressFormValues>
             name='district_id'
-            label='Rayon'
+            label={t('labels.district')}
             rules={[
               {
                 required: true,
-                message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
+                message: t('validation.selectDistrict'),
               },
             ]}
           >
             <Select
-              placeholder='Rayon seçin'
+              placeholder={t('placeholder.selectDistrict')}
               onChange={(value: number) => onRegionSelect('district_id', value)}
               allowClear
               className={styles.select}
@@ -179,16 +180,16 @@ export function AddAddressModal({
 
         <Form.Item<AddressFormValues>
           name='address'
-          label='Ünvan'
+          label={t('labels.address')}
           rules={[
             {
               required: true,
-              message: 'Zəhmət olmasa yaşadığınız ünvanı daxil edin!',
+              message: t('validation.enterAddress'),
             },
           ]}
         >
           <TextArea
-            placeholder='Ünvan'
+            placeholder={t('placeholder.address')}
             className={styles.input}
             rows={3}
           />
@@ -199,7 +200,7 @@ export function AddAddressModal({
             type='submit'
             classes={styles.submitButton}
           >
-            Ünvan əlavə et
+            {t('buttons.addAddress')}
           </Button>
         </Form.Item>
       </Form>
@@ -237,6 +238,7 @@ export function EditAddressModal({
   const locale = useLocale()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [form] = Form.useForm()
+  const t = useTranslations()
   const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
   const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
   const [cityChanged, setCityChanged] = React.useState<boolean>(false)
@@ -301,7 +303,7 @@ export function EditAddressModal({
     )
 
     if (!data) return
-    message.success('Ünvan məlumatları dəyişdirildi!')
+    message.success(t('messages.addressUpdated'))
     responseAddresses()
     form.resetFields()
     onClose()
@@ -318,7 +320,7 @@ export function EditAddressModal({
 
   return (
     <Modal
-      title='Məlumatı yenilə'
+      title={t('titles.updateInfo')}
       open={open}
       onCancel={onClose}
     >
@@ -332,16 +334,16 @@ export function EditAddressModal({
       >
         <Form.Item<AddressFormValues>
           name='city_id'
-          label='Şəhər'
+          label={t('labels.city')}
           rules={[
             {
               required: true,
-              message: 'Zəhmət olmasa yaşadığınız şəhəri seçin!',
+              message: t('validation.selectCity'),
             },
           ]}
         >
           <Select
-            placeholder='Şəhər seçin'
+            placeholder={t('placeholder.selectCity')}
             onChange={(value: number) => onRegionSelect('city_id', value)}
             allowClear
             className={styles.select}
@@ -361,16 +363,16 @@ export function EditAddressModal({
           selectedCity?.hasDistricts) && (
           <Form.Item<AddressFormValues>
             name='district_id'
-            label='Rayon'
+            label={t('labels.district')}
             rules={[
               {
                 required: true,
-                message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
+                message: t('validation.selectDistrict'),
               },
             ]}
           >
             <Select
-              placeholder='Rayon seçin'
+              placeholder={t('placeholder.selectDistrict')}
               onChange={(value: number) => onRegionSelect('district_id', value)}
               allowClear
               className={styles.select}
@@ -393,16 +395,16 @@ export function EditAddressModal({
 
         <Form.Item<AddressFormValues>
           name='address'
-          label='Ünvan'
+          label={t('labels.address')}
           rules={[
             {
               required: true,
-              message: 'Zəhmət olmasa yaşadığınız ünvanı daxil edin!',
+              message: t('validation.enterAddress'),
             },
           ]}
         >
           <TextArea
-            placeholder='Ünvan'
+            placeholder={t('placeholder.address')}
             className={styles.input}
             rows={3}
           />
@@ -413,7 +415,7 @@ export function EditAddressModal({
             type='submit'
             classes={styles.submitButton}
           >
-            Dəyişiklik et
+            {t('buttons.makeChange')}
           </Button>
         </Form.Item>
       </Form>

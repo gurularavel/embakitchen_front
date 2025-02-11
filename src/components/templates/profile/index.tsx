@@ -195,12 +195,12 @@ function ProfileInformation(): React.ReactElement {
         <Row gutter={[16, 16]}>
           <Col span={12}>
             <Form.Item<UpdateProfileFormValues>
-              label='Ad'
+              label={t('labels.name')}
               name='name'
               rules={[
                 {
                   required: true,
-                  message: 'Zəhmət olmasa adınızı daxil edin!',
+                  message: t('validations.enterName'),
                 },
               ]}
             >
@@ -209,12 +209,12 @@ function ProfileInformation(): React.ReactElement {
           </Col>
           <Col span={12}>
             <Form.Item<UpdateProfileFormValues>
-              label='Soyad'
+              label={t('labels.surname')}
               name='surname'
               rules={[
                 {
                   required: true,
-                  message: 'Zəhmət olmasa soyadınızı daxil edin!',
+                  message: t('validations.enterSurname'),
                 },
               ]}
             >
@@ -224,26 +224,24 @@ function ProfileInformation(): React.ReactElement {
         </Row>
 
         <Form.Item<UpdateProfileFormValues>
-          label='Email'
+          label={t('labels.email')}
           name='email'
-          rules={[
-            { required: true, message: 'Zəhmət olmasa email daxil edin!' },
-          ]}
+          rules={[{ required: true, message: t('validations.email') }]}
         >
           <Input className={styles.input} />
         </Form.Item>
 
         <Form.Item<UpdateProfileFormValues>
-          label='Mobil nömrə'
+          label={t('labels.mobileNumber')}
           name='phone'
           rules={[
             {
               required: true,
-              message: 'Zəhmət olmasa mobil nömrə daxil edin!',
+              message: t('validations.enterMobileNumber'),
             },
             {
               pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
-              message: 'Zəhmət olmasa düzgün formatda mobil nömrə daxil edin.',
+              message: t('validations.invalidMobileNumber'),
             },
           ]}
         >
@@ -292,29 +290,25 @@ function ChangePassword(): React.ReactElement {
         className={styles.form}
       >
         <Form.Item<ChangePasswordFormValues>
-          label='Şifrə'
+          label={t('labels.password')}
           name='password'
-          rules={[
-            { required: true, message: 'Zəhmət olmasa şifrə daxil edin!' },
-          ]}
+          rules={[{ required: true, message: t('validations.enterPassword') }]}
         >
           <Input.Password className={styles.input} />
         </Form.Item>
 
         <Form.Item<ChangePasswordFormValues>
-          label='Şifrə (təkrar)'
+          label={t('labels.repeatPassword')}
           name='password_confirmation'
           rules={[
-            { required: true, message: 'Zəhmət olmasa şifrənin təkrar edin!' },
+            { required: true, message: t('validations.enterRepeatPassword') },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
                 return Promise.reject(
-                  new Error(
-                    'Zəhmət olmasa şifrənizin təkrarını düzgün daxil edin!',
-                  ),
+                  new Error(t('validations.reEnterRepeatPassword')),
                 )
               },
             }),
@@ -397,7 +391,7 @@ function Addresses(): React.ReactElement {
           >
             <div className={addressesStyles.addressInfoHeader}>
               <span className={addressesStyles.headerTitle}>
-                Ünvan {++index}
+                {t('texts.address')} {++index}
               </span>
               <div className={addressesStyles.actionButtons}>
                 <span onClick={() => handleEditAddress(address)}>
@@ -449,7 +443,7 @@ function Addresses(): React.ReactElement {
             type='button'
             classes={styles.submitButton}
           >
-            {t('profile.addAddress')}
+            {t('buttons.addAddress')}
           </Button>
         </div>
       </div>

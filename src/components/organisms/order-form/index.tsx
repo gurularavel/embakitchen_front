@@ -48,7 +48,7 @@ async function fetchDistricts(
 export function OrderForm(): React.ReactElement {
   const locale = useLocale()
   const [form] = Form.useForm()
-  const t = useTranslations('buttons')
+  const t = useTranslations()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [products, setProducts] = React.useState<OrderProductEntry[]>([])
   const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
@@ -124,7 +124,7 @@ export function OrderForm(): React.ReactElement {
     await createOrder(body)
     setIsOrderFormDrawerVisible(false)
     form.resetFields()
-    message.success('Sifarişiniz uğurla tamamlandı.')
+    message.success(t('messages.orderSuccess'))
   }
 
   return (
@@ -152,16 +152,16 @@ export function OrderForm(): React.ReactElement {
                   <Form.Item<OrderFormValues['products']>
                     {...restField}
                     name={[name, 'id']}
-                    label='Məhsul'
+                    label={t('labels.product')}
                     rules={[
                       {
                         required: true,
-                        message: 'Zəhmət olmasa məhsul seçin!',
+                        message: t('validations.selectProduct'),
                       },
                     ]}
                   >
                     <Select
-                      placeholder='Məhsul seçin'
+                      placeholder={t('placeholder.selectProduct')}
                       allowClear
                       className={styles.select}
                       showSearch
@@ -183,17 +183,17 @@ export function OrderForm(): React.ReactElement {
                 <Col span={12}>
                   <Form.Item<OrderFormValues['products']>
                     {...restField}
-                    label='En'
+                    label={t('labels.width')}
                     name={[name, 'width']}
                     rules={[
                       {
                         required: true,
-                        message: 'Zəhmət olmasa məhsulun enini daxil edin!',
+                        message: t('validations.enterWidth'),
                       },
                     ]}
                   >
                     <InputNumber
-                      placeholder='En'
+                      placeholder={t('placeholder.width')}
                       className={styles.input}
                     />
                   </Form.Item>
@@ -202,17 +202,16 @@ export function OrderForm(): React.ReactElement {
                   <Form.Item<OrderFormValues['products']>
                     {...restField}
                     name={[name, 'height']}
-                    label='Hündürlük'
+                    label={t('labels.height')}
                     rules={[
                       {
                         required: true,
-                        message:
-                          'Zəhmət olmasa məhsulun hündürlüyünü daxil edin!',
+                        message: t('validations.enterHeight'),
                       },
                     ]}
                   >
                     <InputNumber
-                      placeholder='Hündürlük'
+                      placeholder={t('placeholder.height')}
                       className={styles.input}
                     />
                   </Form.Item>
@@ -222,7 +221,7 @@ export function OrderForm(): React.ReactElement {
                     onClick={() => remove(name)}
                     classes={styles.submitButton}
                   >
-                    {t('delete')}
+                    {t('buttons.delete')}
                   </Button>
                 </Col>
               </Row>
@@ -233,7 +232,7 @@ export function OrderForm(): React.ReactElement {
                 classes={styles.submitButton}
               >
                 <PlusOutlined />
-                <span>{t('addProduct')}</span>
+                <span>{t('buttons.addProduct')}</span>
               </Button>
             </Form.Item>
           </>
@@ -242,16 +241,16 @@ export function OrderForm(): React.ReactElement {
 
       <Form.Item<OrderFormValues>
         name='city_id'
-        label='Şəhər'
+        label={t('labels.city')}
         rules={[
           {
             required: true,
-            message: 'Zəhmət olmasa yaşadığınız şəhəri seçin!',
+            message: t('validations.selectCity'),
           },
         ]}
       >
         <Select
-          placeholder='Şəhər seçin'
+          placeholder={t('placeholder.selectCity')}
           onChange={(value: number) => onRegionSelect('city_id', value)}
           allowClear
           className={styles.select}
@@ -272,16 +271,16 @@ export function OrderForm(): React.ReactElement {
       {((user?.district?.id && !cityChanged) || selectedCity?.hasDistricts) && (
         <Form.Item<OrderFormValues>
           name='district_id'
-          label='Rayon'
+          label={t('labels.district')}
           rules={[
             {
               required: true,
-              message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
+              message: t('validations.selectDistrict'),
             },
           ]}
         >
           <Select
-            placeholder='Rayon seçin'
+            placeholder={t('placeholder.selectDistrict')}
             onChange={(value: number) => onRegionSelect('district_id', value)}
             allowClear
             className={styles.select}
@@ -302,26 +301,26 @@ export function OrderForm(): React.ReactElement {
 
       <Form.Item<OrderFormValues>
         name='address'
-        label='Ünvan'
+        label={t('labels.address')}
         rules={[
           {
             required: true,
-            message: 'Zəhmət olmasa yaşadığınız ünvanı daxil edin!',
+            message: t('validations.enterAddress'),
           },
         ]}
       >
         <Input
-          placeholder='Ünvan'
+          placeholder={t('placeholder.address')}
           className={styles.input}
         />
       </Form.Item>
 
       <Form.Item<OrderFormValues>
         name='message'
-        label='Qeyd'
+        label={t('labels.note')}
       >
         <TextArea
-          placeholder='Qeyd'
+          placeholder={t('placeholder.note')}
           rows={4}
         />
       </Form.Item>
@@ -331,7 +330,7 @@ export function OrderForm(): React.ReactElement {
           type='submit'
           classes={styles.submitButton}
         >
-          {t('sendOrder')}
+          {t('buttons.sendOrder')}
         </Button>
       </Form.Item>
     </Form>
