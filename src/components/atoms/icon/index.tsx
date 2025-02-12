@@ -33,6 +33,9 @@ import starGray from '/public/assets/icons/star-gray.svg'
 import starYellow from '/public/assets/icons/star-yellow.svg'
 import closeDarkIcon from '/public/assets/icons/close-dark.svg'
 import profileDarkIcon from '/public/assets/icons/profile-dark.svg'
+import editIcon from '/public/assets/icons/edit.svg'
+import trashIcon from '/public/assets/icons/trash.svg'
+import loadingIcon from '/public/assets/icons/loading.svg'
 
 interface IconProps {
   variant: IconVariant
@@ -73,6 +76,9 @@ const icons: Readonly<Record<IconVariant, StaticImageData>> = {
   'star-yellow': starYellow,
   'close-dark': closeDarkIcon,
   'profile-dark': profileDarkIcon,
+  edit: editIcon,
+  trash: trashIcon,
+  loading: loadingIcon,
 }
 
 export function Icon({

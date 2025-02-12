@@ -1,7 +1,10 @@
 import { message } from 'antd'
 import { httpClient } from '~ek/http-client'
 import type {
+  AddressFormValues,
+  AddressResponse,
   ChangePasswordFormValues,
+  CreateAddressResponse,
   LoginFormValues,
   LoginResponse,
   PlainApiResponse,
@@ -75,4 +78,47 @@ export async function changePassword(
       message.error(e.message)
     }
   }
+}
+
+export async function createAddress(
+  values: AddressFormValues,
+): Promise<CreateAddressResponse | undefined> {
+  try {
+    const response = await httpClient.post<
+      CreateAddressResponse,
+      AddressFormValues
+    >('/addresses', values)
+
+    return response as CreateAddressResponse
+  } catch (e) {
+    if (e instanceof Error) {
+      message.error(e.message)
+    }
+  }
+}
+
+export async function getAddresses(
+  apiQueryParams: AuthenticatedApiParams,
+): Promise<AddressResponse['data']> {
+  const response = await httpClient.get<AddressResponse>(
+    '/addresses',
+    apiQueryParams,
+  )
+  return response?.data as AddressResponse['data']
+}
+
+export async function deleteAddress(id: number): Promise<PlainApiResponse> {
+  const response = await httpClient.delete<PlainApiResponse>(`/addresses/${id}`)
+  return response as PlainApiResponse
+}
+
+export async function editAddress(
+  data: AddressFormValues,
+  id: number,
+): Promise<PlainApiResponse> {
+  const response = await httpClient.put<PlainApiResponse, AddressFormValues>(
+    `/addresses/${id}`,
+    data,
+  )
+  return response as PlainApiResponse
 }

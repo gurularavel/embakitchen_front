@@ -1,3 +1,4 @@
+import { Modal } from 'antd'
 import {
   Language,
   type MediaFile,
@@ -158,4 +159,38 @@ export const removeBrowserAuthData = (): void => {
     path =>
       (document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`),
   )
+}
+
+type ConfirmModalOptions = {
+  title: string
+  onOk: VoidFunction
+  onCancel?: VoidFunction
+  okText?: string
+  cancelText?: string
+}
+export function confirmModal({
+  title,
+  onOk,
+  onCancel,
+  okText,
+  cancelText,
+}: ConfirmModalOptions): void {
+  Modal.confirm({
+    title,
+    okText,
+    cancelText,
+    onOk,
+    onCancel,
+    okButtonProps: {
+      style: {
+        backgroundColor: '#E55E25',
+      },
+    },
+    cancelButtonProps: {
+      style: {
+        borderColor: '#E55E25',
+        color: '#49525B',
+      },
+    },
+  })
 }

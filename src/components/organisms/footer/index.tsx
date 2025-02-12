@@ -71,7 +71,9 @@ export function Footer(): React.ReactElement {
             </li>
 
             <li className={styles.contactUsItem}>
-              <span className={styles.contactUsLabel}>Email:</span>
+              <span className={styles.contactUsLabel}>
+                {t('labels.email')}:
+              </span>
               <ActionLink
                 href='mailto:support@embakitchen.az'
                 label='support@embakitchen.az'

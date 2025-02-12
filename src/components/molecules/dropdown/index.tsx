@@ -9,7 +9,7 @@ import { SCREENS, updatePrimitiveState } from '~ek/utils'
 interface DropdownProps {
   label: string
   nestedLinks: NavLinkEntry['nestedLinks']
-  closeMenu?: () => void
+  closeMenu?: VoidFunction
 }
 
 const dropdownStyles: Readonly<TwClasses> = {

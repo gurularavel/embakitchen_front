@@ -39,6 +39,9 @@ export type IconVariant =
   | 'close-dark'
   | 'profile-dark'
   | 'search-dark'
+  | 'edit'
+  | 'trash'
+  | 'loading'
 
 export type TimeoutId = NodeJS.Timeout | null
 
@@ -178,10 +181,10 @@ export interface StoreEntry<T extends string = Language> {
   city: CityEntry<T>
 }
 
-export interface Color<T extends string = Language> {
+export interface Color<T extends string = Language, TBanner = [MediaFile]> {
   id: number
   title: MultilingualText<T>
-  image: [MediaFile]
+  image: TBanner
   status: boolean
 }
 
@@ -195,16 +198,22 @@ export interface Comment {
   created_at: string
 }
 
-export interface SimilarProduct<T extends string = Language> {
+export interface SimilarProduct<
+  T extends string = Language,
+  TBanner = [MediaFile],
+> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
   tags: Tag<T>[]
   images: MediaFile[]
-  bannerImage: [MediaFile]
+  bannerImage: TBanner
 }
 
-export interface ProductEntry<T extends string = Language> {
+export interface ProductEntry<
+  T extends string = Language,
+  TBanner = [MediaFile],
+> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
@@ -216,7 +225,7 @@ export interface ProductEntry<T extends string = Language> {
   design: MultilingualText<T>
   status: boolean
   images: MediaFile[]
-  bannerImage: [MediaFile]
+  bannerImage: TBanner
   category: {
     id: number
     title: MultilingualText<T>
@@ -229,9 +238,9 @@ export interface ProductEntry<T extends string = Language> {
       total: number
     }
   }
-  colors: Color<T>[]
+  colors: Color<T, TBanner>[]
   tags: Tag<T>[]
-  similar_products: SimilarProduct<T>[]
+  similar_products: SimilarProduct<T, TBanner>[]
   comments: Comment[]
 }
 
@@ -352,4 +361,25 @@ export interface OrderEntry<T extends string = Language> {
   district: DistrictEntry<T>
   products: EnhancedOrderProduct<T>[]
   status: boolean
+  address: string
+}
+
+export interface AddressFormValues {
+  user_id: number
+  city_id: number
+  district_id: number
+  address: string
+}
+
+export interface AddressEntry<T extends string = Language> {
+  id: number
+  city: CityEntry<T>
+  district: DistrictEntry<T>
+  address: string
+}
+
+export interface CreateAddressResponse extends AddressFormValues {
+  id: number
+  created_at: string
+  updated_at: string
 }

@@ -12,7 +12,7 @@ type NavbarContext = 'header' | 'footer'
 interface NavbarProps {
   context: NavbarContext
   classes?: string
-  closeMenu?: () => void
+  closeMenu?: VoidFunction
 }
 
 interface FooterNav {
@@ -39,7 +39,7 @@ const navbarStyles: Readonly<Record<NavbarContext, TwClasses>> = {
 const navbarHeaderStyles = navbarStyles.header as Readonly<StyleRecord>
 const navbarFooterStyles = navbarStyles.footer as Readonly<StyleRecord>
 
-const renderDropdown = (link: NavLinkEntry, closeMenu?: () => void) => (
+const renderDropdown = (link: NavLinkEntry, closeMenu?: VoidFunction) => (
   <Dropdown
     label={link.label}
     nestedLinks={link.nestedLinks}
@@ -50,7 +50,7 @@ const renderDropdown = (link: NavLinkEntry, closeMenu?: () => void) => (
 const renderNavLink = (
   link: NavLinkEntry,
   className?: string,
-  closeMenu?: () => void,
+  closeMenu?: VoidFunction,
 ) => (
   <NavLink
     href={link.href!}
@@ -64,7 +64,7 @@ const renderNavLink = (
 function NavbarHeader({
   closeMenu,
 }: {
-  closeMenu?: () => void
+  closeMenu?: VoidFunction
 }): React.ReactElement {
   const pathname = usePathname()
   const t = useTranslations('buttons')
