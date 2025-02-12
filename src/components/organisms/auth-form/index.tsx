@@ -91,7 +91,7 @@ function LoginForm(): React.ReactElement {
       <Form.Item<LoginFormValues>
         label={t('labels.email')}
         name='email'
-        rules={[{ required: true, message: t('validation.enterEmail') }]}
+        rules={[{ required: true, message: t('validations.enterEmail') }]}
       >
         <Input className={styles.input} />
       </Form.Item>
@@ -99,7 +99,7 @@ function LoginForm(): React.ReactElement {
       <Form.Item<LoginFormValues>
         label={t('labels.password')}
         name='password'
-        rules={[{ required: true, message: t('validation.password') }]}
+        rules={[{ required: true, message: t('validations.enterPassword') }]}
       >
         <Input.Password className={styles.input} />
       </Form.Item>
@@ -192,7 +192,7 @@ function RegistrationForm({
           <Form.Item<RegistrationFormValues>
             label={t('labels.name')}
             name='name'
-            rules={[{ required: true, message: t('validation.enterName') }]}
+            rules={[{ required: true, message: t('validations.enterName') }]}
           >
             <Input className={styles.input} />
           </Form.Item>
@@ -204,7 +204,7 @@ function RegistrationForm({
             rules={[
               {
                 required: true,
-                message: t('validation.enterSurname'),
+                message: t('validations.enterSurname'),
               },
             ]}
           >
@@ -216,7 +216,7 @@ function RegistrationForm({
       <Form.Item<RegistrationFormValues>
         label={t('labels.email')}
         name='email'
-        rules={[{ required: true, message: t('validation.enterEmail') }]}
+        rules={[{ required: true, message: t('validations.enterEmail') }]}
       >
         <Input className={styles.input} />
       </Form.Item>
@@ -225,10 +225,10 @@ function RegistrationForm({
         label={t('labels.mobileNumber')}
         name='phone'
         rules={[
-          { required: true, message: t('validation.enterMobileNumber') },
+          { required: true, message: t('validations.enterMobileNumber') },
           {
             pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
-            message: t('validation.invalidMobileNumber'),
+            message: t('validations.invalidMobileNumber'),
           },
         ]}
       >
@@ -244,7 +244,7 @@ function RegistrationForm({
         rules={[
           {
             required: true,
-            message: t('validation.selectCity'),
+            message: t('validations.selectCity'),
           },
         ]}
       >
@@ -272,7 +272,7 @@ function RegistrationForm({
           rules={[
             {
               required: true,
-              message: t('validation.selectDistrict'),
+              message: t('validations.selectDistrict'),
             },
           ]}
         >
@@ -302,7 +302,7 @@ function RegistrationForm({
         rules={[
           {
             required: true,
-            message: t('validation.enterAddress'),
+            message: t('validations.enterAddress'),
           },
         ]}
       >
@@ -316,7 +316,7 @@ function RegistrationForm({
       <Form.Item<RegistrationFormValues>
         label={t('labels.password')}
         name='password'
-        rules={[{ required: true, message: t('validation.password') }]}
+        rules={[{ required: true, message: t('validations.password') }]}
       >
         <Input.Password className={styles.input} />
       </Form.Item>
@@ -325,14 +325,14 @@ function RegistrationForm({
         label={t('labels.repeatPassword')}
         name='password_confirmation'
         rules={[
-          { required: true, message: t('validation.enterRepeatPassword') },
+          { required: true, message: t('validations.enterRepeatPassword') },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue('password') === value) {
                 return Promise.resolve()
               }
               return Promise.reject(
-                new Error(t('validation.reEnterRepeatPassword')),
+                new Error(t('validations.reEnterRepeatPassword')),
               )
             },
           }),

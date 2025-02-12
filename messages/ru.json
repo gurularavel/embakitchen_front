@@ -92,7 +92,8 @@
     "remember": "Помнить",
     "placeOrder": "Оформить заказ",
     "send": "Отправлять",
-    "addAddress": "Добавить адрес"
+    "addAddress": "Добавить адрес",
+    "makeChange": "Внести изменения"
   },
   "titles": {
     "currentCampaigns": "Текущие Кампании",
@@ -107,8 +108,7 @@
     "customerFeedback": "Отзывы клиентов",
     "similarProducts": "Похожие продукты",
     "addAddress": "Добавить адрес",
-    "updateInfo": "Обновить информацию",
-    "makeChange": "Внесите изменения"
+    "updateInfo": "Обновить информацию"
   },
   "search": {
     "notFound": "Товаров, соответствующих вашему запросу, не обнаружено.",
@@ -161,7 +161,7 @@
     "password": "Пароль",
     "repeatPassword": "Пароль (повторить)"
   },
-  "validation": {
+  "validations": {
     "selectProduct": "Пожалуйста, выберите товар!",
     "enterWidth": "Пожалуйста, введите ширину продукта",
     "enterHeight": "Пожалуйста, введите высоту изделия!",
