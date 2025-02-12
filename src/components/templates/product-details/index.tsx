@@ -4,6 +4,8 @@ import * as React from 'react'
 import Image from 'next/image'
 import { format } from 'date-fns'
 import { az } from 'date-fns/locale'
+import { Avatar, Tooltip, Space } from 'antd'
+import { useTranslations } from 'next-intl'
 import { Banner, Button, Icon, NavLink, Slider } from '~ek/components'
 import type {
   Color,
@@ -15,7 +17,6 @@ import type {
 import birbank from '/public/assets/images/birbank.png'
 import { httpClient } from '~ek/http-client'
 import { usePathname } from '~ek/i18n/routing'
-import { useTranslations } from 'next-intl'
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -36,14 +37,8 @@ const productDetailsStyles: Readonly<TwClasses> = {
   characteristicsValue: 'flex-1 text-base font-medium text-gray-1',
   productColors: 'flex flex-col gap-y-1',
   productColorLabel: 'text-xs font-medium text-gray-7',
-  productColorSelector:
-    'h-14 border border-solid border-gray-8 rounded relative',
-  selectedColor: 'h-full flex items-center px-4',
-  colorsWrapper: (isColorSelectorVisible: unknown) =>
-    `h-[336px] overflow-y-auto bg-white absolute top-14 -right-px -left-px ${(isColorSelectorVisible as boolean) ? 'block drop-shadow-md' : 'hidden'}`,
-  color:
-    'h-14 flex items-center gap-x-2.5 px-4 cursor-pointer hover:bg-primary-9 hover:text-primary-1',
-  colorTitle: '',
+  productColorSelector: '[&&]:h-14 relative',
+  colorAvatar: 'border border-solid [&&]:border-gray-8 p-1',
   order: '',
   orderButton:
     'w-full h-14 flex items-center justify-center gap-x-2 bg-primary-1 rounded-md text-base font-semibold text-white',
@@ -80,7 +75,17 @@ const productDetailsStyles: Readonly<TwClasses> = {
   productTitle: 'text-xl leading-7 font-medium text-tertiary-1 mb-4',
 }
 const styles = productDetailsStyles as Readonly<StyleRecord>
-const getColorsWrapperStyles = productDetailsStyles.colorsWrapper as StyleGetter
+
+const renderRating = (rate: number) =>
+  Array(5)
+    .fill(0)
+    .map((_, i: number) => (
+      <Icon
+        key={i}
+        variant={i < rate ? 'star-yellow' : 'star-gray'}
+        sizes='w-6 h-6'
+      />
+    ))
 
 export function ProductDetails({
   id,
@@ -98,9 +103,6 @@ export function ProductDetails({
 }: Readonly<ProductDetailsProps>): React.ReactElement {
   const [isColorSelectorVisible, setIsColorSelectorVisible] =
     React.useState<boolean>(false)
-  const [selectedColor, setSelectedColor] = React.useState<string>(
-    colors[0].title,
-  )
   const newCommentInput = React.useRef<HTMLTextAreaElement>(null)
   const pathname = usePathname()
   const t = useTranslations()
@@ -199,29 +201,24 @@ export function ProductDetails({
               <span className={styles.productColorLabel}>
                 {t('texts.color')}
               </span>
-              <div className={styles.productColorSelector}>
-                <div className={styles.selectedColor}>{selectedColor}</div>
-                <div className={getColorsWrapperStyles(isColorSelectorVisible)}>
-                  {colors.map((color: Color<string>) => (
-                    <div
-                      key={color.id}
-                      className={styles.color}
-                      onClick={() => setSelectedColor(color.title)}
-                    >
-                      <Image
-                        src={
-                          (color.image as unknown as { original_url: string })
-                            .original_url
-                        }
-                        alt={color.title}
-                        width={22}
-                        height={22}
-                      />
-                      <span className={styles.colorTitle}>{color.title}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <Space
+                wrap
+                size={4}
+              >
+                {colors.map((color: Color<string, MediaFile>) => (
+                  <Tooltip
+                    title={color.title}
+                    key={color.id}
+                  >
+                    <Avatar
+                      src={color.image.original_url}
+                      className={styles.colorAvatar}
+                      shape='square'
+                      size='default'
+                    />
+                  </Tooltip>
+                ))}
+              </Space>
             </div>
 
             <div className={styles.order}>
@@ -261,15 +258,7 @@ export function ProductDetails({
             >
               <div className={styles.rateAndDate}>
                 <span className={styles.rate}>
-                  {Array(5)
-                    .fill(0)
-                    .map((_, i: number) => (
-                      <Icon
-                        key={i}
-                        variant={i < comment.rate ? 'star-yellow' : 'star-gray'}
-                        sizes='w-6 h-6'
-                      />
-                    ))}
+                  {renderRating(comment.rate)}
                 </span>
                 <span className={styles.date}>
                   {format(comment.created_at, 'd MMMM yyyy', { locale: az })}
@@ -305,30 +294,29 @@ export function ProductDetails({
           </h4>
 
           <div className={styles.similarProducts}>
-            {similar_products?.map((similarProduct: SimilarProduct<string>) => (
-              <NavLink
-                key={similarProduct.id}
-                href={`${pathnameWithoutLastSlug}/${similarProduct.slug}`}
-                className={styles.similarProduct}
-              >
-                <div className={styles.productImageWrapper}>
-                  <Image
-                    src={
-                      (similarProduct.bannerImage as unknown as MediaFile)
-                        .original_url
-                    }
-                    alt={`Embakitchen - ${similarProduct.title}`}
-                    className={styles.productImage}
-                    fill
-                  />
-                </div>
-                <div>
-                  <h4 className={styles.productTitle}>
-                    {similarProduct.title}
-                  </h4>
-                </div>
-              </NavLink>
-            ))}
+            {similar_products?.map(
+              (similarProduct: SimilarProduct<string, MediaFile>) => (
+                <NavLink
+                  key={similarProduct.id}
+                  href={`${pathnameWithoutLastSlug}/${similarProduct.slug}`}
+                  className={styles.similarProduct}
+                >
+                  <div className={styles.productImageWrapper}>
+                    <Image
+                      src={similarProduct.bannerImage.original_url}
+                      alt={`Embakitchen - ${similarProduct.title}`}
+                      className={styles.productImage}
+                      fill
+                    />
+                  </div>
+                  <div>
+                    <h4 className={styles.productTitle}>
+                      {similarProduct.title}
+                    </h4>
+                  </div>
+                </NavLink>
+              ),
+            )}
           </div>
         </div>
       )}
