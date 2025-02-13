@@ -286,7 +286,7 @@ export function OrderForm(): React.ReactElement {
               }
               options={addresses.map(address => ({
                 value: address.id,
-                label: address.address,
+                label: `${address.city.title} şəhəri, ${address.district && address.district.title + ' rayonu,'} ${address.address}`,
               }))}
             />
           </Form.Item>
