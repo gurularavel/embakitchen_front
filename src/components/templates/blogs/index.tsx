@@ -18,7 +18,7 @@ const styles = blogStyles as Readonly<StyleRecord>
 export function Blogs({
   title,
   image,
-  blogs,
+  blogs: { data, pagination },
 }: Readonly<BlogsProps>): React.ReactElement {
   const pathname = usePathname()
 
@@ -30,7 +30,7 @@ export function Blogs({
       />
 
       <div className={styles.blogs}>
-        {blogs?.map((blog: ArrayElement<typeof blogs>) => (
+        {data?.map((blog: ArrayElement<typeof data>) => (
           <div key={blog.id}>
             <NavLink href={`${pathname}/${blog.slug}`}>
               <div className={styles.imageWrapper}>
@@ -51,7 +51,7 @@ export function Blogs({
         ))}
       </div>
 
-      <Pagination totalPages={5} />
+      <Pagination total={pagination?.total} />
     </>
   )
 }

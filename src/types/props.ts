@@ -6,7 +6,6 @@ import type {
   BlogsPageResponse,
   BlogsResponse,
   CampaignEntry,
-  CampaignsResponse,
   CityEntry,
   CategoryEntry,
   CategoryProduct,
@@ -16,7 +15,6 @@ import type {
   ProductMainInfo,
   ProjectEntry,
   StoreEntry,
-  ProductsResponse,
   PaginatedResponse,
 } from '~ek/types'
 
@@ -41,14 +39,18 @@ type OmittedProjectEntry = Omit<ProjectEntry<string>, 'content' | 'bannerImage'>
 interface ModifiedProjectEntry extends OmittedProjectEntry {
   bannerImage: MediaFile
 }
+
+interface ProjectPaginatedProps extends PaginatedResponse {
+  data: ModifiedProjectEntry[]
+}
 export interface ProjectsProps extends SharedProps {
-  projects: ModifiedProjectEntry[]
+  projects: ProjectPaginatedProps
 }
 
 type OmittedBlogsPageResponse = Omit<BlogsPageResponse<string>, 'id' | 'image'>
 export interface BlogsProps extends OmittedBlogsPageResponse {
   image: MediaFile
-  blogs: BlogsResponse<string>['data']
+  blogs: BlogsResponse<string>
 }
 
 type OmittedBlogDetailsResponse = Omit<
@@ -89,7 +91,7 @@ type OmittedBlogEntry = Omit<
   BlogEntry<string>,
   'content' | 'image' | 'similar_posts'
 >
-interface ModifiedBlogEntry extends OmittedBlogEntry {
+export interface ModifiedBlogEntry extends OmittedBlogEntry {
   image: MediaFile
 }
 export interface HomeProps extends OmittedHomepageResponse {
@@ -114,8 +116,14 @@ type OmittedCategoryProduct = Omit<CategoryProduct<string>, 'bannerImage'>
 export interface ModifiedCategoryProduct extends OmittedCategoryProduct {
   bannerImage: MediaFile
 }
+
+export interface PaginatedCategoryProducts extends PaginatedResponse {
+  data: ModifiedCategoryProduct[]
+}
+
 export interface ProductCategoryProps
-  extends Omit<CategoryEntry<string, ModifiedCategoryProduct>, 'bannerImage'> {
+  extends Omit<CategoryEntry<string, ModifiedCategoryProduct>, 'bannerImage'>,
+    PaginatedCategoryProducts {
   bannerImage: MediaFile
 }
 

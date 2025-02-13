@@ -80,7 +80,7 @@ export function OrderForm(): React.ReactElement {
       const initialProducts = await getProducts()
       const uiData = {
         products: transformToUiData(
-          initialProducts.map(p => ({ id: p.id, title: p.title })),
+          initialProducts.data.map(p => ({ id: p.id, title: p.title })),
           locale as Language,
         ) as OrderProductEntry[],
         cities: transformToUiData(

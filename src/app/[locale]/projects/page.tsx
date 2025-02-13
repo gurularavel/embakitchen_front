@@ -5,15 +5,17 @@ import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export default async function ProjectsPage({
   params: { locale },
+  searchParams,
 }: Readonly<PageProps>): Promise<React.ReactElement> {
-  const projects = await getProjects(defaultApiQueryParams)
+  const page = searchParams?.page ?? 1
+  const projects = await getProjects({ ...defaultApiQueryParams, page })
   const projectsPageContent = await getProjectsPageContent()
 
   const projectsProps: ProjectsProps = {
     ...(transformToUiData(
       omit({ source: projectsPageContent, fields: ['id'] }),
       locale,
-    ) as Omit<ProjectsProps, 'projects'>),
+    ) as Omit<ProjectsProps, 'data' | 'pagination'>),
     projects: transformToUiData(projects, locale) as ProjectsProps['projects'],
   }
 

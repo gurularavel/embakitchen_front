@@ -3,24 +3,23 @@ import type { ProductEntry, ProductsResponse } from '~ek/types'
 
 export async function getProducts(
   apiQueryParams?: ApiQueryParams,
-): Promise<ProductsResponse['data']> {
-  const response = await httpClient.get<ProductsResponse>(
-    '/products',
-    apiQueryParams ?? {},
-  )
+): Promise<ProductsResponse> {
+  const response = await httpClient.get<ProductsResponse>('/products', {
+    query: apiQueryParams,
+  })
 
-  return response?.data as ProductsResponse['data']
+  return response as ProductsResponse
 }
 
 export async function getBestSellingProducts(
   apiQueryParams?: ApiQueryParams,
-): Promise<ProductsResponse['data']> {
+): Promise<ProductsResponse> {
   const response = await httpClient.get<ProductsResponse>(
     '/best-selling-products',
     apiQueryParams ?? {},
   )
 
-  return response?.data as ProductsResponse['data']
+  return response as ProductsResponse
 }
 
 export async function getProductDetails(slug: string): Promise<ProductEntry> {

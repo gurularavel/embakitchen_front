@@ -13,13 +13,13 @@ export async function getProjectsPageContent(): Promise<ProjectsPageResponse> {
 
 export async function getProjects(
   apiQueryParams: ApiQueryParams,
-): Promise<ProjectsResponse['data']> {
+): Promise<ProjectsResponse> {
   const response = await httpClient.get<ProjectsResponse>(
     '/projects',
     apiQueryParams,
   )
 
-  return response?.data as ProjectsResponse['data']
+  return response as ProjectsResponse
 }
 
 export async function getProjectDetails(slug: string): Promise<ProjectEntry> {
