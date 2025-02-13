@@ -1,6 +1,9 @@
-import { useTranslations } from 'next-intl'
+'use client'
+
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { Button } from '~ek/components'
+import { useOrderForm } from '~ek/hooks'
 import { MediaFile } from '~ek/types'
 
 interface SlogansSectionProps {
@@ -29,6 +32,7 @@ export function SlogansSection({
   backgroundImg,
 }: Readonly<SlogansSectionProps>): React.ReactElement {
   const t = useTranslations('buttons')
+  const { openOrderForm } = useOrderForm()
 
   return (
     <section className={styles.slogansSection}>
@@ -45,7 +49,10 @@ export function SlogansSection({
         <h4 className={styles.s1}>{title}</h4>
         <h4 className={styles.s2}>{content}</h4>
         <div className={styles.buttonWrapper}>
-          <Button classes={styles.specialOrderButton}>
+          <Button
+            classes={styles.specialOrderButton}
+            onClick={openOrderForm}
+          >
             {t('createCustomOrder')}
           </Button>
         </div>

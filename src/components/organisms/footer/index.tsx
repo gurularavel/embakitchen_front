@@ -1,4 +1,5 @@
 'use client'
+
 import { useTranslations } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
 import {
@@ -9,7 +10,7 @@ import {
   Navbar,
   SocialContacts,
 } from '~ek/components'
-import { useStore } from '~ek/hooks'
+import { useOrderForm } from '~ek/hooks'
 
 const footerStyles: Readonly<TwClasses> = {
   footer:
@@ -32,18 +33,8 @@ const styles = footerStyles as Readonly<StyleRecord>
 
 export function Footer(): React.ReactElement {
   const t = useTranslations()
-  const {
-    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
-    authSlice: { user },
-  } = useStore(state => state)
+  const { openOrderForm } = useOrderForm()
 
-  const makeCustomOrder = (): void => {
-    if (user) {
-      setIsOrderFormDrawerVisible(true)
-    } else {
-      setIsAuthFormDrawerVisible(true)
-    }
-  }
   return (
     <footer className={styles.footer}>
       <ul className={styles.footerContent}>
@@ -97,7 +88,7 @@ export function Footer(): React.ReactElement {
             <li className={styles.contactUsItem}>
               <Button
                 classes={styles.specialOrderButton}
-                onClick={makeCustomOrder}
+                onClick={openOrderForm}
               >
                 <span>{t('buttons.createCustomOrder')}</span>
                 <Icon
