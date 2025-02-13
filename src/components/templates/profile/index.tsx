@@ -226,7 +226,7 @@ function ProfileInformation(): React.ReactElement {
         <Form.Item<UpdateProfileFormValues>
           label={t('labels.email')}
           name='email'
-          rules={[{ required: true, message: t('validations.email') }]}
+          rules={[{ required: true, message: t('validations.enterEmail') }]}
         >
           <Input className={styles.input} />
         </Form.Item>
@@ -256,7 +256,7 @@ function ProfileInformation(): React.ReactElement {
             type='submit'
             classes={styles.submitButton}
           >
-            {t('button.remember')}
+            {t('buttons.remember')}
           </Button>
         </Form.Item>
       </Form>

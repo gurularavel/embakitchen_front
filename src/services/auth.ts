@@ -98,7 +98,7 @@ export async function createAddress(
 }
 
 export async function getAddresses(
-  apiQueryParams: AuthenticatedApiParams,
+  apiQueryParams?: AuthenticatedApiParams,
 ): Promise<AddressResponse['data']> {
   const response = await httpClient.get<AddressResponse>(
     '/addresses',

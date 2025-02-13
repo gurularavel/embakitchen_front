@@ -17,6 +17,8 @@ import type {
 import birbank from '/public/assets/images/birbank.png'
 import { httpClient } from '~ek/http-client'
 import { usePathname } from '~ek/i18n/routing'
+import { useStore } from '~ek/hooks'
+
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -108,6 +110,18 @@ export function ProductDetails({
   const t = useTranslations()
   const pathnameWithoutLastSlug = pathname.split('/').slice(0, -1).join('/')
 
+  const {
+    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    authSlice: { user },
+  } = useStore(state => state)
+
+  const makeCustomOrder = (): void => {
+    if (user) {
+      setIsOrderFormDrawerVisible(true)
+    } else {
+      setIsAuthFormDrawerVisible(true)
+    }
+  }
   const addNewComment = async (): Promise<void> => {
     const message = newCommentInput.current?.value
     const body = {
@@ -222,7 +236,10 @@ export function ProductDetails({
             </div>
 
             <div className={styles.order}>
-              <Button classes={styles.orderButton}>
+              <Button
+                classes={styles.orderButton}
+                onClick={makeCustomOrder}
+              >
                 <span>{t('buttons.placeOrder')}</span>
                 <Icon
                   variant='arrow-right-white'
