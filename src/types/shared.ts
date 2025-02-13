@@ -286,9 +286,7 @@ export interface UserEntry {
   surname: string
   email: string
   phone: string
-  city: Omit<CityEntry, 'status'>
-  district: DistrictEntry
-  address: string
+  addresses: AddressEntry[]
   orders: []
   role: UserRole
   status: boolean
@@ -317,10 +315,11 @@ export interface OrderProductInfo {
 
 export interface OrderFormValues {
   products: OrderProductInfo[]
-  city_id: number
-  district_id: number
-  address: string
+  addresses: number
   message: string
+  city_id?: number
+  district_id?: number
+  address?: string
 }
 
 export interface Headers extends Partial<AxiosHeaders> {
