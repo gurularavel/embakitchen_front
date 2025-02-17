@@ -207,7 +207,10 @@ export interface SimilarProduct<T extends string = Language> {
   bannerImage: [MediaFile]
 }
 
-export interface ProductEntry<T extends string = Language> {
+export interface ProductEntry<
+  T extends string = Language,
+  TBanner = [MediaFile],
+> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
@@ -219,7 +222,7 @@ export interface ProductEntry<T extends string = Language> {
   design: MultilingualText<T>
   status: boolean
   images: MediaFile[]
-  bannerImage: [MediaFile]
+  bannerImage: TBanner
   category: {
     id: number
     title: MultilingualText<T>
@@ -238,24 +241,19 @@ export interface ProductEntry<T extends string = Language> {
   comments: Comment[]
 }
 
-export type ProductMainInfo = Pick<
-  ProductEntry<string>,
+export type ProductMainInfo<TBanner = [MediaFile]> = Pick<
+  ProductEntry<string, TBanner>,
   'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
 >
 
-export type CategoryProduct<T extends string = Language> = Pick<
-  ProductEntry<T>,
-  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
->
 export interface CategoryEntry<
   T extends string = Language,
-  K = CategoryProduct<T>,
+  TBanner = [MediaFile],
 > {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
-  bannerImage: [MediaFile]
-  products: K[]
+  bannerImage: TBanner
   status: boolean
 }
 

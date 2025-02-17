@@ -20,8 +20,7 @@ const styles = productCategoryStyles as Readonly<StyleRecord>
 export function ProductCategory({
   title,
   bannerImage,
-  data,
-  pagination,
+  products: { data, pagination },
 }: Readonly<ProductCategoryProps>): React.ReactElement {
   const { category } = useParams()
   const decodedCategory = decodeURIComponent(category as string)
@@ -35,7 +34,7 @@ export function ProductCategory({
 
       <div className={styles.products}>
         {data?.map(
-          (product: ArrayElement<ProductCategoryProps['products']>) => (
+          (product: ArrayElement<ProductCategoryProps['products']['data']>) => (
             <div key={product.id}>
               <NavLink href={`/products/${decodedCategory}/${product.slug}`}>
                 <div className={styles.top}>

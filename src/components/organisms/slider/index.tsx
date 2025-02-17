@@ -27,7 +27,7 @@ import type {
   Language,
   MainSliderEntry,
   MediaFile,
-  ModifiedCategoryProduct,
+  ProductMainInfo,
   PaginatedCategoryProducts,
   PartnersSliderEntry,
   ProductEntry,
@@ -257,7 +257,7 @@ function Gallery(): React.ReactElement {
           touchEventsTarget='container'
         >
           {bestSellingProductContent?.data?.map(
-            (product: ModifiedCategoryProduct, i: number) => (
+            (product: ProductMainInfo<MediaFile>, i: number) => (
               <SwiperSlide
                 key={i}
                 className={gallerySliderStyles.slide}

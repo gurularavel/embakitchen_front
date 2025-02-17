@@ -8,7 +8,6 @@ import type {
   CampaignEntry,
   CityEntry,
   CategoryEntry,
-  CategoryProduct,
   HomepageResponse,
   MediaFile,
   ProductEntry,
@@ -108,19 +107,12 @@ export interface CampaignsProps extends SharedProps {
   campaigns: ModifiedCampaignEntry[]
 }
 
-type OmittedCategoryProduct = Omit<CategoryProduct<string>, 'bannerImage'>
-export interface ModifiedCategoryProduct extends OmittedCategoryProduct {
-  bannerImage: MediaFile
-}
-
 export interface PaginatedCategoryProducts extends PaginatedResponse {
-  data: ModifiedCategoryProduct[]
+  data: ProductMainInfo<MediaFile>[]
 }
 
-export interface ProductCategoryProps
-  extends Omit<CategoryEntry<string, ModifiedCategoryProduct>, 'bannerImage'>,
-    PaginatedCategoryProducts {
-  bannerImage: MediaFile
+export interface ProductCategoryProps extends CategoryEntry<string, MediaFile> {
+  products: PaginatedCategoryProducts
 }
 
 type ProjectDetailsEntry = Omit<

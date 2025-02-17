@@ -17,11 +17,11 @@ export default async function ProductCategoryPage({
     ...(transformToUiData(
       omit({ source: categoryData, fields: ['id'] }),
       locale,
-    ) as Omit<ProductCategoryProps, 'data' | 'pagination'>),
-    ...(transformToUiData(products, locale) as Pick<
-      ProductCategoryProps,
-      'data' | 'pagination'
-    >),
+    ) as Omit<ProductCategoryProps, 'products'>),
+    products: transformToUiData(
+      products,
+      locale,
+    ) as ProductCategoryProps['products'],
   }
 
   return <ProductCategory {...productCategoryProps} />
