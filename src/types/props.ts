@@ -35,10 +35,8 @@ export interface AboutProps extends OmittedAboutPageResponse {
   aboutInfoBlocks: AboutInfoBlock<string>[]
 }
 
-type OmittedProjectEntry = Omit<ProjectEntry<string>, 'content' | 'bannerImage'>
-interface ModifiedProjectEntry extends OmittedProjectEntry {
-  bannerImage: MediaFile
-}
+type OmittedProjectEntry = Omit<ProjectEntry<string, MediaFile>, 'content'>
+interface ModifiedProjectEntry extends OmittedProjectEntry {}
 
 interface ProjectPaginatedProps extends PaginatedResponse {
   data: ModifiedProjectEntry[]

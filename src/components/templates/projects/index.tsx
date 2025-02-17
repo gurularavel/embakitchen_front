@@ -42,6 +42,7 @@ export function Projects({
             ),
           )}
       </div>
+
       <Pagination total={pagination?.total} />
     </>
   )

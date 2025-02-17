@@ -104,14 +104,17 @@ export interface Tag<T extends string = Language> {
   status: boolean
 }
 
-export interface ProjectEntry<T extends string = Language> {
+export interface ProjectEntry<
+  T extends string = Language,
+  TBanner = [MediaFile],
+> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
   content: MultilingualText<T>
   tags: Tag<T>[]
   similar_projects: Omit<ProjectEntry, 'content' | 'similar_projects'>[]
-  bannerImage: [MediaFile]
+  bannerImage: TBanner
   images: MediaFile[]
   status: boolean
 }

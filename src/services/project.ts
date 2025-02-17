@@ -14,10 +14,9 @@ export async function getProjectsPageContent(): Promise<ProjectsPageResponse> {
 export async function getProjects(
   apiQueryParams: ApiQueryParams,
 ): Promise<ProjectsResponse> {
-  const response = await httpClient.get<ProjectsResponse>(
-    '/projects',
-    apiQueryParams,
-  )
+  const response = await httpClient.get<ProjectsResponse>('/projects', {
+    query: apiQueryParams,
+  })
 
   return response as ProjectsResponse
 }
