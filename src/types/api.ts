@@ -18,6 +18,7 @@ import type {
   OrderEntry,
   DistrictEntry,
   OrderFormValues,
+  AddressEntry,
 } from '~ek/types'
 
 export interface PaginatedResponse {
@@ -170,4 +171,8 @@ export interface SearchPageResponse<T extends string = Language> {
   id: number
   title: MultilingualText<T>
   image: [MediaFile]
+}
+
+export interface AddressResponse extends PaginatedResponse {
+  data: AddressEntry[]
 }

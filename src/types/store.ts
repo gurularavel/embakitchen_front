@@ -19,7 +19,7 @@ export interface AuthSlice {
   user: UserEntry | null
   token: string | null
   setAuthData: (params: AuthSliceLoginParams) => void
-  removeAuthData: () => void
+  removeAuthData: VoidFunction
 }
 
 export interface AppState {

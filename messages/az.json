@@ -83,7 +83,17 @@
     "customOrder": "Özəl sifariş",
     "personalAccount": "Şəxsi kabinet",
     "inDetails": "Ətraflı",
-    "readAboutUs": "Haqqımızda oxuyun"
+    "readAboutUs": "Haqqımızda oxuyun",
+    "register": "Qeydiyyatdan keç",
+    "login": "Giriş et",
+    "delete": "Silin",
+    "addProduct": "Məhsul əlavə edin",
+    "sendOrder": "Sifariş göndər",
+    "remember": "Yadda saxla",
+    "placeOrder": "Sifariş ver",
+    "send": "Göndər",
+    "addAddress": "Ünvan əlavə et",
+    "makeChange": "Dəyişiklik et"
   },
   "titles": {
     "currentCampaigns": "Cari Kampaniyalar",
@@ -91,7 +101,14 @@
     "homepageBlogs": "Bloq",
     "popularBlogs": "Məşhur Məqalələr",
     "stores": "Mağazalar",
-    "similarProjects": "Oxşar Layihələr"
+    "similarProjects": "Oxşar Layihələr",
+    "similarBlogs": "Oxşar Bloqlar",
+    "addresses": "Ünvanlar",
+    "aboutProduct": "Məhsul haqqında",
+    "customerFeedback": "Sifarişçi rəyi",
+    "similarProducts": "Oxşar məhsullar",
+    "addAddress": "Ünvan əlavə et",
+    "updateInfo": "Məlumatı yenilə"
   },
   "search": {
     "notFound": "Axtardığınız məhsul tapılmadı.",
@@ -100,6 +117,80 @@
     "searchLink": "Bütün nəticələr"
   },
   "texts": {
-    "campaignFinished": "Bitib"
+    "campaignFinished": "Bitib",
+    "contact": "Əlaqə",
+    "accountInformation": "Hesab məlumatları",
+    "exit": "Çıxış",
+    "changePassword": "Şifrəni dəyiş",
+    "product": "Məhsul",
+    "color": "Rəng",
+    "size": "Ölçü",
+    "address": "Ünvan",
+    "brandDescription": "Embakitchen - Embawood şirkətinin mətbəx mebeli üzrə ixtisaslaşmış brendidir.",
+    "installmentInfo": "Birbank kartı ilə 18 aya faizsiz ödə",
+    "style": "Stil",
+    "material": "Material",
+    "facades": "Fasadlar",
+    "decor": "Dekor",
+    "design": "Dizayn"
+  },
+  "profile": {
+    "accountInfo": "Hesab məlumatları",
+    "addresses": "Ünvanlar",
+    "changePassword": "Şifrəni dəyiş",
+    "orderHistory": "Sifariş tarixçəsi",
+    "logout": "Çıxış"
+  },
+  "modal": {
+    "cancelText": "Xeyr",
+    "okText": "Bəli",
+    "deleteTitle": "Silmək istədiyinizdən əminsiniz?"
+  },
+  "labels": {
+    "product": "Məhsul",
+    "width": "En",
+    "height": "Hündürlük",
+    "city": "Şəhər",
+    "district": "Rayon",
+    "address": "Ünvan",
+    "note": "Qeyd",
+    "name": "Ad",
+    "surname": "Soyad",
+    "email": "Email",
+    "mobileNumber": "Mobil nömrə",
+    "password": "Şifrə",
+    "repeatPassword": "Şifrə (təkrar)"
+  },
+  "validations": {
+    "selectProduct": "Zəhmət olmasa məhsul seçin!",
+    "enterWidth": "Zəhmət olmasa məhsulun enini daxil edin",
+    "enterHeight": "Zəhmət olmasa məhsulun hündürlüyünü daxil edin!",
+    "selectCity": "Zəhmət olmasa yaşadığınız şəhəri seçin!",
+    "selectDistrict": "Zəhmət olmasa yaşadığınız rayonu seçin!",
+    "enterAddress": "Zəhmət olmasa yaşadığınız ünvanı daxil edin!",
+    "enterName": "Zəhmət olmasa adınızı daxil edin!",
+    "enterSurname": "Zəhmət olmasa soyadınızı daxil edin!",
+    "enterEmail": "Zəhmət olmasa email daxil edin!",
+    "enterMobileNumber": "Zəhmət olmasa mobil nömrə daxil edin!",
+    "invalidMobileNumber": "Zəhmət olmasa düzgün formatda mobil nömrə daxil edin.",
+    "enterPassword": "Zəhmət olmasa şifrə daxil edin!",
+    "enterRepeatPassword": "Zəhmət olmasa şifrənin təkrar edin!",
+    "reEnterRepeatPassword": "Zəhmət olmasa şifrənizin təkrarını düzgün daxil edin!"
+  },
+  "messages": {
+    "addressUpdated": "Ünvan məlumatları dəyişdirildi!",
+    "registrationSuccess": "Siz uğurla qeydiyyatdan keçdiniz!",
+    "orderSuccess": "Sifarişiniz uğurla tamamlandı.",
+    "newAddressAdded": "Yeni ünvan əlavə edildi!"
+  },
+  "placeholder": {
+    "selectProduct": "Məhsul seçin",
+    "width": "En",
+    "height": "Hündürlük",
+    "selectCity": "Şəhər seçin",
+    "selectDistrict": "Rayon seçin",
+    "address": "Ünvan",
+    "note": "Qeyd",
+    "search": "Axtar"
   }
 }

@@ -70,9 +70,7 @@ interface ModifiedProductMainInfo extends OmittedProductMainInfo {
 
 export interface ProductDetailsProps
   extends Omit<SharedProps, 'title'>,
-    Omit<ProductEntry<string>, 'bannerImage'> {
-  bannerImage: MediaFile
-}
+    ProductEntry<string, MediaFile> {}
 
 type OmittedHomepageResponse = Omit<
   HomepageResponse<string>,

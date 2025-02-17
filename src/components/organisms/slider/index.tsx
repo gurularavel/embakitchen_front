@@ -120,7 +120,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
-    thumb: 'h-[280px]',
+    thumb: 'h-[200px]',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -434,11 +434,15 @@ function Product(): React.ReactElement {
         onSwiper={setThumbsSwiper}
         loop={true}
         spaceBetween={24}
-        slidesPerView={2}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className={productSliderStyles.thumb}
+        breakpoints={{
+          0: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+        }}
       >
         {product.images?.map((image: MediaFile) => (
           <SwiperSlide key={image.uuid}>

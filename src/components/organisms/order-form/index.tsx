@@ -3,8 +3,10 @@
 import * as React from 'react'
 import { Col, Form, Input, InputNumber, message, Row, Select } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { useLocale } from 'next-intl'
-import {
+import { useLocale, useTranslations } from 'next-intl'
+import { Button } from '~ek/components'
+import type {
+  AddressEntry,
   CityEntry,
   DistrictEntry,
   Language,
@@ -13,9 +15,14 @@ import {
   ProductEntry,
 } from '~ek/types'
 import { useStore } from '~ek/hooks'
-import { createOrder, getCities, getDistricts, getProducts } from '~ek/services'
+import {
+  createOrder,
+  getAddresses,
+  getCities,
+  getDistricts,
+  getProducts,
+} from '~ek/services'
 import { transformToUiData } from '~ek/utils'
-import { Button } from '~ek/components/atoms'
 
 const { TextArea } = Input
 
@@ -48,36 +55,28 @@ async function fetchDistricts(
 export function OrderForm(): React.ReactElement {
   const locale = useLocale()
   const [form] = Form.useForm()
+  const t = useTranslations()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [products, setProducts] = React.useState<OrderProductEntry[]>([])
+  const [addresses, setAddresses] = React.useState<AddressEntry<string>[]>([])
   const [selectedCity, setSelectedCity] = React.useState<CityEntry<string>>()
+  const [isAddressSelected, setIsAddressSelected] =
+    React.useState<boolean>(true)
   const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
   const {
-    authSlice: { user },
+    authSlice: { user, token },
     clientSlice: { setIsOrderFormDrawerVisible },
   } = useStore(state => state)
 
   React.useEffect(() => {
-    if (user) {
-      if (user.city.hasDistricts) {
-        fetchDistricts(user.city.id, locale as Language, setDistricts)
-      }
-
-      form.setFieldsValue({
-        city_id: user.city.id,
-        district_id: {
-          id: user.district?.id,
-          label: user.district?.title[locale as Language],
-        },
-        address: user.address,
-      })
-    }
-  }, [user, form, locale])
-
-  React.useEffect(() => {
     async function initializeFormValues() {
+      if (!token) return
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      }
       const initialCities = await getCities()
       const initialProducts = await getProducts()
+      const initialAddresses = await getAddresses({ headers })
       const uiData = {
         products: transformToUiData(
           initialProducts.data.map(p => ({ id: p.id, title: p.title })),
@@ -87,13 +86,18 @@ export function OrderForm(): React.ReactElement {
           initialCities,
           locale as Language,
         ) as CityEntry<string>[],
+        addresses: transformToUiData(
+          initialAddresses,
+          locale as Language,
+        ) as AddressEntry<string>[],
       }
       setCities(uiData.cities)
       setProducts(uiData.products)
+      setAddresses(uiData.addresses)
     }
 
     initializeFormValues()
-  }, [locale])
+  }, [locale, token])
 
   React.useEffect(() => {
     if (selectedCity?.hasDistricts) {
@@ -101,8 +105,13 @@ export function OrderForm(): React.ReactElement {
     }
   }, [selectedCity, locale])
 
-  const onRegionSelect = (field: keyof OrderFormValues, value: number) => {
-    form.setFieldsValue({ [field]: value })
+  const onSelectChange = (field: keyof OrderFormValues, value: number) => {
+    if (field === 'addresses') {
+      setIsAddressSelected(true)
+    } else {
+      form.setFieldsValue({ [field]: value })
+    }
+
     if (field === 'city_id') {
       const city = cities.find(c => c.id === value)
       setSelectedCity(city)
@@ -110,22 +119,31 @@ export function OrderForm(): React.ReactElement {
   }
 
   const sendOrderHandler = async (values: OrderFormValues) => {
+    let addressInfo = {}
     const orderedUser = {
       user_id: user?.id,
       name: user?.name,
       surname: user?.surname,
       phone: user?.phone,
     }
-
+    const address = addresses?.find(a => a.id === values.addresses)
+    if (address) {
+      addressInfo = {
+        city_id: address.city?.id,
+        district_id: address.district?.id,
+        address: address.address,
+      }
+    }
     const body = {
       ...orderedUser,
+      ...addressInfo,
       ...values,
     } as OrderResquestBody
 
     await createOrder(body)
     setIsOrderFormDrawerVisible(false)
     form.resetFields()
-    message.success('Sifarişiniz uğurla tamamlandı.')
+    message.success(t('messages.orderSuccess'))
   }
 
   return (
@@ -153,16 +171,16 @@ export function OrderForm(): React.ReactElement {
                   <Form.Item<OrderFormValues['products']>
                     {...restField}
                     name={[name, 'id']}
-                    label='Məhsul'
+                    label={t('labels.product')}
                     rules={[
                       {
                         required: true,
-                        message: 'Zəhmət olmasa məhsul seçin!',
+                        message: t('validations.selectProduct'),
                       },
                     ]}
                   >
                     <Select
-                      placeholder='Məhsul seçin'
+                      placeholder={t('placeholder.selectProduct')}
                       allowClear
                       className={styles.select}
                       showSearch
@@ -184,17 +202,17 @@ export function OrderForm(): React.ReactElement {
                 <Col span={12}>
                   <Form.Item<OrderFormValues['products']>
                     {...restField}
-                    label='En'
+                    label={t('labels.width')}
                     name={[name, 'width']}
                     rules={[
                       {
                         required: true,
-                        message: 'Zəhmət olmasa məhsulun enini daxil edin!',
+                        message: t('validations.enterWidth'),
                       },
                     ]}
                   >
                     <InputNumber
-                      placeholder='En'
+                      placeholder={t('placeholder.width')}
                       className={styles.input}
                     />
                   </Form.Item>
@@ -203,17 +221,16 @@ export function OrderForm(): React.ReactElement {
                   <Form.Item<OrderFormValues['products']>
                     {...restField}
                     name={[name, 'height']}
-                    label='Hündürlük'
+                    label={t('labels.height')}
                     rules={[
                       {
                         required: true,
-                        message:
-                          'Zəhmət olmasa məhsulun hündürlüyünü daxil edin!',
+                        message: t('validations.enterHeight'),
                       },
                     ]}
                   >
                     <InputNumber
-                      placeholder='Hündürlük'
+                      placeholder={t('placeholder.height')}
                       className={styles.input}
                     />
                   </Form.Item>
@@ -223,7 +240,7 @@ export function OrderForm(): React.ReactElement {
                     onClick={() => remove(name)}
                     classes={styles.submitButton}
                   >
-                    Silin
+                    {t('buttons.delete')}
                   </Button>
                 </Col>
               </Row>
@@ -234,95 +251,150 @@ export function OrderForm(): React.ReactElement {
                 classes={styles.submitButton}
               >
                 <PlusOutlined />
-                <span>Məhsul əlavə edin</span>
+                <span>{t('buttons.addProduct')}</span>
               </Button>
             </Form.Item>
           </>
         )}
       </Form.List>
 
-      <Form.Item<OrderFormValues>
-        name='city_id'
-        label='Şəhər'
-        rules={[
-          {
-            required: true,
-            message: 'Zəhmət olmasa yaşadığınız şəhəri seçin!',
-          },
-        ]}
-      >
-        <Select
-          placeholder='Şəhər seçin'
-          onChange={(value: number) => onRegionSelect('city_id', value)}
-          allowClear
-          className={styles.select}
-          showSearch
-          optionFilterProp='label'
-          filterSort={(optionA, optionB) =>
-            ((optionA?.label as string) ?? '')
-              .toLowerCase()
-              .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
-          }
-          options={cities.map(city => ({
-            value: city.id,
-            label: city.title,
-          }))}
-        />
-      </Form.Item>
+      {isAddressSelected ? (
+        <>
+          <Form.Item<OrderFormValues>
+            name='addresses'
+            label={t('labels.address')}
+            rules={[
+              {
+                required: true,
+                message: t('validations.enterAddress'),
+              },
+            ]}
+          >
+            <Select
+              placeholder={t('placeholder.address')}
+              onChange={(value: number) => onSelectChange('addresses', value)}
+              allowClear
+              className={styles.select}
+              showSearch
+              optionFilterProp='label'
+              filterSort={(optionA, optionB) =>
+                ((optionA?.label as string) ?? '')
+                  .toLowerCase()
+                  .localeCompare(
+                    ((optionB?.label as string) ?? '').toLowerCase(),
+                  )
+              }
+              options={addresses.map(address => ({
+                value: address.id,
+                label: `${address.city.title} şəhəri, ${address.district && address.district.title + ' rayonu,'} ${address.address}`,
+              }))}
+            />
+          </Form.Item>
+          <div
+            className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
+            onClick={() => setIsAddressSelected(!isAddressSelected)}
+          >
+            Başqa bir ünvan əlavə et
+          </div>
+        </>
+      ) : (
+        <>
+          <Form.Item<OrderFormValues>
+            name='city_id'
+            label={t('labels.city')}
+            rules={[
+              {
+                required: true,
+                message: t('validations.selectCity'),
+              },
+            ]}
+          >
+            <Select
+              placeholder={t('placeholder.selectCity')}
+              onChange={(value: number) => onSelectChange('city_id', value)}
+              allowClear
+              className={styles.select}
+              showSearch
+              optionFilterProp='label'
+              filterSort={(optionA, optionB) =>
+                ((optionA?.label as string) ?? '')
+                  .toLowerCase()
+                  .localeCompare(
+                    ((optionB?.label as string) ?? '').toLowerCase(),
+                  )
+              }
+              options={cities.map(city => ({
+                value: city.id,
+                label: city.title,
+              }))}
+            />
+          </Form.Item>
 
-      {(user?.district?.id || selectedCity?.hasDistricts) && (
-        <Form.Item<OrderFormValues>
-          name='district_id'
-          label='Rayon'
-          rules={[
-            {
-              required: true,
-              message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
-            },
-          ]}
-        >
-          <Select
-            placeholder='Rayon seçin'
-            onChange={(value: number) => onRegionSelect('district_id', value)}
-            allowClear
-            className={styles.select}
-            showSearch
-            optionFilterProp='label'
-            filterSort={(optionA, optionB) =>
-              ((optionA?.label as string) ?? '')
-                .toLowerCase()
-                .localeCompare(((optionB?.label as string) ?? '').toLowerCase())
-            }
-            options={districts.map(district => ({
-              value: district.id,
-              label: district.title,
-            }))}
-          />
-        </Form.Item>
+          {selectedCity?.hasDistricts && (
+            <Form.Item<OrderFormValues>
+              name='district_id'
+              label={t('labels.district')}
+              rules={[
+                {
+                  required: true,
+                  message: t('validations.selectDistrict'),
+                },
+              ]}
+            >
+              <Select
+                placeholder={t('placeholder.selectDistrict')}
+                onChange={(value: number) =>
+                  onSelectChange('district_id', value)
+                }
+                allowClear
+                className={styles.select}
+                showSearch
+                optionFilterProp='label'
+                filterSort={(optionA, optionB) =>
+                  ((optionA?.label as string) ?? '')
+                    .toLowerCase()
+                    .localeCompare(
+                      ((optionB?.label as string) ?? '').toLowerCase(),
+                    )
+                }
+                options={districts.map(district => ({
+                  value: district.id,
+                  label: district.title,
+                }))}
+              />
+            </Form.Item>
+          )}
+
+          <Form.Item<OrderFormValues>
+            name='address'
+            label={t('labels.address')}
+            rules={[
+              {
+                required: true,
+                message: t('validations.enterAddress'),
+              },
+            ]}
+          >
+            <Input
+              placeholder={t('placeholder.address')}
+              className={styles.input}
+            />
+          </Form.Item>
+          <div
+            className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
+            onClick={() => setIsAddressSelected(!isAddressSelected)}
+          >
+            Mövcud ünvanlardan seçim et
+          </div>
+        </>
       )}
 
       <Form.Item<OrderFormValues>
-        name='address'
-        label='Ünvan'
-        rules={[
-          {
-            required: true,
-            message: 'Zəhmət olmasa yaşadığınız ünvanı daxil edin!',
-          },
-        ]}
-      >
-        <Input
-          placeholder='Ünvan'
-          className={styles.input}
-        />
-      </Form.Item>
-
-      <Form.Item<OrderFormValues>
         name='message'
-        label='Qeyd'
+        label={t('labels.note')}
       >
         <TextArea
-          placeholder='Qeyd'
+          placeholder={t('placeholder.note')}
           rows={4}
         />
       </Form.Item>
@@ -332,7 +404,7 @@ export function OrderForm(): React.ReactElement {
           type='submit'
           classes={styles.submitButton}
         >
-          Sifariş göndər
+          {t('buttons.sendOrder')}
         </Button>
       </Form.Item>
     </Form>

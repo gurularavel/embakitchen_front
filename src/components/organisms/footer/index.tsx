@@ -1,3 +1,5 @@
+'use client'
+import { useTranslations } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
 import {
   ActionLink,
@@ -7,6 +9,7 @@ import {
   Navbar,
   SocialContacts,
 } from '~ek/components'
+import { useStore } from '~ek/hooks'
 
 const footerStyles: Readonly<TwClasses> = {
   footer:
@@ -23,11 +26,24 @@ const footerStyles: Readonly<TwClasses> = {
     'inline-block w-14 min-w-14 text-base font-medium text-tertiary-4',
   contactUsLink: 'text-base font-medium text-tertiary-1 break-all',
   specialOrderButton:
-    'w-full laptop:w-[215px] h-12 flex justify-center items-center gap-x-2 rounded-md bg-primary-9 text-base font-semibold text-primary-2',
+    'w-full py-1 px-3 min-h-12 flex justify-center items-center gap-x-2 rounded-md bg-primary-9 text-base font-semibold text-primary-2',
 }
 const styles = footerStyles as Readonly<StyleRecord>
 
 export function Footer(): React.ReactElement {
+  const t = useTranslations()
+  const {
+    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    authSlice: { user },
+  } = useStore(state => state)
+
+  const makeCustomOrder = (): void => {
+    if (user) {
+      setIsOrderFormDrawerVisible(true)
+    } else {
+      setIsAuthFormDrawerVisible(true)
+    }
+  }
   return (
     <footer className={styles.footer}>
       <ul className={styles.footerContent}>
@@ -37,10 +53,7 @@ export function Footer(): React.ReactElement {
             sizes='w-[132px] h-[21px]'
           />
 
-          <h5 className={styles.description}>
-            Embakitchen - Embawood şirkətinin mətbəx mebeli üzrə ixtisaslaşmış
-            brendidir.
-          </h5>
+          <h5 className={styles.description}>{t('texts.brandDescription')}</h5>
 
           <SocialContacts
             layout='horizontal'
@@ -60,7 +73,9 @@ export function Footer(): React.ReactElement {
         <li className={styles.footerItem}>
           <ul className={styles.contactUs}>
             <li className={styles.contactUsItem}>
-              <span className={styles.contactUsLabel}>Əlaqə:</span>
+              <span className={styles.contactUsLabel}>
+                {t('texts.contact')}
+              </span>
               <ActionLink
                 href='tel:+994552207212'
                 label='+994552207212'
@@ -69,7 +84,9 @@ export function Footer(): React.ReactElement {
             </li>
 
             <li className={styles.contactUsItem}>
-              <span className={styles.contactUsLabel}>Email:</span>
+              <span className={styles.contactUsLabel}>
+                {t('labels.email')}:
+              </span>
               <ActionLink
                 href='mailto:support@embakitchen.az'
                 label='support@embakitchen.az'
@@ -78,8 +95,11 @@ export function Footer(): React.ReactElement {
             </li>
 
             <li className={styles.contactUsItem}>
-              <Button classes={styles.specialOrderButton}>
-                <span>Özəl sifariş yarat</span>
+              <Button
+                classes={styles.specialOrderButton}
+                onClick={makeCustomOrder}
+              >
+                <span>{t('buttons.createCustomOrder')}</span>
                 <Icon
                   variant='chevron-right-orange'
                   sizes='w-6 h-6'

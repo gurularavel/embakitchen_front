@@ -97,21 +97,23 @@ export function PopularBlogs({
             <ul className={styles.popularBlogs}>
               {popularBlogs.map(
                 (popularBlog: ArrayElement<HomeProps['popularBlogs']>) => (
-                  <li
-                    key={popularBlog.id}
-                    className={styles.popularBlog}
-                  >
-                    <h4 className={styles.popularBlogTitle}>
-                      {popularBlog.title}
-                    </h4>
-                    <div className={styles.popularBlogImageWrapper}>
-                      <Image
-                        src={popularBlog.image.original_url}
-                        alt={popularBlog.title}
-                        className={styles.popularBlogImage}
-                        fill
-                      />
-                    </div>
+                  <li key={popularBlog.id}>
+                    <NavLink
+                      className={styles.popularBlog}
+                      href={`/blog/${popularBlog.slug}`}
+                    >
+                      <h4 className={styles.popularBlogTitle}>
+                        {popularBlog.title}
+                      </h4>
+                      <div className={styles.popularBlogImageWrapper}>
+                        <Image
+                          src={popularBlog.image.original_url}
+                          alt={popularBlog.title}
+                          className={styles.popularBlogImage}
+                          fill
+                        />
+                      </div>
+                    </NavLink>
                   </li>
                 ),
               )}

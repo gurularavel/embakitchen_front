@@ -2,7 +2,7 @@ import * as React from 'react'
 
 export function useClickOutside(
   selector: string,
-  callback: () => void,
+  callback: VoidFunction,
   isActive: boolean,
 ) {
   React.useEffect(() => {

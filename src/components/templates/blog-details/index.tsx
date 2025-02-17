@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { NavLink } from '~ek/components'
 import type { BlogDetailsProps, MediaFile } from '~ek/types'
@@ -35,6 +36,8 @@ export function BlogDetails({
   content,
   similar_posts,
 }: Readonly<BlogDetailsProps>): React.ReactElement {
+  const t = useTranslations('titles')
+
   return (
     <>
       <div className={styles.blog}>
@@ -65,8 +68,7 @@ export function BlogDetails({
 
       {similar_posts?.length && (
         <div className={styles.similarBlogs}>
-          <h4 className={styles.similarBlogsTitle}>Similar Blogs</h4>
-
+          <h4 className={styles.similarBlogsTitle}>{t('similarBlogs')}</h4>
           <div className={styles.blogs}>
             {similar_posts?.map((blog, i: number) => (
               <NavLink

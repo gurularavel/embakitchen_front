@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import type { FormProps } from 'antd'
 import { Col, Form, Input, message, Row, Select } from 'antd'
 import { MaskedInput } from 'antd-mask-input'
@@ -61,6 +61,7 @@ function LoginForm(): React.ReactElement {
   } = useStore(state => state)
   const router = useRouter()
   const locale = useLocale()
+  const t = useTranslations()
 
   const handleLogin: FormProps<LoginFormValues>['onFinish'] = async values => {
     const { email, password } = values
@@ -88,17 +89,17 @@ function LoginForm(): React.ReactElement {
       autoComplete='off'
     >
       <Form.Item<LoginFormValues>
-        label='Email'
+        label={t('labels.email')}
         name='email'
-        rules={[{ required: true, message: 'Zəhmət olmasa email daxil edin!' }]}
+        rules={[{ required: true, message: t('validations.enterEmail') }]}
       >
         <Input className={styles.input} />
       </Form.Item>
 
       <Form.Item<LoginFormValues>
-        label='Şifrə'
+        label={t('labels.password')}
         name='password'
-        rules={[{ required: true, message: 'Zəhmət olmasa şifrə daxil edin!' }]}
+        rules={[{ required: true, message: t('validations.enterPassword') }]}
       >
         <Input.Password className={styles.input} />
       </Form.Item>
@@ -108,7 +109,7 @@ function LoginForm(): React.ReactElement {
           type='submit'
           classes={styles.submitButton}
         >
-          Giriş et
+          {t('buttons.login')}
         </Button>
       </Form.Item>
     </Form>
@@ -118,6 +119,7 @@ function LoginForm(): React.ReactElement {
 function RegistrationForm({
   setSelectedAuthForm,
 }: Pick<AuthFormProps, 'setSelectedAuthForm'>): React.ReactElement {
+  const t = useTranslations()
   const locale = useLocale()
   const [cities, setCities] = React.useState<CityEntry<string>[]>([])
   const [form] = Form.useForm()
@@ -161,7 +163,7 @@ function RegistrationForm({
 
       if (!data) return
 
-      message.success('Siz uğurla qeydiyyatdan keçdiniz!')
+      message.success(t('messages.registrationSuccess'))
       setSelectedAuthForm('login')
     }
 
@@ -188,23 +190,21 @@ function RegistrationForm({
       <Row gutter={[16, 16]}>
         <Col span={12}>
           <Form.Item<RegistrationFormValues>
-            label='Ad'
+            label={t('labels.name')}
             name='name'
-            rules={[
-              { required: true, message: 'Zəhmət olmasa adınızı daxil edin!' },
-            ]}
+            rules={[{ required: true, message: t('validations.enterName') }]}
           >
             <Input className={styles.input} />
           </Form.Item>
         </Col>
         <Col span={12}>
           <Form.Item<RegistrationFormValues>
-            label='Soyad'
+            label={t('labels.surname')}
             name='surname'
             rules={[
               {
                 required: true,
-                message: 'Zəhmət olmasa soyadınızı daxil edin!',
+                message: t('validations.enterSurname'),
               },
             ]}
           >
@@ -214,21 +214,21 @@ function RegistrationForm({
       </Row>
 
       <Form.Item<RegistrationFormValues>
-        label='Email'
+        label={t('labels.email')}
         name='email'
-        rules={[{ required: true, message: 'Zəhmət olmasa email daxil edin!' }]}
+        rules={[{ required: true, message: t('validations.enterEmail') }]}
       >
         <Input className={styles.input} />
       </Form.Item>
 
       <Form.Item<RegistrationFormValues>
-        label='Mobil nömrə'
+        label={t('labels.mobileNumber')}
         name='phone'
         rules={[
-          { required: true, message: 'Zəhmət olmasa mobil nömrə daxil edin!' },
+          { required: true, message: t('validations.enterMobileNumber') },
           {
             pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
-            message: 'Zəhmət olmasa düzgün formatda mobil nömrə daxil edin.',
+            message: t('validations.invalidMobileNumber'),
           },
         ]}
       >
@@ -240,16 +240,16 @@ function RegistrationForm({
 
       <Form.Item<RegistrationFormValues>
         name='city_id'
-        label='Şəhər'
+        label={t('labels.city')}
         rules={[
           {
             required: true,
-            message: 'Zəhmət olmasa yaşadığınız şəhəri seçin!',
+            message: t('validations.selectCity'),
           },
         ]}
       >
         <Select
-          placeholder='Şəhər seçin'
+          placeholder={t('placeholder.selectCity')}
           onChange={(value: number) => onRegionSelect('city_id', value)}
           allowClear
           className={styles.select}
@@ -268,16 +268,16 @@ function RegistrationForm({
       {selectedCity?.hasDistricts && (
         <Form.Item<RegistrationFormValues>
           name='district_id'
-          label='Rayon'
+          label={t('labels.district')}
           rules={[
             {
               required: true,
-              message: 'Zəhmət olmasa yaşadığınız rayonu seçin!',
+              message: t('validations.selectDistrict'),
             },
           ]}
         >
           <Select
-            placeholder='Rayon seçin'
+            placeholder={t('placeholder.selectDistrict')}
             onChange={(value: number) => onRegionSelect('district_id', value)}
             allowClear
             className={styles.select}
@@ -298,43 +298,41 @@ function RegistrationForm({
 
       <Form.Item<RegistrationFormValues>
         name='address'
-        label='Ünvan'
+        label={t('labels.address')}
         rules={[
           {
             required: true,
-            message: 'Zəhmət olmasa yaşadığınız ünvanı daxil edin!',
+            message: t('validations.enterAddress'),
           },
         ]}
       >
         <TextArea
-          placeholder='Ünvan'
+          placeholder={t('placeholder.address')}
           className={styles.input}
           rows={3}
         />
       </Form.Item>
 
       <Form.Item<RegistrationFormValues>
-        label='Şifrə'
+        label={t('labels.password')}
         name='password'
-        rules={[{ required: true, message: 'Zəhmət olmasa şifrə daxil edin!' }]}
+        rules={[{ required: true, message: t('validations.password') }]}
       >
         <Input.Password className={styles.input} />
       </Form.Item>
 
       <Form.Item<RegistrationFormValues>
-        label='Şifrə (təkrar)'
+        label={t('labels.repeatPassword')}
         name='password_confirmation'
         rules={[
-          { required: true, message: 'Zəhmət olmasa şifrənin təkrar edin!' },
+          { required: true, message: t('validations.enterRepeatPassword') },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue('password') === value) {
                 return Promise.resolve()
               }
               return Promise.reject(
-                new Error(
-                  'Zəhmət olmasa şifrənizin təkrarını düzgün daxil edin!',
-                ),
+                new Error(t('validations.reEnterRepeatPassword')),
               )
             },
           }),
@@ -348,7 +346,7 @@ function RegistrationForm({
           type='submit'
           classes={styles.submitButton}
         >
-          Qeydiyyatdan keç
+          {t('buttons.register')}
         </Button>
       </Form.Item>
     </Form>
