@@ -118,10 +118,6 @@ export interface ProductsResponse extends PaginatedResponse {
   data: ProductMainInfo[]
 }
 
-export interface CategoryResponse
-  extends PaginatedResponse,
-    CategoryEntry<string> {}
-
 export interface LoginResponse {
   user: UserEntry
   token: string

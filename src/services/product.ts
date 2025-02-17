@@ -16,7 +16,7 @@ export async function getBestSellingProducts(
 ): Promise<ProductsResponse> {
   const response = await httpClient.get<ProductsResponse>(
     '/best-selling-products',
-    apiQueryParams ?? {},
+    { query: apiQueryParams },
   )
 
   return response as ProductsResponse

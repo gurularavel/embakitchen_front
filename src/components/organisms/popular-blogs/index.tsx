@@ -1,23 +1,13 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
-import type { HomeProps } from '~ek/types'
 import sectionTitleBg from '/public/assets/images/section-title-bg.png'
 import { NavLink } from '~ek/components/atoms'
-
-interface ModifiedBlogEntry {
-  id: number
-  title: string
-  slug: string
-  description: string
-  image: {
-    original_url: string
-  }
-}
+import { HomeProps } from '~ek/types'
 
 interface PopularBlogsProps {
-  blogs: { data: ModifiedBlogEntry[] }
-  popularBlogs: ModifiedBlogEntry[]
+  blogs: HomeProps['blogs']
+  popularBlogs: HomeProps['popularBlogs']
 }
 
 const popularBlogsStyles: Readonly<TwClasses> = {
@@ -73,7 +63,7 @@ export function PopularBlogs({
 
         <div className={styles.blogsWrapper}>
           <div className={styles.blogs}>
-            {blogs?.data?.map((blog: ModifiedBlogEntry) => (
+            {blogs?.map((blog: ArrayElement<HomeProps['blogs']>) => (
               <div
                 className={styles.blog}
                 key={blog.id}
@@ -105,24 +95,26 @@ export function PopularBlogs({
             </div>
 
             <ul className={styles.popularBlogs}>
-              {popularBlogs.map((popularBlog: ModifiedBlogEntry) => (
-                <li
-                  key={popularBlog.id}
-                  className={styles.popularBlog}
-                >
-                  <h4 className={styles.popularBlogTitle}>
-                    {popularBlog.title}
-                  </h4>
-                  <div className={styles.popularBlogImageWrapper}>
-                    <Image
-                      src={popularBlog.image.original_url}
-                      alt={popularBlog.title}
-                      className={styles.popularBlogImage}
-                      fill
-                    />
-                  </div>
-                </li>
-              ))}
+              {popularBlogs.map(
+                (popularBlog: ArrayElement<HomeProps['popularBlogs']>) => (
+                  <li
+                    key={popularBlog.id}
+                    className={styles.popularBlog}
+                  >
+                    <h4 className={styles.popularBlogTitle}>
+                      {popularBlog.title}
+                    </h4>
+                    <div className={styles.popularBlogImageWrapper}>
+                      <Image
+                        src={popularBlog.image.original_url}
+                        alt={popularBlog.title}
+                        className={styles.popularBlogImage}
+                        fill
+                      />
+                    </div>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
         </div>
