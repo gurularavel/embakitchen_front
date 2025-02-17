@@ -19,7 +19,6 @@ import { httpClient } from '~ek/http-client'
 import { usePathname } from '~ek/i18n/routing'
 import { useStore } from '~ek/hooks'
 
-
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
     'grid grid-cols-1 laptop:grid-cols-3 gap-y-6 gap-x-7 mb-6 laptop:mb-10 px-0 laptop:px-15',

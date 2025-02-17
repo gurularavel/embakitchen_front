@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { twMerge } from 'tailwind-merge'
-import type { HomeProps } from '~ek/types'
 import sectionTitleBg from '/public/assets/images/section-title-bg.png'
 import { NavLink } from '~ek/components/atoms'
+import { HomeProps } from '~ek/types'
 
 interface PopularBlogsProps {
   blogs: HomeProps['blogs']
@@ -63,7 +63,7 @@ export function PopularBlogs({
 
         <div className={styles.blogsWrapper}>
           <div className={styles.blogs}>
-            {blogs.map((blog: ArrayElement<PopularBlogsProps['blogs']>) => (
+            {blogs?.map((blog: ArrayElement<HomeProps['blogs']>) => (
               <div
                 className={styles.blog}
                 key={blog.id}

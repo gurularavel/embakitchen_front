@@ -1,14 +1,10 @@
 import { httpClient } from '~ek/http-client'
-import type { CategoryEntry, CategoryResponse } from '~ek/types'
-import { omit } from '~ek/utils'
+import type { CategoryEntry } from '~ek/types'
 
 export async function getCategoryDetails(slug: string): Promise<CategoryEntry> {
-  const response = await httpClient.get<CategoryResponse>(
+  const response = await httpClient.get<CategoryEntry>(
     `/product-categories/${slug}`,
   )
 
-  return omit({
-    source: response as CategoryResponse,
-    fields: ['pagination'],
-  }) as CategoryEntry
+  return response as CategoryEntry
 }

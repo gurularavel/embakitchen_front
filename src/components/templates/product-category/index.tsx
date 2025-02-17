@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { Banner, NavLink, Pagination } from '~ek/components'
-import type { CategoryEntry, ProductCategoryProps } from '~ek/types'
+import type { ProductCategoryProps } from '~ek/types'
 
 const productCategoryStyles: Readonly<TwClasses> = {
   container: 'mb-6 laptop:mb-15',
@@ -20,7 +20,7 @@ const styles = productCategoryStyles as Readonly<StyleRecord>
 export function ProductCategory({
   title,
   bannerImage,
-  products,
+  products: { data, pagination },
 }: Readonly<ProductCategoryProps>): React.ReactElement {
   const { category } = useParams()
   const decodedCategory = decodeURIComponent(category as string)
@@ -33,8 +33,8 @@ export function ProductCategory({
       />
 
       <div className={styles.products}>
-        {products?.map(
-          (product: ArrayElement<ProductCategoryProps['products']>) => (
+        {data?.map(
+          (product: ArrayElement<ProductCategoryProps['products']['data']>) => (
             <div key={product.id}>
               <NavLink href={`/products/${decodedCategory}/${product.slug}`}>
                 <div className={styles.top}>
@@ -62,6 +62,7 @@ export function ProductCategory({
           ),
         )}
       </div>
+      <Pagination total={pagination?.total} />
     </div>
   )
 }
