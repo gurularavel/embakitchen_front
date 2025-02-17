@@ -27,7 +27,8 @@ import type {
   Language,
   MainSliderEntry,
   MediaFile,
-  ModifiedCategoryProduct,
+  ProductMainInfo,
+  PaginatedCategoryProducts,
   PartnersSliderEntry,
   ProductEntry,
   SliderVariant,
@@ -119,7 +120,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
-    thumb: 'h-[280px]',
+    thumb: 'h-[200px]',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -220,7 +221,7 @@ function Gallery(): React.ReactElement {
   const gallerySliderRef = React.useRef<SwiperType>()
   const locale = useLocale()
   const [bestSellingProductContent, setBestSellingProductContent] =
-    React.useState<ModifiedCategoryProduct[]>([])
+    React.useState<PaginatedCategoryProducts>({} as PaginatedCategoryProducts)
 
   React.useEffect(() => {
     async function initializeBestSellingProductsContent() {
@@ -231,7 +232,7 @@ function Gallery(): React.ReactElement {
       const uiData = transformToUiData(
         bestSellingProductContent,
         locale as Language,
-      ) as ModifiedCategoryProduct[]
+      ) as PaginatedCategoryProducts
       setBestSellingProductContent(uiData)
     }
 
@@ -259,8 +260,8 @@ function Gallery(): React.ReactElement {
           modules={[Navigation]}
           touchEventsTarget='container'
         >
-          {bestSellingProductContent.map(
-            (product: ModifiedCategoryProduct, i: number) => (
+          {bestSellingProductContent?.data?.map(
+            (product: ProductMainInfo<MediaFile>, i: number) => (
               <SwiperSlide
                 key={i}
                 className={gallerySliderStyles.slide}
@@ -437,11 +438,15 @@ function Product(): React.ReactElement {
         onSwiper={setThumbsSwiper}
         loop={true}
         spaceBetween={24}
-        slidesPerView={2}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className={productSliderStyles.thumb}
+        breakpoints={{
+          0: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+        }}
       >
         {product.images?.map((image: MediaFile) => (
           <SwiperSlide key={image.uuid}>

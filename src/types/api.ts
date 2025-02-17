@@ -58,9 +58,11 @@ export interface BlogsPageResponse<T extends string = Language> {
   image: [MediaFile]
 }
 
-export interface BlogsResponse<T extends string = Language>
-  extends PaginatedResponse {
-  data: Omit<BlogEntry<T>, 'content' | 'similar_posts'>[]
+export interface BlogsResponse<
+  T extends string = Language,
+  TBanner = [MediaFile],
+> extends PaginatedResponse {
+  data: Omit<BlogEntry<T, TBanner>, 'content' | 'similar_posts'>[]
 }
 
 export interface MainSliderResponse extends PaginatedResponse {
@@ -116,10 +118,6 @@ export interface CampaignsPageResponse<T extends string = Language> {
 export interface ProductsResponse extends PaginatedResponse {
   data: ProductMainInfo[]
 }
-
-export interface CategoryResponse
-  extends PaginatedResponse,
-    CategoryEntry<string> {}
 
 export interface LoginResponse {
   user: UserEntry

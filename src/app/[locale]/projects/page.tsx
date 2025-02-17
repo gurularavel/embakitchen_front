@@ -5,8 +5,12 @@ import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export default async function ProjectsPage({
   params: { locale },
+  searchParams,
 }: Readonly<PageProps>): Promise<React.ReactElement> {
-  const projects = await getProjects(defaultApiQueryParams)
+  const projects = await getProjects({
+    ...defaultApiQueryParams,
+    ...searchParams,
+  })
   const projectsPageContent = await getProjectsPageContent()
 
   const projectsProps: ProjectsProps = {

@@ -3,7 +3,7 @@ import type { ProjectsProps } from '~ek/types'
 import { NavLink } from '~ek/components/atoms'
 import { usePathname } from '~ek/i18n/routing'
 
-type ProjectItemProps = ArrayElement<ProjectsProps['projects']>
+type ProjectItemProps = ArrayElement<ProjectsProps['projects']['data']>
 
 const projectItemStyles: Readonly<TwClasses> = {
   top: 'relative h-60',

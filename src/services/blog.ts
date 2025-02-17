@@ -8,12 +8,12 @@ export async function getBlogsPageContent(): Promise<BlogsPageResponse> {
 
 export async function getBlogs(
   apiQueryParams: ApiQueryParams,
-): Promise<BlogsResponse['data']> {
+): Promise<BlogsResponse> {
   const response = await httpClient.get<BlogsResponse>('/posts', {
     query: apiQueryParams,
   })
 
-  return response?.data as BlogsResponse['data']
+  return response as BlogsResponse
 }
 
 export async function getBlogDetails(slug: string): Promise<BlogEntry> {
