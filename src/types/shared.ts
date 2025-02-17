@@ -116,13 +116,13 @@ export interface ProjectEntry<T extends string = Language> {
   status: boolean
 }
 
-export interface BlogEntry<T extends string = Language> {
+export interface BlogEntry<T extends string = Language, TBanner = [MediaFile]> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
   description: MultilingualText<T>
   content: MultilingualText<T>
-  image: [MediaFile]
+  image: TBanner
   similar_posts: Omit<BlogEntry, 'content'>[]
   status: boolean
 }

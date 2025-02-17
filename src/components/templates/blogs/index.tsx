@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { Banner, NavLink, Pagination } from '~ek/components'
 import { usePathname } from '~ek/i18n/routing'
-import type { BlogsProps, MediaFile } from '~ek/types'
+import type { BlogsProps } from '~ek/types'
 
 const blogStyles: Readonly<TwClasses> = {
   blogs:
@@ -35,7 +35,7 @@ export function Blogs({
             <NavLink href={`${pathname}/${blog.slug}`}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src={(blog.image as unknown as MediaFile).original_url}
+                  src={blog.image.original_url}
                   alt={`Embakitchen - ${blog.title}`}
                   className={styles.image}
                   fill

@@ -57,9 +57,11 @@ export interface BlogsPageResponse<T extends string = Language> {
   image: [MediaFile]
 }
 
-export interface BlogsResponse<T extends string = Language>
-  extends PaginatedResponse {
-  data: Omit<BlogEntry<T>, 'content' | 'similar_posts'>[]
+export interface BlogsResponse<
+  T extends string = Language,
+  TBanner = [MediaFile],
+> extends PaginatedResponse {
+  data: Omit<BlogEntry<T, TBanner>, 'content' | 'similar_posts'>[]
 }
 
 export interface MainSliderResponse extends PaginatedResponse {

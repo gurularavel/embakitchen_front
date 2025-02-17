@@ -50,15 +50,14 @@ export interface ProjectsProps extends SharedProps {
 type OmittedBlogsPageResponse = Omit<BlogsPageResponse<string>, 'id' | 'image'>
 export interface BlogsProps extends OmittedBlogsPageResponse {
   image: MediaFile
-  blogs: BlogsResponse<string>
+  blogs: BlogsResponse<string, MediaFile>
 }
 
 type OmittedBlogDetailsResponse = Omit<
-  BlogEntry<string>,
-  'id' | 'image' | 'status' | 'similar_posts'
+  BlogEntry<string, MediaFile>,
+  'id' | 'status' | 'similar_posts'
 >
 export interface BlogDetailsProps extends OmittedBlogDetailsResponse {
-  image: MediaFile
   similar_posts: Omit<BlogDetailsProps, 'content'>[]
 }
 
@@ -88,12 +87,11 @@ export interface ModifiedCampaignEntry extends OmittedCampaignEntry {
 }
 
 type OmittedBlogEntry = Omit<
-  BlogEntry<string>,
-  'content' | 'image' | 'similar_posts'
+  BlogEntry<string, MediaFile>,
+  'content' | 'similar_posts'
 >
-export interface ModifiedBlogEntry extends OmittedBlogEntry {
-  image: MediaFile
-}
+export interface ModifiedBlogEntry extends OmittedBlogEntry {}
+
 export interface HomeProps extends OmittedHomepageResponse {
   createOrderImage: MediaFile
   styleImage: MediaFile
