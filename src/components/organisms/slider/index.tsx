@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import {
@@ -119,7 +119,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
-    thumb: 'h-[200px]',
+    // thumb: 'h-[280px]',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -391,9 +391,7 @@ function Product(): React.ReactElement {
   )
   const { slug } = useParams() as { slug: string }
   type SliderProduct = Pick<ProductEntry<string>, 'title' | 'images'>
-  const [product, setProduct] = React.useState<SliderProduct>(
-    {} as SliderProduct,
-  )
+  const [product, setProduct] = React.useState<SliderProduct | null>(null)
   const locale = useLocale() as Language
 
   React.useEffect(() => {
@@ -410,49 +408,72 @@ function Product(): React.ReactElement {
 
   return (
     <>
-      <Swiper
-        loop={true}
-        spaceBetween={10}
-        navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className={productSliderStyles.main}
-      >
-        {product.images?.map((image: MediaFile) => (
-          <SwiperSlide key={image.uuid}>
-            <Image
-              src={image.original_url}
-              alt={product.title}
-              fill
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {product && product.images && (
+        <Swiper
+          loop={true}
+          spaceBetween={10}
+          navigation={true}
+          thumbs={{ swiper: thumbsSwiper }}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className={productSliderStyles.main}
+        >
+          {product.images?.map((image: MediaFile) => (
+            <SwiperSlide key={image.uuid}>
+              <Image
+                src={image.original_url}
+                alt={product.title}
+                fill
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
 
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        loop={true}
-        spaceBetween={24}
-        freeMode={true}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className={productSliderStyles.thumb}
-        breakpoints={{
-          0: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-        }}
-      >
-        {product.images?.map((image: MediaFile) => (
-          <SwiperSlide key={image.uuid}>
-            <Image
-              src={image.original_url}
-              alt={product.title}
-              fill
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {product && product.images && (
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          loop={false}
+          slidesPerView={4}
+          spaceBetween={24}
+          freeMode={true}
+          watchSlidesProgress={true}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className={productSliderStyles.thumb}
+          breakpoints={{
+            0: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+              loop: true,
+              grid: {
+                rows: 2,
+                fill: 'row',
+              },
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+              loop: false,
+              grid: {
+                rows: 4,
+                fill: 'row',
+              },
+            },
+          }}
+        >
+          {product.images?.map((image: MediaFile) => (
+            <SwiperSlide
+              key={image.uuid}
+              className='!h-[130px] laptop:!h-[150px]'
+            >
+              <Image
+                src={image.original_url}
+                alt={product.title}
+                fill
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </>
   )
 }
