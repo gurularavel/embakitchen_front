@@ -33,11 +33,8 @@ const styles = footerStyles as Readonly<StyleRecord>
 export function Footer(): React.ReactElement {
   const t = useTranslations()
   const {
-    clientSlice: {
-      setIsAuthFormDrawerVisible,
-      setIsOrderFormDrawerVisible,
-      setSelectedProduct,
-    },
+    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    orderSlice: { setSelectedProduct },
     authSlice: { user },
   } = useStore(state => state)
 

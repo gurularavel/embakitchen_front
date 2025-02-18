@@ -10,16 +10,10 @@ export const createClientSlice: StateCreator<
   isClientRendering: false,
   isAuthFormDrawerVisible: false,
   isOrderFormDrawerVisible: false,
-  selectedProduct: null,
   setClientRendering: (isClientRendering: boolean) =>
     set(state => ({
       ...state,
       clientSlice: { ...state.clientSlice, isClientRendering },
-    })),
-  setSelectedProduct: (selectedProduct: number | null) =>
-    set(state => ({
-      ...state,
-      clientSlice: { ...state.clientSlice, selectedProduct },
     })),
   setIsAuthFormDrawerVisible: (isAuthFormDrawerVisible: boolean) =>
     set(state => ({

@@ -70,11 +70,8 @@ function NavbarHeader({
   const t = useTranslations('buttons')
   const commonNavLinks: NavLinkEntry[] = useTranslations('links').raw('header')
   const {
-    clientSlice: {
-      setIsAuthFormDrawerVisible,
-      setIsOrderFormDrawerVisible,
-      setSelectedProduct,
-    },
+    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    orderSlice: { setSelectedProduct },
     authSlice: { user },
   } = useStore(state => state)
 

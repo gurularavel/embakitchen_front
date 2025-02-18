@@ -65,12 +65,8 @@ export function OrderForm(): React.ReactElement {
   const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
   const {
     authSlice: { user, token },
-    clientSlice: {
-      setIsOrderFormDrawerVisible,
-      setSelectedProduct,
-      selectedProduct,
-      isOrderFormDrawerVisible,
-    },
+    clientSlice: { setIsOrderFormDrawerVisible, isOrderFormDrawerVisible },
+    orderSlice: { setSelectedProduct, selectedProduct },
   } = useStore(state => state)
 
   React.useEffect(() => {
