@@ -65,7 +65,12 @@ export function OrderForm(): React.ReactElement {
   const [districts, setDistricts] = React.useState<DistrictEntry<string>[]>([])
   const {
     authSlice: { user, token },
-    clientSlice: { setIsOrderFormDrawerVisible },
+    clientSlice: {
+      setIsOrderFormDrawerVisible,
+      setSelectedProduct,
+      selectedProduct,
+      isOrderFormDrawerVisible,
+    },
   } = useStore(state => state)
 
   React.useEffect(() => {
@@ -96,8 +101,19 @@ export function OrderForm(): React.ReactElement {
       setAddresses(uiData.addresses)
     }
 
+    if (selectedProduct) {
+      form.setFieldsValue({
+        products: [{ id: selectedProduct }],
+      })
+    }
+
     initializeFormValues()
-  }, [locale, token])
+  }, [locale, token, selectedProduct, form])
+
+  React.useEffect(() => {
+    !isOrderFormDrawerVisible && form.resetFields()
+    setSelectedProduct(null)
+  }, [isOrderFormDrawerVisible, form, setSelectedProduct])
 
   React.useEffect(() => {
     if (selectedCity?.hasDistricts) {
@@ -153,6 +169,9 @@ export function OrderForm(): React.ReactElement {
       onFinish={sendOrderHandler}
       autoComplete='off'
       form={form}
+      initialValues={{
+        products: selectedProduct ? [{ id: selectedProduct }] : [{}],
+      }}
     >
       <Form.List
         name='products'

@@ -5,6 +5,8 @@ export interface ClientSlice {
   isClientRendering: boolean
   isAuthFormDrawerVisible: boolean
   isOrderFormDrawerVisible: boolean
+  selectedProduct: number | null
+  setSelectedProduct: (product: number | null) => void
   setClientRendering: (isClientRendering: boolean) => void
   setIsAuthFormDrawerVisible: (isAuthFormDrawerVisible: boolean) => void
   setIsOrderFormDrawerVisible: (isOrderFormDrawerVisible: boolean) => void

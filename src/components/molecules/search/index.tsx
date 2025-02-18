@@ -50,7 +50,7 @@ export function Search(): React.ReactElement {
 
   const onInputChange = async (search: string) => {
     setInputValue(search)
-    const searchResult = await getSearchResult({ search })
+    const searchResult = await getSearchResult({ search, perPage: 6 })
     const uiData = transformToUiData(
       searchResult,
       locale as Language,

@@ -110,13 +110,18 @@ export function ProductDetails({
   const pathnameWithoutLastSlug = pathname.split('/').slice(0, -1).join('/')
 
   const {
-    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    clientSlice: {
+      setIsAuthFormDrawerVisible,
+      setIsOrderFormDrawerVisible,
+      setSelectedProduct,
+    },
     authSlice: { user },
   } = useStore(state => state)
 
   const makeCustomOrder = (): void => {
     if (user) {
       setIsOrderFormDrawerVisible(true)
+      setSelectedProduct(id)
     } else {
       setIsAuthFormDrawerVisible(true)
     }
