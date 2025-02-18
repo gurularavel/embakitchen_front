@@ -165,9 +165,6 @@ export function OrderForm(): React.ReactElement {
       onFinish={sendOrderHandler}
       autoComplete='off'
       form={form}
-      initialValues={{
-        products: selectedProduct ? [{ id: selectedProduct }] : [{}],
-      }}
     >
       <Form.List
         name='products'
