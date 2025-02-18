@@ -26,5 +26,7 @@ export default function middleware(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ['/', '/(az|ru|en)/:path*'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+  ],
 }

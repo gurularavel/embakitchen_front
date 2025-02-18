@@ -27,7 +27,8 @@ import type {
   Language,
   MainSliderEntry,
   MediaFile,
-  ModifiedCategoryProduct,
+  ProductMainInfo,
+  PaginatedCategoryProducts,
   PartnersSliderEntry,
   ProductEntry,
   SliderVariant,
@@ -215,7 +216,7 @@ function Gallery(): React.ReactElement {
   const gallerySliderRef = React.useRef<SwiperType>()
   const locale = useLocale()
   const [bestSellingProductContent, setBestSellingProductContent] =
-    React.useState<ModifiedCategoryProduct[]>([])
+    React.useState<PaginatedCategoryProducts>({} as PaginatedCategoryProducts)
 
   React.useEffect(() => {
     async function initializeBestSellingProductsContent() {
@@ -226,7 +227,7 @@ function Gallery(): React.ReactElement {
       const uiData = transformToUiData(
         bestSellingProductContent,
         locale as Language,
-      ) as ModifiedCategoryProduct[]
+      ) as PaginatedCategoryProducts
       setBestSellingProductContent(uiData)
     }
 
@@ -254,8 +255,8 @@ function Gallery(): React.ReactElement {
           modules={[Navigation]}
           touchEventsTarget='container'
         >
-          {bestSellingProductContent.map(
-            (product: ModifiedCategoryProduct, i: number) => (
+          {bestSellingProductContent?.data?.map(
+            (product: ProductMainInfo<MediaFile>, i: number) => (
               <SwiperSlide
                 key={i}
                 className={gallerySliderStyles.slide}
