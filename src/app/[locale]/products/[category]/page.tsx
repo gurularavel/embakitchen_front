@@ -7,10 +7,12 @@ export default async function ProductCategoryPage({
   params: { locale, category },
   searchParams,
 }: Readonly<PageProps>): Promise<React.ReactElement> {
-  const categoryData: CategoryEntry = await getCategoryDetails(category!)
+  const decodedSlug = decodeURIComponent(category!)
+  const categoryData: CategoryEntry = await getCategoryDetails(decodedSlug)
   const products = await getProducts({
     ...defaultApiQueryParams,
     ...searchParams,
+    category: decodedSlug,
   })
 
   const productCategoryProps: ProductCategoryProps = {

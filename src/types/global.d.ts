@@ -23,6 +23,7 @@ declare global {
     perPage?: number
     status?: boolean
     search?: string
+    category?: string
   }
 
   interface AuthenticatedApiParams extends ApiQueryParams {
