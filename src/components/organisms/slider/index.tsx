@@ -187,9 +187,11 @@ function Main(): React.ReactElement {
                   <Button classes={mainSliderStyles.specialOrder}>
                     {t('createCustomOrder')}
                   </Button>
-                  <Button classes={mainSliderStyles.showProducts}>
-                    {t('viewProducts')}
-                  </Button>
+                  <NavLink href={'/products'}>
+                    <Button classes={mainSliderStyles.showProducts}>
+                      {t('viewProducts')}
+                    </Button>
+                  </NavLink>
                 </div>
               </div>
             </div>
