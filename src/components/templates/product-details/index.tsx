@@ -111,12 +111,14 @@ export function ProductDetails({
 
   const {
     clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    orderSlice: { setSelectedProduct },
     authSlice: { user },
   } = useStore(state => state)
 
   const makeCustomOrder = (): void => {
     if (user) {
       setIsOrderFormDrawerVisible(true)
+      setSelectedProduct(id)
     } else {
       setIsAuthFormDrawerVisible(true)
     }

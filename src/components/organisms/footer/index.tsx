@@ -34,12 +34,14 @@ export function Footer(): React.ReactElement {
   const t = useTranslations()
   const {
     clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    orderSlice: { setSelectedProduct },
     authSlice: { user },
   } = useStore(state => state)
 
   const makeCustomOrder = (): void => {
     if (user) {
       setIsOrderFormDrawerVisible(true)
+      setSelectedProduct(null)
     } else {
       setIsAuthFormDrawerVisible(true)
     }
