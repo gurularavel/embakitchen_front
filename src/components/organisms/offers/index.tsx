@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { Button, Icon, Video } from '~ek/components'
+import { Button, Icon, NavLink, Video } from '~ek/components'
 import type { HomeProps } from '~ek/types'
 
 type OffersProps = Pick<HomeProps, 'video' | 'videoSection' | 'infoArray'>
@@ -51,14 +51,15 @@ export function Offers({
           <h4 className={styles.title}>{videoSection.title}</h4>
 
           <p className={styles.content}>{videoSection.content}</p>
-
-          <Button classes={styles.readAboutUs}>
-            <span>{t('readAboutUs')}</span>
-            <Icon
-              variant='arrow-right-white'
-              sizes={styles.readAboutUsIcon}
-            />
-          </Button>
+          <NavLink href={'/about'}>
+            <Button classes={styles.readAboutUs}>
+              <span>{t('readAboutUs')}</span>
+              <Icon
+                variant='arrow-right-white'
+                sizes={styles.readAboutUsIcon}
+              />
+            </Button>
+          </NavLink>
         </div>
 
         <div className={styles.options}>

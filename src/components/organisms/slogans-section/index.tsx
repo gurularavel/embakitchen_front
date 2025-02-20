@@ -1,6 +1,8 @@
+'use client'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Button } from '~ek/components'
+import { useStore } from '~ek/hooks'
 import { MediaFile } from '~ek/types'
 
 interface SlogansSectionProps {
@@ -29,7 +31,20 @@ export function SlogansSection({
   backgroundImg,
 }: Readonly<SlogansSectionProps>): React.ReactElement {
   const t = useTranslations('buttons')
+  const {
+    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    orderSlice: { setSelectedProduct },
+    authSlice: { user },
+  } = useStore(state => state)
 
+  const makeCustomOrder = (): void => {
+    if (user) {
+      setIsOrderFormDrawerVisible(true)
+      setSelectedProduct(null)
+    } else {
+      setIsAuthFormDrawerVisible(true)
+    }
+  }
   return (
     <section className={styles.slogansSection}>
       <div className={styles.backgroundWrapper}>
@@ -45,7 +60,10 @@ export function SlogansSection({
         <h4 className={styles.s1}>{title}</h4>
         <h4 className={styles.s2}>{content}</h4>
         <div className={styles.buttonWrapper}>
-          <Button classes={styles.specialOrderButton}>
+          <Button
+            classes={styles.specialOrderButton}
+            onClick={makeCustomOrder}
+          >
             {t('createCustomOrder')}
           </Button>
         </div>
