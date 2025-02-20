@@ -408,7 +408,7 @@ function Product(): React.ReactElement {
 
   return (
     <>
-      {product && product.images && (
+      {product?.images && (
         <Swiper
           loop={true}
           spaceBetween={10}
@@ -417,8 +417,8 @@ function Product(): React.ReactElement {
           modules={[FreeMode, Navigation, Thumbs]}
           className={productSliderStyles.main}
         >
-          {product.images?.map((image: MediaFile) => (
-            <SwiperSlide key={image.uuid}>
+          {product.images.map((image: MediaFile, index: number) => (
+            <SwiperSlide key={`${image.uuid}-${index}`}>
               <Image
                 src={image.original_url}
                 alt={product.title}
@@ -428,41 +428,32 @@ function Product(): React.ReactElement {
           ))}
         </Swiper>
       )}
-
-      {product && product.images && (
+      {product?.images && (
         <Swiper
           onSwiper={setThumbsSwiper}
           loop={false}
-          slidesPerView={4}
-          spaceBetween={24}
+          grid={{ rows: 2, fill: 'row' }}
+          slidesPerView={2}
+          spaceBetween={30}
           freeMode={true}
           watchSlidesProgress={true}
-          modules={[FreeMode, Navigation, Thumbs]}
+          modules={[Grid, FreeMode, Navigation, Thumbs]}
           className={productSliderStyles.thumb}
           breakpoints={{
-            0: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-              loop: true,
-              grid: {
-                rows: 2,
-                fill: 'row',
-              },
-            },
             1024: {
               slidesPerView: 4,
               spaceBetween: 24,
               loop: false,
               grid: {
-                rows: 4,
+                rows: 1,
                 fill: 'row',
               },
             },
           }}
         >
-          {product.images?.map((image: MediaFile) => (
+          {product.images.map((image: MediaFile, index: number) => (
             <SwiperSlide
-              key={image.uuid}
+              key={`${image.uuid}-${index}`}
               className='!h-[130px] laptop:!h-[150px]'
             >
               <Image
