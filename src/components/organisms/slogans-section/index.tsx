@@ -51,7 +51,7 @@ export function SlogansSection({
         <div className={styles.buttonWrapper}>
           <Button
             classes={styles.specialOrderButton}
-            onClick={openOrderForm}
+            onClick={() => openOrderForm(null)}
           >
             {t('createCustomOrder')}
           </Button>

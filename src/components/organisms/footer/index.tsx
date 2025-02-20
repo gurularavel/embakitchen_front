@@ -10,7 +10,7 @@ import {
   Navbar,
   SocialContacts,
 } from '~ek/components'
-import { useStore } from '~ek/hooks'
+import { useOrderForm } from '~ek/hooks'
 
 const footerStyles: Readonly<TwClasses> = {
   footer:
@@ -33,20 +33,8 @@ const styles = footerStyles as Readonly<StyleRecord>
 
 export function Footer(): React.ReactElement {
   const t = useTranslations()
-  const {
-    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
-    orderSlice: { setSelectedProduct },
-    authSlice: { user },
-  } = useStore(state => state)
+  const { openOrderForm } = useOrderForm()
 
-  const makeCustomOrder = (): void => {
-    if (user) {
-      setIsOrderFormDrawerVisible(true)
-      setSelectedProduct(null)
-    } else {
-      setIsAuthFormDrawerVisible(true)
-    }
-  }
   return (
     <footer className={styles.footer}>
       <ul className={styles.footerContent}>
@@ -100,7 +88,7 @@ export function Footer(): React.ReactElement {
             <li className={styles.contactUsItem}>
               <Button
                 classes={styles.specialOrderButton}
-                onClick={makeCustomOrder}
+                onClick={() => openOrderForm(null)}
               >
                 <span>{t('buttons.createCustomOrder')}</span>
                 <Icon

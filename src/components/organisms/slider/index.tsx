@@ -188,7 +188,7 @@ function Main(): React.ReactElement {
                 <div className={mainSliderStyles.buttons}>
                   <Button
                     classes={mainSliderStyles.specialOrder}
-                    onClick={openOrderForm}
+                    onClick={() => openOrderForm(null)}
                   >
                     {t('createCustomOrder')}
                   </Button>
