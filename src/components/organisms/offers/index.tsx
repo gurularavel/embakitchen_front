@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { Button, Icon, NavLink, Video } from '~ek/components'
+import { Icon, NavLink, Video } from '~ek/components'
 import type { HomeProps } from '~ek/types'
 
 type OffersProps = Pick<HomeProps, 'video' | 'videoSection' | 'infoArray'>
@@ -17,7 +17,7 @@ const offersStyles: Readonly<TwClasses> = {
   title: 'text-base font-medium text-primary-6 mb-3',
   content: 'mb-10 text-3xl leading-10 font-semibold text-white',
   readAboutUs:
-    'w-full laptop:w-auto px-0 laptop:px-10 h-14 bg-primary-2 flex items-center justify-center gap-x-2 rounded-md mb-6 text-base font-semibold text-tertiary-11',
+    'w-full laptop:w-[278px] px-0 laptop:px-10 h-14 bg-primary-2 flex items-center justify-center gap-x-2 rounded-md mb-6 text-base font-semibold text-tertiary-11',
   readAboutUsIcon: 'w-6 h-6',
   options: 'grid grid-cols-1 tablet:grid-cols-2 gap-16',
   option: 'w-full tablet:max-w-[312px]',
@@ -51,14 +51,16 @@ export function Offers({
           <h4 className={styles.title}>{videoSection.title}</h4>
 
           <p className={styles.content}>{videoSection.content}</p>
-          <NavLink href={'/about'}>
-            <Button classes={styles.readAboutUs}>
-              <span>{t('readAboutUs')}</span>
-              <Icon
-                variant='arrow-right-white'
-                sizes={styles.readAboutUsIcon}
-              />
-            </Button>
+
+          <NavLink
+            className={styles.readAboutUs}
+            href='/about'
+          >
+            <span>{t('readAboutUs')}</span>
+            <Icon
+              variant='arrow-right-white'
+              sizes={styles.readAboutUsIcon}
+            />
           </NavLink>
         </div>
 
