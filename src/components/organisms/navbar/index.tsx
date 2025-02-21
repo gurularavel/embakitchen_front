@@ -71,12 +71,14 @@ function NavbarHeader({
   const commonNavLinks: NavLinkEntry[] = useTranslations('links').raw('header')
   const {
     clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
+    orderSlice: { setSelectedProduct },
     authSlice: { user },
   } = useStore(state => state)
 
   const makeCustomOrder = (): void => {
     if (user) {
       setIsOrderFormDrawerVisible(true)
+      setSelectedProduct(null)
     } else {
       setIsAuthFormDrawerVisible(true)
     }

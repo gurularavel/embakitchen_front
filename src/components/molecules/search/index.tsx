@@ -7,7 +7,7 @@ import { Button, Icon, Input, NavLink } from '~ek/components'
 import { useClickOutside, useInputFocus } from '~ek/hooks'
 import { getSearchResult } from '~ek/services'
 import type { Language, SearchResultEntry } from '~ek/types'
-import { transformToUiData, updatePrimitiveState } from '~ek/utils'
+import { PER_PAGE, transformToUiData, updatePrimitiveState } from '~ek/utils'
 
 const searchStyles: Readonly<TwClasses> = {
   search: 'w-auto h-full',
@@ -50,7 +50,7 @@ export function Search(): React.ReactElement {
 
   const onInputChange = async (search: string) => {
     setInputValue(search)
-    const searchResult = await getSearchResult({ search })
+    const searchResult = await getSearchResult({ search, perPage: PER_PAGE })
     const uiData = transformToUiData(
       searchResult,
       locale as Language,
