@@ -53,16 +53,17 @@ const productDetailsStyles: Readonly<TwClasses> = {
     'px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10',
   commentsWrapperTitle:
     'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
-  comments: 'max-h-[433px] overflow-y-auto',
+  commentsWrapperContent: 'flex gap-[40px]',
+  comments: 'max-h-[433px] overflow-y-auto no-scrollbar',
   comment: 'bg-tertiary-11 flex flex-col gap-y-4 px-10 py-6 mb-6 last:mb-0',
   rateAndDate: 'flex flex-col',
   rate: 'flex gap-x-2 mb-[9px]',
   date: 'text-base font-normal text-gray-4',
   message: 'text-base font-normal text-gray-1',
   fullname: 'text-base font-medium text-gray-1',
-  newComment: '',
+  newComment: 'w-[50%] h-[430px]',
   newCommentInput:
-    'w-full h-25 mt-2 border border-solid border-gray-8 rounded focus:outline-none px-4 py-3',
+    'w-full h-32 max-h-[88%] border border-solid border-gray-8 rounded focus:outline-none px-4 py-3',
   newCommentBtn:
     'bg-primary-1 text-white flex w-full h-10 items-center justify-center rounded',
   similarProductsWrapper: 'px-4 tablet:px-10 laptop:px-15 widescreen:px-25',
@@ -132,6 +133,21 @@ export function ProductDetails({
       message,
     }
     const response = await httpClient.post('/comments', body)
+  }
+
+  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textarea = event.target
+
+    if (textarea.scrollHeight > textarea.clientHeight) {
+      textarea.style.height = `${textarea.scrollHeight}px`
+    }
+
+    if (textarea.scrollHeight > 430) {
+      textarea.style.height = '430px'
+      textarea.style.overflowY = 'scroll'
+    } else {
+      textarea.style.overflowY = 'hidden'
+    }
   }
 
   return (
@@ -266,40 +282,43 @@ export function ProductDetails({
           {t('titles.customerFeedback')}
         </h5>
 
-        <div className={styles.comments}>
-          {comments?.map((comment: Comment) => (
-            <div
-              className={styles.comment}
-              key={comment.id}
+        <div className={styles.commentsWrapperContent}>
+          <div className={styles.comments}>
+            {comments?.map((comment: Comment) => (
+              <div
+                className={styles.comment}
+                key={comment.id}
+              >
+                <div className={styles.rateAndDate}>
+                  <span className={styles.rate}>
+                    {renderRating(comment.rate)}
+                  </span>
+                  <span className={styles.date}>
+                    {format(comment.created_at, 'd MMMM yyyy', { locale: az })}
+                  </span>
+                </div>
+                <span className={styles.message}>{comment.message}</span>
+                <div className={styles.fullname}>
+                  {comment.name} {comment.surname}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.newComment}>
+            <textarea
+              className={styles.newCommentInput}
+              ref={newCommentInput}
+              onInput={handleInput}
+            ></textarea>
+
+            <Button
+              classes={styles.newCommentBtn}
+              onClick={addNewComment}
             >
-              <div className={styles.rateAndDate}>
-                <span className={styles.rate}>
-                  {renderRating(comment.rate)}
-                </span>
-                <span className={styles.date}>
-                  {format(comment.created_at, 'd MMMM yyyy', { locale: az })}
-                </span>
-              </div>
-              <span className={styles.message}>{comment.message}</span>
-              <div className={styles.fullname}>
-                {comment.name} {comment.surname}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className={styles.newComment}>
-          <textarea
-            className={styles.newCommentInput}
-            ref={newCommentInput}
-          ></textarea>
-
-          <Button
-            classes={styles.newCommentBtn}
-            onClick={addNewComment}
-          >
-            {t('buttons.send')}
-          </Button>
+              {t('buttons.send')}
+            </Button>
+          </div>
         </div>
       </div>
 
