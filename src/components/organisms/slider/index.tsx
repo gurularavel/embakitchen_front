@@ -16,7 +16,7 @@ import SwiperCore, { type Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
 import { useLocale, useTranslations } from 'next-intl'
 import { Button, Icon, NavLink, SocialContacts } from '~ek/components'
-import { useScreenSize, useStore } from '~ek/hooks'
+import { useOrderForm, useScreenSize, useStore } from '~ek/hooks'
 import {
   defaultApiQueryParams,
   omit,
@@ -120,6 +120,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
+    img: 'w-full h-full object-cover',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -135,6 +136,7 @@ function Main(): React.ReactElement {
     ModifiedMainSliderEntry[]
   >([])
   const t = useTranslations('buttons')
+  const { openOrderForm } = useOrderForm()
 
   React.useEffect(() => {
     async function initializeMainSliderContent() {
@@ -184,7 +186,10 @@ function Main(): React.ReactElement {
                 </h3>
 
                 <div className={mainSliderStyles.buttons}>
-                  <Button classes={mainSliderStyles.specialOrder}>
+                  <Button
+                    classes={mainSliderStyles.specialOrder}
+                    onClick={() => openOrderForm(null)}
+                  >
                     {t('createCustomOrder')}
                   </Button>
                   <NavLink href={'/products'}>
@@ -424,6 +429,7 @@ function Product(): React.ReactElement {
               <Image
                 src={image.original_url}
                 alt={product.title}
+                className={productSliderStyles.img}
                 fill
               />
             </SwiperSlide>
@@ -433,7 +439,7 @@ function Product(): React.ReactElement {
       {product?.images && (
         <Swiper
           onSwiper={setThumbsSwiper}
-          loop={false}
+          loop={product.images.length > 4}
           grid={{ rows: 2, fill: 'row' }}
           slidesPerView={2}
           spaceBetween={30}
@@ -445,7 +451,7 @@ function Product(): React.ReactElement {
             1024: {
               slidesPerView: 4,
               spaceBetween: 24,
-              loop: false,
+              loop: product.images.length > 4,
               grid: {
                 rows: 1,
                 fill: 'row',
@@ -461,6 +467,7 @@ function Product(): React.ReactElement {
               <Image
                 src={image.original_url}
                 alt={product.title}
+                className={productSliderStyles.img}
                 fill
               />
             </SwiperSlide>

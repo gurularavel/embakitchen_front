@@ -60,3 +60,9 @@ figure.image img {
 .ant-input-number .ant-input-number-input-wrap .ant-input-number-input {
   height: 100%;
 }
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}

@@ -16,6 +16,7 @@ export function useClickOutside(
     }
 
     document.addEventListener('click', handleClickOutside)
+
     return () => document.removeEventListener('click', handleClickOutside)
   }, [isActive, selector, callback])
 }
