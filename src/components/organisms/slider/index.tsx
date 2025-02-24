@@ -435,7 +435,7 @@ function Product(): React.ReactElement {
       {product?.images && (
         <Swiper
           onSwiper={setThumbsSwiper}
-          loop={false}
+          loop={product.images.length > 4}
           grid={{ rows: 2, fill: 'row' }}
           slidesPerView={2}
           spaceBetween={30}
@@ -447,7 +447,7 @@ function Product(): React.ReactElement {
             1024: {
               slidesPerView: 4,
               spaceBetween: 24,
-              loop: false,
+              loop: product.images.length > 4,
               grid: {
                 rows: 1,
                 fill: 'row',
