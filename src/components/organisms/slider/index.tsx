@@ -120,6 +120,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
+    img: 'w-full h-full object-cover',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -424,6 +425,7 @@ function Product(): React.ReactElement {
               <Image
                 src={image.original_url}
                 alt={product.title}
+                className={productSliderStyles.img}
                 fill
               />
             </SwiperSlide>
@@ -461,6 +463,7 @@ function Product(): React.ReactElement {
               <Image
                 src={image.original_url}
                 alt={product.title}
+                className={productSliderStyles.img}
                 fill
               />
             </SwiperSlide>
