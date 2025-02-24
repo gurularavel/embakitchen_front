@@ -16,7 +16,7 @@ import SwiperCore, { type Swiper as SwiperType } from 'swiper'
 import { twMerge } from 'tailwind-merge'
 import { useLocale, useTranslations } from 'next-intl'
 import { Button, Icon, NavLink, SocialContacts } from '~ek/components'
-import { useScreenSize, useStore } from '~ek/hooks'
+import { useOrderForm, useScreenSize, useStore } from '~ek/hooks'
 import {
   defaultApiQueryParams,
   omit,
@@ -136,6 +136,7 @@ function Main(): React.ReactElement {
     ModifiedMainSliderEntry[]
   >([])
   const t = useTranslations('buttons')
+  const { openOrderForm } = useOrderForm()
 
   React.useEffect(() => {
     async function initializeMainSliderContent() {
@@ -185,7 +186,10 @@ function Main(): React.ReactElement {
                 </h3>
 
                 <div className={mainSliderStyles.buttons}>
-                  <Button classes={mainSliderStyles.specialOrder}>
+                  <Button
+                    classes={mainSliderStyles.specialOrder}
+                    onClick={() => openOrderForm(null)}
+                  >
                     {t('createCustomOrder')}
                   </Button>
                   <NavLink href={'/products'}>

@@ -17,7 +17,7 @@ import type {
 import birbank from '/public/assets/images/birbank.png'
 import { httpClient } from '~ek/http-client'
 import { usePathname } from '~ek/i18n/routing'
-import { useStore } from '~ek/hooks'
+import { useOrderForm } from '~ek/hooks'
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -112,21 +112,8 @@ export function ProductDetails({
   const pathname = usePathname()
   const t = useTranslations()
   const pathnameWithoutLastSlug = pathname.split('/').slice(0, -1).join('/')
+  const { openOrderForm } = useOrderForm()
 
-  const {
-    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
-    orderSlice: { setSelectedProduct },
-    authSlice: { user },
-  } = useStore(state => state)
-
-  const makeCustomOrder = (): void => {
-    if (user) {
-      setIsOrderFormDrawerVisible(true)
-      setSelectedProduct(id)
-    } else {
-      setIsAuthFormDrawerVisible(true)
-    }
-  }
   const addNewComment = async (): Promise<void> => {
     const message = newCommentInput.current?.value
     const body = {
@@ -137,7 +124,7 @@ export function ProductDetails({
       rate: 5,
       message,
     }
-    const response = await httpClient.post('/comments', body)
+    await httpClient.post('/comments', body)
   }
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -252,7 +239,7 @@ export function ProductDetails({
             <div className={styles.order}>
               <Button
                 classes={styles.orderButton}
-                onClick={makeCustomOrder}
+                onClick={() => openOrderForm(id)}
               >
                 <span>{t('buttons.placeOrder')}</span>
                 <Icon
