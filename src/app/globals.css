@@ -61,8 +61,13 @@ figure.image img {
   height: 100%;
 }
 
-@layer utilities {
-  .no-scrollbar {
-    scrollbar-width: none;
-  }
+.simplebar-scrollbar::before {
+  background-color: #a0a0a0 !important;
+  opacity: 1 !important;
+}
+
+.simplebar-track.simplebar-vertical {
+  width: 8px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
 }

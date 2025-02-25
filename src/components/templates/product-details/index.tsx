@@ -18,6 +18,8 @@ import birbank from '/public/assets/images/birbank.png'
 import { httpClient } from '~ek/http-client'
 import { usePathname } from '~ek/i18n/routing'
 import { useOrderForm } from '~ek/hooks'
+import SimpleBar from 'simplebar-react'
+import 'simplebar-react/dist/simplebar.min.css'
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -54,9 +56,8 @@ const productDetailsStyles: Readonly<TwClasses> = {
   commentsWrapperTitle:
     'h-[50px] relative laptop:mb-[10px] text-[25px] laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0 mb-[15px]',
   commentsWrapperContent:
-    'flex flex-col gap-[30px] laptop:flex-row laptop:gap-[40px]',
-  comments:
-    'max-h-[350px] w-full overflow-y-auto no-scrollbar laptop:max-h-[433px]',
+    'flex flex-col gap-[50px] laptop:flex-row laptop:gap-[40px]',
+  comments: 'max-h-[350px] w-full overflow-y-auto laptop:max-h-[433px]',
   comment: 'bg-tertiary-11 flex flex-col gap-y-4 px-10 py-6 mb-6 last:mb-0',
   rateAndDate: 'flex flex-col',
   rate: 'flex gap-x-2 mb-[9px]',
@@ -269,8 +270,8 @@ export function ProductDetails({
         </h5>
 
         <div className={styles.commentsWrapperContent}>
-          {comments?.length > 0 && (
-            <div className={styles.comments}>
+          {!!comments?.length && (
+            <SimpleBar className={styles.comments}>
               {comments?.map((comment: Comment) => (
                 <div
                   className={styles.comment}
@@ -292,12 +293,12 @@ export function ProductDetails({
                   </div>
                 </div>
               ))}
-            </div>
+            </SimpleBar>
           )}
 
           <div
             className={`${styles.newComment}
-              ${comments?.length > 0 ? styles.newCommentWithComments : ''}`}
+              ${!!comments?.length ? styles.newCommentWithComments : ''}`}
           >
             <textarea
               className={styles.newCommentInput}
