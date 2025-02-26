@@ -6,7 +6,7 @@ import { Icon, NavLink, Timer } from '~ek/components'
 import type { ModifiedCampaignEntry } from '~ek/types'
 
 const campaignItemStyles: Readonly<TwClasses> = {
-  container: 'w-full last:hidden widescreen:last:block',
+  container: 'w-full widescreen:last:block',
   wrapper: 'h-full',
   imgWrapper: 'h-60 relative',
   img: 'w-full h-full object-cover',

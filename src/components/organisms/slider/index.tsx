@@ -121,7 +121,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
-    thumb: 'h-[200px]',
+    img: 'w-full h-full object-cover',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -193,9 +193,11 @@ function Main(): React.ReactElement {
                   >
                     {t('createCustomOrder')}
                   </Button>
-                  <Button classes={mainSliderStyles.showProducts}>
-                    {t('viewProducts')}
-                  </Button>
+                  <NavLink href={'/products'}>
+                    <Button classes={mainSliderStyles.showProducts}>
+                      {t('viewProducts')}
+                    </Button>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -399,9 +401,7 @@ function Product(): React.ReactElement {
   )
   const { slug } = useParams() as { slug: string }
   type SliderProduct = Pick<ProductEntry<string>, 'title' | 'images'>
-  const [product, setProduct] = React.useState<SliderProduct>(
-    {} as SliderProduct,
-  )
+  const [product, setProduct] = React.useState<SliderProduct | null>(null)
   const locale = useLocale() as Language
 
   React.useEffect(() => {
@@ -418,49 +418,65 @@ function Product(): React.ReactElement {
 
   return (
     <>
-      <Swiper
-        loop={true}
-        spaceBetween={10}
-        navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className={productSliderStyles.main}
-      >
-        {product.images?.map((image: MediaFile) => (
-          <SwiperSlide key={image.uuid}>
-            <Image
-              src={image.original_url}
-              alt={product.title}
-              fill
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        loop={true}
-        spaceBetween={24}
-        freeMode={true}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className={productSliderStyles.thumb}
-        breakpoints={{
-          0: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-        }}
-      >
-        {product.images?.map((image: MediaFile) => (
-          <SwiperSlide key={image.uuid}>
-            <Image
-              src={image.original_url}
-              alt={product.title}
-              fill
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {product?.images && (
+        <Swiper
+          loop={true}
+          spaceBetween={10}
+          navigation={true}
+          thumbs={{ swiper: thumbsSwiper }}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className={productSliderStyles.main}
+        >
+          {product.images.map((image: MediaFile, index: number) => (
+            <SwiperSlide key={`${image.uuid}-${index}`}>
+              <Image
+                src={image.original_url}
+                alt={product.title}
+                className={productSliderStyles.img}
+                fill
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+      {product?.images && (
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          loop={product.images.length > 4}
+          grid={{ rows: 2, fill: 'row' }}
+          slidesPerView={2}
+          spaceBetween={30}
+          freeMode={true}
+          watchSlidesProgress={true}
+          modules={[Grid, FreeMode, Navigation, Thumbs]}
+          className={productSliderStyles.thumb}
+          breakpoints={{
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+              loop: product.images.length > 4,
+              grid: {
+                rows: 1,
+                fill: 'row',
+              },
+            },
+          }}
+        >
+          {product.images.map((image: MediaFile, index: number) => (
+            <SwiperSlide
+              key={`${image.uuid}-${index}`}
+              className='!h-[130px] laptop:!h-[150px]'
+            >
+              <Image
+                src={image.original_url}
+                alt={product.title}
+                className={productSliderStyles.img}
+                fill
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </>
   )
 }

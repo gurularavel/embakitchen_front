@@ -7,6 +7,7 @@ import { Footer, Header } from '~ek/components'
 import type { Language } from '~ek/types'
 import { StoreProvider } from '~ek/providers'
 import '~ek/app/globals.css'
+import 'simplebar-react/dist/simplebar.min.css'
 
 interface Params {
   locale: `${Language}`
