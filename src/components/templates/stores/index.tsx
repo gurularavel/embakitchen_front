@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import SimpleBar from 'simplebar-react'
 import { ActionLink, Icon, Map } from '~ek/components'
 import { useLocale, useTranslations } from 'next-intl'
 import type { Language, StoresProps } from '~ek/types'
@@ -10,12 +11,13 @@ import { transformToUiData } from '~ek/utils'
 const storesStyles: Readonly<TwClasses> = {
   wrapper: 'relative mb-10 tablet:mb-15 laptop:mb-25 mt-6 laptop:mt-10',
   storesWrapper:
-    'h-[680px] w-full tablet:w-[424px] widescreen:w-[512px] p-6 bg-white flex flex-col gap-y-6 tablet:absolute tablet:z-10 tablet:top-6 tablet:bottom-6 tablet:left-15 widescreen:left-25 overflow-y-auto',
+    'h-[680px] w-full tablet:w-[424px] widescreen:w-[512px] p-6 bg-white flex flex-col gap-y-6 tablet:absolute tablet:z-10 tablet:top-6 tablet:bottom-6 tablet:left-15 widescreen:left-25',
   title: 'text-2xl leading-9 text-gray-1 font-semibold',
   citiesWrapper: '',
   cities:
     'block w-full h-11 rounded-lg border border-solid border-gray-8 px-3.5',
-  stores: '',
+  stores:
+    'h-full overflow-y-auto [&_.simplebar-scrollbar::before]:bg-[#a0a0a0] [&_.simplebar-scrollbar::before]:opacity-100 [&_.simplebar-scrollbar::before]:w-3 [&_.simplebar-track.simplebar-vertical]:bg-[#f1f1f1] [&_.simplebar-track.simplebar-vertical]:w-[15px] [&_.simplebar-track.simplebar-vertical]:rounded-[4x]',
   store: 'p-6 border border-solid border-gray-9',
   storeTitle: 'mb-4 text-xl leading-6 text-primary-1 font-semibold',
   storeInfoWrapper: 'flex items-center gap-x-2 mb-6 last:mb-0',
@@ -63,7 +65,7 @@ export function Stores({
           </select>
         </div>
 
-        <div className={styles.stores}>
+        <SimpleBar className={styles.stores}>
           {storesToRender.map((store: ArrayElement<StoresProps['stores']>) => (
             <div
               className={styles.store}
@@ -109,7 +111,7 @@ export function Stores({
               </div>
             </div>
           ))}
-        </div>
+        </SimpleBar>
       </div>
 
       <Map stores={stores} />
