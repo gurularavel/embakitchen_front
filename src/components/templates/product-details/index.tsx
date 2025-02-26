@@ -55,8 +55,9 @@ const productDetailsStyles: Readonly<TwClasses> = {
   commentsWrapperTitle:
     'h-[58px] relative mb-10 text-3xl laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
   commentsWrapperContent:
-    'flex flex-col gap-[50px] laptop:flex-row laptop:gap-[40px]',
-  comments: 'max-h-[433px] w-full overflow-y-auto laptop:max-h-[433px]',
+    'flex flex-col gap-[50px] laptop:flex-row laptop:gap-10',
+  comments:
+    'max-h-[433px] w-full overflow-y-auto laptop:max-h-[433px] [&_.simplebar-scrollbar::before]:bg-[#a0a0a0] [&_.simplebar-scrollbar::before]:opacity-100 [&_.simplebar-scrollbar::before]:w-3 [&_.simplebar-track.simplebar-vertical]:bg-[#f1f1f1] [&_.simplebar-track.simplebar-vertical]:w-[15px] [&_.simplebar-track.simplebar-vertical]:rounded-[4px]',
   comment: 'bg-tertiary-11 flex flex-col gap-y-4 px-10 py-6 mb-6 last:mb-0',
   rateAndDate: 'flex flex-col',
   rate: 'flex gap-x-2 mb-[9px]',
@@ -64,7 +65,7 @@ const productDetailsStyles: Readonly<TwClasses> = {
   message: 'text-base font-normal text-gray-1',
   fullname: 'text-base font-medium text-gray-1',
   newComment: 'w-full max-h-[430px]',
-  newCommentWithComments: 'laptop:w-[50%]',
+  newCommentWrapperContent: 'laptop:w-1/2',
   newCommentInput:
     'w-full h-32 max-h-[300px] laptop:max-h-[88%] border border-solid border-gray-8 rounded focus:outline-none px-4 py-3',
   newCommentBtn:
@@ -297,7 +298,7 @@ export function ProductDetails({
 
           <div
             className={`${styles.newComment}
-              ${!!comments?.length ? styles.newCommentWithComments : ''}`}
+              ${!!comments?.length ? styles.newCommentWrapperContent : ''}`}
           >
             <textarea
               className={styles.newCommentInput}
