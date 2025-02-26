@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import { az } from 'date-fns/locale'
 import { Avatar, Tooltip, Space } from 'antd'
 import { useTranslations } from 'next-intl'
+import SimpleBar from 'simplebar-react'
 import { Banner, Button, Icon, NavLink, Slider } from '~ek/components'
 import type {
   Color,
@@ -18,8 +19,6 @@ import birbank from '/public/assets/images/birbank.png'
 import { httpClient } from '~ek/http-client'
 import { usePathname } from '~ek/i18n/routing'
 import { useOrderForm } from '~ek/hooks'
-import SimpleBar from 'simplebar-react'
-import 'simplebar-react/dist/simplebar.min.css'
 
 const productDetailsStyles: Readonly<TwClasses> = {
   productMainInfoWrapper:
@@ -54,10 +53,10 @@ const productDetailsStyles: Readonly<TwClasses> = {
   commentsWrapper:
     'px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10',
   commentsWrapperTitle:
-    'h-[50px] relative laptop:mb-[10px] text-[25px] laptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0 mb-[15px]',
+    'h-[58px] relative mb-10 text-3xl Dlaptop:text-[36px] leading-10 laptop:leading-[44px] font-semibold text-tertiary-1 after:content-[""] after:inline-block after:h-[2px] after:w-20 after:bg-tertiary-2 after:absolute after:left-0 after:bottom-0',
   commentsWrapperContent:
     'flex flex-col gap-[50px] laptop:flex-row laptop:gap-[40px]',
-  comments: 'max-h-[350px] w-full overflow-y-auto laptop:max-h-[433px]',
+  comments: 'max-h-[433px] w-full overflow-y-auto laptop:max-h-[433px]',
   comment: 'bg-tertiary-11 flex flex-col gap-y-4 px-10 py-6 mb-6 last:mb-0',
   rateAndDate: 'flex flex-col',
   rate: 'flex gap-x-2 mb-[9px]',
