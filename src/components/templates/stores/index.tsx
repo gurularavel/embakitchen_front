@@ -17,7 +17,7 @@ const storesStyles: Readonly<TwClasses> = {
   cities:
     'block w-full h-11 rounded-lg border border-solid border-gray-8 px-3.5',
   stores:
-    'h-full overflow-y-auto [&_.simplebar-scrollbar::before]:bg-gray-400 [&_.simplebar-scrollbar::before]:opacity-100 [&_.simplebar-scrollbar::before]:w-3 [&_.simplebar-track.simplebar-vertical]:bg-gray-9 [&_.simplebar-track.simplebar-vertical]:w-[15px] [&_.simplebar-track.simplebar-vertical]:rounded-[4x]',
+    'h-full overflow-y-auto [&_.simplebar-scrollbar::before]:bg-gray-400 [&_.simplebar-scrollbar::before]:opacity-100 [&_.simplebar-scrollbar::before]:w-3 [&_.simplebar-track.simplebar-vertical]:bg-gray-9 [&_.simplebar-track.simplebar-vertical]:w-[15px] [&_.simplebar-track.simplebar-vertical]:rounded',
   store: 'p-6 border border-solid border-gray-9',
   storeTitle: 'mb-4 text-xl leading-6 text-primary-1 font-semibold',
   storeInfoWrapper: 'flex items-center gap-x-2 mb-6 last:mb-0',
