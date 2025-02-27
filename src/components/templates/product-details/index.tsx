@@ -57,7 +57,7 @@ const productDetailsStyles: Readonly<TwClasses> = {
   commentsWrapperContent:
     'flex flex-col gap-[50px] laptop:flex-row laptop:gap-10',
   comments:
-    'max-h-[433px] w-full overflow-y-auto laptop:max-h-[433px] [&_.simplebar-scrollbar::before]:bg-[#a0a0a0] [&_.simplebar-scrollbar::before]:opacity-100 [&_.simplebar-scrollbar::before]:w-3 [&_.simplebar-track.simplebar-vertical]:bg-[#f1f1f1] [&_.simplebar-track.simplebar-vertical]:w-[15px] [&_.simplebar-track.simplebar-vertical]:rounded-[4px]',
+    'max-h-[433px] w-full overflow-y-auto laptop:max-h-[433px] [&_.simplebar-scrollbar::before]:bg-gray-400 [&_.simplebar-scrollbar::before]:opacity-100 [&_.simplebar-scrollbar::before]:w-3 [&_.simplebar-track.simplebar-vertical]:bg-gray-9 [&_.simplebar-track.simplebar-vertical]:w-[15px] [&_.simplebar-track.simplebar-vertical]:rounded',
   comment: 'bg-tertiary-11 flex flex-col gap-y-4 px-10 py-6 mb-6 last:mb-0',
   rateAndDate: 'flex flex-col',
   rate: 'flex gap-x-2 mb-[9px]',
