@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import {
@@ -99,13 +99,14 @@ const sliderStyles: Readonly<TwClasses> = {
     sliderWrapper: 'w-full h-[372px] relative',
     swiper: 'gallery-slider h-full cursor-pointer',
     slide:
-      'group laptop:!h-[340px] laptop:[&.swiper-slide-next]:!h-[372px] laptop:!flex laptop:items-center laptop:[&.swiper-slide-active]:!w-[calc((100%-570px)/2)] laptop:[&.swiper-slide-next]:!w-[570px] laptop:[&.swiper-slide-next+.swiper-slide]:!w-[calc((100%-570px)/2)] widescreen:[&.swiper-slide-active]:!w-1/3 widescreen:[&.swiper-slide-next]:!w-1/3 widescreen:[&.swiper-slide-next+.swiper-slide]:!w-1/3',
+      'group laptop:!h-[340px] laptop:[&.swiper-slide-next]:!h-[372px] laptop:!flex laptop:items-center laptop:[&.swiper-slide-active]:!pr-[27px] laptop:[&.swiper-slide-next+.swiper-slide]:!pl-[27px] widescreen:[&.swiper-slide-active]:!pr-10 widescreen:[&.swiper-slide-next+.swiper-slide]:!pl-10',
+    slideLink: 'inline-block size-full relative',
     img: 'w-full h-full object-cover',
     nav: 'absolute top-1/2 -translate-1/2 z-10 w-[33.33px] h-[33.33px] flex items-center justify-center bg-supplementary-2/80',
     prev: 'left-[3.33px] laptop:-left-[calc(33.33px/2)] rounded-full',
     next: 'right-[3.33px] laptop:-right-[calc(33.33px/2)] rounded-full',
     surface:
-      'w-auto mobile:min-w-[254px] laptop:min-w-[183px] bg-tertiary-2 rounded-lg py-3 px-6 absolute bottom-4 left-4 right-4 mobile:left-1/2 mobile:right-auto mobile:-translate-x-1/2 laptop:translate-x-full laptop:right-4 laptop:opacity-0 laptop:invisible laptop:group-hover:visible laptop:group-hover:opacity-100 laptop:group-hover:translate-x-0 transition-all duration-200',
+      'w-auto mobile:min-w-[254px] laptop:min-w-[183px] bg-tertiary-2 rounded-lg py-3 px-6 absolute bottom-4 left-4 right-4 mobile:left-1/2 mobile:right-auto mobile:-translate-x-1/2  laptop:left-4 laptop:translate-x-full laptop:right-4 laptop:opacity-0 laptop:invisible desktop:left-auto laptop:group-hover:visible laptop:group-hover:opacity-100 laptop:group-hover:translate-x-0 transition-all duration-200',
     tag: 'text-sm font-medium text-secondary-4 leading-5 mb-1',
     title: 'text-base font-medium text-white leading-6',
   },
@@ -120,7 +121,7 @@ const sliderStyles: Readonly<TwClasses> = {
   },
   product: {
     main: 'h-[300px] laptop:h-[480px] mb-6',
-    thumb: 'h-[200px]',
+    img: 'w-full h-full object-cover',
   },
 }
 const mainSliderStyles = sliderStyles.main as Readonly<StyleRecord>
@@ -192,9 +193,11 @@ function Main(): React.ReactElement {
                   >
                     {t('createCustomOrder')}
                   </Button>
-                  <Button classes={mainSliderStyles.showProducts}>
-                    {t('viewProducts')}
-                  </Button>
+                  <NavLink href={'/products'}>
+                    <Button classes={mainSliderStyles.showProducts}>
+                      {t('viewProducts')}
+                    </Button>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -250,11 +253,9 @@ function Gallery(): React.ReactElement {
           breakpoints={{
             1024: {
               slidesPerView: 3,
-              spaceBetween: 27,
             },
             1920: {
               slidesPerView: 3,
-              spaceBetween: 40,
             },
           }}
           modules={[Navigation]}
@@ -266,12 +267,16 @@ function Gallery(): React.ReactElement {
                 key={i}
                 className={gallerySliderStyles.slide}
               >
-                <NavLink href={`/products/${product.category}/${product.slug}`}>
+                <NavLink
+                  href={`/products/${product.category}/${product.slug}`}
+                  className={gallerySliderStyles.slideLink}
+                >
                   <Image
                     src={product.bannerImage.original_url}
                     alt={product.title}
                     className={gallerySliderStyles.img}
                     fill
+                    style={{ inset: 'unset !important' }}
                   />
 
                   <div className={gallerySliderStyles.surface}>
@@ -396,9 +401,7 @@ function Product(): React.ReactElement {
   )
   const { slug } = useParams() as { slug: string }
   type SliderProduct = Pick<ProductEntry<string>, 'title' | 'images'>
-  const [product, setProduct] = React.useState<SliderProduct>(
-    {} as SliderProduct,
-  )
+  const [product, setProduct] = React.useState<SliderProduct | null>(null)
   const locale = useLocale() as Language
 
   React.useEffect(() => {
@@ -415,49 +418,65 @@ function Product(): React.ReactElement {
 
   return (
     <>
-      <Swiper
-        loop={true}
-        spaceBetween={10}
-        navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className={productSliderStyles.main}
-      >
-        {product.images?.map((image: MediaFile) => (
-          <SwiperSlide key={image.uuid}>
-            <Image
-              src={image.original_url}
-              alt={product.title}
-              fill
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        loop={true}
-        spaceBetween={24}
-        freeMode={true}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className={productSliderStyles.thumb}
-        breakpoints={{
-          0: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-        }}
-      >
-        {product.images?.map((image: MediaFile) => (
-          <SwiperSlide key={image.uuid}>
-            <Image
-              src={image.original_url}
-              alt={product.title}
-              fill
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {product?.images && (
+        <Swiper
+          loop={true}
+          spaceBetween={10}
+          navigation={true}
+          thumbs={{ swiper: thumbsSwiper }}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className={productSliderStyles.main}
+        >
+          {product.images.map((image: MediaFile, index: number) => (
+            <SwiperSlide key={`${image.uuid}-${index}`}>
+              <Image
+                src={image.original_url}
+                alt={product.title}
+                className={productSliderStyles.img}
+                fill
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+      {product?.images && (
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          loop={product.images.length > 4}
+          grid={{ rows: 2, fill: 'row' }}
+          slidesPerView={2}
+          spaceBetween={30}
+          freeMode={true}
+          watchSlidesProgress={true}
+          modules={[Grid, FreeMode, Navigation, Thumbs]}
+          className={productSliderStyles.thumb}
+          breakpoints={{
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+              loop: product.images.length > 4,
+              grid: {
+                rows: 1,
+                fill: 'row',
+              },
+            },
+          }}
+        >
+          {product.images.map((image: MediaFile, index: number) => (
+            <SwiperSlide
+              key={`${image.uuid}-${index}`}
+              className='!h-[130px] laptop:!h-[150px]'
+            >
+              <Image
+                src={image.original_url}
+                alt={product.title}
+                className={productSliderStyles.img}
+                fill
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </>
   )
 }

@@ -50,6 +50,7 @@ const config: Config = {
           '8': '#CCD1D6',
           '9': '#E8EBED',
           '10': '#F7F7F8',
+          '400': '#9ca3af',
           '900': '#18181B',
         },
         semi: {
