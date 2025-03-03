@@ -107,25 +107,28 @@ export interface Tag<T extends string = Language> {
   status: boolean
 }
 
-export interface ProjectEntry<T extends string = Language> {
+export interface ProjectEntry<
+  T extends string = Language,
+  TBanner = [MediaFile],
+> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
   content: MultilingualText<T>
   tags: Tag<T>[]
   similar_projects: Omit<ProjectEntry, 'content' | 'similar_projects'>[]
-  bannerImage: [MediaFile]
+  bannerImage: TBanner
   images: MediaFile[]
   status: boolean
 }
 
-export interface BlogEntry<T extends string = Language> {
+export interface BlogEntry<T extends string = Language, TBanner = [MediaFile]> {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
   description: MultilingualText<T>
   content: MultilingualText<T>
-  image: [MediaFile]
+  image: TBanner
   similar_posts: Omit<BlogEntry, 'content'>[]
   status: boolean
 }
@@ -244,24 +247,19 @@ export interface ProductEntry<
   comments: Comment[]
 }
 
-export type ProductMainInfo = Pick<
-  ProductEntry<string>,
+export type ProductMainInfo<TBanner = [MediaFile]> = Pick<
+  ProductEntry<string, TBanner>,
   'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
 >
 
-export type CategoryProduct<T extends string = Language> = Pick<
-  ProductEntry<T>,
-  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
->
 export interface CategoryEntry<
   T extends string = Language,
-  K = CategoryProduct<T>,
+  TBanner = [MediaFile],
 > {
   id: number
   title: MultilingualText<T>
   slug: MultilingualText<T>
-  bannerImage: [MediaFile]
-  products: K[]
+  bannerImage: TBanner
   status: boolean
 }
 
@@ -292,9 +290,7 @@ export interface UserEntry {
   surname: string
   email: string
   phone: string
-  city: Omit<CityEntry, 'status'>
-  district: DistrictEntry
-  address: string
+  addresses: AddressEntry[]
   orders: []
   role: UserRole
   status: boolean
@@ -323,10 +319,11 @@ export interface OrderProductInfo {
 
 export interface OrderFormValues {
   products: OrderProductInfo[]
-  city_id: number
-  district_id: number
-  address: string
+  addresses: number
   message: string
+  city_id?: number
+  district_id?: number
+  address?: string
 }
 
 export interface Headers extends Partial<AxiosHeaders> {

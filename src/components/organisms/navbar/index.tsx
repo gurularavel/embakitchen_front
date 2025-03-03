@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import { Button, Dropdown, NavLink } from '~ek/components'
-import { useStore } from '~ek/hooks'
+import { useOrderForm } from '~ek/hooks'
 import type { NavLinkEntry } from '~ek/types'
 
 type NavbarContext = 'header' | 'footer'
@@ -69,18 +69,7 @@ function NavbarHeader({
   const pathname = usePathname()
   const t = useTranslations('buttons')
   const commonNavLinks: NavLinkEntry[] = useTranslations('links').raw('header')
-  const {
-    clientSlice: { setIsAuthFormDrawerVisible, setIsOrderFormDrawerVisible },
-    authSlice: { user },
-  } = useStore(state => state)
-
-  const makeCustomOrder = (): void => {
-    if (user) {
-      setIsOrderFormDrawerVisible(true)
-    } else {
-      setIsAuthFormDrawerVisible(true)
-    }
-  }
+  const { openOrderForm } = useOrderForm()
 
   return (
     <ul className={navbarHeaderStyles.nav}>
@@ -104,7 +93,7 @@ function NavbarHeader({
       <li className={navbarHeaderStyles.navItem}>
         <Button
           classes={navbarHeaderStyles.specialOrderButton}
-          onClick={makeCustomOrder}
+          onClick={() => openOrderForm(null)}
         >
           {t('customOrder')}
         </Button>

@@ -1,11 +1,11 @@
 'use client'
 
 import * as React from 'react'
-import { Col, Flex, Form, Input, message, Row } from 'antd'
+import { useRouter } from 'next/navigation'
+import { Col, Form, Input, message, Row } from 'antd'
 import MaskedInput from 'antd-mask-input'
 import { LogoutOutlined } from '@ant-design/icons'
 import { useLocale, useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
 import { Button, Icon, AddAddressModal, EditAddressModal } from '~ek/components'
 import { useAuth, useStore } from '~ek/hooks'
 import {
@@ -41,7 +41,7 @@ const profileStyles: Readonly<TwClasses> = {
     `h-14 flex items-center mb-5 last:mb-0 cursor-pointer text-base font-medium px-6 py-4 ${(isActive as boolean) ? 'bg-primary-9 text-primary-1' : 'bg-white text-tertiary-3'}`,
   tabContent: 'w-full',
   sectionTitle: 'text-2xl leading-9 text-primary-1 font-semibold mb-6',
-  form: 'w-[520px] flex flex-col gap-y-5',
+  form: 'w-full laptop:w-[520px] flex flex-col gap-y-5',
   double: 'flex gap-x-4 [&_div]:flex-1',
   inputGroup: 'flex flex-col gap-y-1',
   label: 'text-xs font-medium text-gray-1',
@@ -221,44 +221,50 @@ function ProfileInformation(): React.ReactElement {
               <Input className={styles.input} />
             </Form.Item>
           </Col>
+
+          <Col span={24}>
+            <Form.Item<UpdateProfileFormValues>
+              label={t('labels.email')}
+              name='email'
+              rules={[{ required: true, message: t('validations.enterEmail') }]}
+            >
+              <Input className={styles.input} />
+            </Form.Item>
+          </Col>
+
+          <Col span={24}>
+            <Form.Item<UpdateProfileFormValues>
+              label={t('labels.mobileNumber')}
+              name='phone'
+              rules={[
+                {
+                  required: true,
+                  message: t('validations.enterMobileNumber'),
+                },
+                {
+                  pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
+                  message: t('validations.invalidMobileNumber'),
+                },
+              ]}
+            >
+              <MaskedInput
+                mask={'+994 00 000 00 00'}
+                className={styles.input}
+              />
+            </Form.Item>
+          </Col>
+
+          <Col span={24}>
+            <Form.Item<UpdateProfileFormValues> label={null}>
+              <Button
+                type='submit'
+                classes={styles.submitButton}
+              >
+                {t('buttons.remember')}
+              </Button>
+            </Form.Item>
+          </Col>
         </Row>
-
-        <Form.Item<UpdateProfileFormValues>
-          label={t('labels.email')}
-          name='email'
-          rules={[{ required: true, message: t('validations.email') }]}
-        >
-          <Input className={styles.input} />
-        </Form.Item>
-
-        <Form.Item<UpdateProfileFormValues>
-          label={t('labels.mobileNumber')}
-          name='phone'
-          rules={[
-            {
-              required: true,
-              message: t('validations.enterMobileNumber'),
-            },
-            {
-              pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
-              message: t('validations.invalidMobileNumber'),
-            },
-          ]}
-        >
-          <MaskedInput
-            mask={'+994 00 000 00 00'}
-            className={styles.input}
-          />
-        </Form.Item>
-
-        <Form.Item<UpdateProfileFormValues> label={null}>
-          <Button
-            type='submit'
-            classes={styles.submitButton}
-          >
-            {t('button.remember')}
-          </Button>
-        </Form.Item>
       </Form>
     </>
   )
@@ -537,12 +543,4 @@ function OrderHistory(): React.ReactElement {
       ))}
     </>
   )
-}
-
-function CreditPayment(): React.ReactElement {
-  return <div>CreditPayment</div>
-}
-
-function CreateYourDesign(): React.ReactElement {
-  return <div>CreateYourDesign</div>
 }

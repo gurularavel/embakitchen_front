@@ -6,17 +6,14 @@ import type {
   BlogsPageResponse,
   BlogsResponse,
   CampaignEntry,
-  CampaignsResponse,
   CityEntry,
   CategoryEntry,
-  CategoryProduct,
   HomepageResponse,
   MediaFile,
   ProductEntry,
   ProductMainInfo,
   ProjectEntry,
   StoreEntry,
-  ProductsResponse,
   PaginatedResponse,
 } from '~ek/types'
 
@@ -37,26 +34,27 @@ export interface AboutProps extends OmittedAboutPageResponse {
   aboutInfoBlocks: AboutInfoBlock<string>[]
 }
 
-type OmittedProjectEntry = Omit<ProjectEntry<string>, 'content' | 'bannerImage'>
-interface ModifiedProjectEntry extends OmittedProjectEntry {
-  bannerImage: MediaFile
+type OmittedProjectEntry = Omit<ProjectEntry<string, MediaFile>, 'content'>
+interface ModifiedProjectEntry extends OmittedProjectEntry {}
+
+interface ProjectPaginatedProps extends PaginatedResponse {
+  data: ModifiedProjectEntry[]
 }
 export interface ProjectsProps extends SharedProps {
-  projects: ModifiedProjectEntry[]
+  projects: ProjectPaginatedProps
 }
 
 type OmittedBlogsPageResponse = Omit<BlogsPageResponse<string>, 'id' | 'image'>
 export interface BlogsProps extends OmittedBlogsPageResponse {
   image: MediaFile
-  blogs: BlogsResponse<string>['data']
+  blogs: BlogsResponse<string, MediaFile>
 }
 
 type OmittedBlogDetailsResponse = Omit<
-  BlogEntry<string>,
-  'id' | 'image' | 'status' | 'similar_posts'
+  BlogEntry<string, MediaFile>,
+  'id' | 'status' | 'similar_posts'
 >
 export interface BlogDetailsProps extends OmittedBlogDetailsResponse {
-  image: MediaFile
   similar_posts: Omit<BlogDetailsProps, 'content'>[]
 }
 
@@ -84,12 +82,11 @@ export interface ModifiedCampaignEntry extends OmittedCampaignEntry {
 }
 
 type OmittedBlogEntry = Omit<
-  BlogEntry<string>,
-  'content' | 'image' | 'similar_posts'
+  BlogEntry<string, MediaFile>,
+  'content' | 'similar_posts'
 >
-interface ModifiedBlogEntry extends OmittedBlogEntry {
-  image: MediaFile
-}
+export interface ModifiedBlogEntry extends OmittedBlogEntry {}
+
 export interface HomeProps extends OmittedHomepageResponse {
   createOrderImage: MediaFile
   styleImage: MediaFile
@@ -108,13 +105,12 @@ export interface CampaignsProps extends SharedProps {
   campaigns: ModifiedCampaignEntry[]
 }
 
-type OmittedCategoryProduct = Omit<CategoryProduct<string>, 'bannerImage'>
-export interface ModifiedCategoryProduct extends OmittedCategoryProduct {
-  bannerImage: MediaFile
+export interface PaginatedCategoryProducts extends PaginatedResponse {
+  data: ProductMainInfo<MediaFile>[]
 }
-export interface ProductCategoryProps
-  extends Omit<CategoryEntry<string, ModifiedCategoryProduct>, 'bannerImage'> {
-  bannerImage: MediaFile
+
+export interface ProductCategoryProps extends CategoryEntry<string, MediaFile> {
+  products: PaginatedCategoryProducts
 }
 
 type ProjectDetailsEntry = Omit<

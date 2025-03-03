@@ -44,7 +44,7 @@ export default async function HomePage({
       currentCampaigns,
       locale,
     ) as ModifiedCampaignEntry[],
-    blogs: transformToUiData(blogs, locale) as HomeProps['blogs'],
+    blogs: transformToUiData(blogs.data, locale) as HomeProps['blogs'],
     popularBlogs: transformToUiData(
       popularBlogs,
       locale,

@@ -1,17 +1,30 @@
 import { ProductCategory } from '~ek/components'
-import { getCategoryDetails } from '~ek/services'
+import { getCategoryDetails, getProducts } from '~ek/services'
 import type { CategoryEntry, ProductCategoryProps } from '~ek/types'
-import { transformToUiData } from '~ek/utils'
+import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export default async function ProductCategoryPage({
   params: { locale, category },
+  searchParams,
 }: Readonly<PageProps>): Promise<React.ReactElement> {
-  const categoryData: CategoryEntry = await getCategoryDetails(category!)
+  const decodedSlug = decodeURIComponent(category!)
+  const categoryData: CategoryEntry = await getCategoryDetails(decodedSlug)
+  const products = await getProducts({
+    ...defaultApiQueryParams,
+    ...searchParams,
+    category: decodedSlug,
+  })
 
-  const productCategoryProps = transformToUiData(
-    categoryData,
-    locale,
-  ) as ProductCategoryProps
+  const productCategoryProps: ProductCategoryProps = {
+    ...(transformToUiData(
+      omit({ source: categoryData, fields: ['id'] }),
+      locale,
+    ) as Omit<ProductCategoryProps, 'products'>),
+    products: transformToUiData(
+      products,
+      locale,
+    ) as ProductCategoryProps['products'],
+  }
 
   return <ProductCategory {...productCategoryProps} />
 }

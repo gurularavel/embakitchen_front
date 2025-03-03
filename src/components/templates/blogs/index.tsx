@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { Banner, NavLink } from '~ek/components'
+import { Banner, NavLink, Pagination } from '~ek/components'
 import { usePathname } from '~ek/i18n/routing'
-import type { BlogsProps, MediaFile } from '~ek/types'
+import type { BlogsProps } from '~ek/types'
 
 const blogStyles: Readonly<TwClasses> = {
   blogs:
@@ -18,7 +18,7 @@ const styles = blogStyles as Readonly<StyleRecord>
 export function Blogs({
   title,
   image,
-  blogs,
+  blogs: { data, pagination },
 }: Readonly<BlogsProps>): React.ReactElement {
   const pathname = usePathname()
 
@@ -30,12 +30,12 @@ export function Blogs({
       />
 
       <div className={styles.blogs}>
-        {blogs?.map((blog: ArrayElement<typeof blogs>) => (
+        {data?.map((blog: ArrayElement<typeof data>) => (
           <div key={blog.id}>
             <NavLink href={`${pathname}/${blog.slug}`}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src={(blog.image as unknown as MediaFile).original_url}
+                  src={blog.image.original_url}
                   alt={`Embakitchen - ${blog.title}`}
                   className={styles.image}
                   fill
@@ -50,6 +50,8 @@ export function Blogs({
           </div>
         ))}
       </div>
+
+      <Pagination total={pagination?.total} />
     </>
   )
 }
