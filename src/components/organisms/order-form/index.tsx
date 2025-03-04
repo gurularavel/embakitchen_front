@@ -306,7 +306,7 @@ export function OrderForm(): React.ReactElement {
             className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
             onClick={() => setIsAddressSelected(!isAddressSelected)}
           >
-            Başqa bir ünvan əlavə et
+            {t('buttons.addAnotherAddress')}
           </div>
         </>
       ) : (
@@ -396,7 +396,7 @@ export function OrderForm(): React.ReactElement {
             className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
             onClick={() => setIsAddressSelected(!isAddressSelected)}
           >
-            Mövcud ünvanlardan seçim et
+            {t('buttons.selectExistingAddress')}
           </div>
         </>
       )}
