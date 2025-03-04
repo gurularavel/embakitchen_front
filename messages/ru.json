@@ -93,7 +93,9 @@
     "placeOrder": "Оформить заказ",
     "send": "Отправлять",
     "addAddress": "Добавить адрес",
-    "makeChange": "Внести изменения"
+    "makeChange": "Внести изменения",
+    "selectExistingAddress": "Выбирайте из доступных адресов",
+    "addAnotherAddress": "Добавить еще один адрес"
   },
   "titles": {
     "currentCampaigns": "Текущие Кампании",

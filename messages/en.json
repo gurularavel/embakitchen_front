@@ -93,7 +93,9 @@
     "placeOrder": "Place order",
     "send": "Send",
     "addAddress": "Add address",
-    "makeChange": "Make a change"
+    "makeChange": "Make a change",
+    "selectExistingAddress": "Choose from available addresses",
+    "addAnotherAddress": "Add another address"
   },
   "titles": {
     "currentCampaigns": "Current Campaigns",

@@ -93,7 +93,9 @@
     "placeOrder": "Sifariş ver",
     "send": "Göndər",
     "addAddress": "Ünvan əlavə et",
-    "makeChange": "Dəyişiklik et"
+    "makeChange": "Dəyişiklik et",
+    "selectExistingAddress": "Mövcud ünvanlardan seçim et",
+    "addAnotherAddress": "Başqa bir ünvan əlavə et"
   },
   "titles": {
     "currentCampaigns": "Cari Kampaniyalar",
