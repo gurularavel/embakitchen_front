@@ -31,7 +31,7 @@ export function ProductSearch({
         {data?.map((product: ArrayElement<SearchResultEntry['data']>) => (
           <div key={product.id}>
             <NavLink
-              href={`/products/${product.category.title}/${product.slug}`}
+              href={`/products/${product.category.slug}/${product.slug}`}
             >
               <div className={styles.top}>
                 <Image

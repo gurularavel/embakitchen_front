@@ -103,7 +103,7 @@ export function Search(): React.ReactElement {
                   onClick={closeSearch}
                 >
                   <NavLink
-                    href={`/products/${product.category.title}/${product.slug}`}
+                    href={`/products/${product.category.slug}/${product.slug}`}
                   >
                     <div className={styles.resultProductWrapper}>
                       <Image
