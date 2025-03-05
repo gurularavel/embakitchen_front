@@ -193,6 +193,7 @@
     "selectDistrict": "Select region",
     "address": "Address",
     "note": "Note",
-    "search": "Search"
+    "search": "Search",
+    "message": "Your message..."
   }
 }
