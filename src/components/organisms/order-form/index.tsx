@@ -280,7 +280,7 @@ export function OrderForm(): React.ReactElement {
           rules={[
             {
               required: true,
-              message: 'Please enter your phone!',
+              message: t('validations.enterMobileNumber'),
             },
             {
               pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
