@@ -24,6 +24,7 @@ import {
 } from '~ek/services'
 import { transformToUiData } from '~ek/utils'
 import SimpleBar from 'simplebar-react'
+import { MaskedInput } from 'antd-mask-input'
 
 const { TextArea } = Input
 
@@ -273,6 +274,25 @@ export function OrderForm(): React.ReactElement {
             </>
           )}
         </Form.List>
+        <Form.Item<OrderFormValues>
+          name='phone'
+          label='Phone'
+          rules={[
+            {
+              required: true,
+              message: 'Please enter your phone!',
+            },
+            {
+              pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
+              message: t('validations.invalidMobileNumber'),
+            },
+          ]}
+        >
+          <MaskedInput
+            mask={'+994 00 000 00 00'}
+            className={styles.input}
+          />
+        </Form.Item>
 
         {isAddressSelected ? (
           <>
