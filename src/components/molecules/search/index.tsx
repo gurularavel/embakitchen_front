@@ -7,7 +7,7 @@ import { Button, Icon, Input, NavLink } from '~ek/components'
 import { useClickOutside, useInputFocus } from '~ek/hooks'
 import { getSearchResult } from '~ek/services'
 import type { Language, SearchResultEntry } from '~ek/types'
-import { PER_PAGE, transformToUiData, updatePrimitiveState } from '~ek/utils'
+import { transformToUiData, updatePrimitiveState } from '~ek/utils'
 
 const searchStyles: Readonly<TwClasses> = {
   search: 'w-auto h-full',
@@ -50,7 +50,7 @@ export function Search(): React.ReactElement {
 
   const onInputChange = async (search: string) => {
     setInputValue(search)
-    const searchResult = await getSearchResult({ search, perPage: PER_PAGE })
+    const searchResult = await getSearchResult({ search, perPage: 6 })
     const uiData = transformToUiData(
       searchResult,
       locale as Language,
@@ -103,7 +103,7 @@ export function Search(): React.ReactElement {
                   onClick={closeSearch}
                 >
                   <NavLink
-                    href={`/products/${product.category}/${product.slug}`}
+                    href={`/products/${product.category.slug}/${product.slug}`}
                   >
                     <div className={styles.resultProductWrapper}>
                       <Image

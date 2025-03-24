@@ -304,6 +304,7 @@ export function ProductDetails({
               className={styles.newCommentInput}
               ref={newCommentInput}
               onInput={handleInput}
+              placeholder={t('placeholder.message')}
             ></textarea>
 
             <Button

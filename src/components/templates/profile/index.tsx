@@ -537,6 +537,15 @@ function OrderHistory(): React.ReactElement {
                   {order.address}
                 </span>
               </div>
+
+              <div className={orderHistoryStyles.orderInfoWrapper}>
+                <span className={orderHistoryStyles.orderInfoLabel}>
+                  {t('texts.phone')}
+                </span>
+                <span className={orderHistoryStyles.orderInfoText}>
+                  {order.phone}
+                </span>
+              </div>
             </div>
           ))}
         </div>

@@ -268,7 +268,7 @@ function Gallery(): React.ReactElement {
                 className={gallerySliderStyles.slide}
               >
                 <NavLink
-                  href={`/products/${product.category}/${product.slug}`}
+                  href={`/products/${product.category.slug}/${product.slug}`}
                   className={gallerySliderStyles.slideLink}
                 >
                   <Image

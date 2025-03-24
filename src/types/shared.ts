@@ -321,6 +321,7 @@ export interface OrderFormValues {
   products: OrderProductInfo[]
   addresses: number
   message: string
+  phone: string
   city_id?: number
   district_id?: number
   address?: string

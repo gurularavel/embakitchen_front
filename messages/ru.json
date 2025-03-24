@@ -93,7 +93,9 @@
     "placeOrder": "Оформить заказ",
     "send": "Отправлять",
     "addAddress": "Добавить адрес",
-    "makeChange": "Внести изменения"
+    "makeChange": "Внести изменения",
+    "selectExistingAddress": "Выбирайте из доступных адресов",
+    "addAnotherAddress": "Добавить еще один адрес"
   },
   "titles": {
     "currentCampaigns": "Текущие Кампании",
@@ -126,6 +128,7 @@
     "color": "Цвет",
     "size": "Размер",
     "address": "Адрес",
+    "phone": "Телефон",
     "brandDescription": "Embakitchen - Это бренд компании Embawood, специализирующейся на кухонной мебели.",
     "installmentInfo": "Оплачивайте картой Birbank на 18 месяцев без процентов.",
     "style": "Стиль",
@@ -191,6 +194,7 @@
     "selectDistrict": "Выберите регион",
     "address": "Адрес",
     "note": "Примечание",
-    "search": "Поиск"
+    "search": "Поиск",
+    "message": "Ваше сообщение..."
   }
 }
