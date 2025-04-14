@@ -272,7 +272,7 @@ function Gallery(): React.ReactElement {
                   className={gallerySliderStyles.slideLink}
                 >
                   <Image
-                    src={product.bannerImage.original_url}
+                    src={product.mainImage.original_url}
                     alt={product.title}
                     className={gallerySliderStyles.img}
                     fill
