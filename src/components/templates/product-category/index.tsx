@@ -24,7 +24,6 @@ export function ProductCategory({
 }: Readonly<ProductCategoryProps>): React.ReactElement {
   const { category } = useParams()
   const decodedCategory = decodeURIComponent(category as string)
-
   return (
     <div className={styles.container}>
       <Banner
@@ -39,7 +38,7 @@ export function ProductCategory({
               <NavLink href={`/products/${decodedCategory}/${product.slug}`}>
                 <div className={styles.top}>
                   <Image
-                    src={product.bannerImage.original_url}
+                    src={product.mainImage.original_url}
                     alt={`Embakitchen - ${product.title}`}
                     className={styles.img}
                     fill
