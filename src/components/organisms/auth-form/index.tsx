@@ -74,7 +74,11 @@ function LoginForm(): React.ReactElement {
 
     setAuthData(data)
     setIsAuthFormDrawerVisible(false)
-    document.cookie = `token=${data.token}`
+
+    // Set cookie expiration to 1 day
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString()
+    document.cookie = `token=${data.token}; expires=${expires}; path=/; max-age=60; secure; samesite=strict`
+
     localStorage.setItem('token', JSON.stringify(data.token))
     localStorage.setItem('user', JSON.stringify(data.user))
     router.push(LOCALIZED_PATHNAMES['/profile'][locale as Language])
