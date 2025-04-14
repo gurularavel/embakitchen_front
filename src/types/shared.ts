@@ -229,6 +229,7 @@ export interface ProductEntry<
   status: boolean
   images: MediaFile[]
   bannerImage: TBanner
+  mainImage: TBanner
   category: {
     id: number
     title: MultilingualText<T>
@@ -249,7 +250,7 @@ export interface ProductEntry<
 
 export type ProductMainInfo<TBanner = [MediaFile]> = Pick<
   ProductEntry<string, TBanner>,
-  'id' | 'title' | 'slug' | 'tags' | 'images' | 'bannerImage' | 'category'
+  'id' | 'title' | 'slug' | 'tags' | 'images' | 'mainImage' | 'category'
 >
 
 export interface CategoryEntry<
