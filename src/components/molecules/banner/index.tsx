@@ -3,7 +3,7 @@ import type { BannerProps } from '~ek/types'
 
 const bannerStyles: Readonly<TwClasses> = {
   container:
-    'w-full h-50 laptop:h-[25rem] laptop:px-15 widescreen:px-0 my-6 laptop:my-10',
+    'w-full h-50 laptop:h-[20rem] laptop:px-15 widescreen:px-0 my-6 laptop:my-10',
   wrapper: 'h-full relative',
   titleWrapper:
     'flex items-center justify-center absolute top-0 right-0 bottom-0 left-0 bg-black/40 z-10',
