@@ -9,7 +9,7 @@ const productCategoryStyles: Readonly<TwClasses> = {
   container: 'mb-6 laptop:mb-15',
   products:
     'flex flex-col tablet:grid tablet:grid-cols-2 laptop:grid-cols-3 widescreen:grid-cols-4 gap-y-6 tablet:gap-6 laptop:gap-y-10 px-4 tablet:px-10 laptop:px-15 widescreen:px-25 mb-6 laptop:mb-10',
-  top: 'relative h-60',
+  top: 'relative h-[17rem]',
   img: 'w-full h-full object-cover',
   tag: 'absolute top-0 right-0 bg-primary-9 px-6 h-12 flex items-center justify-center text-base font-medium text-primary-1',
   bottom: 'pt-3',
