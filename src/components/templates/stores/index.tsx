@@ -71,7 +71,14 @@ export function Stores({
               className={styles.store}
               key={store.id}
             >
-              <h5 className={styles.storeTitle}>{store.title}</h5>
+              <h5 className={styles.storeTitle}>
+                <a
+                  href={store.map_url}
+                  target='_blank'
+                >
+                  {store.title}
+                </a>
+              </h5>
               <div className={styles.storeInfoWrapper}>
                 <ActionLink
                   href={`tel:${store.phone}`}

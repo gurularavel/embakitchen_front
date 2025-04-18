@@ -179,6 +179,7 @@ export interface StoreEntry<T extends string = Language> {
     longitude: string
     latitude: string
   }
+  map_url: string
   email: string
   status: boolean
   city: CityEntry<T>
