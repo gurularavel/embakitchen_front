@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import SimpleBar from 'simplebar-react'
+import { Select, Space } from 'antd'
 import { ActionLink, Icon, Map } from '~ek/components'
 import { useLocale, useTranslations } from 'next-intl'
 import type { Language, StoresProps } from '~ek/types'
@@ -14,6 +15,8 @@ const storesStyles: Readonly<TwClasses> = {
     'h-[680px] w-full tablet:w-[424px] widescreen:w-[512px] p-6 bg-white flex flex-col gap-y-6 tablet:absolute tablet:z-10 tablet:top-6 tablet:bottom-6 tablet:left-15 widescreen:left-25',
   title: 'text-2xl leading-9 text-gray-1 font-semibold',
   citiesWrapper: '',
+  select:
+    '!h-10 text-gray-6 rounded hover:!border-solid hover:!border-gray-400 focus:!border-solid focus:!border-gray-400',
   cities:
     'block w-full h-11 rounded-lg border border-solid border-gray-8 px-3.5',
   stores:
@@ -34,10 +37,12 @@ export function Stores({
   const locale = useLocale()
   const [storesToRender, setStoresToRender] =
     React.useState<StoresProps['stores']>(stores)
-
-  async function handleCitySelection(e: React.ChangeEvent<HTMLSelectElement>) {
-    const cityId = +e.target.value
-    const filteredStores = await getStores({ cityId })
+  const citiesOptions = cities?.map(c => ({
+    value: c.id,
+    label: c.title,
+  }))
+  async function handleCitySelection(id: number) {
+    const filteredStores = await getStores({ cityId: id })
     const uiData = transformToUiData(
       filteredStores,
       locale as Language,
@@ -50,19 +55,14 @@ export function Stores({
       <div className={styles.storesWrapper}>
         <h1 className={styles.title}>{t('stores')}</h1>
         <div className={styles.citiesWrapper}>
-          <select
-            className={styles.cities}
+          <Select
+            style={{ width: '100%' }}
+            placeholder='Şəhər seçin'
+            className={styles.select}
             onChange={handleCitySelection}
-          >
-            {cities.map((city: ArrayElement<StoresProps['cities']>) => (
-              <option
-                value={city.id}
-                key={city.id}
-              >
-                {city.title}
-              </option>
-            ))}
-          </select>
+            options={citiesOptions || []}
+            optionRender={option => <Space>{option.label}</Space>}
+          />
         </div>
 
         <SimpleBar className={styles.stores}>
