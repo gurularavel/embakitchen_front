@@ -120,6 +120,10 @@ const sliderStyles: Readonly<TwClasses> = {
     image: 'w-full h-12',
   },
   product: {
+    sliderWrapper: 'relative',
+    nav: 'absolute top-1/2 -translate-1/2 z-10 w-[33.33px] h-[33.33px] flex items-center justify-center bg-supplementary-2/80',
+    prev: 'left-[3.33px] laptop:-left-[calc(33.33px/2)] rounded-full',
+    next: 'right-[3.33px] laptop:-right-[calc(33.33px/2)] rounded-full',
     main: 'h-[300px] laptop:h-[480px] mb-6',
     img: 'w-full h-full object-cover',
   },
@@ -396,6 +400,7 @@ function Partners(): React.ReactElement {
 }
 
 function Product(): React.ReactElement {
+  const productSliderRef = React.useRef<SwiperType>()
   const [thumbsSwiper, setThumbsSwiper] = React.useState<SwiperType | null>(
     null,
   )
@@ -419,25 +424,46 @@ function Product(): React.ReactElement {
   return (
     <>
       {product?.images && (
-        <Swiper
-          loop={true}
-          spaceBetween={10}
-          navigation={true}
-          thumbs={{ swiper: thumbsSwiper }}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className={productSliderStyles.main}
-        >
-          {product.images.map((image: MediaFile, index: number) => (
-            <SwiperSlide key={`${image.uuid}-${index}`}>
-              <Image
-                src={image.original_url}
-                alt={product.title}
-                className={productSliderStyles.img}
-                fill
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className={productSliderStyles.sliderWrapper}>
+          <Swiper
+            loop={true}
+            onBeforeInit={swiper => (productSliderRef.current = swiper)}
+            spaceBetween={10}
+            navigation={true}
+            thumbs={{ swiper: thumbsSwiper }}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className={productSliderStyles.main}
+          >
+            {product.images.map((image: MediaFile, index: number) => (
+              <SwiperSlide key={`${image.uuid}-${index}`}>
+                <Image
+                  src={image.original_url}
+                  alt={product.title}
+                  className={productSliderStyles.img}
+                  fill
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <Button
+            classes={twMerge(productSliderStyles.nav, productSliderStyles.prev)}
+            onClick={() => productSliderRef.current?.slidePrev()}
+          >
+            <Icon
+              variant='arrow-left'
+              sizes='w-3 h-2.5'
+            />
+          </Button>
+          <Button
+            classes={twMerge(productSliderStyles.nav, productSliderStyles.next)}
+            onClick={() => productSliderRef.current?.slideNext()}
+          >
+            <Icon
+              variant='arrow-right-gray'
+              sizes='w-3 h-2.5'
+            />
+          </Button>
+        </div>
       )}
       {product?.images && (
         <Swiper
