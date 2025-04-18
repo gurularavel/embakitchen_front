@@ -14,6 +14,7 @@ interface LeafletMapProps {
 interface Position {
   title: string
   coords: LatLngTuple
+  id: number
 }
 
 const mapStyles: Readonly<TwClasses> = {
@@ -27,6 +28,7 @@ export function LeafletMap({
   const position: LatLngTuple = [40.38489374280334, 49.824969832271016]
   const positions: Position[] = Object.values(stores).map(
     (store: ArrayElement<StoresProps['stores']>) => ({
+      id: store.id,
       title: store.title,
       coords: [store.coords.latitude, store.coords.longitude].map(
         Number.parseFloat,
@@ -46,10 +48,18 @@ export function LeafletMap({
         url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {positions.map(
-        ({ title, coords }: { title: string; coords: LatLngTuple }) => (
+        ({
+          id,
+          title,
+          coords,
+        }: {
+          title: string
+          coords: LatLngTuple
+          id: number
+        }) => (
           <Marker
             position={coords}
-            key={title}
+            key={id}
           >
             <Popup>{title}</Popup>
           </Marker>
