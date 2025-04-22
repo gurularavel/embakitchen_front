@@ -62,8 +62,8 @@ function CompactScreenHeader(): React.ReactElement {
       />
       <div className={compactHeaderStyles.options}>
         <ActionLink
-          href='tel:126'
-          label='126'
+          href='tel:3303'
+          label='3303'
           actionLinkIcon={{ variant: 'phone', sizes: 'w-5 h-5' }}
           gap={8}
           classes={compactHeaderStyles.phone}
@@ -99,8 +99,8 @@ function WideScreenHeader({
       </div>
       <div className={wideHeaderStyles.right}>
         <ActionLink
-          href='tel:126'
-          label='126'
+          href='tel:3303'
+          label='3303'
           actionLinkIcon={{ variant: 'phone', sizes: 'w-[30px] h-[30px]' }}
           gap={8}
         />

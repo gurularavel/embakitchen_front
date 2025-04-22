@@ -82,8 +82,8 @@ export function Sidebar(): React.ReactElement {
           />
 
           <ActionLink
-            href='tel:126'
-            label='126'
+            href='tel:3303'
+            label='3303'
             actionLinkIcon={{ variant: 'phone', sizes: 'w-[30px] h-[30px]' }}
             gap={8}
             classes={styles.phone}
