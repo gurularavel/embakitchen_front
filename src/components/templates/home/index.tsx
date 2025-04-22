@@ -42,14 +42,14 @@ export function Home({
         backgroundImg={createOrderImage}
       />
 
+      {!!campaigns?.length && <CurrentCampaigns campaigns={campaigns} />}
+
+      <Slider variant='partners' />
+
       <PopularBlogs
         blogs={blogs}
         popularBlogs={popularBlogs}
       />
-
-      <Slider variant='partners' />
-
-      {!!campaigns?.length && <CurrentCampaigns campaigns={campaigns} />}
     </>
   )
 }
