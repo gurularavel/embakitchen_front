@@ -44,12 +44,12 @@ export function Home({
 
       {!!campaigns?.length && <CurrentCampaigns campaigns={campaigns} />}
 
-      <Slider variant='partners' />
-
       <PopularBlogs
         blogs={blogs}
         popularBlogs={popularBlogs}
       />
+
+      <Slider variant='partners' />
     </>
   )
 }
