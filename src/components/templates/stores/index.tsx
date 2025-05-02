@@ -33,7 +33,7 @@ export function Stores({
   stores,
   cities,
 }: Readonly<StoresProps>): React.ReactElement {
-  const t = useTranslations('titles')
+  const t = useTranslations()
   const locale = useLocale()
   const [storesToRender, setStoresToRender] =
     React.useState<StoresProps['stores']>(stores)
@@ -53,11 +53,11 @@ export function Stores({
   return (
     <div className={styles.wrapper}>
       <div className={styles.storesWrapper}>
-        <h1 className={styles.title}>{t('stores')}</h1>
+        <h1 className={styles.title}>{t('titles.stores')}</h1>
         <div className={styles.citiesWrapper}>
           <Select
             style={{ width: '100%' }}
-            placeholder='Şəhər seçin'
+            placeholder={t('placeholder.selectCity')}
             className={styles.select}
             onChange={handleCitySelection}
             options={citiesOptions || []}
