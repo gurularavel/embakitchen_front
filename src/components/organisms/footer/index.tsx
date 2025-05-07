@@ -68,8 +68,8 @@ export function Footer(): React.ReactElement {
                 {t('texts.contact')}
               </span>
               <ActionLink
-                href='tel:+994552207212'
-                label='+994552207212'
+                href='tel:+994555103303'
+                label='+994555103303'
                 classes={styles.contactUsLink}
               />
             </li>
