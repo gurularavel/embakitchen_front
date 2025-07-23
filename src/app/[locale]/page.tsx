@@ -14,7 +14,7 @@ import type {
 import { defaultApiQueryParams, omit, transformToUiData } from '~ek/utils'
 
 export const metadata: Metadata = {
-  title: 'Embakitchen Ana Səhifə',
+  title: 'Embakitchen',
 }
 
 export default async function HomePage({

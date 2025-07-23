@@ -23,7 +23,6 @@ import {
   getProducts,
 } from '~ek/services'
 import { transformToUiData } from '~ek/utils'
-import SimpleBar from 'simplebar-react'
 import { MaskedInput } from 'antd-mask-input'
 
 const { TextArea } = Input
@@ -163,287 +162,285 @@ export function OrderForm(): React.ReactElement {
   }
 
   return (
-    <SimpleBar className={styles.orderFormScroll}>
-      <Form
-        layout='vertical'
-        className={styles.form}
-        onFinish={sendOrderHandler}
-        autoComplete='off'
-        form={form}
+    <Form
+      layout='vertical'
+      className={styles.form}
+      onFinish={sendOrderHandler}
+      autoComplete='off'
+      form={form}
+    >
+      <Form.List
+        name='products'
+        initialValue={[{}]}
       >
-        <Form.List
-          name='products'
-          initialValue={[{}]}
-        >
-          {(fields, { add, remove }) => (
-            <>
-              {fields.map(({ key, name, ...restField }) => (
-                <Row
-                  key={key}
-                  gutter={[16, 0]}
-                  style={{ margin: '0 0 0.75rem 0' }}
-                  className={styles.orderedProduct}
-                >
-                  <Col span={24}>
-                    <Form.Item<OrderFormValues['products']>
-                      {...restField}
-                      name={[name, 'id']}
-                      label={t('labels.product')}
-                      rules={[
-                        {
-                          required: true,
-                          message: t('validations.selectProduct'),
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder={t('placeholder.selectProduct')}
-                        allowClear
-                        className={styles.select}
-                        showSearch
-                        optionFilterProp='label'
-                        filterSort={(optionA, optionB) =>
-                          ((optionA?.label as string) ?? '')
-                            .toLowerCase()
-                            .localeCompare(
-                              ((optionB?.label as string) ?? '').toLowerCase(),
-                            )
-                        }
-                        options={products.map(product => ({
-                          value: product.id,
-                          label: product.title,
-                        }))}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item<OrderFormValues['products']>
-                      {...restField}
-                      label={t('labels.width')}
-                      name={[name, 'width']}
-                      rules={[
-                        {
-                          required: true,
-                          message: t('validations.enterWidth'),
-                        },
-                      ]}
-                    >
-                      <InputNumber
-                        placeholder={t('placeholder.width')}
-                        className={styles.input}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item<OrderFormValues['products']>
-                      {...restField}
-                      name={[name, 'height']}
-                      label={t('labels.height')}
-                      rules={[
-                        {
-                          required: true,
-                          message: t('validations.enterHeight'),
-                        },
-                      ]}
-                    >
-                      <InputNumber
-                        placeholder={t('placeholder.height')}
-                        className={styles.input}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={24}>
-                    <Button
-                      onClick={() => remove(name)}
-                      classes={styles.submitButton}
-                    >
-                      {t('buttons.delete')}
-                    </Button>
-                  </Col>
-                </Row>
-              ))}
-              <Form.Item>
-                <Button
-                  onClick={() => add()}
-                  classes={styles.submitButton}
-                >
-                  <PlusOutlined />
-                  <span>{t('buttons.addProduct')}</span>
-                </Button>
-              </Form.Item>
-            </>
-          )}
-        </Form.List>
-        <Form.Item<OrderFormValues>
-          name='phone'
-          label='Phone'
-          rules={[
-            {
-              required: true,
-              message: t('validations.enterMobileNumber'),
-            },
-            {
-              pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
-              message: t('validations.invalidMobileNumber'),
-            },
-          ]}
-        >
-          <MaskedInput
-            mask={'+994 00 000 00 00'}
-            className={styles.input}
-          />
-        </Form.Item>
-
-        {isAddressSelected ? (
+        {(fields, { add, remove }) => (
           <>
-            <Form.Item<OrderFormValues>
-              name='addresses'
-              label={t('labels.address')}
-              rules={[
-                {
-                  required: true,
-                  message: t('validations.enterAddress'),
-                },
-              ]}
-            >
-              <Select
-                placeholder={t('placeholder.address')}
-                onChange={(value: number) => onSelectChange('addresses', value)}
-                allowClear
-                className={styles.select}
-                showSearch
-                optionFilterProp='label'
-                filterSort={(optionA, optionB) =>
-                  ((optionA?.label as string) ?? '')
-                    .toLowerCase()
-                    .localeCompare(
-                      ((optionB?.label as string) ?? '').toLowerCase(),
-                    )
-                }
-                options={addresses.map(address => ({
-                  value: address.id,
-                  label: `${address.city.title} şəhəri, ${address.district && address.district.title + ' rayonu,'} ${address.address}`,
-                }))}
-              />
-            </Form.Item>
-            <div
-              className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
-              onClick={() => setIsAddressSelected(!isAddressSelected)}
-            >
-              {t('buttons.addAnotherAddress')}
-            </div>
-          </>
-        ) : (
-          <>
-            <Form.Item<OrderFormValues>
-              name='city_id'
-              label={t('labels.city')}
-              rules={[
-                {
-                  required: true,
-                  message: t('validations.selectCity'),
-                },
-              ]}
-            >
-              <Select
-                placeholder={t('placeholder.selectCity')}
-                onChange={(value: number) => onSelectChange('city_id', value)}
-                allowClear
-                className={styles.select}
-                showSearch
-                optionFilterProp='label'
-                filterSort={(optionA, optionB) =>
-                  ((optionA?.label as string) ?? '')
-                    .toLowerCase()
-                    .localeCompare(
-                      ((optionB?.label as string) ?? '').toLowerCase(),
-                    )
-                }
-                options={cities.map(city => ({
-                  value: city.id,
-                  label: city.title,
-                }))}
-              />
-            </Form.Item>
-
-            {selectedCity?.hasDistricts && (
-              <Form.Item<OrderFormValues>
-                name='district_id'
-                label={t('labels.district')}
-                rules={[
-                  {
-                    required: true,
-                    message: t('validations.selectDistrict'),
-                  },
-                ]}
+            {fields.map(({ key, name, ...restField }) => (
+              <Row
+                key={key}
+                gutter={[16, 0]}
+                style={{ margin: '0 0 0.75rem 0' }}
+                className={styles.orderedProduct}
               >
-                <Select
-                  placeholder={t('placeholder.selectDistrict')}
-                  onChange={(value: number) =>
-                    onSelectChange('district_id', value)
-                  }
-                  allowClear
-                  className={styles.select}
-                  showSearch
-                  optionFilterProp='label'
-                  filterSort={(optionA, optionB) =>
-                    ((optionA?.label as string) ?? '')
-                      .toLowerCase()
-                      .localeCompare(
-                        ((optionB?.label as string) ?? '').toLowerCase(),
-                      )
-                  }
-                  options={districts.map(district => ({
-                    value: district.id,
-                    label: district.title,
-                  }))}
-                />
-              </Form.Item>
-            )}
-
-            <Form.Item<OrderFormValues>
-              name='address'
-              label={t('labels.address')}
-              rules={[
-                {
-                  required: true,
-                  message: t('validations.enterAddress'),
-                },
-              ]}
-            >
-              <Input
-                placeholder={t('placeholder.address')}
-                className={styles.input}
-              />
+                <Col span={24}>
+                  <Form.Item<OrderFormValues['products']>
+                    {...restField}
+                    name={[name, 'id']}
+                    label={t('labels.product')}
+                    rules={[
+                      {
+                        required: true,
+                        message: t('validations.selectProduct'),
+                      },
+                    ]}
+                  >
+                    <Select
+                      placeholder={t('placeholder.selectProduct')}
+                      allowClear
+                      className={styles.select}
+                      showSearch
+                      optionFilterProp='label'
+                      filterSort={(optionA, optionB) =>
+                        ((optionA?.label as string) ?? '')
+                          .toLowerCase()
+                          .localeCompare(
+                            ((optionB?.label as string) ?? '').toLowerCase(),
+                          )
+                      }
+                      options={products.map(product => ({
+                        value: product.id,
+                        label: product.title,
+                      }))}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item<OrderFormValues['products']>
+                    {...restField}
+                    label={t('labels.width')}
+                    name={[name, 'width']}
+                    rules={[
+                      {
+                        required: true,
+                        message: t('validations.enterWidth'),
+                      },
+                    ]}
+                  >
+                    <InputNumber
+                      placeholder={t('placeholder.width')}
+                      className={styles.input}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item<OrderFormValues['products']>
+                    {...restField}
+                    name={[name, 'height']}
+                    label={t('labels.height')}
+                    rules={[
+                      {
+                        required: true,
+                        message: t('validations.enterHeight'),
+                      },
+                    ]}
+                  >
+                    <InputNumber
+                      placeholder={t('placeholder.height')}
+                      className={styles.input}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={24}>
+                  <Button
+                    onClick={() => remove(name)}
+                    classes={styles.submitButton}
+                  >
+                    {t('buttons.delete')}
+                  </Button>
+                </Col>
+              </Row>
+            ))}
+            <Form.Item>
+              <Button
+                onClick={() => add()}
+                classes={styles.submitButton}
+              >
+                <PlusOutlined />
+                <span>{t('buttons.addProduct')}</span>
+              </Button>
             </Form.Item>
-            <div
-              className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
-              onClick={() => setIsAddressSelected(!isAddressSelected)}
-            >
-              {t('buttons.selectExistingAddress')}
-            </div>
           </>
         )}
+      </Form.List>
+      <Form.Item<OrderFormValues>
+        name='phone'
+        label='Phone'
+        rules={[
+          {
+            required: true,
+            message: t('validations.enterMobileNumber'),
+          },
+          {
+            pattern: /^\+994 \d{2} \d{3} \d{2} \d{2}$/,
+            message: t('validations.invalidMobileNumber'),
+          },
+        ]}
+      >
+        <MaskedInput
+          mask={'+994 00 000 00 00'}
+          className={styles.input}
+        />
+      </Form.Item>
 
-        <Form.Item<OrderFormValues>
-          name='message'
-          label={t('labels.note')}
-        >
-          <TextArea
-            placeholder={t('placeholder.note')}
-            rows={4}
-          />
-        </Form.Item>
-
-        <Form.Item<OrderFormValues> label={null}>
-          <Button
-            type='submit'
-            classes={styles.submitButton}
+      {isAddressSelected ? (
+        <>
+          <Form.Item<OrderFormValues>
+            name='addresses'
+            label={t('labels.address')}
+            rules={[
+              {
+                required: true,
+                message: t('validations.enterAddress'),
+              },
+            ]}
           >
-            {t('buttons.sendOrder')}
-          </Button>
-        </Form.Item>
-      </Form>
-    </SimpleBar>
+            <Select
+              placeholder={t('placeholder.address')}
+              onChange={(value: number) => onSelectChange('addresses', value)}
+              allowClear
+              className={styles.select}
+              showSearch
+              optionFilterProp='label'
+              filterSort={(optionA, optionB) =>
+                ((optionA?.label as string) ?? '')
+                  .toLowerCase()
+                  .localeCompare(
+                    ((optionB?.label as string) ?? '').toLowerCase(),
+                  )
+              }
+              options={addresses.map(address => ({
+                value: address.id,
+                label: `${address.city.title} şəhəri, ${address.district && address.district.title + ' rayonu,'} ${address.address}`,
+              }))}
+            />
+          </Form.Item>
+          <div
+            className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
+            onClick={() => setIsAddressSelected(!isAddressSelected)}
+          >
+            {t('buttons.addAnotherAddress')}
+          </div>
+        </>
+      ) : (
+        <>
+          <Form.Item<OrderFormValues>
+            name='city_id'
+            label={t('labels.city')}
+            rules={[
+              {
+                required: true,
+                message: t('validations.selectCity'),
+              },
+            ]}
+          >
+            <Select
+              placeholder={t('placeholder.selectCity')}
+              onChange={(value: number) => onSelectChange('city_id', value)}
+              allowClear
+              className={styles.select}
+              showSearch
+              optionFilterProp='label'
+              filterSort={(optionA, optionB) =>
+                ((optionA?.label as string) ?? '')
+                  .toLowerCase()
+                  .localeCompare(
+                    ((optionB?.label as string) ?? '').toLowerCase(),
+                  )
+              }
+              options={cities.map(city => ({
+                value: city.id,
+                label: city.title,
+              }))}
+            />
+          </Form.Item>
+
+          {selectedCity?.hasDistricts && (
+            <Form.Item<OrderFormValues>
+              name='district_id'
+              label={t('labels.district')}
+              rules={[
+                {
+                  required: true,
+                  message: t('validations.selectDistrict'),
+                },
+              ]}
+            >
+              <Select
+                placeholder={t('placeholder.selectDistrict')}
+                onChange={(value: number) =>
+                  onSelectChange('district_id', value)
+                }
+                allowClear
+                className={styles.select}
+                showSearch
+                optionFilterProp='label'
+                filterSort={(optionA, optionB) =>
+                  ((optionA?.label as string) ?? '')
+                    .toLowerCase()
+                    .localeCompare(
+                      ((optionB?.label as string) ?? '').toLowerCase(),
+                    )
+                }
+                options={districts.map(district => ({
+                  value: district.id,
+                  label: district.title,
+                }))}
+              />
+            </Form.Item>
+          )}
+
+          <Form.Item<OrderFormValues>
+            name='address'
+            label={t('labels.address')}
+            rules={[
+              {
+                required: true,
+                message: t('validations.enterAddress'),
+              },
+            ]}
+          >
+            <Input
+              placeholder={t('placeholder.address')}
+              className={styles.input}
+            />
+          </Form.Item>
+          <div
+            className='text-right text-blue-400 decoration-blue-400 underline cursor-pointer'
+            onClick={() => setIsAddressSelected(!isAddressSelected)}
+          >
+            {t('buttons.selectExistingAddress')}
+          </div>
+        </>
+      )}
+
+      <Form.Item<OrderFormValues>
+        name='message'
+        label={t('labels.note')}
+      >
+        <TextArea
+          placeholder={t('placeholder.note')}
+          rows={4}
+        />
+      </Form.Item>
+
+      <Form.Item<OrderFormValues> label={null}>
+        <Button
+          type='submit'
+          classes={styles.submitButton}
+        >
+          {t('buttons.sendOrder')}
+        </Button>
+      </Form.Item>
+    </Form>
   )
 }
